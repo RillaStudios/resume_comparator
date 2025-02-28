@@ -1,6 +1,6 @@
 import React from 'react'
 
-const mainPage = () => {
+const navbar = () => {
   return (
     <div>
       
@@ -8,4 +8,4 @@ const mainPage = () => {
   )
 }
 
-export default mainPage
+export default navbar
