@@ -31,13 +31,18 @@ const Navbar = () => {
         <Link to="/">
         <img src={logo} className="App-logo" alt="logo" />
         </Link>
+
+        {/* Menu Toggle Button */}
         <img
           className="menu-btn"
           src={isMenuOpen ? closeNav : menuIcon}
           alt="menu-button"
           onClick={() => setIsMenuOpen(!isMenuOpen)}
         />
-        <ul className="nav-menu">
+        
+        {/* Navigation Links */}
+        <ul className={`nav-menu ${isMenuOpen ? "menu-open" : ""}`}
+          onClick={() => setIsMenuOpen(false)} >
 
           <li className="nav-item">
             <Link to="/" className="nav-link">Home</Link>
