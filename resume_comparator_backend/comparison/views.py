@@ -9,10 +9,11 @@ nlp = spacy.load('en_core_web_sm')
 def process_text(request):
     if request.method == 'POST':
         # Get the text input from the POST request
-        text = request.POST.get('text', '')
+        text1 = request.POST.get('text', '')
+        text2 = request.POST.get('text2', '')
         
         # Process the text with spaCy
-        doc = nlp(text)
+        doc = nlp(text1)
         
         # Extract token data (text, lemma, and part of speech)
         data = [{'text': token.text, 'lemma': token.lemma_, 'pos': token.pos_} for token in doc]
