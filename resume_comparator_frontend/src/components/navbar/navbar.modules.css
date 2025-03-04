@@ -1,0 +1,91 @@
+/* Global styles for navbar */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+    background-color: #2614e9;
+    position: relative;
+  }
+  .App-logo{
+    height: 40px;
+    width: 40px;
+    margin-right: auto; 
+  }
+  .navbar-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+  }
+   
+  .menu-btn {
+    width: 30px;
+    cursor: pointer;
+    display: none;
+  }
+   
+  .nav-menu {
+    list-style: none;
+    display: flex;
+    width: 20%;
+    padding: 0;
+    margin: 0;
+    margin-left: auto; 
+  }
+  
+   
+  .nav-menu .nav-item1 {
+    margin-right: auto;
+  }
+   
+  .nav-menu .nav-item2 {
+    margin-left: auto;
+  }
+   
+  .nav-item {
+    padding: 0 10px;
+  }
+   
+  .nav-link {
+    text-decoration: none;
+    color: white;
+    font-size: 1.1rem;
+    transition: color 0.3s ease;
+  }
+   
+  .nav-item:hover .nav-link {
+    color: #5d5798;
+  }
+   
+  .nav-item1:hover .nav-link {
+    color: #5d5798;
+  }
+   
+  /* Mobile styles */
+  @media (max-width: 768px) {
+    .menu-btn {
+      display: block;
+    }
+   
+    .nav-menu {
+      display: none;
+      position: absolute;
+      top: 0;
+      right: 0;
+      background-color: #2614e9;
+      padding: 1rem;
+      border-radius: 5px;
+      width: 200px;
+      flex-direction: column;
+      gap: 1rem;
+    }
+   
+    .menu-open {
+      display: flex;
+    }
+   
+    .nav-item {
+      text-align: center;
+    }
+  }

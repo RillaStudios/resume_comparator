@@ -1,0 +1,155 @@
+.main-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    width: 100%;
+    padding: 20px;
+    color: black;
+    background-color: white;
+    gap: 10px;
+}
+
+/* Header - Places user name at the top right */
+.header {
+    width: 90%;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.user-d {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+/* Main content area */
+.container-body {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    width: 100%;
+    max-width: 1200px; 
+    margin-top: 20px;
+    gap: 20px;
+}
+
+/* Left Section (Dropdown & Job Description) */
+.left-section {
+    display: flex;
+    flex-direction: column; 
+    width: 30%; 
+}
+
+/* Dropdown */
+.dropdown-container {
+    display: flex;
+    flex-direction: column;
+    width: 60%;
+    font-weight: bold;
+    height: 60px;
+}
+
+/* Job Description Box */
+.display-box {
+    width: 155%;
+    height: 450px;
+    border: 1px solid #ccc;
+    padding: 10px;
+    overflow-y: auto;
+    text-align: left;
+    background-color: #f9f9f9;
+    border-radius: 5px;
+    margin-top: 15px;
+}
+
+/* Right Section - Upload Container */
+.upload-container {
+    width: 25%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 2px dashed #ccc;
+    padding: 20px;
+    text-align: center;
+    border-radius: 5px;
+    min-height: 150px;
+}
+
+.upload-container label {
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 8px;
+}
+
+.uploaded-file {
+    margin-top: 10px;
+    font-size: 15px;
+    color: green;
+}
+
+/* Convert Button - Centered */
+.convert-button {
+    margin-top: 20px;
+    padding: 15px 30px;
+    background-color: #150ab4;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/* RESPONSIVENESS */
+
+/* Medium Screens (Tablets & Small Laptops) */
+@media (max-width: 1024px) {
+    .container-body {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .left-section,
+    .upload-container {
+        width: 80%;
+        text-align: center;
+    }
+
+    .display-box {
+        height: auto;
+    }
+}
+
+/* Small Screens (Phones) */
+@media (max-width: 768px) {
+    .container-body {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .header {
+        justify-content: center; 
+    }
+
+    .user-d {
+        font-size: 16px;
+    }
+
+    .left-section,
+    .upload-container {
+        width: 90%;
+    }
+
+    .dropdown-container {
+        align-items: center;
+    }
+
+    .display-box {
+        width: 100%;
+        height: auto;
+    }
+
+    .convert-button {
+        width: 90%;
+        text-align: center;
+    }
+}

@@ -1,8 +1,8 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import "./App.css";
-import Layout from "./components/navbar/Layout"; 
-import MainPage from "./components/mainPage/MainPage"; 
+import Layout from "./components/navbar/Layout";
+import  MainPage  from "./components/mainPage/MainPage"; 
 import Reports from "./components/pages/reports/Reports";
 import Account from "./components/auth/Account";
 import Summary from "./components/pages/summary/Summary";
