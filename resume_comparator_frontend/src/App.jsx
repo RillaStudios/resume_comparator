@@ -2,14 +2,14 @@ import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import "./App.css";
 import Layout from "./components/navbar/Layout";
-import  MainPage  from "./components/mainPage/MainPage"; 
+import  MainPage  from "./components/mainPage/mainPage"; 
 import Reports from "./components/pages/reports/Reports";
 import Account from "./components/auth/Account";
 import Summary from "./components/pages/summary/Summary";
 
 /*
- Author: Michael Tamatey
- Date: 20250304
+ Author: Michael Tamatey/ Navjot Kaur
+ Date: 20250222
  Description: This class controls routes
 */
 
