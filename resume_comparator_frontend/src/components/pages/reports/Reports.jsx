@@ -1,5 +1,7 @@
 import React from "react";
 import { useLocation } from "react-router-dom";
+ import "./Reports.modules.css";
+
 
 /*
  Author: Michael Tamatey/ Navjot Kaur
@@ -15,7 +17,7 @@ const Reports = () => {
   const status = score >= 80 ? "✅ Passed" : "❌ Failed";
 
   return (
-    <div>
+    <div className="reports-container">
       <h2>Comparison Results</h2>
       <p><strong>Job Title:</strong> {jobTitle}</p>
       <p><strong>Score:</strong> {score}%</p>
