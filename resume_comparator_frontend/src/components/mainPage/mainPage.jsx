@@ -1,12 +1,12 @@
 import "./mainPage.modules.css";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-
+import jobs from "./jobs.json";
 
 /*
  Author: Michael Tamatey/ Navjot Kaur
  Date: 20250222
- Description: This class makes api connection and allows users to select job posting and upload resumes to compare 
+ Description: This class allows users to select job posting and upload resumes to compare 
 */
 
 export const MainPage = () => {
@@ -19,7 +19,7 @@ export const MainPage = () => {
 
  // Fetch jobs from Django backend
  useEffect(() => {
-  fetch("http://127.0.0.1:8000/api/job-postings/")  // Fetch job list from backend
+  fetch("http://127.0.0.1:8000/api/jobs/")  // Fetch job list from backend
     .then((res) => res.json())
     .then((data) => {
       setJobs(data);
@@ -44,45 +44,29 @@ export const MainPage = () => {
     }
   };
 
-  // Handle compare button click
+  // Send resume to backend for processing
   const handleCompare = async () => {
     if (!selectedJob || !uploadedFile) {
       alert("Please select a job title and upload your resume.");
       return;
     }
-  
-    const file = uploadedFile;
-  
-    // Function to convert file to Base64
-    const toBase64 = (file) =>
-      new Promise((resolve, reject) => {
-        const reader = new FileReader();
-        reader.readAsDataURL(file);
-        reader.onload = () => resolve(reader.result.split(",")[1]); // Remove the data prefix
-        reader.onerror = (error) => reject(error);
-      });
-  
+
+    const formData = new FormData();
+    formData.append("resume", uploadedFile);
+    formData.append("jobId", selectedJob.id);  // Send job ID only
+
     try {
-      const base64File = await toBase64(file);
-  
-      const requestBody = JSON.stringify({
-        resume: base64File,  // Base64-encoded string
-        file_name: file.name, // File name (optional)
-        job_posting_id: selectedJob.id, // Send job ID only
-      });
-  
       const response = await fetch("http://127.0.0.1:8000/api/compare/", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: requestBody,
+        body: formData,
       });
-  
+
       if (!response.ok) throw new Error("Failed to compare resume.");
-  
+
       const data = await response.json();
-  
-      navigate("/reports", { state: { jobTitle: selectedJob.title, score: data.matchScore } });
-  
+
+      navigate("/reports", { state: { jobTitle: selectedJob.title, result, score: data.matchScore } });
+
     } catch (error) {
       console.error("Error comparing resume:", error);
       alert("Error processing resume.");
@@ -108,12 +92,8 @@ export const MainPage = () => {
           {/* Job Description */}
           {selectedJob && (
             <div className="display-box">
+              <p>Company: {selectedJob.company}</p>
               <p>Description: {selectedJob.description}</p>
-              <p>Date Created: {selectedJob.created_at}</p>
-              <p>company: {selectedJob.company}</p>
-              <p>Location: {selectedJob.location}</p>
-              <p>Salary: {selectedJob.salary}</p>
-              <p>Job Type: {selectedJob.remote}</p>
             </div>
           )}
         </div>
