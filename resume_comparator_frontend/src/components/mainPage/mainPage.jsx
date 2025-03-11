@@ -17,19 +17,22 @@ export const MainPage = () => {
   const [fileName, setFileName] = useState("");
   const navigate = useNavigate();
 
- // Fetch jobs from Django backend
- useEffect(() => {
-  fetch("http://127.0.0.1:8000/api/jobs/")  // Fetch job list from backend
-    .then((res) => res.json())
-    .then((data) => {
-      setJobs(data);
-      setSelectedJob(data[0]);  // Default to first job
-    })
-    .catch((err) => console.error("Error fetching jobs:", err));
-}, []);
+  // Fetch jobs from Django backend
+  useEffect(() => {
+    fetch("http://127.0.0.1:8000/api/job-postings/")  // Fetch job list from backend
+      .then((res) => res.json())
+      .then((data) => {
 
-   // Handle job selection
-   const handleJobChange = (event) => {
+        console.log("Data:", data);
+
+        setJobs(data);
+        setSelectedJob(data[0]);  // Default to first job
+      })
+      .catch((err) => console.error("Error fetching jobs:", err));
+  }, []);
+
+  // Handle job selection
+  const handleJobChange = (event) => {
     const selectedTitle = event.target.value;
     const job = jobs.find((job) => job.title === selectedTitle);
     setSelectedJob(job);
@@ -61,11 +64,14 @@ export const MainPage = () => {
         body: formData,
       });
 
+      console.log("Response status:", response.status);
+      console.log("Response headers:", response.headers);
+
       if (!response.ok) throw new Error("Failed to compare resume.");
 
       const data = await response.json();
 
-      navigate("/reports", { state: { jobTitle: selectedJob.title, result, score: data.matchScore } });
+      console.log("Data:", data);
 
     } catch (error) {
       console.error("Error comparing resume:", error);
@@ -75,7 +81,7 @@ export const MainPage = () => {
 
   return (
     <div className="main-container">
-      <h3 className="user-d">Welcome User !!</h3> 
+      <h3 className="user-d">Welcome User !!</h3>
 
       <div className="container-body">
         <div className="left-section">
@@ -92,25 +98,25 @@ export const MainPage = () => {
           {/* Job Description */}
           {selectedJob && (
             <div className="display-box">
-              <p>Company: {selectedJob.company}</p>
-              <p>Description: {selectedJob.description}</p>
+              <p>Company: {selectedJob.company.name}</p>
+              <p>Description: {selectedJob.company.description}</p>
             </div>
           )}
         </div>
 
-        
+
 
         {/* Resume Upload */}
         <div className="upload-container">
           <label htmlFor="file-upload">Upload Resume:</label>
           <input type="file" id="file-upload" onChange={handleFileUpload} />
           {uploadedFile && (
-                <div className="uploaded-file">
-                  <p>Uploaded File: {fileName}</p>
-                </div>
-              )}
+            <div className="uploaded-file">
+              <p>Uploaded File: {fileName}</p>
             </div>
-          </div>
+          )}
+        </div>
+      </div>
 
       {/* Compare Button */}
       <button className="convert-button" onClick={handleCompare}>Compare</button>

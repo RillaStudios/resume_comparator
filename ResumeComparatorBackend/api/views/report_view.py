@@ -1,37 +1,63 @@
-from rest_framework.views import APIView
+from rest_framework.parsers import MultiPartParser, FormParser
 from rest_framework.response import Response
+from rest_framework.views import APIView
+
 from api.models.report_model import Report
 from api.serializers.report_serializer import ReportSerializer
 
 """
-A view for all reports
+A view for individual reports
 
-This view allows for the retrieval and deletion of all reports.
+This view allows for the retrieval, and deletion of individual reports.
 
 @Author: IFD
 @Date: 2025-03-05
 """
-class ReportsView(APIView):
+class ReportView(APIView):
+    parser_classes = (MultiPartParser, FormParser)
 
-    def get(self, request) -> Response:
+    def post(self, request) -> Response:
+        """
+        Create a report
+
+        :param request:
+        :return: The created report
+        """
+        file_serializer = ReportSerializer(data=request.data)
+
+        if file_serializer.is_valid():
+
+            file_serializer.save()
+
+            return Response({"message": "File uploaded successfully!", "data": file_serializer.data}, status=201)
+        else:
+            return Response(file_serializer.errors, status=400)
+
+    def get(self, request, uid: int = None) -> Response:
         """
         Get all reports
 
+        :param uid:
         :param request:
         :return: A list of all reports
         """
-        items = Report.objects.all()
-        serializer = ReportSerializer(items, many=True)
-        return Response(serializer.data)
+        if uid is None:
+            items = Report.objects.all()
+            serializer = ReportSerializer(items, many=True)
+            return Response(serializer.data)
+        else:
+            item = Report.objects.get(pk=uid)
+            serializer = ReportSerializer(item)
+            return Response(serializer.data)
 
-    def delete(self, request) -> Response:
+    def delete(self, request, uid) -> Response:
         """
-        Delete all reports
+        Delete a report
 
         :param request:
-        :return: A 204 response
+        :param uid:
+        :return: 204
         """
-
-        items = Report.objects.all()
-        items.delete()
+        item = Report.objects.get(pk=uid)
+        item.delete()
         return Response(status=204)

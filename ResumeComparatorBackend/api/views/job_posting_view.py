@@ -1,7 +1,7 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from api.models.job_posting_model import JobPosting
-from api.serializers.job_posting_serializer import JobPostingSerializer
+
+from api.job_posting.job_posting import JobPosting
 
 """
 A view for all job postings
@@ -12,13 +12,26 @@ This view allows for the retrieval of all job postings.
 """
 class JobPostingView(APIView):
 
-    def get(self, request) -> Response:
-        """
-        Get all job postings
+    def get(self, request, uid=None):
+        if uid is not None:
+            """
+            Get all job postings
 
-        :param request:
-        :return: Job postings
-        """
-        items = JobPosting.objects.all()
-        serializer = JobPostingSerializer(items, many=True)
-        return Response(serializer.data)
+            :param uid:
+            :param request:
+            :return: Job postings
+            """
+            job_posting = JobPosting().create_from_json(uid)
+
+            return Response(job_posting.to_json())
+        else:
+            """
+            Get all job postings
+
+            :param uid:
+            :param request:
+            :return: Job postings
+            """
+            job_posting = JobPosting().create_from_json(None)
+
+            return Response(job_posting)

@@ -14,24 +14,13 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-from django.conf.urls.static import static
 from django.urls import path, include
-from DjangoApp import settings  # Import settings for MEDIA_URL configuration
-from ResumeComparatorBackend.views import process_resume  # Import API endpoint
 
 # Define application routes
-
-
 urlpatterns = [
-
-    path("process-resume/", process_resume, name="process_resume"),
-
 
     #    path('admin/', admin.site.urls),
     path('api/', include('api.urls')),
 
 ]
-
-# Serve media files (useful for handling uploaded files during development)
-urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 

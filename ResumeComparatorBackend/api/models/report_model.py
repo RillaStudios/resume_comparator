@@ -15,14 +15,8 @@ Attributes:
 @Date: 2025-03-05
 """
 class Report(models.Model):
-    applicant_name = models.CharField(max_length=100)
-
-    applicant_resume = models.TextField()
-
-    description = models.TextField()
+    applicant_resume = models.FileField(upload_to='resumes/')
     created_at = models.DateTimeField(auto_now_add=True)
-    passed = models.BooleanField(default=False)
-    score = models.FloatField(default=0)
 
     """
     A string representation of the report.
@@ -34,4 +28,4 @@ class Report(models.Model):
     @Date: 2025-03-05
     """
     def __str__(self):
-        return str(self.id) + " " + self.applicant_name
+        return str(self.id)

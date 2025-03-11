@@ -1,0 +1,64 @@
+{
+  "job-postings": [
+    {
+      "id": 1,
+      "title": "Java Developer",
+      "company": {
+        "name": "TechNova Solutions",
+        "description": "TechNova Solutions is a leading software development firm specializing in cutting-edge enterprise solutions. Our mission is to build scalable, high-performance applications for global clients."
+      },
+      "job_description": {
+        "summary": "We are seeking a skilled Java Developer to join our dynamic team. The ideal candidate will have experience in Java development, Spring Boot, and cloud technologies.",
+        "responsibilities": [
+          "Design, develop, and maintain Java-based applications.",
+          "Collaborate with cross-functional teams to define and implement new features.",
+          "Write clean, scalable, and efficient code following best practices.",
+          "Troubleshoot, debug, and resolve software defects.",
+          "Develop and maintain RESTful APIs and microservices.",
+          "Ensure application security and performance optimization.",
+          "Participate in code reviews and mentoring junior developers."
+        ],
+        "requirements": {
+          "must_have": [
+            "Bachelor’s degree in Computer Science or related field.",
+            "3+ years of professional experience in Java development.",
+            "Proficiency in Java, Spring Boot, and Hibernate.",
+            "Experience with RESTful APIs and microservices architecture.",
+            "Familiarity with relational databases like MySQL or PostgreSQL.",
+            "Knowledge of cloud platforms (AWS, Azure, or GCP).",
+            "Strong understanding of software development life cycle (SDLC)."
+          ],
+          "nice_to_have": [
+            "Experience with Docker and Kubernetes.",
+            "Familiarity with front-end technologies (React, Angular, or Vue).",
+            "Understanding of CI/CD pipelines and DevOps practices."
+          ]
+        }
+      },
+      "location": {
+        "city": "Charlottetown",
+        "province": "PEI",
+        "country": "Canada",
+        "remote": true
+      },
+      "salary": {
+        "min": 90000,
+        "max": 120000,
+        "currency": "CAD",
+        "period": "yearly"
+      },
+      "employment_type": "Full-Time",
+      "benefits": [
+        "Health, dental, and vision insurance",
+        "401(k) with company match",
+        "Flexible work schedule",
+        "Remote work options",
+        "Professional development budget",
+        "Paid time off (PTO) and holidays"
+      ],
+      "posted_date": "2025-03-10",
+      "application_deadline": "2025-04-10",
+      "contact_email": "careers@technovasolutions.com"
+    }
+  ]
+}

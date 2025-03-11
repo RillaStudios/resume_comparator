@@ -499,7 +499,7 @@
     </routine>
     <schema id="191" parent="1" name="main">
       <Current>1</Current>
-      <LastIntrospectionLocalTimestamp>2025-03-04.19:01:08</LastIntrospectionLocalTimestamp>
+      <LastIntrospectionLocalTimestamp>2025-03-10.22:55:52</LastIntrospectionLocalTimestamp>
     </schema>
     <argument id="192" parent="16">
       <ArgumentDirection>R</ArgumentDirection>
@@ -1590,7 +1590,7 @@
     <argument id="554" parent="190">
       <Position>1</Position>
     </argument>
-    <table id="555" parent="191" name="api_item"/>
+    <table id="555" parent="191" name="api_report"/>
     <table id="556" parent="191" name="auth_group"/>
     <table id="557" parent="191" name="auth_group_permissions"/>
     <table id="558" parent="191" name="auth_permission"/>
@@ -1612,15 +1612,15 @@
       <Position>1</Position>
       <StoredType>integer|0s</StoredType>
     </column>
-    <column id="568" parent="555" name="name">
+    <column id="568" parent="555" name="applicant_resume">
       <NotNull>1</NotNull>
       <Position>2</Position>
       <StoredType>varchar(100)|0s</StoredType>
     </column>
-    <column id="569" parent="555" name="description">
+    <column id="569" parent="555" name="created_at">
       <NotNull>1</NotNull>
       <Position>3</Position>
-      <StoredType>text|0s</StoredType>
+      <StoredType>datetime|0s</StoredType>
     </column>
     <key id="570" parent="555">
       <ColNames>id</ColNames>
