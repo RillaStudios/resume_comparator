@@ -5,11 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="26d74a4c-992e-4b3a-bf7f-8569bfdea1d5" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/ResumeComparatorBackend.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/ResumeComparatorBackend.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../resume_comparator_frontend/src/components/mainPage/mainPage.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../resume_comparator_frontend/src/components/mainPage/mainPage.jsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -142,7 +139,7 @@
       <workItem from="1741639311573" duration="436000" />
       <workItem from="1741639757201" duration="12421000" />
       <workItem from="1741660526863" duration="2929000" />
-      <workItem from="1741698045348" duration="3683000" />
+      <workItem from="1741698045348" duration="4493000" />
     </task>
     <servers />
   </component>

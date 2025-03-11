@@ -1,7 +1,7 @@
 import "./mainPage.modules.css";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import jobs from "./jobs.json";
+
 
 /*
  Author: Michael Tamatey/ Navjot Kaur
