@@ -95,11 +95,42 @@ export const MainPage = () => {
             </select>
           </div>
 
-          {/* Job Description */}
-          {selectedJob && (
+              {/* Job Description */}
+              {selectedJob && (
             <div className="display-box">
-              <p>Company: {selectedJob.company.name}</p>
-              <p>Description: {selectedJob.company.description}</p>
+             <p><strong>Company:</strong> {selectedJob.company.name}</p>
+              <p><strong>Location:</strong> {selectedJob.location.city}, {selectedJob.location.province}, {selectedJob.location.country}</p>
+              <p><strong>Description:</strong> {selectedJob.company.description}</p>
+              <p><strong>Summary:</strong> {selectedJob.job_description.summary}</p>
+              <p><strong>Responsibilities:</strong></p>
+              <ol>
+                {selectedJob.job_description.responsibilities.map((resp, index) => (
+                  <li key={index}>{resp}</li>
+                ))}
+              </ol>
+              <p><strong>Must-Have Requirements:</strong></p>
+              <ol>
+                {selectedJob.job_description.requirements.must_have.map((req, index) => (
+                  <li key={index}>{req}</li>
+                ))}
+              </ol>
+              <p><strong>Nice-to-Have Requirements:</strong></p>
+              <ol>
+                {selectedJob.job_description.requirements.nice_to_have.map((req, index) => (
+                  <li key={index}>{req}</li>
+                ))}
+              </ol>
+              <p><strong>Salary:</strong> {selectedJob.salary.currency} {selectedJob.salary.min} - {selectedJob.salary.max} per {selectedJob.salary.period}</p>
+              <p><strong>Employment Type:</strong> {selectedJob.employment_type}</p>
+              <p><strong>Benefits:</strong></p>
+              <ol>
+                {selectedJob.benefits.map((benefit, index) => (
+                  <li key={index}>{benefit}</li>
+                ))}
+              </ol>
+              <p><strong>Posted Date:</strong> {selectedJob.posted_date}</p>
+              <p><strong>Application Deadline:</strong> {selectedJob.application_deadline}</p>
+              <p><strong>Contact Email:</strong> <a href={'mailto:${selectedJob.contact_email}'}>{selectedJob.contact_email}</a></p>
             </div>
           )}
         </div>
