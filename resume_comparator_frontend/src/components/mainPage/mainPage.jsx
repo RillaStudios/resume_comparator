@@ -1,7 +1,7 @@
 import "./mainPage.modules.css";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-
+import spinner from "../../assets/image/loadingSpinner.gif";
 
 /*
  Author: Michael Tamatey/ Navjot Kaur
@@ -15,6 +15,7 @@ export const MainPage = () => {
   const [selectedJob, setSelectedJob] = useState(null); // Store selected job
   const [uploadedFile, setUploadedFile] = useState(null);
   const [fileName, setFileName] = useState("");
+  const [loading, setLoading] = useState(false)
   const navigate = useNavigate();
 
   // Fetch jobs from Django backend
@@ -53,6 +54,7 @@ export const MainPage = () => {
       alert("Please select a job title and upload your resume.");
       return;
     }
+    setLoading(true);
 
     const formData = new FormData();
     formData.append("resume", uploadedFile);
@@ -76,6 +78,10 @@ export const MainPage = () => {
     } catch (error) {
       console.error("Error comparing resume:", error);
       alert("Error processing resume.");
+    }finally{
+      setTimeout(() => {
+        setLoading(false);
+      }, 1000);
     }
   };
 
@@ -135,7 +141,7 @@ export const MainPage = () => {
           )}
         </div>
 
-
+ 
 
         {/* Resume Upload */}
         <div className="upload-container">
@@ -148,10 +154,23 @@ export const MainPage = () => {
           )}
         </div>
       </div>
+ 
 
       {/* Compare Button */}
-      <button className="convert-button" onClick={handleCompare}>Compare</button>
-    </div>
+      <button className="convert-button" onClick={handleCompare} disabled={loading}>
+        {loading ? "Processing..." : "Compare"}
+      </button>
+
+      {loading && (
+        <div className="loading-spin">
+          <div className="loading-spinner">
+            <img src={spinner} alt="Loading..." />
+          </div>
+        </div>
+      )}
+      
+  </div>
+    
   );
 };
 
