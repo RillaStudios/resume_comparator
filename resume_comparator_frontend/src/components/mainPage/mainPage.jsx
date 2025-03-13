@@ -4,8 +4,6 @@ import { useNavigate } from "react-router-dom";
 import spinner from "../../assets/image/loadingSpinner.gif";
 import { toast } from "react-toastify";
 
-
-
 /*
  Author: Michael Tamatey/ Navjot Kaur
  Date: 20250222
@@ -79,11 +77,11 @@ export const MainPage = () => {
 
       console.log("Data:", data);
 
-      toast.success("Comparing successful!"); // ✅ Show success only after a successful response
+      toast.success("Comparing successful!"); //Show success only after a successful response
 
     } catch (error) {
       console.error("Error comparing resume:", error);
-      toast.error("Comparison failed. Please try again."); // ❌ Show error if request fails
+      toast.error("Comparison failed. Please try again."); //Show error if request fails
     }finally{
       setTimeout(() => {
         setLoading(false);
@@ -164,13 +162,13 @@ export const MainPage = () => {
       {/* Compare Button */}
       {/* Compare Button - Disabled until a resume is uploaded */}
       <button 
-  className="convert-button" 
-  onClick={handleCompare} 
-  disabled={!uploadedFile || loading}
-  title={!uploadedFile ? "Please upload a file first!" : ""}
->
-  {loading ? "Processing..." : "Compare"}
-</button>
+        className={`convert-button ${loading ? "processing" : ""}`} 
+        onClick={handleCompare} 
+        disabled={!uploadedFile || loading}
+        title={!uploadedFile ? "Please upload a file first!" : ""}
+       >
+        {loading ? "Processing..." : "Compare"}
+        </button>
 
       {loading && (
         <div className="loading-spin">

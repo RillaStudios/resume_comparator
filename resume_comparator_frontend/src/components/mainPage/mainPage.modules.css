@@ -107,6 +107,12 @@
     color: red; /* Red text */
   }
 
+  /* Green when processing */
+.convert-button.processing {
+    background-color: green !important;
+    color: white; /* white text */
+  }
+
 /* RESPONSIVENESS */
 
 /* Medium Screens (Tablets & Small Laptops) */
