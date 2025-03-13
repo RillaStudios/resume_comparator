@@ -2,6 +2,9 @@ import "./mainPage.modules.css";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import spinner from "../../assets/image/loadingSpinner.gif";
+import { toast } from "react-toastify";
+
+
 
 /*
  Author: Michael Tamatey/ Navjot Kaur
@@ -17,6 +20,7 @@ export const MainPage = () => {
   const [fileName, setFileName] = useState("");
   const [loading, setLoading] = useState(false)
   const navigate = useNavigate();
+  
 
   // Fetch jobs from Django backend
   useEffect(() => {
@@ -51,8 +55,8 @@ export const MainPage = () => {
   // Send resume to backend for processing
   const handleCompare = async () => {
     if (!selectedJob || !uploadedFile) {
-      alert("Please select a job title and upload your resume.");
-      return;
+      toast.warning("Please select a job title and upload your resume."); // message to user
+       return;
     }
     setLoading(true);
 
@@ -75,9 +79,11 @@ export const MainPage = () => {
 
       console.log("Data:", data);
 
+      toast.success("Comparing successful!"); // ✅ Show success only after a successful response
+
     } catch (error) {
       console.error("Error comparing resume:", error);
-      alert("Error processing resume.");
+      toast.error("Comparison failed. Please try again."); // ❌ Show error if request fails
     }finally{
       setTimeout(() => {
         setLoading(false);
@@ -87,7 +93,6 @@ export const MainPage = () => {
 
   return (
     <div className="main-container">
-      <h3 className="user-d">Welcome User !!</h3>
 
       <div className="container-body">
         <div className="left-section">
@@ -158,9 +163,14 @@ export const MainPage = () => {
 
       {/* Compare Button */}
       {/* Compare Button - Disabled until a resume is uploaded */}
-      <button className="convert-button" onClick={handleCompare} disabled={!uploadedFile || loading}>
-        {loading ? "Processing..." : "Compare"}
-      </button>
+      <button 
+  className="convert-button" 
+  onClick={handleCompare} 
+  disabled={!uploadedFile || loading}
+  title={!uploadedFile ? "Please upload a file first!" : ""}
+>
+  {loading ? "Processing..." : "Compare"}
+</button>
 
       {loading && (
         <div className="loading-spin">

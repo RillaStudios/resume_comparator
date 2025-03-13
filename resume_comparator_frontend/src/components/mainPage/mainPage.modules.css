@@ -100,6 +100,13 @@
     cursor: pointer;
 }
 
+/* Convert Button - Disabled */
+.convert-button:disabled {
+    cursor: not-allowed; /* Shows "X" cursor */
+    background-color: #ffcccc; /* Light red background */
+    color: red; /* Red text */
+  }
+
 /* RESPONSIVENESS */
 
 /* Medium Screens (Tablets & Small Laptops) */

@@ -1,0 +1,42 @@
+/* Navbar Container */
+.navbar {
+  background-color: #150ab4;
+  padding: 15px 30px;
+  border-bottom: 1px solid #ddd;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+/* Ensure the profile section moves to the right */
+.profile-section {
+  display: flex;
+  align-items: center;
+  margin-left: auto; /* Pushes it to the right */
+}
+
+/* Profile Name */
+.profile-info {
+  text-align: right; /* Align text to the right */
+  color: white;
+}
+
+/* Profile Role */
+.profile-role {
+  font-size: 1rem;
+  color: rgb(0, 0, 0);
+  margin-top: 2px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .navbar {
+      flex-direction: row;
+  }
+
+  .profile-section {
+      justify-content: flex-end; /* Keep aligned to the right */
+      width: auto;
+  }
+}

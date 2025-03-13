@@ -1,0 +1,111 @@
+/* Sidebar container */
+.side-nav {
+  width: 250px;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #150ab4;
+  /* Adjust as needed */
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+
+/* Logo styles */
+.logo-container {
+  width: 100%;
+  display: flex;
+  justify-content: start;
+  padding: 20px ;
+}
+
+.logo {
+  height: 56px;
+  width: auto;
+}
+
+/* Navigation styles */
+.nav-menu {
+  width: 100%;
+  flex-grow: 1;
+  /* Pushes content down */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.nav-menu-items {
+  width: 100%;
+  list-style: none;
+  padding: 0;
+}
+
+.nav-text {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  padding: 12px 20px;
+}
+
+.nav-text a {
+  text-decoration: none;
+  color: white;
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: 10px;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+}
+
+.nav-text a:hover {
+  background-color: #000;
+  color: white;
+}
+
+/* Active link styling */
+.nav-text.active a {
+  background-color: #000;
+  color: white;
+}
+
+span {
+  margin-left: 16px;
+}
+
+/* Logout Button Styles */
+.logout-container {
+  width: 100%;
+  padding: 10px;
+  display: flex;
+}
+
+.logout-btn {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: 10px ;
+  border-radius: 4px;
+  text-decoration: none;
+  font-size: 16px;
+  font-weight: bold;
+  background-color: transparent;
+  color: red;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+.logout-btn span {
+  flex-grow: 1;
+  /* Pushes the icon to the far right */
+}
+
+.logout-btn:hover {
+  background-color: red;
+  color: white;
+}
+
+.logout-icon {
+  font-size: 20px;
+}

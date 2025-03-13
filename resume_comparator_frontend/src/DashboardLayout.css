@@ -1,0 +1,48 @@
+/* Layout with sidebar and main content */
+.dashboard-layout {
+    display: flex;
+    height: 100vh;
+    /* Full height of the page */
+}
+
+/* Sidebar fixed on the left */
+.side-nav {
+    width: 250px;
+    background: white;
+    position: fixed;
+    /* Fix sidebar position */
+    top: 0;
+    left: 0;
+    bottom: 0;
+    /* Make sidebar stretch full height */
+    z-index: 10;
+    /* Ensure it sits above content */
+}
+
+/* Main content area */
+.main-content {
+    margin-left: 250px;
+    /* Leave space for the sidebar */
+    flex-grow: 1;
+    overflow-x: hidden;
+    /* Prevent horizontal overflow */
+    height: 100vh;
+    /* Full height of the viewport */
+    display: flex;
+    flex-direction: column;
+}
+
+/* Adjust page content style */
+.page-content {
+    flex-grow: 1;
+    /* Allow page content to grow */
+    overflow-y: auto;
+    /* Enable vertical scrolling */
+    padding: 20px;
+    background: #f8f9fa;
+    border-radius: 8px;
+    margin-top: 10px;
+    /* Optional: Add top margin for profile section */
+    max-height: calc(100vh - 50px);
+    /* Ensure content height is within the viewport */
+}
