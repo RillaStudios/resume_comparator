@@ -157,7 +157,8 @@ export const MainPage = () => {
  
 
       {/* Compare Button */}
-      <button className="convert-button" onClick={handleCompare} disabled={loading}>
+      {/* Compare Button - Disabled until a resume is uploaded */}
+      <button className="convert-button" onClick={handleCompare} disabled={!uploadedFile || loading}>
         {loading ? "Processing..." : "Compare"}
       </button>
 
