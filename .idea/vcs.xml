@@ -2,5 +2,8 @@
 <project version="4">
   <component name="VcsDirectoryMappings">
     <mapping directory="" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/ResumeComparatorBackend/ai_models/all-MiniLM-L6-v2" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/ResumeComparatorBackend/ai_models/distilbert-resume-parts-classify" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/ResumeComparatorBackend/ai_models/ms-marco-MiniLM-L6-v2" vcs="Git" />
   </component>
 </project>
