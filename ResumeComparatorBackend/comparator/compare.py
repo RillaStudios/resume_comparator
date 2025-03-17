@@ -1,4 +1,12 @@
-from api.models.report_model import Report
+from pathlib import Path
+
+import torch
+from django.conf import settings
+from sentence_transformers import CrossEncoder
+
+from api.job_posting.job_posting import JobPosting
+from api.models.compare_report_model import CompareReport
+from comparator.resume.resume import Resume
 
 """
 Compare class
@@ -19,7 +27,7 @@ class Compare:
 
     # Constructor
     def __init__(self, job_posting_id: int, resume_path: str):
-        self.resume = resume_path
+        self.resume_path = resume_path
         self.job_posting_id = job_posting_id
 
     """
@@ -31,35 +39,33 @@ class Compare:
     Returns:
         float: The score of the comparison.
     """
-    def compare_and_gen_report(self) -> Report:
 
-        # job_posting = JobPosting.objects.get(id=self.job_posting_id)
-        # resume = self.resume
-        #
-        # # Tokenize the resume
-        # resume_doc = self.nlp(resume)
-        # job_doc = self.nlp(job_posting.description)
-        #
-        # similarity = resume_doc.similarity(job_doc)
-        #
-        # # Use a keyword-based scoring system
-        # keywords = self.extract_keywords(job_posting.description)
-        # matched_keywords = self.match_keywords(resume, keywords)
-        #
-        # print(f"Matched Keywords: {matched_keywords.conjugate()}")
-        # print("Keywords: ", keywords)
-        #
-        # # Calculate final score: Weighted sum of similarity and keyword match
-        # self.score = self.calculate_score(similarity, matched_keywords, keywords)
-        #
-        # # Set passed based on threshold
-        # if self.score > 50:  # Arbitrary threshold for passing
-        #     self.passed = True
-        # else:
-        #     self.passed = False
-        #
-        # # Compare the resume to the job posting
-        # # Calculate the score
-        # self.passed = True
-        # self.score = 0.0
-        return self
+    def compare_and_gen_report(self) -> CompareReport:
+        model_path = Path(settings.BASE_DIR, 'ai_models', 'ms-marco-MiniLM-L6-v2')
+        model = CrossEncoder(str(model_path))
+
+        resume = Resume(self.resume_path)
+        job_posting = JobPosting().create_from_json(job_posting_id=1)
+
+        # Combine all job requirements into a single string
+        job_requirements_str = " ".join(job_posting.job_requirements_must_have).join(job_posting.job_requirements_nice_to_have)
+
+        print(resume.skills)
+
+        # Print raw logits before applying sigmoid
+        skills_score_raw = model.predict([(resume.skills, job_requirements_str)])[0]
+        experience_score_raw = model.predict([(resume.experience, job_requirements_str)])[0]
+        education_score_raw = model.predict([(resume.education, job_requirements_str)])[0]
+        summary_score_raw = model.predict([(resume.summary, job_posting.job_summary)])[0]
+
+        final_score = (skills_score_raw * 0.8) + (experience_score_raw * 0.5) + (education_score_raw * 0.4) + (
+                    summary_score_raw * 0.15)
+
+        print(f"Final Score: {final_score}")
+
+        # Return a CompareReport instance with the score
+        return CompareReport(resume=self.resume_path, job_id=self.job_posting_id, score=final_score)
+
+def normalize_logit(logit, min_val, max_val):
+    # Scale the logit to be between 0 and 1
+    return (logit - min_val) / (max_val - min_val)

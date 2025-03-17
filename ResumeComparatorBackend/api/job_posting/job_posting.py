@@ -67,9 +67,10 @@ class JobPosting:
                 ).to_json()
                 for job_posting in job_postings
             ]
+
         for job_posting in job_postings:
             if job_posting['id'] == job_posting_id:
-                self.job_posting_id = job_posting_id
+                self.job_posting_id = job_posting['id']
                 self.title = job_posting['title']
                 self.company_name = job_posting['company']['name']
                 self.company_desc = job_posting['company']['description']
@@ -91,6 +92,7 @@ class JobPosting:
                 self.job_closing_date = job_posting['application_deadline']
                 self.job_contact_email = job_posting['contact_email']
                 break
+
         return self
 
     def to_json(self):
@@ -127,3 +129,9 @@ class JobPosting:
             "application_deadline": self.job_closing_date,
             "contact_email": self.job_contact_email
         }
+
+    def get_by_id(self, job_posting_id):
+        return self.create_from_json(job_posting_id)
+
+    def __str__(self):
+        return json.dumps(self.to_json(), indent=4)
