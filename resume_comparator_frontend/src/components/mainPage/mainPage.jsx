@@ -18,7 +18,7 @@ export const MainPage = () => {
   const [fileName, setFileName] = useState("");
   const [loading, setLoading] = useState(false)
   const navigate = useNavigate();
-  
+
 
   // Fetch jobs from Django backend
   useEffect(() => {
@@ -54,7 +54,7 @@ export const MainPage = () => {
   const handleCompare = async () => {
     if (!selectedJob || !uploadedFile) {
       toast.warning("Please select a job title and upload your resume."); // message to user
-       return;
+      return;
     }
     setLoading(true);
 
@@ -79,10 +79,12 @@ export const MainPage = () => {
 
       toast.success("Comparing successful!"); //Show success only after a successful response
 
+      navigate("/reports", { state: { jobTitle: selectedJob.title, score: data.score } });
+
     } catch (error) {
       console.error("Error comparing resume:", error);
       toast.error("Comparison failed. Please try again."); //Show error if request fails
-    }finally{
+    } finally {
       setTimeout(() => {
         setLoading(false);
       }, 1000);
@@ -104,10 +106,10 @@ export const MainPage = () => {
             </select>
           </div>
 
-              {/* Job Description */}
-              {selectedJob && (
+          {/* Job Description */}
+          {selectedJob && (
             <div className="display-box">
-             <p><strong>Company:</strong> {selectedJob.company.name}</p>
+              <p><strong>Company:</strong> {selectedJob.company.name}</p>
               <p><strong>Location:</strong> {selectedJob.location.city}, {selectedJob.location.province}, {selectedJob.location.country}</p>
               <p><strong>Description:</strong> {selectedJob.company.description}</p>
               <p><strong>Summary:</strong> {selectedJob.job_description.summary}</p>
@@ -144,7 +146,7 @@ export const MainPage = () => {
           )}
         </div>
 
- 
+
 
         {/* Resume Upload */}
         <div className="upload-container">
@@ -157,18 +159,18 @@ export const MainPage = () => {
           )}
         </div>
       </div>
- 
+
 
       {/* Compare Button */}
       {/* Compare Button - Disabled until a resume is uploaded */}
-      <button 
-        className={`convert-button ${loading ? "processing" : ""}`} 
-        onClick={handleCompare} 
+      <button
+        className={`convert-button ${loading ? "processing" : ""}`}
+        onClick={handleCompare}
         disabled={!uploadedFile || loading}
         title={!uploadedFile ? "Please upload a file first!" : ""}
-       >
+      >
         {loading ? "Processing..." : "Compare"}
-        </button>
+      </button>
 
       {loading && (
         <div className="loading-spin">
@@ -177,9 +179,9 @@ export const MainPage = () => {
           </div>
         </div>
       )}
-      
-  </div>
-    
+
+    </div>
+
   );
 };
 
