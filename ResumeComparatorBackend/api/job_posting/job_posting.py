@@ -1,6 +1,12 @@
 import json
 import os
 
+"""
+A class to represent a job posting.
+
+Author: IFD
+Date: 2025-03-17
+"""
 class JobPosting:
 
     def __init__(self, uid: int = 0, title: str = "", company_name: str = "", company_desc: str = "", job_summary: str = "",
@@ -32,6 +38,15 @@ class JobPosting:
         self.job_contact_email = job_contact_email
 
     def create_from_json(self, job_posting_id=None):
+        """
+        A method to create a JobPosting object from a JSON file.
+
+        :param job_posting_id: The ID of the job posting to retrieve. If None, all job postings are returned.
+        :return: A list of JobPosting objects or a single JobPosting object.
+
+        Author: IFD
+        Date: 2025-03-17
+        """
         base_dir = os.path.dirname(os.path.abspath(__file__))
         file_path = os.path.join(base_dir, 'data', 'job_postings.json')
         if not os.path.exists(file_path):
@@ -96,6 +111,14 @@ class JobPosting:
         return self
 
     def to_json(self):
+        """
+        A method to convert a JobPosting object to a JSON object.
+
+        :return: A JSON object representing the JobPosting object.
+
+        Author: IFD
+        Date: 2025-03-17
+        """
         return {
             "id": self.job_posting_id,
             "title": self.title,
@@ -130,8 +153,13 @@ class JobPosting:
             "contact_email": self.job_contact_email
         }
 
-    def get_by_id(self, job_posting_id):
-        return self.create_from_json(job_posting_id)
-
     def __str__(self):
+        """
+        A method to return a string representation of the JobPosting object.
+
+        :return: A string representation of the JobPosting object.
+
+        Author: IFD
+        Date: 2025-03-17
+        """
         return json.dumps(self.to_json(), indent=4)
