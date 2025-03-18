@@ -7,31 +7,6 @@
     <list default="true" id="26d74a4c-992e-4b3a-bf7f-8569bfdea1d5" name="Changes" comment="Added more compare logic">
       <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../resume_comparator_backend/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../resume_comparator_backend/.idea/inspectionProfiles/profiles_settings.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../resume_comparator_backend/.idea/misc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../resume_comparator_backend/.idea/modules.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../resume_comparator_backend/.idea/resume_comparator_backend.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../resume_comparator_backend/.idea/vcs.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../resume_comparator_backend/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../resume_comparator_backend/comparison/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../resume_comparator_backend/comparison/admin.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../resume_comparator_backend/comparison/apps.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../resume_comparator_backend/comparison/migrations/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../resume_comparator_backend/comparison/models.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../resume_comparator_backend/comparison/serializers.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../resume_comparator_backend/comparison/templates/process_text.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../resume_comparator_backend/comparison/tests.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../resume_comparator_backend/comparison/urls.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../resume_comparator_backend/comparison/utils.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../resume_comparator_backend/comparison/views.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../resume_comparator_backend/cvcomparison/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../resume_comparator_backend/cvcomparison/asgi.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../resume_comparator_backend/cvcomparison/settings.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../resume_comparator_backend/cvcomparison/urls.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../resume_comparator_backend/cvcomparison/wsgi.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../resume_comparator_backend/db.sqlite3" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../resume_comparator_backend/manage.py" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -76,31 +51,31 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Django Server.ResumeComparator.executor": "Run",
-    "Django Server.ResumeComparatorBackend.executor": "Run",
-    "Python.Django.executor": "Run",
-    "Python.test_model.executor": "Run",
-    "RunOnceActivity.OpenDjangoStructureViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "RunOnceActivity.pycharm.django.structure.promotion.once.per.project": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "main",
-    "last_opened_file_path": "C:/Users/izaak/resume_comparator",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Django Server.ResumeComparator.executor&quot;: &quot;Run&quot;,
+    &quot;Django Server.ResumeComparatorBackend.executor&quot;: &quot;Run&quot;,
+    &quot;Python.Django.executor&quot;: &quot;Run&quot;,
+    &quot;Python.test_model.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.OpenDjangoStructureViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.pycharm.django.structure.promotion.once.per.project&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/izaak/resume_comparator&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
-  "keyToStringList": {
-    "stardust.markdown.MarkdownSplitEditorSuppressor:keyList": []
+  &quot;keyToStringList&quot;: {
+    &quot;stardust.markdown.MarkdownSplitEditorSuppressor:keyList&quot;: []
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\izaak\resume_comparator\ResumeComparatorBackend" />
