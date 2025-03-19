@@ -14,24 +14,31 @@
       <change afterPath="$PROJECT_DIR$/comparator/resume/extraction_tools/section_parser.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/job_posting/job_posting.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/job_posting/job_posting.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/serializers/report_serializer.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/views/compare_view.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/views/report_view.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/comparator/compare.py" beforeDir="false" afterPath="$PROJECT_DIR$/comparator/compare.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/comparator/resume.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/comparator/settings.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/comparator/test_model.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/media/Resume@.pdf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/media/Resume@_UYnBWhy.pdf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/media/Ss_resume.docx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/media/Ss_resume_akwpAVE.docx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/media/resumes/sentence_data.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../resume_comparator_frontend/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/../resume_comparator_frontend/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../resume_comparator_frontend/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../resume_comparator_frontend/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../resume_comparator_frontend/src/components/mainPage/mainPage.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../resume_comparator_frontend/src/components/mainPage/mainPage.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../resume_comparator_frontend/src/components/pages/reports/Reports.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../resume_comparator_frontend/src/components/pages/reports/Reports.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../resume_comparator_backend/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../resume_comparator_backend/.idea/inspectionProfiles/profiles_settings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../resume_comparator_backend/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../resume_comparator_backend/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../resume_comparator_backend/.idea/resume_comparator_backend.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../resume_comparator_backend/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../resume_comparator_backend/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../resume_comparator_backend/comparison/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../resume_comparator_backend/comparison/admin.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../resume_comparator_backend/comparison/apps.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../resume_comparator_backend/comparison/migrations/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../resume_comparator_backend/comparison/models.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../resume_comparator_backend/comparison/serializers.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../resume_comparator_backend/comparison/templates/process_text.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../resume_comparator_backend/comparison/tests.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../resume_comparator_backend/comparison/urls.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../resume_comparator_backend/comparison/utils.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../resume_comparator_backend/comparison/views.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../resume_comparator_backend/cvcomparison/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../resume_comparator_backend/cvcomparison/asgi.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../resume_comparator_backend/cvcomparison/settings.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../resume_comparator_backend/cvcomparison/urls.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../resume_comparator_backend/cvcomparison/wsgi.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../resume_comparator_backend/db.sqlite3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../resume_comparator_backend/manage.py" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -81,8 +88,6 @@
     "Django Server.ResumeComparator.executor": "Run",
     "Django Server.ResumeComparatorBackend.executor": "Run",
     "Python.Django.executor": "Run",
-    "Python.resume.executor": "Run",
-    "Python.test.executor": "Run",
     "Python.test_model.executor": "Run",
     "RunOnceActivity.OpenDjangoStructureViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
@@ -99,10 +104,10 @@
     "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable",
     "vue.rearranger.settings.migration": "true"
   },
-  "keyToStringList": {
-    "stardust.markdown.MarkdownSplitEditorSuppressor:keyList": []
+  &quot;keyToStringList&quot;: {
+    &quot;stardust.markdown.MarkdownSplitEditorSuppressor:keyList&quot;: []
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\izaak\resume_comparator\ResumeComparatorBackend\comparator\resume\converter" />
