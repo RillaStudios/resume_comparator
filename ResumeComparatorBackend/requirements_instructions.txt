@@ -7,3 +7,7 @@
 # venv\Scripts\activate  # On Windows
 # pip install -r requirements.txt
 # pip install spacy-transformers
+# python -m spacy download en_core_web_sm
+#
+# Make sure these are ran to successfully run the code.
+
