@@ -4,18 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5cccb144-14bf-4b3a-8576-15de1ba56b71" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/ResumeComparatorBackend.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/ResumeComparatorBackend.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+    <list default="true" id="5cccb144-14bf-4b3a-8576-15de1ba56b71" name="Changes" comment="Added requirements to fix backend functionality.">
+      <change afterPath="$PROJECT_DIR$/.gitattributes" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ai_models/all-MiniLM-L6-v2" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ai_models/distilbert-resume-parts-classify" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ai_models/ms-marco-MiniLM-L6-v2" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/comparator/resume/extraction_tools/keyword_extractor.py" beforeDir="false" afterPath="$PROJECT_DIR$/comparator/resume/extraction_tools/keyword_extractor.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/requirements_instructions.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements_instructions.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -121,12 +113,32 @@
       <workItem from="1742391539144" duration="806000" />
       <workItem from="1742392346328" duration="145000" />
       <workItem from="1742392496293" duration="455000" />
-      <workItem from="1742392959718" duration="752000" />
+      <workItem from="1742392959718" duration="4614000" />
     </task>
+    <task id="LOCAL-00001" summary="Added requirements to fix backend functionality.">
+      <option name="closed" value="true" />
+      <created>1742393775041</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1742393775041</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="VcsManagerConfiguration">
     <ignored-roots>
@@ -135,6 +147,8 @@
       <path value="$PROJECT_DIR$/ai_models/en_Resume_Matching_Keywords" />
       <path value="$PROJECT_DIR$/ai_models/ms-marco-MiniLM-L6-v2" />
     </ignored-roots>
+    <MESSAGE value="Added requirements to fix backend functionality." />
+    <option name="LAST_COMMIT_MESSAGE" value="Added requirements to fix backend functionality." />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/ResumeComparatorBackend$manage.coverage" NAME="manage Coverage Results" MODIFIED="1742392447503" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
