@@ -4,41 +4,18 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="26d74a4c-992e-4b3a-bf7f-8569bfdea1d5" name="Changes" comment="Added more compare logic">
-      <change afterPath="$PROJECT_DIR$/ai_models/en_Resume_Matching_Keywords" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/comparator/resume/converter/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/comparator/resume/extraction_tools/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/comparator/resume/extraction_tools/extract.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/comparator/resume/extraction_tools/keyword_extractor.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/comparator/resume/extraction_tools/section_classifier.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/comparator/resume/extraction_tools/section_parser.py" afterDir="false" />
+    <list default="true" id="5cccb144-14bf-4b3a-8576-15de1ba56b71" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/ResumeComparatorBackend.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/ResumeComparatorBackend.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../resume_comparator_backend/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../resume_comparator_backend/.idea/inspectionProfiles/profiles_settings.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../resume_comparator_backend/.idea/misc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../resume_comparator_backend/.idea/modules.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../resume_comparator_backend/.idea/resume_comparator_backend.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../resume_comparator_backend/.idea/vcs.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../resume_comparator_backend/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../resume_comparator_backend/comparison/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../resume_comparator_backend/comparison/admin.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../resume_comparator_backend/comparison/apps.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../resume_comparator_backend/comparison/migrations/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../resume_comparator_backend/comparison/models.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../resume_comparator_backend/comparison/serializers.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../resume_comparator_backend/comparison/templates/process_text.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../resume_comparator_backend/comparison/tests.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../resume_comparator_backend/comparison/urls.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../resume_comparator_backend/comparison/utils.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../resume_comparator_backend/comparison/views.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../resume_comparator_backend/cvcomparison/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../resume_comparator_backend/cvcomparison/asgi.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../resume_comparator_backend/cvcomparison/settings.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../resume_comparator_backend/cvcomparison/urls.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../resume_comparator_backend/cvcomparison/wsgi.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../resume_comparator_backend/db.sqlite3" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../resume_comparator_backend/manage.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ai_models/all-MiniLM-L6-v2" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ai_models/distilbert-resume-parts-classify" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ai_models/ms-marco-MiniLM-L6-v2" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/comparator/resume/extraction_tools/keyword_extractor.py" beforeDir="false" afterPath="$PROJECT_DIR$/comparator/resume/extraction_tools/keyword_extractor.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/requirements_instructions.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements_instructions.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -48,77 +25,57 @@
   <component name="DjangoConsoleOptions" custom-start-script="import sys; print('Python %s on %s' % (sys.version, sys.platform))&#10;import django; print('Django %s' % django.get_version())&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;if 'setup' in dir(django): django.setup()&#10;import django_manage_shell; django_manage_shell.run(PROJECT_ROOT)">
     <option name="myCustomStartScript" value="import sys; print('Python %s on %s' % (sys.version, sys.platform))&#10;import django; print('Django %s' % django.get_version())&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;if 'setup' in dir(django): django.setup()&#10;import django_manage_shell; django_manage_shell.run(PROJECT_ROOT)" />
   </component>
-  <component name="FileTemplateManagerImpl">
-    <option name="RECENT_TEMPLATES">
-      <list>
-        <option value="Python Script" />
-      </list>
-    </option>
-  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
   <component name="GitHubPullRequestSearchHistory">{
   &quot;lastFilter&quot;: {
     &quot;state&quot;: &quot;OPEN&quot;,
-    &quot;assignee&quot;: &quot;Srajain137013&quot;
+    &quot;assignee&quot;: &quot;RillaStudios&quot;
   }
 }</component>
   <component name="GithubPullRequestsUISettings">{
   &quot;selectedUrlAndAccountId&quot;: {
     &quot;url&quot;: &quot;https://github.com/RillaStudios/resume_comparator.git&quot;,
-    &quot;accountId&quot;: &quot;ca928273-3984-4dc3-b757-b569690467f6&quot;
+    &quot;accountId&quot;: &quot;fd96d372-8f9a-46fc-80d3-d12ce47d6692&quot;
   }
 }</component>
-  <component name="InvalidFacetManager">
-    <ignored-facets>
-      <facet id="ResumeComparatorBackend/invalid/Django" />
-    </ignored-facets>
-  </component>
   <component name="ProjectColorInfo">{
+  &quot;customColor&quot;: &quot;&quot;,
   &quot;associatedIndex&quot;: 1
 }</component>
-  <component name="ProjectId" id="2trWVQJ328aIW6PsxM7RvDpOBDJ" />
+  <component name="ProjectId" id="2uXOdBJVn6xDzcH3AEltD6QRjoW" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Django Server.ResumeComparator.executor": "Run",
-    "Django Server.ResumeComparatorBackend.executor": "Run",
-    "Python.Django.executor": "Run",
-    "Python.test_model.executor": "Run",
-    "RunOnceActivity.OpenDjangoStructureViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "RunOnceActivity.pycharm.django.structure.promotion.once.per.project": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "main",
-    "last_opened_file_path": "C:/Users/izaak/resume_comparator",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable",
-    "vue.rearranger.settings.migration": "true"
-  },
-  &quot;keyToStringList&quot;: {
-    &quot;stardust.markdown.MarkdownSplitEditorSuppressor:keyList&quot;: []
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Django Server.Django Server.executor&quot;: &quot;Run&quot;,
+    &quot;Django Server.Unnamed.executor&quot;: &quot;Run&quot;,
+    &quot;Python.manage.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.OpenDjangoStructureViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/izaakford/resume_comparator/ResumeComparatorBackend&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\izaak\resume_comparator\ResumeComparatorBackend\comparator\resume\converter" />
-      <recent name="C:\Users\izaak\resume_comparator\ResumeComparatorBackend\comparator\resume\extraction_tools" />
-      <recent name="C:\Users\izaak\resume_comparator\ResumeComparatorBackend\ai_models" />
-      <recent name="C:\Users\izaak\resume_comparator\ResumeComparatorBackend\media\resumes" />
-      <recent name="C:\Users\izaak\resume_comparator\ResumeComparatorBackend" />
+      <recent name="$PROJECT_DIR$/ai_models" />
     </key>
   </component>
   <component name="RunManager">
-    <configuration name="ResumeComparator" type="Python.DjangoServer" factoryName="Django server">
+    <configuration name="Django Server" type="Python.DjangoServer" factoryName="Django server">
       <module name="ResumeComparatorBackend" />
       <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -128,6 +85,7 @@
         <env name="DJANGO_SETTINGS_MODULE" value="DjangoApp.settings" />
       </envs>
       <option name="SDK_HOME" value="" />
+      <option name="SDK_NAME" value="Python 3.11 virtualenv at ~/resume_comparator/ResumeComparatorBackend/.venv" />
       <option name="WORKING_DIRECTORY" value="" />
       <option name="IS_MODULE_SDK" value="false" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
@@ -155,50 +113,30 @@
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="26d74a4c-992e-4b3a-bf7f-8569bfdea1d5" name="Changes" comment="" />
-      <created>1741110696996</created>
+      <changelist id="5cccb144-14bf-4b3a-8576-15de1ba56b71" name="Changes" comment="" />
+      <created>1742391537802</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1741110696996</updated>
-      <workItem from="1741110698002" duration="31000" />
-      <workItem from="1741111218463" duration="35000" />
-      <workItem from="1741111254956" duration="3461000" />
-      <workItem from="1741387442794" duration="226000" />
-      <workItem from="1741387671562" duration="261000" />
-      <workItem from="1741387934450" duration="29000" />
-      <workItem from="1741417530153" duration="1891000" />
-      <workItem from="1741463531929" duration="12000" />
-      <workItem from="1741639311573" duration="436000" />
-      <workItem from="1741639757201" duration="12421000" />
-      <workItem from="1741660526863" duration="2929000" />
-      <workItem from="1741698045348" duration="7843000" />
-      <workItem from="1741879047544" duration="305000" />
-      <workItem from="1742190591218" duration="436000" />
-      <workItem from="1742191115837" duration="5000" />
-      <workItem from="1742255536316" duration="12023000" />
-      <workItem from="1742268806221" duration="6000" />
+      <updated>1742391537802</updated>
+      <workItem from="1742391539144" duration="806000" />
+      <workItem from="1742392346328" duration="145000" />
+      <workItem from="1742392496293" duration="455000" />
+      <workItem from="1742392959718" duration="752000" />
     </task>
-    <task id="LOCAL-00001" summary="Added more compare logic">
-      <option name="closed" value="true" />
-      <created>1742190896356</created>
-      <option name="number" value="00001" />
-      <option name="presentableId" value="LOCAL-00001" />
-      <option name="project" value="LOCAL" />
-      <updated>1742190896356</updated>
-    </task>
-    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Added more compare logic" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added more compare logic" />
+    <ignored-roots>
+      <path value="$PROJECT_DIR$/ai_models/all-MiniLM-L6-v2" />
+      <path value="$PROJECT_DIR$/ai_models/distilbert-resume-parts-classify" />
+      <path value="$PROJECT_DIR$/ai_models/en_Resume_Matching_Keywords" />
+      <path value="$PROJECT_DIR$/ai_models/ms-marco-MiniLM-L6-v2" />
+    </ignored-roots>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/ResumeComparatorBackend$resume.coverage" NAME="resume Coverage Results" MODIFIED="1742257389221" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/comparator/resume" />
-    <SUITE FILE_PATH="coverage/ResumeComparatorBackend$test.coverage" NAME="test Coverage Results" MODIFIED="1742263200736" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/comparator" />
-    <SUITE FILE_PATH="coverage/ResumeComparatorBackend$test_model.coverage" NAME="test_model Coverage Results" MODIFIED="1741650365591" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/comparator" />
+    <SUITE FILE_PATH="coverage/ResumeComparatorBackend$manage.coverage" NAME="manage Coverage Results" MODIFIED="1742392447503" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>

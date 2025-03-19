@@ -1,7 +1,12 @@
+from pathlib import Path
+
 import spacy
+from django.conf import settings
+
+model_path = Path(settings.BASE_DIR) / 'ai_models' / 'en_Resume_Matching_Keywords'
 
 # Load the trained spaCy model
-nlp = spacy.load("en_Resume_Matching_Keywords")
+nlp = spacy.load(model_path)
 
 
 def extract_keywords(text: str, target_labels=None):
