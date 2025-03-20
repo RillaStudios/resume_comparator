@@ -1,9 +1,23 @@
 import { useState, useCallback } from "react";
-import apiClient from "./components/service/api"; // Ensure you have an Axios instance configured
+import axios from "axios";
 
 
-// Custom hook to handle API requests
-// This hook is used to make API requests and manage the state of the request (loading, data, error)
+/*
+ Author: Michael Tamatey/ Navjot Kaur
+ Date: 20250320
+ Description: This class Configure the axios instance with the base URL and headers
+*/
+
+
+const apiClient = axios.create({
+  baseURL: "http://localhost:8085/api", 
+  headers: {
+    "Content-Type": "application/json",
+  },
+});
+
+
+
 export function useApi() {
   const [state, setState] = useState({
     data: undefined,
@@ -12,7 +26,6 @@ export function useApi() {
   });
 
 
-    // Function to make an API request
   const request = useCallback(async (config) => {
     setState({ loading: true, error: undefined });
 
@@ -32,7 +45,7 @@ export function useApi() {
   return { ...state, request };
 }
 
-// Custom hook to handle API requests with JWT token
+
 export function useApiWithJWT(jwtToken) {
   const [state, setState] = useState({
     data: undefined,
@@ -41,6 +54,14 @@ export function useApiWithJWT(jwtToken) {
   });
 
   const request = useCallback(async (config) => {
+    if (!jwtToken) {
+      setState({
+        error: "No JWT Token available",
+        loading: false,
+      });
+      return;
+    }
+
     setState({ loading: true, error: undefined });
 
     try {
