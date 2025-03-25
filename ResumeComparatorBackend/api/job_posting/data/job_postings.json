@@ -59,6 +59,214 @@
       "posted_date": "2025-03-10",
       "application_deadline": "2025-04-10",
       "contact_email": "careers@technovasolutions.com"
+    },
+    {
+      "id": 2,
+      "title": "Chef",
+      "company": {
+        "name": "Gourmet Eats",
+        "description": "Gourmet Eats is a premier restaurant focused on delivering an exceptional culinary experience. We specialize in contemporary international cuisine and are known for our innovative dishes."
+      },
+      "job_description": {
+        "summary": "We are looking for a passionate and experienced Chef to join our kitchen team. The ideal candidate will have a love for food, creativity, and the ability to manage a fast-paced kitchen environment.",
+        "responsibilities": [
+          "Prepare high-quality meals according to the menu.",
+          "Manage kitchen staff, ensuring efficient operations.",
+          "Ensure the kitchen is clean and all health and safety standards are met.",
+          "Develop new recipes and menu items.",
+          "Order and maintain inventory of food supplies.",
+          "Collaborate with management on food pricing and costing."
+        ],
+        "requirements": {
+          "must_have": [
+            "At least 3 years of professional experience as a Chef.",
+            "Strong knowledge of various cuisines and cooking techniques.",
+            "Ability to work in a fast-paced environment.",
+            "Excellent leadership and communication skills."
+          ],
+          "nice_to_have": [
+            "Experience in a Michelin-starred restaurant.",
+            "Formal culinary education."
+          ]
+        }
+      },
+      "location": {
+        "city": "Vancouver",
+        "province": "BC",
+        "country": "Canada",
+        "remote": false
+      },
+      "salary": {
+        "min": 50000,
+        "max": 70000,
+        "currency": "CAD",
+        "period": "yearly"
+      },
+      "employment_type": "Full-Time",
+      "benefits": [
+        "Health, dental, and vision insurance",
+        "Paid time off (PTO) and holidays",
+        "Employee discounts on meals"
+      ],
+      "posted_date": "2025-03-20",
+      "application_deadline": "2025-04-20",
+      "contact_email": "careers@gourmeteats.com"
+    },
+    {
+      "id": 3,
+      "title": "Accountant",
+      "company": {
+        "name": "Finance Solutions Inc.",
+        "description": "Finance Solutions Inc. is a leading financial services firm providing expert accounting, auditing, and advisory services to businesses across various industries."
+      },
+      "job_description": {
+        "summary": "We are seeking an experienced and detail-oriented Accountant to join our growing team. The ideal candidate will have a strong background in financial reporting, tax preparation, and general ledger management.",
+        "responsibilities": [
+          "Prepare and maintain accurate financial statements.",
+          "Assist with tax filings and compliance.",
+          "Reconcile bank statements and general ledger accounts.",
+          "Analyze financial data and provide recommendations for improvements.",
+          "Support the preparation of annual budgets and forecasts.",
+          "Ensure compliance with accounting regulations and standards."
+        ],
+        "requirements": {
+          "must_have": [
+            "Bachelor’s degree in Accounting or Finance.",
+            "CPA certification (or in progress).",
+            "2+ years of experience in accounting or finance roles.",
+            "Strong knowledge of accounting principles and tax laws."
+          ],
+          "nice_to_have": [
+            "Experience with accounting software (QuickBooks, Xero).",
+            "Strong analytical and problem-solving skills."
+          ]
+        }
+      },
+      "location": {
+        "city": "Toronto",
+        "province": "ON",
+        "country": "Canada",
+        "remote": true
+      },
+      "salary": {
+        "min": 55000,
+        "max": 75000,
+        "currency": "CAD",
+        "period": "yearly"
+      },
+      "employment_type": "Full-Time",
+      "benefits": [
+        "Health, dental, and vision insurance",
+        "401(k) with company match",
+        "Professional development budget",
+        "Paid time off (PTO) and holidays"
+      ],
+      "posted_date": "2025-03-18",
+      "application_deadline": "2025-04-18",
+      "contact_email": "careers@financesolutions.com"
+    },
+    {
+      "id": 4,
+      "title": "College Professor",
+      "company": {
+        "name": "University of Excellence",
+        "description": "University of Excellence is a prestigious institution known for its commitment to academic excellence and fostering intellectual curiosity. We offer a wide range of undergraduate and graduate programs."
+      },
+      "job_description": {
+        "summary": "We are looking for a dedicated College Professor to teach undergraduate courses in the field of Computer Science. The ideal candidate will have a passion for teaching, research, and mentoring students.",
+        "responsibilities": [
+          "Teach undergraduate courses in Computer Science.",
+          "Develop course materials and syllabi.",
+          "Conduct research in the field of Computer Science.",
+          "Advise and mentor students in academic and professional development.",
+          "Participate in academic committees and university activities."
+        ],
+        "requirements": {
+          "must_have": [
+            "PhD in Computer Science or a related field.",
+            "3+ years of experience teaching at the university level.",
+            "Strong research background and publication record.",
+            "Excellent communication and presentation skills."
+          ],
+          "nice_to_have": [
+            "Experience with online teaching platforms.",
+            "Active involvement in professional organizations."
+          ]
+        }
+      },
+      "location": {
+        "city": "Vancouver",
+        "province": "BC",
+        "country": "Canada",
+        "remote": false
+      },
+      "salary": {
+        "min": 80000,
+        "max": 100000,
+        "currency": "CAD",
+        "period": "yearly"
+      },
+      "employment_type": "Full-Time",
+      "benefits": [
+        "Health, dental, and vision insurance",
+        "Paid time off (PTO) and holidays",
+        "Research funding and grants",
+        "Professional development opportunities"
+      ],
+      "posted_date": "2025-03-22",
+      "application_deadline": "2025-04-22",
+      "contact_email": "careers@universityofexcellence.com"
+    },
+    {
+      "id": 5,
+      "title": "Legal Clerk",
+      "company": {
+        "name": "Law & Associates",
+        "description": "Law & Associates is a prominent law firm specializing in a wide range of legal services. We provide expert legal advice and representation to individuals and businesses."
+      },
+      "job_description": {
+        "summary": "We are seeking a Legal Clerk to join our legal team. The ideal candidate will assist lawyers with legal research, document preparation, and administrative tasks.",
+        "responsibilities": [
+          "Conduct legal research and draft memos.",
+          "Assist with document preparation and filing.",
+          "Organize and maintain case files.",
+          "Attend court hearings and take notes for lawyers.",
+          "Assist in preparing contracts and legal agreements."
+        ],
+        "requirements": {
+          "must_have": [
+            "Bachelor’s degree in Law or Paralegal Studies.",
+            "1+ years of experience in a legal assistant or clerk role.",
+            "Strong understanding of legal terminology and procedures.",
+            "Proficient in Microsoft Office and legal research tools."
+          ],
+          "nice_to_have": [
+            "Experience with litigation and court filings.",
+            "Knowledge of legal software (Clio, LexisNexis)."
+          ]
+        }
+      },
+      "location": {
+        "city": "Montreal",
+        "province": "QC",
+        "country": "Canada",
+        "remote": false
+      },
+      "salary": {
+        "min": 45000,
+        "max": 60000,
+        "currency": "CAD",
+        "period": "yearly"
+      },
+      "employment_type": "Full-Time",
+      "benefits": [
+        "Health, dental, and vision insurance",
+        "Paid time off (PTO) and holidays",
+        "Professional development budget"
+      ],
+      "posted_date": "2025-03-15",
+      "application_deadline": "2025-04-15",
+      "contact_email": "careers@lawandassociates.com"
     }
   ]
 }

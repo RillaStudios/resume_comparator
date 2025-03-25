@@ -4,11 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5cccb144-14bf-4b3a-8576-15de1ba56b71" name="Changes" comment="Removed old unused app. (Default prebuilt app)">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DjangoApp/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/DjangoApp/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/views/compare_report_view.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/views/compare_report_view.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
+    <list default="true" id="5cccb144-14bf-4b3a-8576-15de1ba56b71" name="Changes" comment="Added ability to upload multiple files and generate multiple reports at once.">
+      <change beforePath="$PROJECT_DIR$/api/job_posting/data/job_postings.json" beforeDir="false" afterPath="$PROJECT_DIR$/api/job_posting/data/job_postings.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -128,7 +125,7 @@
       <workItem from="1742392496293" duration="455000" />
       <workItem from="1742392959718" duration="4614000" />
       <workItem from="1742920755941" duration="2811000" />
-      <workItem from="1742923571765" duration="4000000" />
+      <workItem from="1742923571765" duration="4412000" />
     </task>
     <task id="LOCAL-00001" summary="Added requirements to fix backend functionality.">
       <option name="closed" value="true" />
@@ -170,7 +167,15 @@
       <option name="project" value="LOCAL" />
       <updated>1742924087789</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Added ability to upload multiple files and generate multiple reports at once.">
+      <option name="closed" value="true" />
+      <created>1742927651290</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1742927651290</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -197,7 +202,8 @@
     <MESSAGE value="Added requirements to fix backend functionality." />
     <MESSAGE value="Merged users app into API. (Now one app). Made gitignore the ai_models folder (temp)." />
     <MESSAGE value="Removed old unused app. (Default prebuilt app)" />
-    <option name="LAST_COMMIT_MESSAGE" value="Removed old unused app. (Default prebuilt app)" />
+    <MESSAGE value="Added ability to upload multiple files and generate multiple reports at once." />
+    <option name="LAST_COMMIT_MESSAGE" value="Added ability to upload multiple files and generate multiple reports at once." />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/ResumeComparatorBackend$manage.coverage" NAME="manage Coverage Results" MODIFIED="1742392447503" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
