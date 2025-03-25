@@ -7,3 +7,10 @@
 # .venv\Scripts\activate  # On Windows
 # pip install -r requirements.txt
 # pip install spacy-transformers
+
+
+# To get Authentication Token, follow the instructions.
+# Pull latest commit from the main branch.
+# pip install django djangorestframework djangorestframework-simplejwt
+# python manage.py makemigrations
+# python manage.py migrate
