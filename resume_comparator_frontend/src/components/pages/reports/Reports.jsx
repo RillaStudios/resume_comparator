@@ -24,21 +24,27 @@ const Reports = () => {
 
   // Handle select all functionality
   const handleSelectAll = () => {
-    setSelectAll(!selectAll);
-    setAllReports((prevReports) =>
-      prevReports.map((report) => ({
-        ...report,
-        selected: !selectAll,
-      }))
+    setAllReports(prevReports =>
+      prevReports.map(report =>
+        filteredReports.some(filtered => filtered.name === report.name)
+          ? { ...report, selected: !selectAll }
+          : report
+      )
     );
+    setSelectAll(!selectAll);
   };
+  
+  
 
   // Handle select one functionality
-  const handleSelectOne = (index) => {
-    const updatedReports = [...allReports];
-    updatedReports[index].selected = !updatedReports[index].selected;
-    setAllReports(updatedReports);
-  };
+  const handleSelectOne = (name) => {
+  setAllReports(prevReports =>
+    prevReports.map(report =>
+      report.name === name ? { ...report, selected: !report.selected } : report
+    )
+  );
+};
+
 
   // Handle filter functionality
   const filteredReports = allReports.filter((report) => {
@@ -80,14 +86,13 @@ const Reports = () => {
       </div>
 
       <div className="reports-list">
-        {filteredReports.map((report, index) => (
-          <div key={index} className="report-item">
-          
+        {filteredReports.map((report) => (
+          <div key={report} className="report-item">
             <div className="select-column">
               <input
                 type="checkbox"
                 checked={report.selected}
-                onChange={() => handleSelectOne(index)}
+                onChange={() => handleSelectOne(report.name)}
               />
             </div>
 
