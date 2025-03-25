@@ -5,8 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5cccb144-14bf-4b3a-8576-15de1ba56b71" name="Changes" comment="Added requirements to fix backend functionality.">
-      <change afterPath="$PROJECT_DIR$/.gitattributes" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ai_models/lm-ner-linkedin-skills-recognition/pytorch_model.bin" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ai_models/lm-ner-linkedin-skills-recognition/runs/Jul07_21-42-28_1e3a323724ab/events.out.tfevents.1688766178.1e3a323724ab.315.0" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ai_models/lm-ner-linkedin-skills-recognition/runs/Jul07_22-06-49_1e3a323724ab/events.out.tfevents.1688767615.1e3a323724ab.13081.0" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ai_models/lm-ner-linkedin-skills-recognition/training_args.bin" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/api/models/compare_report_resume_download.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/resumes/Chef-resume-example-28.pdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/ResumeComparatorBackend.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/ResumeComparatorBackend.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
