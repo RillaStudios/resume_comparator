@@ -8,9 +8,9 @@ from api.views.compare_report_view import CompareReportView
 from api.views.user_view import register, login, logout, view_profile, update_profile, delete_user, change_password, protected_view
 
 urlpatterns = [
-    path('reports/', CompareReportView.as_view(), name='reports'),
-    path('reports/<int:uid>/', CompareReportView.as_view(), name='reports'),
-    path('compare/', CompareReportView.as_view(), name='reports'),
+    path('reports/', CompareReportView.as_view(), name='all-reports'),
+    path('reports/<int:uid>/', CompareReportView.as_view(), name='single-report'),
+    path('compare/', CompareReportView.as_view(), name='compare-reports'),
     path('job-postings/', JobPostingView.as_view(), name='all-job-postings'),
     path('job-postings/<int:uid>/', JobPostingView.as_view(), name='job-postings'),
     path('reports/download/', CompareReportResumeDownload.as_view(), name='download-resumes'),

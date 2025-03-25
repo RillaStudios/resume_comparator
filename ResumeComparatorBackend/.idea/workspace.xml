@@ -6,6 +6,9 @@
   <component name="ChangeListManager">
     <list default="true" id="5cccb144-14bf-4b3a-8576-15de1ba56b71" name="Changes" comment="Merged users app into API. (Now one app). Made gitignore the ai_models folder (temp).">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DjangoApp/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/DjangoApp/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -119,6 +122,8 @@
       <workItem from="1742392346328" duration="145000" />
       <workItem from="1742392496293" duration="455000" />
       <workItem from="1742392959718" duration="4614000" />
+      <workItem from="1742920755941" duration="2811000" />
+      <workItem from="1742923571765" duration="96000" />
     </task>
     <task id="LOCAL-00001" summary="Added requirements to fix backend functionality.">
       <option name="closed" value="true" />
@@ -136,7 +141,15 @@
       <option name="project" value="LOCAL" />
       <updated>1742919854061</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Merged users app into API. (Now one app). Made gitignore the ai_models folder (temp).">
+      <option name="closed" value="true" />
+      <created>1742920689292</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1742920689292</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
