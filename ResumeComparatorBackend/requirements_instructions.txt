@@ -7,17 +7,8 @@
 # .venv\Scripts\activate  # On Windows
 # pip install -r requirements.txt
 # pip install spacy-transformers
-<<<<<<< HEAD
 # python -m spacy download en_core_web_sm
+# pip install django djangorestframework djangorestframework-simplejwt
 #
 # Make sure these are ran to successfully run the code.
 
-=======
-
-
-# To get Authentication Token, follow the instructions.
-# Pull latest commit from the main branch.
-# pip install django djangorestframework djangorestframework-simplejwt
-# python manage.py makemigrations
-# python manage.py migrate
->>>>>>> 78144e094e4c01a983cb67e7cd17afbfca31914d
