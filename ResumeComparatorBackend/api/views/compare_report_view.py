@@ -29,7 +29,7 @@ class CompareReportView(APIView):
         Date: 2025-03-05
         """
 
-        # Check if resume file is uploaded
+        # Check if resume file(s) are uploaded
         if 'resume' not in request.FILES:
             return Response({"error": "No file uploaded"}, status=status.HTTP_400_BAD_REQUEST)
 
@@ -37,43 +37,50 @@ class CompareReportView(APIView):
         if not 'jobId' in request.data:
             return Response({"error": "Job ID is missing"}, status=status.HTTP_400_BAD_REQUEST)
 
-        resume_file = request.FILES['resume']
         job_id = request.data.get('jobId')
+        reports = []
 
-        # Check if file size is less than 50MB
-        if resume_file.size > 50 * 1024 * 1024:
-            return Response({"error": "File size too large. Max size is 50MB"},
-                            status=status.HTTP_413_REQUEST_ENTITY_TOO_LARGE)
+        for resume_file in request.FILES.getlist('resume'):
 
-        #Convert word document to pdf (if necessary)
-        if resume_file.name.endswith('.docx') or resume_file.name.endswith('.doc'):
-            # Due to Pythons rather absurdity of not being able to convert a simple docx to pdf
-            # We will use pandoc (possibly) to convert the docx to pdf, this will be in a later version.
-            # For now, we will just throw an error
-            #
-            # Also note that we need it to be converted to PDF as pdfplumber only works with PDFs
-            # and all the docx reading packages perform rather poorly with the various formats of docx
-            #
-            # print('is a docx')
-            # resume_file = DocxConverter(resume_file).convert_docx_to_pdf()
-            return Response({"error": "Only PDFs are supported at the moment"},
-                            status=status.HTTP_400_BAD_REQUEST)
+            # Check if file size is less than 50MB
+            if resume_file.size > 50 * 1024 * 1024:
+                return Response({"error": "File size too large. Max size is 50MB"},
+                                status=status.HTTP_413_REQUEST_ENTITY_TOO_LARGE)
 
-        # Define file path relative to MEDIA_ROOT
-        file_path = f"resumes/{resume_file.name}"
+            #Convert word document to pdf (if necessary)
+            #if resume_file.name.endswith('.docx') or resume_file.name.endswith('.doc'):
+                # Due to Pythons rather absurdity of not being able to convert a simple docx to pdf
+                # We will use pandoc (possibly) to convert the docx to pdf, this will be in a later version.
+                # For now, we will just throw an error
+                #
+                # Also note that we need it to be converted to PDF as pdfplumber only works with PDFs
+                # and all the docx reading packages perform rather poorly with the various formats of docx
+                #
+                # print('is a docx')
+                # resume_file = DocxConverter(resume_file).convert_docx_to_pdf()
+                #return Response({"error": "Only PDFs are supported at the moment"},
+                  #              status=status.HTTP_400_BAD_REQUEST)
 
-        # Save the file using Django's default storage
-        saved_path = default_storage.save(file_path, resume_file)
+            # Define file path relative to MEDIA_ROOT
 
-        # Create the report, passing the relative file path
-        report = Compare(job_id, saved_path).compare_and_gen_report()
+            file_path = f"resumes/{resume_file.name}"
 
-        #Save the report to the database
-        report.save()
+            # Save the file using Django's default storage
+            saved_path = default_storage.save(file_path, resume_file)
 
-        #Return the report
-        items = CompareReport.objects.get(pk=report.id)
-        serializer = CompareReportSerializer(items)
+            # Create the report, passing the relative file path
+            report = Compare(job_id, saved_path).compare_and_gen_report()
+
+            #Save the report to the database
+            report.save()
+            reports.append(report)
+
+        # Return the report(s)
+        if len(reports) == 1:
+            serializer = CompareReportSerializer(reports[0])
+        else:
+            serializer = CompareReportSerializer(reports, many=True)
+
         return Response(serializer.data)
 
     def get(self, request, uid: int = None) -> Response:
