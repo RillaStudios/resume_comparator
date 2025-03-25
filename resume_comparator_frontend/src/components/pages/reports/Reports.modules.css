@@ -134,3 +134,24 @@ input[type="checkbox"] {
   text-align: right;
   margin-bottom: 15px;
 }
+/* Action Buttons */
+.action-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-top: 20px;
+}
+
+.action-buttons button {
+  font-size: 16px;
+  padding:10px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.3s ease;
+}
+
+.action-buttons button:hover {
+  background-color: #45a049;
+  transform: scale(1.05);
+}
+

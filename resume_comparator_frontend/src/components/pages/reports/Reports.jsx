@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom"; // for navigation if needed
 import "./reports.modules.css";
 
 /*
@@ -9,7 +8,7 @@ import "./reports.modules.css";
 */
 
 const Reports = () => {
-  const navigate = useNavigate();  // Hook for navigation
+  
   const [selectAll, setSelectAll] = useState(false);
   const [filter, setFilter] = useState("all")
   const [allReports, setAllReports] = useState([
@@ -25,21 +24,27 @@ const Reports = () => {
 
   // Handle select all functionality
   const handleSelectAll = () => {
-    setSelectAll(!selectAll);
-    setAllReports((prevReports) =>
-      prevReports.map((report) => ({
-        ...report,
-        selected: !selectAll,
-      }))
+    setAllReports(prevReports =>
+      prevReports.map(report =>
+        filteredReports.some(filtered => filtered.name === report.name)
+          ? { ...report, selected: !selectAll }
+          : report
+      )
     );
+    setSelectAll(!selectAll);
   };
+  
+  
 
   // Handle select one functionality
-  const handleSelectOne = (index) => {
-    const updatedReports = [...allReports];
-    updatedReports[index].selected = !updatedReports[index].selected;
-    setAllReports(updatedReports);
-  };
+  const handleSelectOne = (name) => {
+  setAllReports(prevReports =>
+    prevReports.map(report =>
+      report.name === name ? { ...report, selected: !report.selected } : report
+    )
+  );
+};
+
 
   // Handle filter functionality
   const filteredReports = allReports.filter((report) => {
@@ -51,7 +56,7 @@ const Reports = () => {
 
   // Handle report item click
   const handleReportClick = (reportId) => {
-    navigate(`/report-details/${reportId}`);  // Example navigation to a details page
+    navigate(`/report-details/${reportId}`);  
   };
 
   return (
@@ -81,14 +86,13 @@ const Reports = () => {
       </div>
 
       <div className="reports-list">
-        {filteredReports.map((report, index) => (
-          <div key={index} className="report-item">
-          
+        {filteredReports.map((report) => (
+          <div key={report} className="report-item">
             <div className="select-column">
               <input
                 type="checkbox"
                 checked={report.selected}
-                onChange={() => handleSelectOne(index)}
+                onChange={() => handleSelectOne(report.name)}
               />
             </div>
 
@@ -109,14 +113,23 @@ const Reports = () => {
 
             <div className="view-column">
               <button onClick={(e) => {
-                e.stopPropagation(); // Prevent the item click event
+                e.stopPropagation(); 
                 alert("View report");
               }}>📝</button>
             </div>
           </div>
         ))}
       </div>
-    </div>
+    
+     {/* Action Buttons */}
+     
+     <div className="action-buttons">
+     <button onClick={() => alert("Emailing reports...")}>📧 Email</button>
+     <button onClick={() => alert("Downloading reports...")}>📥 Download</button>
+     <button onClick={() => alert("Deleting reports...")}>🗑️ Delete</button>
+     <button onClick={() => alert("Printing reports...")}>🖨️ Print</button>
+   </div>
+   </div>
   );
 };
 
