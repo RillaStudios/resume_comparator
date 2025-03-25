@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom"; // for navigation if needed
 import "./reports.modules.css";
 
 /*
@@ -9,7 +8,7 @@ import "./reports.modules.css";
 */
 
 const Reports = () => {
-  const navigate = useNavigate();  // Hook for navigation
+  
   const [selectAll, setSelectAll] = useState(false);
   const [filter, setFilter] = useState("all")
   const [allReports, setAllReports] = useState([
@@ -51,7 +50,7 @@ const Reports = () => {
 
   // Handle report item click
   const handleReportClick = (reportId) => {
-    navigate(`/report-details/${reportId}`);  // Example navigation to a details page
+    navigate(`/report-details/${reportId}`);  
   };
 
   return (
@@ -109,14 +108,23 @@ const Reports = () => {
 
             <div className="view-column">
               <button onClick={(e) => {
-                e.stopPropagation(); // Prevent the item click event
+                e.stopPropagation(); 
                 alert("View report");
               }}>📝</button>
             </div>
           </div>
         ))}
       </div>
-    </div>
+    
+     {/* Action Buttons */}
+     
+     <div className="action-buttons">
+     <button onClick={() => alert("Emailing reports...")}>📧 Email</button>
+     <button onClick={() => alert("Downloading reports...")}>📥 Download</button>
+     <button onClick={() => alert("Deleting reports...")}>🗑️ Delete</button>
+     <button onClick={() => alert("Printing reports...")}>🖨️ Print</button>
+   </div>
+   </div>
   );
 };
 
