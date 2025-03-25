@@ -11,6 +11,13 @@
   color: #333;
 }
 
+.no-data{
+  text-align: center;
+  font-size: 35px;
+  color: #333;
+  margin-top: 20px;
+}
+
 .report-item {
   background: white;
   border-radius: 10px;
