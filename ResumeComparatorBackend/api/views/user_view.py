@@ -3,10 +3,8 @@ from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated
 from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework import status
-from .models import User
-from .serializers import UserSerializer
+from api.serializers.user_serializer import UserSerializer
 from django.contrib.auth import authenticate
-from django.views.decorators.csrf import csrf_exempt
 from rest_framework.permissions import AllowAny
 
 

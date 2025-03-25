@@ -30,6 +30,9 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'comparator',
+    'django_extensions',
+    'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
@@ -39,10 +42,6 @@ INSTALLED_APPS = [
     'corsheaders',
     'rest_framework',
     'api',
-    'comparator',
-    'django_extensions',
-    'rest_framework_simplejwt',
-    'users',
 ]
 
 MIDDLEWARE = [
@@ -61,7 +60,7 @@ ROOT_URLCONF = 'DjangoApp.urls'
 
 
 #Added this
-AUTH_USER_MODEL = 'users.User'
+AUTH_USER_MODEL = 'api.User'
 
 
 CORS_ALLOW_ALL_ORIGINS = True
