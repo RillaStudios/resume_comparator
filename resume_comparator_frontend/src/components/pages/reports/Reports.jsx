@@ -87,21 +87,42 @@ const Reports = () => {
         throw new Error("Failed to download reports.");
       }
   
-      // If the backend returns a ZIP file
-      const blob = await response.blob();
-      const fileUrl = window.URL.createObjectURL(blob);
-      const a = document.createElement("a");
-      a.href = fileUrl;
-      a.download = "Resumes_" + new Date().toISOString().split("T")[0] + ".zip";
-      document.body.appendChild(a);
-      a.click();
-      window.URL.revokeObjectURL(fileUrl);
-      toast.success("Reports downloaded successfully!");
+      // Check the content type of the response
+      const contentType = response.headers.get("Content-Type");
+  
+      if (contentType && contentType.includes("application/zip")) {
+        // If the response is a ZIP file
+        const blob = await response.blob();
+        const fileUrl = window.URL.createObjectURL(blob);
+        const a = document.createElement("a");
+        a.href = fileUrl;
+        a.download = "Resumes_" + new Date().toISOString().split("T")[0] + ".zip";
+        document.body.appendChild(a);
+        a.click();
+        window.URL.revokeObjectURL(fileUrl);
+        toast.success("Reports downloaded successfully!");
+      } else if (contentType && contentType.includes("application/pdf")) {
+        // If the response is a PDF file
+        const blob = await response.blob();
+        const fileUrl = window.URL.createObjectURL(blob);
+        const a = document.createElement("a");
+        a.href = fileUrl;
+        a.download = "Resume_" + new Date().toISOString().split("T")[0] + ".pdf";
+        document.body.appendChild(a);
+        a.click();
+        window.URL.revokeObjectURL(fileUrl);
+        toast.success("Report downloaded successfully!");
+      } else {
+        throw new Error("Unknown file type.");
+      }
+  
     } catch (error) {
       toast.error("Failed to download reports.");
       console.error("Download error:", error);
     }
   };
+
+  
   // Handle Delete Reports functionality
   const handleDeleteReports = async () => {
     const selectedReports = filteredReports.filter((report) => report.selected);
