@@ -12,7 +12,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 const Reports = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  const { jobTitle, score, created_at } = location.state || {}; // Retrieve job title & score
+  const { jobTitle, score, created_at, job_id } = location.state || {}; // Retrieve job title & score
 
   const [selectAll, setSelectAll] = useState(false);
   const [filter, setFilter] = useState("all");
@@ -64,6 +64,44 @@ const Reports = () => {
     return true;
   });
 
+
+  // Handle Download Report functionality
+  const handleDownloadReports = async () => {
+    const selectedReports = filteredReports.filter((report) => report.selected);
+    if (selectedReports.length === 0) {
+      toast.error("No reports selected! Please select at least one.");
+      return;
+    }
+  
+    try {
+      const reportIds = selectedReports.map((report) => report.id).join(",");
+  
+      const response = await fetch(`http://127.0.0.1:8000/api/reports/download?report_ids=${reportIds}`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+  
+      if (!response.ok) {
+        throw new Error("Failed to download reports.");
+      }
+  
+      // If the backend returns a ZIP file
+      const blob = await response.blob();
+      const fileUrl = window.URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = fileUrl;
+      a.download = "Resumes_" + new Date().toISOString().split("T")[0] + ".zip";
+      document.body.appendChild(a);
+      a.click();
+      window.URL.revokeObjectURL(fileUrl);
+      toast.success("Reports downloaded successfully!");
+    } catch (error) {
+      toast.error("Failed to download reports.");
+      console.error("Download error:", error);
+    }
+  };
   // Handle Delete Reports functionality
   const handleDeleteReports = async () => {
     const selectedReports = filteredReports.filter((report) => report.selected);
@@ -202,7 +240,7 @@ const Reports = () => {
 
                     <div className="name-date-column">
                       <div>
-                        <strong>Job:</strong> {jobTitle ? jobTitle : report.jobTitle}
+                        <strong>Job:</strong> {jobTitle ? jobTitle : report.job_id}
                       </div>
                       <div><strong>Date:</strong> {created_at || report.created_at ? new Date(report.created_at).toLocaleDateString() : "N/A"}</div>
                     </div>
@@ -225,7 +263,7 @@ const Reports = () => {
               {/* Action Buttons */}
               <div className="action-buttons">
                 <button onClick={() => showConfirmationDialog("email")}>📧 Email</button>
-                <button onClick={() => showConfirmationDialog("download")}>📥 Download</button>
+                <button onClick={() => handleDownloadReports("download")}>📥 Download</button>
                 <button onClick={() => showConfirmationDialog("delete")}>🗑️ Delete</button>
                 <button onClick={() => handlePrint()}>🖨️ Print</button>
               </div>
