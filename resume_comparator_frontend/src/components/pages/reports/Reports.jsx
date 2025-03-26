@@ -19,6 +19,8 @@ const Reports = () => {
   const [allReports, setAllReports] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [dialogVisible, setDialogVisible] = useState(false);
+  const [actionType, setActionType] = useState(""); 
 
   // Fetch reports from database
   useEffect(() => {
@@ -27,7 +29,7 @@ const Reports = () => {
         const response = await fetch("http://127.0.0.1:8000/api/reports/");
         if (!response.ok) throw new Error("Failed to fetch reports");
         const data = await response.json();
-        setAllReports(data.map(report => ({ ...report, selected: false }))); // Ensure selected is false initially
+        setAllReports(data.map(report => ({ ...report, selected: false }))); 
       } catch (err) {
         setError(err.message);
       } finally {
@@ -69,7 +71,7 @@ const Reports = () => {
       toast.error("No reports selected! Please select at least one.");
       return;
     }
-  
+
     try {
       await Promise.all(
         selectedReports.map((report) =>
@@ -78,7 +80,7 @@ const Reports = () => {
           })
         )
       );
-  
+
       toast.success("Reports deleted successfully!");
       setAllReports((prevReports) => prevReports.filter((report) => !report.selected));
     } catch (error) {
@@ -87,9 +89,67 @@ const Reports = () => {
     }
   };
 
-  // Fix: Ensure handleReportClick accepts an ID
+  // Handle Email Reports functionality
+  const handleEmailReports = async () => {
+    const selectedReports = filteredReports.filter(report => report.selected);
+    if (selectedReports.length === 0) {
+      toast.error("No reports selected! Please select at least one.");
+      return;
+    }
+
+    try {
+      await Promise.all(
+        selectedReports.map((report) => {
+          const emailData = {
+            to: report.candidateEmail,
+            subject: "Selected Report",
+            body: `Here is the report for ${report.name}:`,
+            report: report,
+          };
+
+          return fetch("http://127.0.0.1:8000/api/sendemail/", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(emailData),
+          });
+        })
+      );
+
+      toast.success("Emails sent successfully!");
+    } catch (error) {
+      toast.error("Failed to send emails.");
+      console.error("Email error:", error);
+    }
+  };
+
+  const handlePrint = () => {
+    window.print();
+  };
+
+  // Show Confirmation Dialog
+  const showConfirmationDialog = (action) => {
+    setActionType(action);
+    setDialogVisible(true);
+  };
+
+  // Confirm the action
+  const confirmAction = () => {
+    if (actionType === "delete") {
+      handleDeleteReports();
+    } else if (actionType === "email") {
+      handleEmailReports();
+    }
+    setDialogVisible(false);
+  };
+
+  // Cancel the action
+  const cancelAction = () => {
+    setDialogVisible(false);
+  };
+
+  
   const handleReportClick = id => {
-    navigate(`/summary/${id}`); // Navigate to summary page with report ID
+    navigate(`/summary/`); // Navigate to summary page with report ID
   };
 
   return (
@@ -132,7 +192,7 @@ const Reports = () => {
                     <div className="select-column">
                       <input
                         type="checkbox"
-                        checked={report.selected || false} // Ensure it starts as controlled
+                        checked={report.selected || false}
                         onChange={e => {
                           e.stopPropagation();
                           handleSelectOne(report.id);
@@ -142,18 +202,13 @@ const Reports = () => {
 
                     <div className="name-date-column">
                       <div>
-                      <div><strong>Job:</strong> {jobTitle ? jobTitle : report.jobTitle}</div>
+                        <strong>Job:</strong> {jobTitle ? jobTitle : report.jobTitle}
                       </div>
-
-                      <strong>Date:</strong>{" "}
-                      {created_at || report.created_at
-                        ? new Date(report.created_at).toLocaleDateString()
-                        : "N/A"}
+                      <div><strong>Date:</strong> {created_at || report.created_at ? new Date(report.created_at).toLocaleDateString() : "N/A"}</div>
                     </div>
 
                     <div className="score-column">
-                      <strong>Score:</strong>{" "}
-                      {Math.min(10, ((score || report.score) / 10).toFixed(1))} / 10
+                      <strong>Score:</strong> {Math.min(10, ((score || report.score) / 10).toFixed(1))} / 10
                     </div>
 
                     <div className="pass-fail-column">
@@ -169,14 +224,25 @@ const Reports = () => {
 
               {/* Action Buttons */}
               <div className="action-buttons">
-                <button onClick={() => handleEmailReports("Emailing")}>📧 Email</button>
-                <button onClick={() => handleDownloadReports("Downloading")}>📥 Download</button>
-                <button onClick={handleDeleteReports}>🗑️ Delete</button>
-                <button onClick={() => handlePrintingReports("Printing")}>🖨️ Print</button>
+                <button onClick={() => showConfirmationDialog("email")}>📧 Email</button>
+                <button onClick={() => showConfirmationDialog("download")}>📥 Download</button>
+                <button onClick={() => showConfirmationDialog("delete")}>🗑️ Delete</button>
+                <button onClick={() => handlePrint()}>🖨️ Print</button>
               </div>
             </>
           )}
         </>
+      )}
+
+      {/* Confirmation Dialog */}
+      {dialogVisible && (
+        <div className="confirmation-dialog">
+          <div className="dialog-content">
+            <h3>Are you sure you want to {actionType} the selected reports?</h3>
+            <button onClick={confirmAction}>Yes</button>
+            <button onClick={cancelAction}>No</button>
+          </div>
+        </div>
       )}
     </div>
   );
