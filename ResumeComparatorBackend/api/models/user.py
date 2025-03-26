@@ -1,6 +1,15 @@
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 
+
+"""
+User Model
+
+This model is used to register a user with a role and hashed password.
+
+Author: Michael Tamatey
+Date: 2025-03-05
+"""
 class User(AbstractUser):
     RECRUITER = 'RECRUITER'
     DIRECTOR = 'DIRECTOR'

@@ -7,6 +7,14 @@ from api.serializers.user_serializer import UserSerializer
 from django.contrib.auth import authenticate
 from rest_framework.permissions import AllowAny
 
+"""
+User Views
+
+This view is used to register, login, logout, protected route, get user details, update, change pass and delete user.
+
+Author: Michael Tamatey
+Date: 2025-03-05
+"""
 
 # Generate JWT Token
 def get_tokens_for_user(user):
@@ -17,7 +25,13 @@ def get_tokens_for_user(user):
     }
 
 
-# User Registration
+
+"""
+User Registration method
+
+Author: Michael Tamatey
+Date: 2025-03-05
+"""
 @api_view(['POST'])
 @permission_classes([AllowAny])
 def register(request):
@@ -32,7 +46,13 @@ def register(request):
 
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-# User Login
+
+"""
+User Login method
+
+Author: Michael Tamatey
+Date: 2025-03-05
+"""
 @api_view(['POST'])
 @permission_classes([AllowAny])
 def login(request):
@@ -54,20 +74,38 @@ def login(request):
     })
 
 
-# User Logout (Client-side should delete token)
+
+"""
+User Logout method (Client-side should delete token)
+
+Author: Michael Tamatey
+Date: 2025-03-05
+"""
+# 
 @api_view(['POST'])
 def logout(request):
     return Response({"message": "Logged out successfully"}, status=status.HTTP_200_OK)
 
 
-# Protected Route
+
+"""
+Protected Route method 
+
+Author: Michael Tamatey
+Date: 2025-03-05
+""" 
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
 def protected_view(request):
     return Response({"message": f"Hello, {request.user.username}! This is a protected route."})
 
 
-# Change Password
+"""
+Change Password method 
+
+Author: Michael Tamatey
+Date: 2025-03-05
+"""  
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
 def change_password(request):
@@ -83,6 +121,12 @@ def change_password(request):
     return Response({"message": "Password updated successfully"}, status=status.HTTP_200_OK)
 
 
+"""
+Change Password method
+
+Author: Michael Tamatey
+Date: 2025-03-05
+"""
 # View Profile
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
@@ -90,7 +134,14 @@ def view_profile(request):
     serializer = UserSerializer(request.user)
     return Response(serializer.data, status=status.HTTP_200_OK)
 
-# Update Profile
+
+
+"""
+Update Profile method
+
+Author: Michael Tamatey
+Date: 2025-03-05
+"""
 @api_view(['PUT'])
 @permission_classes([IsAuthenticated])
 def update_profile(request):
@@ -105,7 +156,13 @@ def update_profile(request):
 
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-# Delete User Account
+
+"""
+Delete User Account method
+
+Author: Michael Tamatey
+Date: 2025-03-05
+"""
 @api_view(['DELETE'])
 @permission_classes([IsAuthenticated])
 def delete_user(request):
