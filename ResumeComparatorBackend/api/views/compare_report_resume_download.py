@@ -1,7 +1,9 @@
 import datetime
 import os
+import tempfile
 import zipfile
 
+from django.core.files.storage import default_storage
 from django.http import FileResponse
 from rest_framework import status
 from rest_framework.response import Response
@@ -9,27 +11,8 @@ from rest_framework.views import APIView
 
 from api.models.compare_report_model import CompareReport
 
-"""
-A view for downloading resumes from reports
-
-This view allows for the downloading of resumes from reports.
-
-@Author: IFD
-@Date: 2025-03-25
-"""
 class CompareReportResumeDownload(APIView):
 
-    """
-    Download a resume from a report
-
-    This method allows for the downloading of a resume from a report.
-
-    :param request: The request object.
-    :return: The response object.
-
-    @Author: IFD
-    @Date: 2025-03-25
-    """
     def get(self, request):
         report_ids = request.query_params.get('report_ids', '')
 
@@ -44,28 +27,30 @@ class CompareReportResumeDownload(APIView):
                 report = CompareReport.objects.get(pk=report_id)
                 file_path = report.resume.path
 
-                with open(file_path, 'rb') as file:
-                    return FileResponse(file, as_attachment=True, filename=os.path.basename(file_path))
+                file = open(file_path, 'rb')
+                return FileResponse(file, as_attachment=True, filename=os.path.basename(file_path))
 
             except CompareReport.DoesNotExist:
                 return Response({"error": "Report not found"}, status=status.HTTP_404_NOT_FOUND)
 
         # Download multiple reports as a ZIP
         zip_filename = f"resumes_{datetime.date.today()}.zip"
-        zip_filepath = os.path.join("/tmp", zip_filename)
+        with tempfile.NamedTemporaryFile(delete=False) as tmp_file:
+            with zipfile.ZipFile(tmp_file, 'w') as zip_file:
+                for report_id in report_ids:
+                    try:
+                        report = CompareReport.objects.get(pk=report_id)
+                        file_path = report.resume.path
+                        zip_file.write(file_path, os.path.basename(file_path))
+                    except CompareReport.DoesNotExist:
+                        continue
 
-        with zipfile.ZipFile(zip_filepath, 'w') as zip_file:
-            for report_id in report_ids:
-                try:
-                    report = CompareReport.objects.get(pk=report_id)
-                    file_path = report.resume.path
-                    zip_file.write(file_path, os.path.basename(file_path))
-                except CompareReport.DoesNotExist:
-                    continue
+            tmp_file_path = tmp_file.name
 
-        # Return the ZIP file
-        with open(zip_filepath, 'rb') as file:
-            response = FileResponse(file, as_attachment=True, filename=zip_filename)
-        os.remove(zip_filepath)
+        with open(tmp_file_path, 'rb') as file:
+            saved_path = default_storage.save(zip_filename, file)
+            response = FileResponse(default_storage.open(saved_path, 'rb'), as_attachment=True, filename=zip_filename)
+
+        os.remove(tmp_file_path)
 
         return response
