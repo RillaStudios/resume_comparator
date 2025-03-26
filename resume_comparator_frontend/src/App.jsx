@@ -1,16 +1,16 @@
 import React from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import "./App.css";
-import  MainPage  from "./components/mainPage/mainPage"; 
+import MainPage from "./components/mainPage/mainPage";
 import Reports from "./components/pages/reports/reports";
 import Summary from "./components/pages/summary/summary";
 import Account from "./components/settings/account/account";
 import DashboardLayout from "./DashboardLayout";
 import NotFound from "./components/auth/notFound";
-import { ToastContainer} from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-import {AuthProvider} from "./components/service/authContext";
-import PrivateRoute from './privateRoute';  // Import PrivateRoute
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { AuthProvider, useAuth } from "./components/service/authContext"; // Make sure to import useAuth
+import Login from "./components/auth/login";
 
 /*
  Author: Michael Tamatey/ Navjot Kaur
@@ -18,39 +18,48 @@ import PrivateRoute from './privateRoute';  // Import PrivateRoute
  Description: This class controls routes
 */
 
+// 🔐 Protected Route Component
+const ProtectedRoute = ({ element }) => {
+  const { user } = useAuth(); // Get authentication state
+
+  return user ? element : <Navigate to="/login" replace />;
+};
+
 function App() {
   return (
-    <> 
-    {/* Toast Notifications */}
-    <ToastContainer position="top-center" // Positions the popup in the center
-        autoClose={3000} // Auto closes after 3 seconds
-        hideProgressBar={false} // Show progress bar
-        newestOnTop={true} // New toasts appear on top
-        closeOnClick // Close on click
-        rtl={false} // Left to right
-        pauseOnFocusLoss // Pause when user switches tab
-        draggable // Allow dragging
-        pauseOnHover // Pause on hover
-        theme="colored" // Use colored theme
-         />
+    <AuthProvider>
+      {/* Toast Notifications */}
+      <ToastContainer
+        position="top-center"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop={true}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="colored"
+      />
 
-         {/* Routes */}
-        <AuthProvider>
-        <Router>
-          <Routes>  
-            <Route path="/" element={<DashboardLayout />}>
-              <Route index element={<MainPage />} />
-              <Route path="/reports" element={<Reports />} />
-              <Route path="/summary" element={<Summary />} />
-              <Route path="/account" element={<Account />} />
-            </Route>
+      <Router>
+        <Routes>
+          {/* Public Route: Login */}
+          <Route path="/login" element={<Login />} />
 
-            {/* 404 Page - Must be the last route */}
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-        </Router>
-      </AuthProvider>
-    </>
+          {/* Private Routes */}
+          <Route path="/" element={<ProtectedRoute element={<DashboardLayout />} />}>
+            <Route index element={<MainPage />} />
+            <Route path="reports" element={<Reports />} />
+            <Route path="summary" element={<Summary />} />
+            <Route path="account" element={<Account />} />
+          </Route>
+
+          {/* 404 Page */}
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+      </Router>
+    </AuthProvider>
   );
 }
 

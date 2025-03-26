@@ -1,5 +1,4 @@
 import React, { createContext, useState, useEffect, useContext } from 'react';
-
 import { login as loginService, logout as logoutService, getProfile as getProfileService } from './authService';
 
 const AuthContext = createContext();
@@ -26,7 +25,7 @@ export const AuthProvider = ({ children }) => {
       const data = await loginService(credentials);
       const userProfile = await getProfileService();
       setUser(userProfile.data);
-      navigate('/');
+      window.location.href = '/';
     } catch (error) {
       console.error("Login failed", error);
     }
