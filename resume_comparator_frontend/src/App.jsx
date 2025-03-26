@@ -9,6 +9,8 @@ import DashboardLayout from "./DashboardLayout";
 import NotFound from "./components/auth/notFound";
 import { ToastContainer} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import {AuthProvider} from "./components/service/authContext";
+import PrivateRoute from './privateRoute';  // Import PrivateRoute
 
 /*
  Author: Michael Tamatey/ Navjot Kaur
@@ -30,24 +32,24 @@ function App() {
         draggable // Allow dragging
         pauseOnHover // Pause on hover
         theme="colored" // Use colored theme
-         /> 
+         />
 
          {/* Routes */}
-    <Router>
-      <Routes>  
-        <Route path="/" element={<DashboardLayout />}>
-          <Route index element={<MainPage />} />
-          <Route path="/reports" element={<Reports />} />
-          <Route path="/summary" element={<Summary />} />
-          <Route path="/account" element={<Account />} />
-          
+        <AuthProvider>
+        <Router>
+          <Routes>  
+            <Route path="/" element={<DashboardLayout />}>
+              <Route index element={<MainPage />} />
+              <Route path="/reports" element={<Reports />} />
+              <Route path="/summary" element={<Summary />} />
+              <Route path="/account" element={<Account />} />
+            </Route>
 
-        </Route>
-
-        {/* 404 Page - Must be the last route */}
-        {<Route path="*" element={<NotFound />} />}
-      </Routes>
-    </Router>
+            {/* 404 Page - Must be the last route */}
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </Router>
+      </AuthProvider>
     </>
   );
 }
