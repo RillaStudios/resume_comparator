@@ -44,7 +44,8 @@ class CompareReportResumeDownload(APIView):
                 report = CompareReport.objects.get(pk=report_id)
                 file_path = report.resume.path
 
-                return FileResponse(open(file_path, 'rb'), as_attachment=True, filename=os.path.basename(file_path))
+                with open(file_path, 'rb') as file:
+                    return FileResponse(file, as_attachment=True, filename=os.path.basename(file_path))
 
             except CompareReport.DoesNotExist:
                 return Response({"error": "Report not found"}, status=status.HTTP_404_NOT_FOUND)
@@ -63,7 +64,8 @@ class CompareReportResumeDownload(APIView):
                     continue
 
         # Return the ZIP file
-        response = FileResponse(open(zip_filepath, 'rb'), as_attachment=True, filename=zip_filename)
-        os.remove(zip_filepath)  # Delete temp file after sending
+        with open(zip_filepath, 'rb') as file:
+            response = FileResponse(file, as_attachment=True, filename=zip_filename)
+        os.remove(zip_filepath)
 
         return response

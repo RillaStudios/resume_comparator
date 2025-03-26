@@ -2,7 +2,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.urls import path
 
-from api.models.compare_report_resume_download import CompareReportResumeDownload
+from api.views.compare_report_resume_download import CompareReportResumeDownload
 from api.views.job_posting_view import JobPostingView
 from api.views.compare_report_view import CompareReportView
 from api.views.user_view import register, login, logout, view_profile, update_profile, delete_user, change_password, protected_view
