@@ -1,0 +1,149 @@
+/* LoginPage.css */
+
+/* Main layout centered vertically and horizontally */
+.main-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background-color: #f1f3f4;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Main card layout */
+.container-body {
+    display: flex;
+    flex-direction: row;
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    max-width: 900px;
+    width: 100%;
+}
+
+/* Left branding panel */
+.left-section {
+    background-color: #150ab4;
+    color: white;
+    flex: 1;
+    padding: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    font-weight: bold;
+    text-align: center;
+}
+
+/* Right login panel */
+.upload-container {
+    flex: 1;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: #ffffff;
+}
+
+.upload-container form {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 300px;
+    margin: 0 auto;
+}
+
+.upload-container h2 {
+    margin-bottom: 20px;
+    font-size: 24px;
+    color: #333;
+}
+
+.upload-container input {
+    padding: 12px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 16px;
+    transition: border 0.2s ease-in-out;
+}
+
+.upload-container input:focus {
+    outline: none;
+    border-color: #150ab4;
+}
+
+/* Button styling */
+.convert-button {
+    padding: 12px;
+    background-color: #150ab4;
+    color: white;
+    font-size: 16px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.convert-button:hover {
+    background-color: #12099e;
+}
+
+.convert-button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+.convert-button.processing {
+    background-color: #28a745 !important;
+}
+
+/* Error text */
+.error-text {
+    color: red;
+    font-size: 14px;
+    margin-bottom: 10px;
+    text-align: left;
+}
+
+/* Responsive tweaks */
+@media (max-width: 768px) {
+    .container-body {
+        flex-direction: column;
+        border-radius: 0;
+        box-shadow: none;
+        height: 100%;
+    }
+
+    .left-section {
+        padding: 20px;
+        font-size: 1.5rem;
+    }
+
+    .upload-container {
+        padding: 20px;
+    }
+}
+/* Branding box inside the left section */
+.branding {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+/* Logo image */
+.branding-logo {
+    width: 100px;
+    height: 100px;
+    object-fit: contain;
+}
+
+/* Title below the logo */
+.branding-title {
+    font-size: 24px;
+    font-weight: bold;
+    color: white;
+    text-align: center;
+}

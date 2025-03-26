@@ -1,4 +1,4 @@
-// src/pages/LoginPage.jsx
+// src/pages/Login.jsx
 import React, { useState } from 'react';
 import { useAuth } from '../service/authContext';
 import './auth.css'; // Reuse shared layout CSS
@@ -31,46 +31,50 @@ const LoginPage = () => {
 
   return (
     <div className="main-container">
-      <div className="container-body">
-        {/* Branding Section */}
-        <div className="left-section">
-          <h1 className="user-d">Resume Comparator</h1>
-        </div>
+  <div className="container-body">
+  <div className="left-section">
+  <div className="branding">
+    <img
+      src="src/assets/image/logo.png"  // <-- Change to your actual logo path (public folder)
+      alt="Logo"
+      className="branding-logo"
+    />
+    <h1 className="branding-title">Resume Comparator</h1>
+  </div>
+</div>
 
-        {/* Login Form Section */}
-        <div className="upload-container">
-          <form onSubmit={handleSubmit} style={{ width: '100%' }}>
-            <h2 style={{ marginBottom: '10px' }}>Login</h2>
-            <input
-              type="text"
-              name="username"
-              placeholder="Username"
-              value={formData.username}
-              onChange={handleChange}
-              required
-              style={{ width: '100%', padding: 10, marginBottom: 10 }}
-            />
-            <input
-              type="password"
-              name="password"
-              placeholder="Password"
-              value={formData.password}
-              onChange={handleChange}
-              required
-              style={{ width: '100%', padding: 10, marginBottom: 10 }}
-            />
-            {error && <p style={{ color: 'red' }}>{error}</p>}
-            <button
-              type="submit"
-              disabled={loading}
-              className={`convert-button ${loading ? 'processing' : ''}`}
-            >
-              {loading ? 'Logging in...' : 'Login'}
-            </button>
-          </form>
-        </div>
-      </div>
+    <div className="upload-container">
+      <form onSubmit={handleSubmit}>
+        <h2>Login</h2>
+        <input
+          type="text"
+          name="username"
+          placeholder="Username"
+          value={formData.username}
+          onChange={handleChange}
+          required
+        />
+        <input
+          type="password"
+          name="password"
+          placeholder="Password"
+          value={formData.password}
+          onChange={handleChange}
+          required
+        />
+        {error && <p className="error-text">{error}</p>}
+        <button
+          type="submit"
+          disabled={loading}
+          className={`convert-button ${loading ? 'processing' : ''}`}
+        >
+          {loading ? 'Logging in...' : 'Login'}
+        </button>
+      </form>
     </div>
+  </div>
+</div>
+
   );
 };
 
