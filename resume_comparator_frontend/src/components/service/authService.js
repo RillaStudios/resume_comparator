@@ -1,56 +1,55 @@
 import axios from 'axios';
-
-
 /*
- Author: Michael Tamatey/ Navjot Kaur
+ Author: Michael Tamatey
  Date: 20250320
  Description: This class Configure the axios instance with the base URL and headers
 */
 
 
-const API_URL = 'http://localhost:8085/api/auth/';
+// Base API URL
+const API_URL = 'http://localhost:8000/api'; 
 
-const register = (firstName, lastName, email, password, address) => {
-  return axios.post(API_URL + 'signup', {
-    firstName,
-    lastName,
-    email,
-    password,
-    address,
-    role: 'DIRECTOR', // Default role to 'DIRECTOR'
-  });
+// Register User
+export const register = async (userData) => {
+    return await axios.post(`${API_URL}/register/`, userData);
 };
 
-const login = async (username, password) => {
-  try {
-    const response = await axios.post(API_URL + 'signin', {
-      username,
-      password,
-    });
-
-    if (response.data.accessToken) {
-      localStorage.setItem('user', JSON.stringify(response.data));
+// Login User
+export const login = async (credentials) => {
+    const response = await axios.post(`${API_URL}/login/`, credentials);
+    if (response.data.access) {
+        localStorage.setItem('access_token', response.data.access);
+        localStorage.setItem('refresh_token', response.data.refresh);
     }
-
     return response.data;
-  } catch (error) {
-    throw new Error(error.response?.data?.message || "Login failed");
-  }
 };
 
-const logout = () => {
-  localStorage.removeItem('user');
+// Logout User
+export const logout = () => {
+    localStorage.removeItem('access_token');
+    localStorage.removeItem('refresh_token');
 };
 
-const getCurrentUser = () => {
-  return JSON.parse(localStorage.getItem('user'));
+// Get User Profile
+export const getProfile = async () => {
+    const token = localStorage.getItem('access_token');
+    return await axios.get(`${API_URL}/profile/`, {
+        headers: { Authorization: `Bearer ${token}` }
+    });
 };
 
-const authService = {
-  register,
-  login,
-  logout,
-  getCurrentUser,
+// Change Password
+export const changePassword = async (newPassword) => {
+    const token = localStorage.getItem('access_token');
+    return await axios.post(`${API_URL}/profile/changepass/`, { new_password: newPassword }, {
+        headers: { Authorization: `Bearer ${token}` }
+    });
 };
 
-export default authService;
+// Delete Account
+export const deleteAccount = async (password) => {
+    const token = localStorage.getItem('access_token');
+    return await axios.post(`${API_URL}/profile/delete/`, { password }, {
+        headers: { Authorization: `Bearer ${token}` }
+    });
+};

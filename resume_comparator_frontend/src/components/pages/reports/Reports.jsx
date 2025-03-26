@@ -66,56 +66,40 @@ const Reports = () => {
 
 
   // Handle Download Report functionality
-  const handleDownloadReports = async () => {
+  const handleDownloadReports = async (action) => {
     const selectedReports = filteredReports.filter((report) => report.selected);
     if (selectedReports.length === 0) {
       toast.error("No reports selected! Please select at least one.");
       return;
     }
-  
+ 
+    const selectedReportIds = selectedReports.map((report) => report.id);
+    console.log(action, selectedReportIds);
+ 
+    const report_ids = selectedReportIds.join(",");
+ 
     try {
-      const reportIds = selectedReports.map((report) => report.id).join(",");
-  
-      const response = await fetch(`http://127.0.0.1:8000/api/reports/download?report_ids=${reportIds}`, {
+      const res = await fetch(`http://127.0.0.1:8000/api/reports/download/?report_ids=${report_ids}`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
         },
       });
-  
-      if (!response.ok) {
-        throw new Error("Failed to download reports.");
+ 
+      if (!res.ok) {
+        throw new Error("Failed to download reports");
       }
-  
-      // Check the content type of the response
-      const contentType = response.headers.get("Content-Type");
-  
-      if (contentType && contentType.includes("application/zip")) {
-        // If the response is a ZIP file
-        const blob = await response.blob();
-        const fileUrl = window.URL.createObjectURL(blob);
-        const a = document.createElement("a");
-        a.href = fileUrl;
-        a.download = "Resumes_" + new Date().toISOString().split("T")[0] + ".zip";
-        document.body.appendChild(a);
-        a.click();
-        window.URL.revokeObjectURL(fileUrl);
-        toast.success("Reports downloaded successfully!");
-      } else if (contentType && contentType.includes("application/pdf")) {
-        // If the response is a PDF file
-        const blob = await response.blob();
-        const fileUrl = window.URL.createObjectURL(blob);
-        const a = document.createElement("a");
-        a.href = fileUrl;
-        a.download = "Resume_" + new Date().toISOString().split("T")[0] + ".pdf";
-        document.body.appendChild(a);
-        a.click();
-        window.URL.revokeObjectURL(fileUrl);
-        toast.success("Report downloaded successfully!");
-      } else {
-        throw new Error("Unknown file type.");
-      }
-  
+ 
+      const blob = await res.blob();
+      const isSingleReport = selectedReports.length === 1;
+      const fileName = isSingleReport ? "report.pdf" : "reports.zip";
+ 
+      const link = document.createElement("a");
+      link.href = window.URL.createObjectURL(blob);
+      link.download = fileName;
+      link.click();
+ 
+      toast.success("Reports downloaded successfully!");
     } catch (error) {
       toast.error("Failed to download reports.");
       console.error("Download error:", error);

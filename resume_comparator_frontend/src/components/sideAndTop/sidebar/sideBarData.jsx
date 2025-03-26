@@ -19,7 +19,7 @@ const allSideBarData = [
   },
   {
     title: "Account",
-    path: "/acoount", // spelling mistake to check 404 page
+    path: "/account", 
     cName: "nav-text",
   },
   // Uncomment if needed
