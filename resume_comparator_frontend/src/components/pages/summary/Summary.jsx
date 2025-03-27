@@ -1,5 +1,5 @@
 import React from "react";
-import "./Summary.module.css";
+import "./summary.module.css";
 import { toast } from "react-toastify";
 
 
@@ -83,116 +83,115 @@ const handleDeleteReports = async (reportId) => {
 
 
 
-  return (
-    <div className="summary-container">
-      <h1>Candidate Summary</h1>
-      <h2>Name - Full Stack Developer</h2>
-      
-      <section>
-        <h2>Overall Score & Recommendation</h2>
-        <p><strong>Final Score:</strong> {summaryData.overallScore}/10</p>
-        <p><strong>Recommendation:</strong> {summaryData.recommendation}</p>
-      </section>
+return (
+  <div className="candidate-summary-container">
+    <h1 className="candidate-summary-title">Candidate Summary</h1>
+    <h2 className="candidate-summary-role">Name - Full Stack Developer</h2>
+    
+    <section className="candidate-summary-section">
+      <h2 className="summary-section-title">Overall Score & Recommendation</h2>
+      <p><strong>Final Score:</strong> {summaryData.overallScore}/10</p>
+      <p><strong>Recommendation:</strong> {summaryData.recommendation}</p>
+    </section>
 
-      <section>
-        <h2>Job Requirements Scoring</h2>
-        <table>
-          <thead>
-            <tr>
-              <th>Requirement</th>
-              <th>Score (1-10)</th>
-              <th>Comments</th>
+    <section className="candidate-summary-section">
+      <h2 className="summary-section-title">Job Requirements Scoring</h2>
+      <table className="candidate-summary-table">
+        <thead>
+          <tr>
+            <th>Requirement</th>
+            <th>Score (1-10)</th>
+            <th>Comments</th>
+          </tr>
+        </thead>
+        <tbody>
+          {summaryData.jobRequirements.map((item, index) => (
+            <tr key={index}>
+              <td>{item.requirement}</td>
+              <td>{item.score}</td>
+              <td>{item.comments}</td>
             </tr>
-          </thead>
-          <tbody>
-            {summaryData.jobRequirements.map((item, index) => (
-              <tr key={index}>
-                <td>{item.requirement}</td>
-                <td>{item.score}</td>
-                <td>{item.comments}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </section>
+          ))}
+        </tbody>
+      </table>
+    </section>
 
-      <section>
-        <h2>Work Experience</h2>
-        <table>
-          <thead>
-            <tr>
-              <th>Industry</th>
-              <th>Company</th>
-              <th>Years</th>
-              <th>Country</th>
+    <section className="candidate-summary-section">
+      <h2 className="summary-section-title">Work Experience</h2>
+      <table className="candidate-summary-table">
+        <thead>
+          <tr>
+            <th>Industry</th>
+            <th>Company</th>
+            <th>Years</th>
+            <th>Country</th>
+          </tr>
+        </thead>
+        <tbody>
+          {summaryData.workExperience.map((item, index) => (
+            <tr key={index}>
+              <td>{item.industry}</td>
+              <td>{item.company}</td>
+              <td>{item.years}</td>
+              <td>{item.country}</td>
             </tr>
-          </thead>
-          <tbody>
-            {summaryData.workExperience.map((item, index) => (
-              <tr key={index}>
-                <td>{item.industry}</td>
-                <td>{item.company}</td>
-                <td>{item.years}</td>
-                <td>{item.country}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </section>
+          ))}
+        </tbody>
+      </table>
+    </section>
 
-      <section>
-        <h2>Education & Certifications</h2>
-        <table>
-          <thead>
-            <tr>
-              <th>Degree/Certification</th>
-              <th>Institution</th>
-              <th>Year</th>
+    <section className="candidate-summary-section">
+      <h2 className="summary-section-title">Education & Certifications</h2>
+      <table className="candidate-summary-table">
+        <thead>
+          <tr>
+            <th>Degree/Certification</th>
+            <th>Institution</th>
+            <th>Year</th>
+          </tr>
+        </thead>
+        <tbody>
+          {summaryData.education.map((item, index) => (
+            <tr key={index}>
+              <td>{item.degree || item.certification}</td>
+              <td>{item.institution}</td>
+              <td>{item.year}</td>
             </tr>
-          </thead>
-          <tbody>
-            {summaryData.education.map((item, index) => (
-              <tr key={index}>
-                <td>{item.degree || item.certification}</td>
-                <td>{item.institution}</td>
-                <td>{item.year}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </section>
+          ))}
+        </tbody>
+      </table>
+    </section>
 
-      <section>
-        <h2>Technical Skills</h2>
-        <table>
-          <thead>
-            <tr>
-              <th>Technology</th>
-              <th>Proficiency (1-10)</th>
-              <th>Last Used</th>
+    <section className="candidate-summary-section">
+      <h2 className="summary-section-title">Technical Skills</h2>
+      <table className="candidate-summary-table">
+        <thead>
+          <tr>
+            <th>Technology</th>
+            <th>Proficiency (1-10)</th>
+            <th>Last Used</th>
+          </tr>
+        </thead>
+        <tbody>
+          {summaryData.technicalSkills.map((item, index) => (
+            <tr key={index}>
+              <td>{item.technology}</td>
+              <td>{item.proficiency}</td>
+              <td>{item.lastUsed}</td>
             </tr>
-          </thead>
-          <tbody>
-            {summaryData.technicalSkills.map((item, index) => (
-              <tr key={index}>
-                <td>{item.technology}</td>
-                <td>{item.proficiency}</td>
-                <td>{item.lastUsed}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </section>
+          ))}
+        </tbody>
+      </table>
+    </section>
 
-        {/* Action Buttons */}
-              <div className="action-buttons">
-                <button onClick={() => handleEmailReports("Emailing")}>📧 Email</button>
-                <button onClick={() => handleDownloadReports("Downloading")}>📥 Download</button>
-                <button onClick={handleDeleteReports}>🗑️ Delete</button>
-                <button className="print-btn" onClick={() => handlePrint("Printing")}>🖨️ Print</button>
-              </div>
-      
+    {/* Action Buttons */}
+    <div className="candidate-action-buttons">
+      <button className="candidate-btn email-btn" onClick={() => handleEmailReports("Emailing")}>📧 Email</button>
+      <button className="candidate-btn download-btn" onClick={() => handleDownloadReports("Downloading")}>📥 Download</button>
+      <button className="candidate-btn delete-btn" onClick={handleDeleteReports}>🗑️ Delete</button>
+      <button className="candidate-btn print-btn" onClick={() => handlePrint("Printing")}>🖨️ Print</button>
     </div>
+  </div>
   );
 };
 
