@@ -2,6 +2,12 @@ import React, { createContext, useState, useEffect, useContext } from 'react';
 import { login as loginService, logout as logoutService, getProfile as getProfileService } from './authService';
 
 
+/*
+ Author: Michael Tamatey
+ Date: 20250222
+ Description: AUTHENTICATION CLASS
+*/
+
 const AuthContext = createContext();
 
 export const useAuth = () => useContext(AuthContext);

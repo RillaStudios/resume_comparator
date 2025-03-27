@@ -1,63 +1,120 @@
-/* General container for the Account page */
+/* Full-page container */
 .account-container {
-    padding: 50px;
-    width: 100%;
-    font-family: Arial, sans-serif;
-    color: #333;
-    background-color: #f4f4f4;
-    border-radius: 8px;
-    max-width: 600px;
-    margin: 0 auto;
-  }
-  
-  .account-container h2 {
-    text-align: center;
-    font-size: 2rem;
-    color: #333;
-  }
-  
+  max-width: 900px;
+  margin: 40px auto;
+  padding: 20px;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+
+/* Hero Image */
+.hero-image {
+  width: 120px; /* Size of the image */
+  height: 120px;
+  border-radius: 50%; /* Makes it round */
+  overflow: hidden;
+  margin: 0 auto 20px; /* Centers it and adds space below */
+  border: 4px solid #ddd; /* Adds a border */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.hero-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Ensures the image fills the circle */
+}
+
+
+/* Title styling */
+h2 {
+  text-align: center;
+  color: #333;
+}
+
+/* User Details Grid */
+.account-details {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* Two columns */
+  gap: 20px; /* Space between grid items */
+  width: 100%;
+  margin-top: 20px;
+}
+
+/* Individual Detail Box */
+.account-box {
+  padding: 15px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background: #f9f9f9;
+  text-align: center;
+  font-size: 16px;
+  font-weight: 500;
+  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+/* Delete Account Section */
+.delete-section {
+  margin-top: 30px;
+  width: 100%;
+  text-align: center;
+}
+
+/* Input field */
+.account-input {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 16px;
+  margin-top: 10px;
+  transition: 0.3s;
+}
+
+.account-input:focus {
+  border-color: #ff4d4d;
+  outline: none;
+  box-shadow: 0 0 5px rgba(255, 77, 77, 0.5);
+}
+
+/* Delete button */
+.account-button {
+  background-color: #ff4d4d;
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  cursor: pointer;
+  margin-top: 15px;
+  transition: 0.3s;
+}
+
+.account-button:hover {
+  background-color: #cc0000;
+}
+
+/* Change Password Link */
+.change-password {
+  display: block;
+  margin-top: 15px;
+  text-align: center;
+  color: #007bff;
+  text-decoration: none;
+  font-size: 16px;
+}
+
+.change-password:hover {
+  text-decoration: underline;
+}
+
+/* Responsive for small screens */
+@media (max-width: 600px) {
   .account-details {
-    margin-top: 20px;
+    grid-template-columns: 1fr; /* Single column on small screens */
   }
-  
-  .account-details p {
-    font-size: 1.1rem;
-    margin-bottom: 10px;
-  }
-  
-  .account-details h3 {
-    font-size: 1.5rem;
-    color: #e74c3c;
-    margin-top: 30px;
-  }
-  
-  .account-input {
-    padding: 10px;
-    width: 100%;
-    margin: 10px 0;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    font-size: 1rem;
-  }
-  
-  .account-button {
-    background-color: #e74c3c;
-    color: white;
-    border: none;
-    padding: 10px 15px;
-    font-size: 1.2rem;
-    border-radius: 4px;
-    cursor: pointer;
-    width: 100%;
-    transition: background-color 0.3s;
-  }
-  
-  .account-button:hover {
-    background-color: #c0392b;
-  }
-  
-  .loading-text {
-    text-align: center;
-    font-size: 1.2rem;
-    color: #888;
-  }
+}

@@ -11,6 +11,7 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { AuthProvider, useAuth } from "./components/service/authContext"; // Make sure to import useAuth
 import Login from "./components/auth/login";
+import ChangePassword from "./components/settings/forgetPassword/forgetPassword"; 
 
 /*
  Author: Michael Tamatey/ Navjot Kaur
@@ -55,6 +56,7 @@ function App() {
             <Route path="reports" element={<Reports />} />
             <Route path="summary" element={<Summary />} />
             <Route path="account" element={<Account />} />
+            <Route path="changepass" element={<ChangePassword />} />
           </Route>
 
           {/* 404 Page */}
