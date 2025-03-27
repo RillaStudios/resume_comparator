@@ -50,6 +50,7 @@ export const changePassword = async (newPassword) => {
 export const deleteAccount = async (password) => {
     const token = localStorage.getItem('access_token');
     return await axios.post(`${API_URL}/profile/delete/`, { password }, {
+        method: 'DELETE',
         headers: { Authorization: `Bearer ${token}` }
     });
 };

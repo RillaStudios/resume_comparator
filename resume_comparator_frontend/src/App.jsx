@@ -12,6 +12,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { AuthProvider, useAuth } from "./components/service/authContext"; // Make sure to import useAuth
 import Login from "./components/auth/login";
 import ChangePassword from "./components/settings/forgetPassword/forgetPassword"; 
+import RegisterPage from "./components/auth/register";
 
 /*
  Author: Michael Tamatey/ Navjot Kaur
@@ -49,6 +50,7 @@ function App() {
         <Routes>
           {/* Public Route: Login */}
           <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<RegisterPage />} />
 
           {/* Private Routes */}
           <Route path="/" element={<ProtectedRoute element={<DashboardLayout />} />}>

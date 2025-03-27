@@ -1,5 +1,5 @@
 import React, { createContext, useState, useEffect, useContext } from 'react';
-import { login as loginService, logout as logoutService, getProfile as getProfileService } from './authService';
+import { login as loginService, logout as logoutService, getProfile as getProfileService, register as registerService } from './authService';
 
 
 /*
@@ -48,6 +48,17 @@ export const AuthProvider = ({ children }) => {
     }
 };
 
+const register = async (userInfo) => {
+  try {
+    const data = await registerService(userInfo); // Call the register service
+    if (data) {
+      window.location.href = '/login'; // Redirect to login page after successful registration
+    }
+  } catch (error) {
+    console.error("Registration failed", error);
+  }
+};
+
   const logout = () => {
     logoutService();
     setUser(null);
@@ -55,7 +66,7 @@ export const AuthProvider = ({ children }) => {
   };
 
   return (
-    <AuthContext.Provider value={{ user, loading, login, logout }}>
+    <AuthContext.Provider value={{ user, loading, login, register, logout }}>
       {children}
     </AuthContext.Provider>
   );

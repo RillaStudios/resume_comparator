@@ -1,0 +1,142 @@
+/* General Register Page Container */
+.register-page-container {
+    display: flex; /* Enables flexbox */
+    width: 100vw; /* Full viewport width */
+    height: 100vh; /* Full viewport height */
+}
+  
+/* Left Section - Full left side */
+.register-page-left-section {
+    flex: 1; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f4f4f4;
+    min-height: 100vh;
+}
+  
+/* Right Section - Full right side */
+.register-page-right-section {
+    flex: 1; 
+    padding: 40px;
+    background-color: white;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+  
+/* Register Box */
+.register-page-box {
+    width: 100%;
+    max-width: 450px;
+    padding: 30px;
+    border-radius: 12px;
+    background: white;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    transition: all 0.3s ease-in-out;
+}
+
+/* Error Text */
+.register-page-error-text {
+    color: red;
+    font-size: 0.9em;
+    margin-top: 10px;
+}
+  
+/* Input Field Styles */
+.input-field {
+    width: 100%;
+    max-width: 400px;
+    padding: 12px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 16px;
+    background-color: #f9f9f9;
+    transition: all 0.3s ease-in-out;
+}
+
+/* Input Focus Effect */
+.input-field:focus {
+    border-color: #007bff;
+    background-color: #ffffff;
+    outline: none;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.3);
+}
+
+/* Input Placeholder Styling */
+.input-field::placeholder {
+    color: #999;
+    font-style: italic;
+}
+
+/* Role Dropdown */
+.register-role-dropdown {
+    width: 100%;
+    max-width: 400px;
+    padding: 12px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 16px;
+    background-color: #f9f9f9;
+    cursor: pointer;
+}
+
+/* Register Button */
+.register-page-button {
+    background-color: #4caf50;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    width: 100%;
+    font-size: 1.1em;
+    transition: background 0.3s ease-in-out;
+}
+
+.register-page-button:hover {
+    background-color: #45a049; /* Darker green */
+}
+
+.register-page-button.processing {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+/* Link for Login */
+.register-login-link {
+    display: block;
+    margin-top: 15px;
+    color: #007bff;
+    text-decoration: none;
+}
+
+.register-login-link:hover {
+    text-decoration: underline;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .register-page-container {
+        flex-direction: column; /* Stack on smaller screens */
+    }
+    .register-page-left-section {
+        flex: none;
+        height: 40vh; /* Reduce height */
+    }
+    .register-page-right-section {
+        flex: none;
+        height: 60vh;
+    }
+}
+
+@media (max-width: 480px) {
+    .input-field {
+        font-size: 14px;
+        padding: 10px;
+    }
+}

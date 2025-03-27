@@ -36,7 +36,7 @@ const LoginPage = () => {
     <div className="login-page-container">
       <div className="login-page-left-section">
           <img
-            src="src/assets/image/loginPhoto.jpeg" 
+            src="src/assets/image/logo.png" 
             alt="Logo"
             className="login-page-branding-logo"
           />
@@ -44,7 +44,7 @@ const LoginPage = () => {
   
       <div className="login-page-right-section">
         <div >
-          <h2>Login</h2>
+          <h2>Welcome Back</h2>
           <form onSubmit={handleSubmit}>
           <input
             type="text"
@@ -64,7 +64,12 @@ const LoginPage = () => {
            required
            className="input-field"
         />
-          
+        <div className="remember-me-container">
+            <input type="checkbox" id="rememberMe" name="rememberMe" />
+            <label htmlFor="rememberMe">Remember Me</label>
+          </div>
+
+          <a href="/register" className="change-password" >Don't have an account? Register here</a>
             {error && <p className="login-page-error-text">{error}</p>}
             <button
               type="submit"

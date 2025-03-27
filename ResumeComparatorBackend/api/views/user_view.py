@@ -163,7 +163,7 @@ Delete User Account method
 Author: Michael Tamatey
 Date: 2025-03-05
 """
-@api_view(['DELETE'])
+@api_view(['POST'])
 @permission_classes([IsAuthenticated])
 def delete_user(request):
     user = request.user
