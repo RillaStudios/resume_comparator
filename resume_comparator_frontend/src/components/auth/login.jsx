@@ -1,8 +1,9 @@
 // src/pages/Login.jsx
 import React, { useState } from 'react';
 import { useAuth } from '../service/authContext';
-import './auth.css'; // Reuse shared layout CSS
-import { login } from '../service/authService'; // Use the provided API service
+import './auth.css';
+import { toast } from "react-toastify";
+
 
 const LoginPage = () => {
   const [formData, setFormData] = useState({ username: '', password: '' });
@@ -22,59 +23,60 @@ const LoginPage = () => {
     try {
       await login(formData); // Calls the abstracted login from your authService
       window.location.href= '/';
+      toast.success("Logged in successfully");
     } catch (err) {
       setError('Invalid credentials');
+      toast.error("failed to login");
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    <div className="main-container">
-  <div className="container-body">
-  <div className="left-section">
-  <div className="branding">
-    <img
-      src="src/assets/image/logo.png"  // <-- Change to your actual logo path (public folder)
-      alt="Logo"
-      className="branding-logo"
-    />
-    <h1 className="branding-title">Resume Comparator</h1>
-  </div>
-</div>
-
-    <div className="upload-container">
-      <form onSubmit={handleSubmit}>
-        <h2>Login</h2>
+    <div className="login-page-container">
+      <div className="login-page-left-section">
+          <img
+            src="src/assets/image/loginPhoto.jpeg" 
+            alt="Logo"
+            className="login-page-branding-logo"
+          />
+      </div>
+  
+      <div className="login-page-right-section">
+        <div >
+          <h2>Login</h2>
+          <form onSubmit={handleSubmit}>
+          <input
+            type="text"
+            name="username"
+            placeholder="Username"
+            value={formData.username}
+            onChange={handleChange}
+            required
+            className="input-field"
+          />
         <input
-          type="text"
-          name="username"
-          placeholder="Username"
-          value={formData.username}
-          onChange={handleChange}
-          required
+            type="password"
+            name="password"
+           placeholder="Password"
+           value={formData.password}
+           onChange={handleChange}
+           required
+           className="input-field"
         />
-        <input
-          type="password"
-          name="password"
-          placeholder="Password"
-          value={formData.password}
-          onChange={handleChange}
-          required
-        />
-        {error && <p className="error-text">{error}</p>}
-        <button
-          type="submit"
-          disabled={loading}
-          className={`convert-button ${loading ? 'processing' : ''}`}
-        >
-          {loading ? 'Logging in...' : 'Login'}
-        </button>
-      </form>
+          
+            {error && <p className="login-page-error-text">{error}</p>}
+            <button
+              type="submit"
+              disabled={loading}
+              className={`login-page-button ${loading ? 'processing' : ''}`}
+            >
+              {loading ? 'Logging in...' : 'Login'}
+            </button>
+          </form>
+        </div>
+      </div>
     </div>
-  </div>
-</div>
-
   );
 };
 

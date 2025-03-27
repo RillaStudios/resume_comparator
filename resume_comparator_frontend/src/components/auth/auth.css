@@ -1,149 +1,122 @@
-/* LoginPage.css */
-
-/* Main layout centered vertically and horizontally */
-.main-container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
-    background-color: #f1f3f4;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+/* General Login Page Container */
+.login-page-container {
+  display: flex; /* Enables flexbox */
+  width: 100vw; /* Full viewport width */
+  height: 100vh; /* Full viewport height */
 }
 
-/* Main card layout */
-.container-body {
-    display: flex;
-    flex-direction: row;
-    background-color: white;
-    border-radius: 12px;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-    overflow: hidden;
-    max-width: 900px;
-    width: 100%;
+/* Left Section - Full left side */
+.login-page-left-section {
+  flex: 1; 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f4f4f4;
+  min-height: 100vh;
 }
 
-/* Left branding panel */
-.left-section {
-    background-color: #150ab4;
-    color: white;
-    flex: 1;
-    padding: 40px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 2rem;
-    font-weight: bold;
-    text-align: center;
+/* Right Section - Full right side */
+.login-page-right-section {
+  flex: 1; 
+  padding: 40px;
+  background-color: white;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-/* Right login panel */
-.upload-container {
-    flex: 1;
-    padding: 40px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    background-color: #ffffff;
+/* Login Box */
+.login-page-box {
+  width: 100%;
+  max-width: 400px;
+  padding: 30px;
+  border-radius: 12px;
+  background: white;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Soft shadow for depth */
+  text-align: center;
+  transition: all 0.3s ease-in-out;
 }
 
-.upload-container form {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    max-width: 300px;
-    margin: 0 auto;
+/* Error Text */
+.login-page-error-text {
+  color: red;
+  font-size: 0.9em;
+  margin-top: 10px;
 }
 
-.upload-container h2 {
-    margin-bottom: 20px;
-    font-size: 24px;
-    color: #333;
+/* Button Styles */
+.login-page-button {
+  background-color: #4caf50;
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  width: 100%;
+  font-size: 1.1em;
+  transition: background 0.3s ease-in-out;
 }
 
-.upload-container input {
-    padding: 12px;
-    margin-bottom: 15px;
-    border: 1px solid #ccc;
-    border-radius: 6px;
-    font-size: 16px;
-    transition: border 0.2s ease-in-out;
+.login-page-button:hover {
+  background-color: #45a049; /* Darker green */
 }
 
-.upload-container input:focus {
-    outline: none;
-    border-color: #150ab4;
+.login-page-button.processing {
+  background-color: #ccc;
+  cursor: not-allowed;
 }
 
-/* Button styling */
-.convert-button {
-    padding: 12px;
-    background-color: #150ab4;
-    color: white;
-    font-size: 16px;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-    transition: background 0.3s ease;
-}
-
-.convert-button:hover {
-    background-color: #12099e;
-}
-
-.convert-button:disabled {
-    background-color: #ccc;
-    cursor: not-allowed;
-}
-
-.convert-button.processing {
-    background-color: #28a745 !important;
-}
-
-/* Error text */
-.error-text {
-    color: red;
-    font-size: 14px;
-    margin-bottom: 10px;
-    text-align: left;
-}
-
-/* Responsive tweaks */
+/* Responsive Design */
 @media (max-width: 768px) {
-    .container-body {
-        flex-direction: column;
-        border-radius: 0;
-        box-shadow: none;
-        height: 100%;
-    }
-
-    .left-section {
-        padding: 20px;
-        font-size: 1.5rem;
-    }
-
-    .upload-container {
-        padding: 20px;
-    }
-}
-/* Branding box inside the left section */
-.branding {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 20px;
+  .login-page-container {
+    flex-direction: column; /* Stack on smaller screens */
+  }
+  .login-page-left-section {
+    flex: none;
+    height: 40vh; /* Reduce height */
+  }
+  .login-page-right-section {
+    flex: none;
+    height: 60vh;
+  }
 }
 
-/* Logo image */
-.branding-logo {
-    width: 100px;
-    height: 100px;
-    object-fit: contain;
+/* Input Field Styles */
+.input-field {
+  width: 100%;
+  padding: 12px;
+  margin: 10px 0;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 16px;
+  background-color: #f9f9f9;
+  transition: all 0.3s ease-in-out;
 }
 
-/* Title below the logo */
-.branding-title {
-    font-size: 24px;
-    font-weight: bold;
-    color: white;
-    text-align: center;
+/* Input Focus Effect */
+.input-field:focus {
+  border-color: #007bff;
+  background-color: #ffffff;
+  outline: none;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.3);
+}
+
+/* Input Placeholder Styling */
+.input-field::placeholder {
+  color: #999;
+  font-style: italic;
+}
+
+/* Add some spacing for buttons */
+.login-page-button {
+  margin-top: 15px;
+}
+
+/* Responsive Design */
+@media (max-width: 480px) {
+  .input-field {
+    font-size: 14px;
+    padding: 10px;
+  }
 }

@@ -2,7 +2,7 @@ import React from "react";
 import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import "./App.css";
 import MainPage from "./components/mainPage/mainPage";
-import Reports from "./components/pages/reports/reports";
+import Reports from "./components/pages/reports/Reports";
 import Summary from "./components/pages/summary/summary";
 import Account from "./components/settings/account/account";
 import DashboardLayout from "./DashboardLayout";
@@ -20,7 +20,9 @@ import Login from "./components/auth/login";
 
 // 🔐 Protected Route Component
 const ProtectedRoute = ({ element }) => {
-  const { user } = useAuth(); // Get authentication state
+  const { user, loading } = useAuth();
+
+  if (loading) return <div>Loading...</div>; // Show loading while fetching profile
 
   return user ? element : <Navigate to="/login" replace />;
 };

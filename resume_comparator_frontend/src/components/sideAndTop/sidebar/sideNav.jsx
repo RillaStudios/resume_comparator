@@ -1,11 +1,10 @@
 import React from "react";
-import { NavLink, useLocation } from "react-router-dom"; // ✅ Import useLocation
+import { NavLink, useLocation, useNavigate } from "react-router-dom"; // ✅ Import useNavigate
 import SideBarData from "./sideBarData"; // ✅ Import SideBarData
 import cvLogo from "../../../assets/image/logo.png"; // ✅ Import logo
 import "./sideNav.css";
 import { IconContext } from "react-icons";
 import { FaSignOutAlt } from "react-icons/fa";
-
 
 /*
  Author: Michael Tamatey/ Navjot Kaur
@@ -14,6 +13,14 @@ import { FaSignOutAlt } from "react-icons/fa";
 */
 const SideNav = (props) => {
   const location = useLocation(); // ✅ Get current path
+  const navigate = useNavigate(); // ✅ For redirecting after logout
+
+  const logout = () => {
+    localStorage.removeItem('access_token');
+    localStorage.removeItem('refresh_token');
+    // Redirect to the login page
+    navigate("/login");
+  };
 
   return (
     <IconContext.Provider value={{ color: "" }}>
@@ -45,7 +52,7 @@ const SideNav = (props) => {
 
         {/* Logout Button at the Bottom */}
         <div className="logout-container">
-          <button onClick={props.logout} className="logout-btn">
+          <button onClick={logout} className="logout-btn">
             <span>Logout</span>
             <FaSignOutAlt className="logout-icon" />
           </button>

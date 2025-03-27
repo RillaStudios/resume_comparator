@@ -1,0 +1,63 @@
+/* General container for the Account page */
+.account-container {
+    padding: 50px;
+    width: 100%;
+    font-family: Arial, sans-serif;
+    color: #333;
+    background-color: #f4f4f4;
+    border-radius: 8px;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+  
+  .account-container h2 {
+    text-align: center;
+    font-size: 2rem;
+    color: #333;
+  }
+  
+  .account-details {
+    margin-top: 20px;
+  }
+  
+  .account-details p {
+    font-size: 1.1rem;
+    margin-bottom: 10px;
+  }
+  
+  .account-details h3 {
+    font-size: 1.5rem;
+    color: #e74c3c;
+    margin-top: 30px;
+  }
+  
+  .account-input {
+    padding: 10px;
+    width: 100%;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1rem;
+  }
+  
+  .account-button {
+    background-color: #e74c3c;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    font-size: 1.2rem;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 100%;
+    transition: background-color 0.3s;
+  }
+  
+  .account-button:hover {
+    background-color: #c0392b;
+  }
+  
+  .loading-text {
+    text-align: center;
+    font-size: 1.2rem;
+    color: #888;
+  }

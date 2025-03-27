@@ -1,31 +1,43 @@
-import React from "react"; // Import React
-import "./topNavBar.css"; // Import CSS for styling
+import React, { useState, useEffect } from "react"; 
+import "./topNavBar.css"; 
+import { getProfile } from "../../service/authService";
+
 /*
- Author: Michael Tamatey/ Navjot Kaur
+ Author: Michael Tamatey / Navjot Kaur
  Date: 20250222
  Description: This class controls the top navigation bar
 */
-const Navbar = () => {
-  //const firstName = localStorage.getItem("firstName") || "";
-  //const lastName = localStorage.getItem("lastName") || "";
-  //const role = localStorage.getItem("role") || "";
 
-  // Hard-coded name and role
-  const firstName = "CIS";
-  const lastName = "OJT";
-  const role = "DIRECTOR";
+const Navbar = () => {
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    const fetchUser = async () => {
+      try {
+        const response = await getProfile();
+        setUser(response.data);
+      } catch (err) {
+        console.error("Failed to fetch profile");
+      }
+    };
+    fetchUser();
+  }, []);
 
   return (
     <nav className="navbar">
-      
-        {/* Profile Section */}
-        <div className="profile-section">
-          <div className="profile-info">
-            <strong>{`${firstName} ${lastName}`}</strong>
-            <div className="profile-role">{role}</div>
-          </div>
+      {/* Profile Section */}
+      <div className="profile-section">
+        <div className="profile-info">
+          {user ? (
+            <>
+              <strong>{`${user.first_name} ${user.last_name}`}</strong>
+              <div className="profile-role">{user.role}</div>
+            </>
+          ) : (
+            <p>Loading...</p> // Show loading while fetching data
+          )}
         </div>
-      
+      </div>
     </nav>
   );
 };

@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react';
-import { getProfile, changePassword, deleteAccount, logout } from '../../service/authService';
-import { useNavigate } from 'react-router-dom';
+import { getProfile, deleteAccount, logout } from '../../service/authService';
+import './Account.css'; // Import the CSS file
+import { toast } from 'react-toastify';
 
 const Account = () => {
     const [user, setUser] = useState(null);
     const [deletePassword, setDeletePassword] = useState('');
-    const navigate = useNavigate();
 
     useEffect(() => {
         const fetchUser = async () => {
@@ -22,35 +22,38 @@ const Account = () => {
     const handleDeleteAccount = async () => {
         try {
             await deleteAccount(deletePassword);
-            alert('Account deleted');
+            toast.success('Account deleted successfully');
             logout();
-            navigate('/login');
+            window.location.href = '/login';
         } catch (err) {
-            alert('Error deleting account');
+            toast.error('Error deleting account')
         }
     };
 
     return (
-        <div>
+        <div className="account-container">
             <h2>Account Details</h2>
             {user ? (
-                <div>
+                <div className="account-details">
                     <p>Username: {user.username}</p>
                     <p>First Name: {user.first_name}</p>
                     <p>Last Name: {user.last_name}</p>
                     <p>Email: {user.email}</p>
                     <p>Address: {user.address}</p>
                     <p>Role: {user.role}</p>
-                    
-                    
+
                     <h3>Delete Account</h3>
-                    <input type="password" 
-                    placeholder="Confirm Password" 
-                    onChange={(e) => setDeletePassword(e.target.value)} />
-                    <button onClick={handleDeleteAccount}>Delete Account</button>
+                    <p> This can not be undone</p>
+                    <input 
+                        type="password" 
+                        className="account-input"
+                        placeholder="Confirm Password" 
+                        onChange={(e) => setDeletePassword(e.target.value)} 
+                    />
+                    <button onClick={handleDeleteAccount} className="account-button">Delete Account</button>
                 </div>
             ) : (
-                <p>Loading...</p>
+                <p className="loading-text">Loading...</p>
             )}
         </div>
     );
