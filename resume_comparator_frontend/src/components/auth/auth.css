@@ -53,7 +53,7 @@
   border: none;
   border-radius: 6px;
   cursor: pointer;
-  width: 90%;
+  width: 100%;
   font-size: 1.1em;
   transition: background 0.3s ease-in-out;
 }
@@ -119,4 +119,23 @@
     font-size: 14px;
     padding: 10px;
   }
+}
+.password-container1 {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.input-field {
+  flex: 1;
+  padding-right: 40px; /* Space for the eye icon */
+}
+
+.toggle-password {
+  position: absolute;
+  right: 10px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #555;
 }

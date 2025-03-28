@@ -1,30 +1,51 @@
-import React, { useState } from 'react';
-import { changePassword } from '../../service/authService';
+import React, { useState, useContext } from 'react';
+import { useAuth } from '../../service/authContext'; // Use the AuthContext hook
 import './ForgetPassword.css';
 import { toast } from 'react-toastify';
-
+import spinner from "../../../assets/image/loadingSpinner.gif";
 
 /*
  Author: Michael Tamatey
  Date: 20250222
- Description: This class is for user change password
+ Description: This class is for user password change with validation
 */
+
 const ForgetPassword = ({ onClose }) => {
+    const { user, changePassword: changePasswordService } = useAuth(); // Get logged-in user and changePassword function from context
+    const [username, setUsername] = useState('');
     const [oldPassword, setOldPassword] = useState('');
     const [newPassword, setNewPassword] = useState('');
+    const [loading, setLoading] = useState(false);
 
     const handleChangePassword = async () => {
-        if (!oldPassword || !newPassword) {
-            toast.error('Please enter both old and new passwords');
+        // Check if all fields are filled
+        if (!username || !oldPassword || !newPassword) {
+            toast.error('Please fill in all fields');
             return;
         }
-
+    
+        // Ensure entered username matches the logged-in user
+        if (username !== user?.username) {
+            toast.error('Entered username does not match the logged-in user');
+            return;
+        }
+    
+        // Check if the old password and new password are the same
+        if (oldPassword === newPassword) {
+            toast.error('New password cannot be the same as the old password');
+            return;
+        }
+    
         try {
-            await changePassword(oldPassword, newPassword);
-            toast.success('Password changed successfully')
+            setLoading(true);  // Show loading spinner
+    
+            // Call the backend to check if the old password is correct and change the password
+            await changePasswordService(username, oldPassword, newPassword);  // Pass the username along with passwords
             onClose(); // Close modal after success
         } catch (err) {
-            alert('Error changing password');
+            toast.error('Error changing password. Please try again.');
+        } finally {
+            setLoading(false); // Hide loading spinner after request completes
         }
     };
 
@@ -32,6 +53,13 @@ const ForgetPassword = ({ onClose }) => {
         <div className="modal-overlay">
             <div className="modal-content">
                 <h3>Change Password</h3>
+                <input 
+                    type="text" 
+                    placeholder="Username" 
+                    value={username} 
+                    onChange={(e) => setUsername(e.target.value)} 
+                    className="password-input"
+                />
                 <input 
                     type="password" 
                     placeholder="Old Password" 
@@ -47,9 +75,21 @@ const ForgetPassword = ({ onClose }) => {
                     className="password-input"
                 />
                 <div className="modal-buttons">
-                    <button onClick={handleChangePassword} className="password-button">Confirm</button>
-                    <button onClick={onClose} className="cancel-button">Cancel</button>
+                    <button onClick={handleChangePassword} className="password-button">
+                        Confirm
+                    </button>
+                    <button onClick={onClose} className="cancel-button">
+                        Cancel
+                    </button>
                 </div>
+
+                {loading && (
+                    <div className="loading-spin">
+                        <div className="loading-spinner">
+                            <img src={spinner} alt="Loading..." />
+                        </div>
+                    </div>
+                )}
             </div>
         </div>
     );

@@ -1,10 +1,12 @@
-import React from "react";
-import { NavLink, useLocation, useNavigate } from "react-router-dom"; // ✅ Import useNavigate
-import SideBarData from "./sideBarData"; // ✅ Import SideBarData
-import cvLogo from "../../../assets/image/logo.png"; // ✅ Import logo
+import React, { useState } from "react";
+import { NavLink, useLocation, useNavigate } from "react-router-dom";
+import SideBarData from "./sideBarData";
+import cvLogo from "../../../assets/image/logo.png";
 import "./sideNav.css";
 import { IconContext } from "react-icons";
 import { FaSignOutAlt } from "react-icons/fa";
+import { toast } from "react-toastify";
+import spinner from "../../../assets/image/loadingSpinner.gif"; // Assuming you have a spinner image
 
 /*
  Author: Michael Tamatey/ Navjot Kaur
@@ -12,14 +14,21 @@ import { FaSignOutAlt } from "react-icons/fa";
  Description: This class controls the sidebar navigation
 */
 const SideNav = (props) => {
-  const location = useLocation(); // ✅ Get current path
-  const navigate = useNavigate(); // ✅ For redirecting after logout
+  const [loading, setLoading] = useState(false); // Loading state for logout
+  const location = useLocation();
+  const navigate = useNavigate();
 
   const logout = () => {
-    localStorage.removeItem('access_token');
-    localStorage.removeItem('refresh_token');
-    // Redirect to the login page
-    navigate("/login");
+    setLoading(true); // Set loading to true before starting logout
+    localStorage.removeItem("access_token");
+    localStorage.removeItem("refresh_token");
+
+    // Simulate async process (e.g., API call or other tasks)
+    setTimeout(() => {
+      setLoading(false); // Set loading to false after logout
+      navigate("/login"); // Redirect to login page
+      toast.success("You have been logged out.");
+    }, 1000); // Simulated delay for logout process (you can adjust this)
   };
 
   return (
@@ -53,10 +62,21 @@ const SideNav = (props) => {
         {/* Logout Button at the Bottom */}
         <div className="logout-container">
           <button onClick={logout} className="logout-btn">
-            <span>Logout</span>
-            <FaSignOutAlt className="logout-icon" />
+            
+              <>
+                <span>Logout</span>
+                <FaSignOutAlt className="logout-icon" />
+              </>
+            
           </button>
         </div>
+        {loading && (
+                <div className="loading-spin1">
+                  <div className="loading-spinner1">
+                    <img src={spinner} alt="Loading..." />
+                  </div>
+                </div>
+              )}
       </div>
     </IconContext.Provider>
   );

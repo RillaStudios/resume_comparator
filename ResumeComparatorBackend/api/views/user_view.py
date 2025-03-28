@@ -3,9 +3,12 @@ from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated
 from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework import status
+from api.models.user import User
 from api.serializers.user_serializer import UserSerializer
 from django.contrib.auth import authenticate
 from rest_framework.permissions import AllowAny
+from django.contrib.auth import authenticate
+
 
 """
 User Views
@@ -25,9 +28,8 @@ def get_tokens_for_user(user):
     }
 
 
-
 """
-User Registration method
+User Register method
 
 Author: Michael Tamatey
 Date: 2025-03-05
@@ -35,9 +37,25 @@ Date: 2025-03-05
 @api_view(['POST'])
 @permission_classes([AllowAny])
 def register(request):
+    # Extract email and username from the request data
+    email = request.data.get('email')
+    username = request.data.get('username')
+
+    # Check if the email or username already exists
+    if User.objects.filter(email=email).exists():
+        return Response({
+            "message": "Email is already registered."
+        }, status=status.HTTP_400_BAD_REQUEST)
+
+    if User.objects.filter(username=username).exists():
+        return Response({
+            "message": "Username is already taken."
+        }, status=status.HTTP_400_BAD_REQUEST)
+
+    # If no duplicates, proceed with serialization and saving the user
     serializer = UserSerializer(data=request.data)
     if serializer.is_valid():
-        user = serializer.save()  # User password is automatically hashed in the serializer
+        user = serializer.save()  
         tokens = get_tokens_for_user(user)
         return Response({
             "message": "User registered successfully",
@@ -109,13 +127,24 @@ Date: 2025-03-05
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
 def change_password(request):
-    user = request.user
+    username = request.data.get('username')
+    old_password = request.data.get('old_password')
     new_password = request.data.get('new_password')
 
-    if not new_password:
-        return Response({"error": "New password is required"}, status=status.HTTP_400_BAD_REQUEST)
+    if not username or not old_password or not new_password:
+        return Response({"error": "All fields (username, old password, new password) are required"}, status=status.HTTP_400_BAD_REQUEST)
 
-    user.set_password(new_password)  # Hash the new password
+    # Ensure the user matches the username in the request
+    try:
+        user = User.objects.get(username=username)
+    except User.DoesNotExist:
+        return Response({"error": "User not found"}, status=status.HTTP_404_NOT_FOUND)
+
+    if not user.check_password(old_password):
+        return Response({"error": "Old password is incorrect"}, status=status.HTTP_400_BAD_REQUEST)
+
+    # If the old password is correct, set the new password
+    user.set_password(new_password)
     user.save()
 
     return Response({"message": "Password updated successfully"}, status=status.HTTP_200_OK)

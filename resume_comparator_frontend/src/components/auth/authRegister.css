@@ -140,3 +140,22 @@
         padding: 10px;
     }
 }
+.password-container {
+    position: relative;
+    width: 50%;
+  }
+  
+  .input-field {
+    width: 100%;
+    padding-right: 60px; 
+    box-sizing: border-box;
+  }
+  
+  .toggle-password {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    color: #666; 
+  }

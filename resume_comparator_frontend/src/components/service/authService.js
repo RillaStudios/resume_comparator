@@ -11,9 +11,23 @@ const API_URL = 'http://localhost:8000/api';
 
 // Register User
 export const register = async (userData) => {
-    return await axios.post(`${API_URL}/register/`, userData);
-};
-
+    try {
+      const response = await axios.post(`${API_URL}/register/`, userData);
+      return response.data;  
+    } catch (error) {
+      if (error.response) {
+        // If the error is from the server
+        const errorMessage = error.response.data.message || error.response.data.error || 'Registration failed';
+        throw new Error(errorMessage);
+      } else if (error.request) {
+        // If the request was made but no response was received
+        throw new Error('No response from server');
+      } else {
+        // Other errors (e.g., in setting up the request)
+        throw new Error(error.message || 'Something went wrong during registration');
+      }
+    }
+  };
 // Login User
 export const login = async (credentials) => {
     const response = await axios.post(`${API_URL}/login/`, credentials);
@@ -21,6 +35,7 @@ export const login = async (credentials) => {
         localStorage.setItem('access_token', response.data.access);
         localStorage.setItem('refresh_token', response.data.refresh);
     }
+
     return response.data;
 };
 
@@ -39,11 +54,34 @@ export const getProfile = async () => {
 };
 
 // Change Password
-export const changePassword = async (newPassword) => {
+export const changePassword = async (username, oldPassword, newPassword) => {
     const token = localStorage.getItem('access_token');
-    return await axios.post(`${API_URL}/profile/changepass/`, { new_password: newPassword }, {
-        headers: { Authorization: `Bearer ${token}` }
-    });
+    
+    if (!token) {
+        throw new Error("Authentication token missing. Please log in again.");
+    }
+
+    try {
+        const response = await axios.post(
+            `${API_URL}/profile/changepass/`, 
+            { 
+                username: username,  // Pass the username here
+                old_password: oldPassword, 
+                new_password: newPassword 
+            }, 
+            { 
+                headers: { Authorization: `Bearer ${token}` }
+            }
+        );
+        
+        return response.data; // Successful response
+    } catch (error) {
+        console.error("Error changing password:", error.response?.data || error.message);
+        
+        // Return the specific error message from the backend
+        throw new Error(error.response?.data?.error || "Error changing password. Please try again.");
+
+    }
 };
 
 // Delete Account

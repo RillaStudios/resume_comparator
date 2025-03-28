@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { useAuth } from '../service/authContext';
 import './authRegister.css';
 import { toast } from "react-toastify";
+import spinner from "../../assets/image/loadingSpinner.gif";
+import { Eye, EyeOff } from "lucide-react"; // Import icons for password visibility toggle
 
 const RegisterPage = () => {
   const [formData, setFormData] = useState({
@@ -18,6 +20,8 @@ const RegisterPage = () => {
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
   const { register } = useAuth(); // Call register from your auth context
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -27,21 +31,21 @@ const RegisterPage = () => {
     e.preventDefault();
     setError('');
     
+    // Check for password match
     if (formData.password !== formData.confirm_password) {
       setError('Passwords do not match');
       toast.error('Passwords do not match');
       return;
     }
-
+  
     setLoading(true);
-
+  
     try {
-      await register(formData); // Calls the register function from authContext
-      toast.success("Registered successfully");
-      window.location.href = "/login"; // Redirect to login page
+      // Call register function from authContext
+      await register(formData);
     } catch (err) {
-      setError('Registration failed');
-      toast.error("Registration failed");
+      // Handle errors by displaying specific error messages
+      setError(err.message || 'Registration failed');
     } finally {
       setLoading(false);
     }
@@ -118,26 +122,49 @@ const RegisterPage = () => {
               <option value="DIRECTOR">DIRECTOR</option>
             </select>
 
-            <input
-              type="password"
-              name="password"
-              placeholder="Password"
-              value={formData.password}
-              onChange={handleChange}
-              required
-              className="input-field"
-            />
-            <input
-              type="password"
-              name="confirm_password"
-              placeholder="Confirm Password"
-              value={formData.confirm_password}
-              onChange={handleChange}
-              required
-              className="input-field"
-            />
+            {/* Password Field with Toggle */}
+            <div className="password-container">
+              <input
+                type={showPassword ? "text" : "password"}
+                name="password"
+                placeholder="Password"
+                value={formData.password}
+                onChange={handleChange}
+                required
+                className="input-field"
+              />
+             <button
+              type="button"
+              onClick={() => setShowPassword(!showPassword)}
+               className="toggle-password"
+              >
+              {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+              </button>
+            </div>
+
+            {/* Confirm Password Field with Toggle */}
+            <div className="password-container">
+              <input
+                type={showConfirmPassword ? "text" : "password"}
+                name="confirm_password"
+                placeholder="Confirm Password"
+                value={formData.confirm_password}
+                onChange={handleChange}
+                required
+                className="input-field"
+              />
+              <button
+              type="button"
+              onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+              className="toggle-password"
+              >
+                {showConfirmPassword? <EyeOff size={20} /> : <Eye size={20} />}
+              </button>
+              
+            </div>
 
             <a href="/login" className="change-password">Already have an account? Login here</a>
+            <br />
 
             {error && <p className="register-page-error-text">{error}</p>}
             <button
@@ -147,6 +174,14 @@ const RegisterPage = () => {
             >
               {loading ? 'Registering...' : 'Register'}
             </button>
+            
+            {loading && (
+              <div className="loading-spin">
+                <div className="loading-spinner">
+                  <img src={spinner} alt="Loading..." />
+                </div>
+              </div>
+            )}
           </form>
         </div>
       </div>
