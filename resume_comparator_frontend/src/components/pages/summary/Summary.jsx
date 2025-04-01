@@ -1,11 +1,12 @@
 import React from "react";
-import "./summary.module.css";
+import "./summary.modules.css";
 import { toast } from "react-toastify";
 
 
 const Summary = () => {
   // Hardcoded data
   const summaryData = {
+
     jobRequirements: [
       { requirement: "Java, J2EE, Spring MVC, Spring Boot", score: 2, comments: "Candidate lists Java (13) but does not mention Spring MVC or Spring Boot experience." },
       { requirement: "Frontend (Angular 8+, ReactJS, VueJS, Typescript)", score: 2, comments: "Only mentions AngularJS, but no mention of modern Angular 8+, ReactJS, or VueJS." },
