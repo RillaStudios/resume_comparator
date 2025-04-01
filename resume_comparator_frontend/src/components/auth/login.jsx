@@ -110,8 +110,6 @@ const LoginPage = () => {
               />
               <label htmlFor="rememberMe">Remember Me</label>
             </div>
-
-            <a href="/register" className="change-password">Don't have an account? Register here</a>
             
             {error && <p className="login-page-error-text">{error}</p>}
             
@@ -123,6 +121,7 @@ const LoginPage = () => {
               {loading ? 'Logging in...' : 'Login'}
             </button>
 
+            <a href="/register" className="change-password">Don't have an account? Register here</a>
             {loading && (
               <div className="loading-spin">
                 <div className="loading-spinner">

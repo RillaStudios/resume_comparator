@@ -82,15 +82,14 @@ const ForgetPassword = ({ onClose }) => {
                         Cancel
                     </button>
                 </div>
-
-                {loading && (
+            </div>
+            {loading && (
                     <div className="loading-spin">
                         <div className="loading-spinner">
                             <img src={spinner} alt="Loading..." />
                         </div>
                     </div>
                 )}
-            </div>
         </div>
     );
 };

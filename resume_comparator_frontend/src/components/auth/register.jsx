@@ -161,10 +161,7 @@ const RegisterPage = () => {
                 {showConfirmPassword? <EyeOff size={20} /> : <Eye size={20} />}
               </button>
               
-            </div>
-
-            <a href="/login" className="change-password">Already have an account? Login here</a>
-            <br />
+            </div>           
 
             {error && <p className="register-page-error-text">{error}</p>}
             <button
@@ -174,6 +171,9 @@ const RegisterPage = () => {
             >
               {loading ? 'Registering...' : 'Register'}
             </button>
+
+            <a href="/login" className="change-password">Already have an account? Login here</a>
+            <br />
             
             {loading && (
               <div className="loading-spin">

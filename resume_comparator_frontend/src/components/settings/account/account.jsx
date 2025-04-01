@@ -79,13 +79,7 @@ const Account = () => {
                             Delete Account
                         </button>
 
-                        {loading && (
-                            <div className="loading-spin">
-                                <div className="loading-spinner">
-                                    <img src={spinner} alt="Loading..." />
-                                </div>
-                            </div>
-                        )}
+                        
 
                         <a href="#" className="change-password" onClick={() => setShowChangePassword(true)}>Change Password Here</a>
                     </div>
@@ -109,6 +103,13 @@ const Account = () => {
                     </div>
                 </div>
             )}
+            {loading && (
+                <div className="loading-spin">
+                <div className="loading-spinner">
+                <img src={spinner} alt="Loading..." />
+                </div>
+                </div>
+             )}
         </div>
     );
 };
