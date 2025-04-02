@@ -30,13 +30,30 @@ export const register = async (userData) => {
   };
 // Login User
 export const login = async (credentials) => {
-    const response = await axios.post(`${API_URL}/login/`, credentials);
-    if (response.data.access) {
-        localStorage.setItem('access_token', response.data.access);
-        localStorage.setItem('refresh_token', response.data.refresh);
-    }
+    try {
+        const formData = new URLSearchParams();  //  Use URLSearchParams for sending data
+        formData.append('username', credentials.username);
+        formData.append('password', credentials.password);
 
-    return response.data;
+        const response = await axios.post(
+            `${API_URL}/login/`, 
+            formData,  //  Sending URL-encoded data
+            {
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',  //  Proper header for URL-encoded data
+                }
+            }
+        );
+
+        if (response.data.access) {
+            return response.data;
+        }
+
+        throw new Error('Login failed. Tokens not received.');
+    } catch (error) {
+        console.error('Login failed', error.response?.data || error.message);
+        throw new Error(error.response?.data?.error || 'Invalid credentials');
+    }
 };
 
 // Logout User
@@ -48,9 +65,21 @@ export const logout = () => {
 // Get User Profile
 export const getProfile = async () => {
     const token = localStorage.getItem('access_token');
-    return await axios.get(`${API_URL}/profile/`, {
-        headers: { Authorization: `Bearer ${token}` }
-    });
+    if (!token) {
+        throw new Error('No access token found');
+    }
+
+    try {
+        const response = await axios.get(`${API_URL}/profile/`, {
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        });
+        return response;
+    } catch (error) {
+        console.error('Failed to fetch profile', error);
+        throw error;
+    }
 };
 
 // Change Password

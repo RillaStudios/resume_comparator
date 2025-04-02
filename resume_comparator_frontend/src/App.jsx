@@ -31,22 +31,22 @@ const ProtectedRoute = ({ element }) => {
 
 function App() {
   return (
-    <AuthProvider>
-      {/* Toast Notifications */}
-      <ToastContainer
-        position="top-center"
-        autoClose={3000}
-        hideProgressBar={false}
-        newestOnTop={true}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-        theme="colored"
-      />
-
+    
       <Router>
+        <AuthProvider>
+              {/* ToastContainer is now added globally here for consistent access */}
+    <ToastContainer
+      position="top-center"
+      autoClose={3000}
+      hideProgressBar={false}
+      newestOnTop={true}
+      closeOnClick
+      rtl={false}
+      pauseOnFocusLoss
+      draggable
+      pauseOnHover
+      theme="colored"
+    />
         <Routes>
           {/* Public Route: Login */}
           <Route path="/login" element={<Login />} />
@@ -64,8 +64,9 @@ function App() {
           {/* 404 Page */}
           <Route path="*" element={<NotFound />} />
         </Routes>
+        </AuthProvider>
       </Router>
-    </AuthProvider>
+    
   );
 }
 

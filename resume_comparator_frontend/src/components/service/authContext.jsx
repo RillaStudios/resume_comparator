@@ -1,6 +1,7 @@
 import React, { createContext, useState, useEffect, useContext } from 'react';
 import { login as loginService, logout as logoutService, getProfile as getProfileService, register as registerService, changePassword as changePasswordService } from './authService';
 import { toast } from 'react-toastify';
+import { useNavigate } from 'react-router-dom';
 /*
  Author: Michael Tamatey/ Navjot Kaur
  Date: 20250222
@@ -14,6 +15,7 @@ export const useAuth = () => useContext(AuthContext);
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true); // Track loading state
+  const navigate = useNavigate();
 
   useEffect(() => {
     const token = localStorage.getItem('access_token');
@@ -34,24 +36,29 @@ export const AuthProvider = ({ children }) => {
   const login = async (credentials) => {
     try {
         const data = await loginService(credentials);
-        if (data) {
-          console.log("Registration successful", data); 
-          alert('Login successful!'); 
-        }
-        let userProfile;
-        try {
-            userProfile = await getProfileService();
-            setUser(userProfile.data);
+        if (data && data.access) {
+          console.log("Registration successful", data);
+          toast.success('Login successful!');
+
+          localStorage.setItem('access_token', data.access);
+          localStorage.setItem('refresh_token', data.refresh);
+
+          try {
+            const userProfile = await getProfileService();  //  Ensure this is called only when login is successful
+            console.log("User profile fetched successfully", userProfile.data);
+            setUser(userProfile.data);  //  Save user profile in context
+            navigate('/');
         } catch (profileError) {
-            console.error("Profile fetch error:", profileError);  
+            console.error('Failed to fetch profile:', profileError);
+            toast.error('Failed to fetch profile.');
         }
-        setTimeout(() => {
-            window.location.href = '/'; // Delay redirect to allow state update
-        }, 200);
-    } catch (error) {
-        console.error("Login error:", error);
-        alert("Invalid credentials");
-    }
+      } else {
+          toast.error('Invalid login credentials');
+      }
+  } catch (error) {
+      console.error('Login error:', error);
+      toast.error(error.message || 'Login failed');
+  }
 };
 
 const register = async (userInfo) => {
@@ -63,7 +70,8 @@ const register = async (userInfo) => {
       console.log("Registration successful", data); 
       alert('Registration successful!'); 
       toast.success('Registration successful!');
-      window.location.href = '/login'; // Redirect to login page after successful registration 
+      // window.location.href = '/login'; // Redirect to login page after successful registration 
+      navigate('/login');
     }
   } catch (error) {    
     console.error("Registration failed", error.message); 
@@ -74,8 +82,10 @@ const register = async (userInfo) => {
 const logout = () => {
     logoutService();
     setUser(null);
-    window.location.href= '/login'; // Redirect to login page after logout
-};
+    // window.location.href= '/login'; // Redirect to login page after logout
+    toast.success('Logged out successfully'); //  Toast notification for logout
+    navigate('/login');
+  };
 
 // Change Password function
 const changePassword = async (username, oldPassword, newPassword) => {

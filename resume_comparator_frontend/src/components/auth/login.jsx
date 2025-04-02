@@ -5,12 +5,14 @@ import { Eye, EyeOff } from "lucide-react"; // Import eye icons
 import './auth.css';
 import { toast } from "react-toastify";
 import spinner from "../../assets/image/loadingSpinner.gif";
+import { useNavigate } from 'react-router-dom'; 
 
 const LoginPage = () => {
   const [formData, setFormData] = useState({ username: '', password: '' });
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
   const { login } = useAuth();
+  const navigate = useNavigate();
   const [rememberMe, setRememberMe] = useState(false);
   const [showPassword, setShowPassword] = useState(false); // State for password visibility
 
@@ -44,9 +46,9 @@ const LoginPage = () => {
     }
   
     try {
-      await login(formData); // Ensure `login` throws an error if authentication fails
-      toast.success("Logged in successfully");
-      window.location.href = '/';
+      await login({username: formData.username, password: formData.password}); // Ensure `login` throws an error if authentication fails
+      // navigate('/');
+      
     } catch (err) {
       console.error("Login Error:", err);
       setError('Invalid credentials');
