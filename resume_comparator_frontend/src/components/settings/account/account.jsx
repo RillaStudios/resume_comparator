@@ -5,6 +5,7 @@ import ProfilePic from '../../../assets/image/profilePic.png';
 import ForgetPassword from '../forgetPassword/forgetPassword'; 
 import './Account.css'; 
 import spinner from "../../../assets/image/loadingSpinner.gif";
+import { useNavigate } from 'react-router-dom';
 
 const Account = () => {
     const [user, setUser] = useState(null);
@@ -12,6 +13,7 @@ const Account = () => {
     const [showChangePassword, setShowChangePassword] = useState(false);
     const [loading, setLoading] = useState(false);
     const [showDeleteModal, setShowDeleteModal] = useState(false); // State for modal
+    const navigate = useNavigate();
 
     useEffect(() => {
         const fetchUser = async () => {
@@ -37,9 +39,10 @@ const Account = () => {
         setLoading(true);
         try {
             await deleteAccount(deletePassword);
-            alert('Account deleted successfully');
+            toast.success('Account deleted successfully');
             logout();
-            window.location.href = '/login';
+            // window.location.href = '/login';
+            navigate('/login');
         } catch (err) {
             toast.error('Error deleting account invalid password');
         } finally {
