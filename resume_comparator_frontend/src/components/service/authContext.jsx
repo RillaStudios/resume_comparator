@@ -3,7 +3,7 @@ import { login as loginService, logout as logoutService, getProfile as getProfil
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 /*
- Author: Michael Tamatey/ Navjot Kaur
+ Author: Michael Tamatey/Navjot Kaur/Shohbit
  Date: 20250222
  Description: AUTHENTICATION CLASS
 */

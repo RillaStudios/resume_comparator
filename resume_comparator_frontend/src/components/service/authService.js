@@ -1,6 +1,6 @@
 import axios from 'axios';
 /*
- Author: Michael Tamatey
+ Author: Michael Tamatey/Navjot Kaur/Shohbit
  Date: 20250320
  Description: This class Configure the axios instance with the base URL and headers
 */

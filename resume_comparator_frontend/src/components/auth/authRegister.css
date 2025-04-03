@@ -58,6 +58,34 @@
     transition: all 0.3s ease-in-out;
 }
 
+
+
+.password-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 32%;
+  }
+  
+  .input-field {
+    width: 100%;
+    padding-right: 40px; /* Space for the eye icon */
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  .toggle-password {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #555;
+  }
+
 /* Input Focus Effect */
 .input-field:focus {
     border-color: #007bff;
@@ -140,22 +168,3 @@
         padding: 10px;
     }
 }
-.password-container {
-    position: relative;
-    width: 50%;
-  }
-  
-  .input-field {
-    width: 100%;
-    padding-right: 60px; 
-    box-sizing: border-box;
-  }
-  
-  .toggle-password {
-    position: absolute;
-    right: 10px;
-    top: 50%;
-    transform: translateY(-50%);
-    cursor: pointer;
-    color: #666; 
-  }
