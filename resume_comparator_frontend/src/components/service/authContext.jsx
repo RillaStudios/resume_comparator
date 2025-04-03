@@ -68,14 +68,16 @@ const register = async (userInfo) => {
 
     if (data) {
       console.log("Registration successful", data); 
-      alert('Registration successful!'); 
+      // alert('Registration successful!'); 
       toast.success('Registration successful!');
       // window.location.href = '/login'; // Redirect to login page after successful registration 
-      navigate('/login');
+      setTimeout(() => {
+        navigate('/login'); // Navigate only after toast is shown
+      }, 2000); 
     }
   } catch (error) {    
     console.error("Registration failed", error.message); 
-    alert(`Registration failed: ${error.message}`);
+    toast.error(`Registration failed: ${error.message}`);
   }
 };
 
@@ -92,16 +94,16 @@ const changePassword = async (username, oldPassword, newPassword) => {
     try {
         const token = localStorage.getItem('access_token');
         if (!token) {
-            alert("You must be logged in to change your password.");
+          toast.error("You must be logged in to change your password.");
             return;
         }
 
         await changePasswordService(username, oldPassword, newPassword); // Call your service to change the password
-        alert('Password changed successfully!');
+        toast.success('Password changed successfully!');
         logout(); // Redirect after password change
     } catch (error) {
         console.error('Error changing password:', error);
-        alert('Error changing password. Please try again.');
+        toast.error('Error changing password. Please try again.');
     }
 };
 
