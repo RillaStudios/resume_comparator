@@ -29,7 +29,7 @@
     justify-content: space-between;
     align-items: flex-start;
     width: 100%;
-    max-width: 1200px; 
+    max-width: 1200px;
     margin-top: 20px;
     gap: 20px;
 }
@@ -37,8 +37,8 @@
 /* Left Section (Dropdown & Job Description) */
 .left-section {
     display: flex;
-    flex-direction: column; 
-    width: 30%; 
+    flex-direction: column;
+    width: 30%;
 }
 
 /* Dropdown */
@@ -105,13 +105,13 @@
     cursor: not-allowed; /* Shows "X" cursor */
     background-color: #ffcccc; /* Light red background */
     color: red; /* Red text */
-  }
+}
 
-  /* Green when processing */
+/* Green when processing */
 .convert-button.processing {
     background-color: green !important;
     color: white; /* white text */
-  }
+}
 
 /* RESPONSIVENESS */
 
@@ -129,7 +129,12 @@
     }
 
     .display-box {
+        width: 100%;
         height: auto;
+    }
+
+    .convert-button {
+        width: 90%;
     }
 }
 
@@ -141,7 +146,7 @@
     }
 
     .header {
-        justify-content: center; 
+        justify-content: center;
     }
 
     .user-d {
@@ -166,8 +171,6 @@
         width: 90%;
         text-align: center;
     }
-   
-      
 }
 
 /* Full-Screen Overlay with Blur Effect */
@@ -180,13 +183,10 @@
     display: flex;
     justify-content: center;
     align-items: center;
-  }
-  
-  /* Spinner Animation  */
-  .loading-spinner img {
+}
+
+/* Spinner Animation */
+.loading-spinner img {
     width: 30px;
     height: 30px;
-  }
-  
-  
-  
+}

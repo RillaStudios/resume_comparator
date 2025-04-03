@@ -3,7 +3,7 @@ import { useAuth } from '../service/authContext';
 import './authRegister.css';
 import { toast } from "react-toastify";
 import spinner from "../../assets/image/loadingSpinner.gif";
-import { Eye, EyeOff } from "lucide-react"; // Import icons for password visibility toggle
+import { Eye, EyeOff } from "lucide-react";
 
 const RegisterPage = () => {
   const [formData, setFormData] = useState({

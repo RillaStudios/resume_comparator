@@ -12,7 +12,7 @@ const Account = () => {
     const [deletePassword, setDeletePassword] = useState('');
     const [showChangePassword, setShowChangePassword] = useState(false);
     const [loading, setLoading] = useState(false);
-    const [showDeleteModal, setShowDeleteModal] = useState(false); // State for modal
+    const [showDeleteModal, setShowDeleteModal] = useState(false);
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -40,14 +40,12 @@ const Account = () => {
         try {
             await deleteAccount(deletePassword);
             toast.success('Account deleted successfully');
-            logout();
-            // window.location.href = '/login';
             navigate('/login');
         } catch (err) {
             toast.error('Error deleting account invalid password');
         } finally {
             setLoading(false);
-            setShowDeleteModal(false); // Close modal after deletion
+            setShowDeleteModal(false);
         }
     };
 

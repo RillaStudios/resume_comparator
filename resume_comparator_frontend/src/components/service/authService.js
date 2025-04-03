@@ -16,14 +16,11 @@ export const register = async (userData) => {
       return response.data;  
     } catch (error) {
       if (error.response) {
-        // If the error is from the server
         const errorMessage = error.response.data.message || error.response.data.error || 'Registration failed';
         throw new Error(errorMessage);
       } else if (error.request) {
-        // If the request was made but no response was received
         throw new Error('No response from server');
       } else {
-        // Other errors (e.g., in setting up the request)
         throw new Error(error.message || 'Something went wrong during registration');
       }
     }
@@ -31,16 +28,16 @@ export const register = async (userData) => {
 // Login User
 export const login = async (credentials) => {
     try {
-        const formData = new URLSearchParams();  //  Use URLSearchParams for sending data
+        const formData = new URLSearchParams();
         formData.append('username', credentials.username);
         formData.append('password', credentials.password);
 
         const response = await axios.post(
             `${API_URL}/login/`, 
-            formData,  //  Sending URL-encoded data
+            formData,
             {
                 headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded',  //  Proper header for URL-encoded data
+                    'Content-Type': 'application/x-www-form-urlencoded',
                 }
             }
         );
@@ -94,7 +91,7 @@ export const changePassword = async (username, oldPassword, newPassword) => {
         const response = await axios.post(
             `${API_URL}/profile/changepass/`, 
             { 
-                username: username,  // Pass the username here
+                username: username,
                 old_password: oldPassword, 
                 new_password: newPassword 
             }, 
@@ -103,11 +100,9 @@ export const changePassword = async (username, oldPassword, newPassword) => {
             }
         );
         
-        return response.data; // Successful response
+        return response.data;
     } catch (error) {
         console.error("Error changing password:", error.response?.data || error.message);
-        
-        // Return the specific error message from the backend
         throw new Error(error.response?.data?.error || "Error changing password. Please try again.");
 
     }

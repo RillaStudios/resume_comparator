@@ -12,7 +12,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 const Reports = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  const { jobTitle, score, created_at, job_id } = location.state || {}; // Retrieve job title & score
+  const { jobTitle, score, created_at, job_id } = location.state || {};
 
   const [selectAll, setSelectAll] = useState(false);
   const [filter, setFilter] = useState("all");
@@ -192,7 +192,7 @@ const Reports = () => {
 
   
   const handleReportClick = id => {
-    navigate(`/summary/`); // Navigate to summary page with report ID
+    navigate(`/summary/`);
   };
 
   return (

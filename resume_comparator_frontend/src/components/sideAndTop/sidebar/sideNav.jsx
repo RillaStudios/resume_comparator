@@ -6,7 +6,7 @@ import "./sideNav.css";
 import { IconContext } from "react-icons";
 import { FaSignOutAlt } from "react-icons/fa";
 import { toast } from "react-toastify";
-import spinner from "../../../assets/image/loadingSpinner.gif"; // Assuming you have a spinner image
+import spinner from "../../../assets/image/loadingSpinner.gif"; 
 
 /*
  Author: Michael Tamatey/ Navjot Kaur
@@ -25,10 +25,10 @@ const SideNav = (props) => {
 
     // Simulate async process (e.g., API call or other tasks)
     setTimeout(() => {
-      setLoading(false); // Set loading to false after logout
-      navigate("/login"); // Redirect to login page
+      setLoading(false); 
+      navigate("/login"); 
       toast.success("You have been logged out.");
-    }, 1000); // Simulated delay for logout process (you can adjust this)
+    }, 1000); 
   };
 
   return (

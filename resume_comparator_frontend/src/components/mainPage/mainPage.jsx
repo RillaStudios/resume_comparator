@@ -11,8 +11,8 @@ import { toast } from "react-toastify";
 */
 
 export const MainPage = () => {
-  const [jobs, setJobs] = useState([]);  // Store jobs from backend
-  const [selectedJob, setSelectedJob] = useState(null); // Store selected job
+  const [jobs, setJobs] = useState([]);  
+  const [selectedJob, setSelectedJob] = useState(null);
   const [uploadedFile, setUploadedFile] = useState(null);
   const [fileName, setFileName] = useState("");
   const [loading, setLoading] = useState(false)
@@ -21,14 +21,14 @@ export const MainPage = () => {
 
   // Fetch jobs from Django backend
   useEffect(() => {
-    fetch("http://127.0.0.1:8000/api/job-postings/")  // Fetch job list from backend
+    fetch("http://127.0.0.1:8000/api/job-postings/")
       .then((res) => res.json())
       .then((data) => {
 
         console.log("Data:", data);
 
         setJobs(data);
-        setSelectedJob(data[0]);  // Default to first job
+        setSelectedJob(data[0]);
       })
       .catch((err) => console.error("Error fetching jobs:", err));
   }, []);
@@ -52,14 +52,14 @@ export const MainPage = () => {
   // Send resume to backend for processing
   const handleCompare = async () => {
     if (!selectedJob || !uploadedFile) {
-      toast.warning("Please select a job title and upload your resume."); // message to user
+      toast.warning("Please select a job title and upload your resume.");
       return;
     }
     setLoading(true);
 
     const formData = new FormData();
     formData.append("resume", uploadedFile);
-    formData.append("jobId", selectedJob.id);  // Send job ID only
+    formData.append("jobId", selectedJob.id);
 
     try {
       const response = await fetch("http://127.0.0.1:8000/api/compare/", {
@@ -76,13 +76,13 @@ export const MainPage = () => {
 
       console.log("Data:", data);
 
-      toast.success("Comparing successful!"); //Show success only after a successful response
+      toast.success("Comparing successful!");
 
       navigate("/reports", { state: { jobTitle: selectedJob.title, score: data.score, date: data.created_at, jobId: data.job_id } });
 
     } catch (error) {
       console.error("Error comparing resume:", error);
-      toast.error("Comparison failed. Please try again."); //Show error if request fails
+      toast.error("Comparison failed. Please try again.");
     } finally {
       setTimeout(() => {
         setLoading(false);
@@ -159,8 +159,6 @@ export const MainPage = () => {
         </div>
       </div>
 
-
-      {/* Compare Button */}
       {/* Compare Button - Disabled until a resume is uploaded */}
       <button
         className={`convert-button ${loading ? "processing" : ""}`}

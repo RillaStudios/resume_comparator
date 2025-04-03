@@ -11,41 +11,37 @@ import spinner from "../../../assets/image/loadingSpinner.gif";
 */
 
 const ForgetPassword = ({ onClose }) => {
-    const { user, changePassword: changePasswordService } = useAuth(); // Get logged-in user and changePassword function from context
+    const { user, changePassword: changePasswordService } = useAuth();
     const [username, setUsername] = useState('');
     const [oldPassword, setOldPassword] = useState('');
     const [newPassword, setNewPassword] = useState('');
     const [loading, setLoading] = useState(false);
 
     const handleChangePassword = async () => {
-        // Check if all fields are filled
         if (!username || !oldPassword || !newPassword) {
             toast.error('Please fill in all fields');
             return;
         }
-    
-        // Ensure entered username matches the logged-in user
         if (username !== user?.username) {
             toast.error('Entered username does not match the logged-in user');
             return;
         }
-    
-        // Check if the old password and new password are the same
+
         if (oldPassword === newPassword) {
             toast.error('New password cannot be the same as the old password');
             return;
         }
     
         try {
-            setLoading(true);  // Show loading spinner
+            setLoading(true); 
     
             // Call the backend to check if the old password is correct and change the password
-            await changePasswordService(username, oldPassword, newPassword);  // Pass the username along with passwords
-            onClose(); // Close modal after success
+            await changePasswordService(username, oldPassword, newPassword);
+            onClose();
         } catch (err) {
             toast.error('Error changing password. Please try again.');
         } finally {
-            setLoading(false); // Hide loading spinner after request completes
+            setLoading(false);
         }
     };
 

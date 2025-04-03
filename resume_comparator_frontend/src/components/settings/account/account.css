@@ -36,6 +36,13 @@ h2 {
   color: #333;
 }
 
+h3{
+  text-align: center;
+  color: red;
+  font-size: 18px;
+  margin-top: 10px;
+}
+
 /* User Details Grid */
 .account-details {
   display: grid;

@@ -1,12 +1,18 @@
-// src/pages/Login.jsx
 import React, { useEffect, useState } from 'react';
 import { useAuth } from '../service/authContext';
-import { Eye, EyeOff } from "lucide-react"; // Import eye icons
+import { Eye, EyeOff } from "lucide-react";
 import './auth.css';
 import { toast } from "react-toastify";
 import spinner from "../../assets/image/loadingSpinner.gif";
 import { useNavigate } from 'react-router-dom'; 
 
+
+/*
+ Author: Michael Tamatey
+ Date: 20250222
+ Description: Login page component for user authentication.
+ This component allows users to enter their username and password to log in.
+*/
 const LoginPage = () => {
   const [formData, setFormData] = useState({ username: '', password: '' });
   const [error, setError] = useState('');
@@ -14,19 +20,38 @@ const LoginPage = () => {
   const { login } = useAuth();
   const navigate = useNavigate();
   const [rememberMe, setRememberMe] = useState(false);
-  const [showPassword, setShowPassword] = useState(false); // State for password visibility
+  const [showPassword, setShowPassword] = useState(false);
 
   // Load the saved state from localStorage when the component mounts
   useEffect(() => {
     const savedRememberMe = localStorage.getItem('rememberMe') === 'true';
+    const savedUsername = localStorage.getItem('username') || '';
+    const savedPassword = localStorage.getItem('password') || '';
+    
     setRememberMe(savedRememberMe);
+    
+    if (savedRememberMe) {
+      setFormData({
+        username: savedUsername,
+        password: savedPassword,
+      });
+    }
   }, []);
 
   // Handle checkbox change
   const handleRememberMeChange = (e) => {
     const isChecked = e.target.checked;
     setRememberMe(isChecked);
-    localStorage.setItem('rememberMe', isChecked); // Save to localStorage
+    
+    if (isChecked) {
+      localStorage.setItem('rememberMe', true);
+      localStorage.setItem('username', formData.username);
+      localStorage.setItem('password', formData.password);
+    } else {
+      localStorage.removeItem('rememberMe');
+      localStorage.removeItem('username');
+      localStorage.removeItem('password');
+    }
   };
 
   const handleChange = (e) => {
@@ -41,13 +66,12 @@ const LoginPage = () => {
     if (!formData.username || !formData.password) {
       setError('Login Failed');
       toast.error("Login Failed");
-      setLoading(false); // Stop loading if validation fails
+      setLoading(false); 
       return;
     }
   
     try {
-      await login({username: formData.username, password: formData.password}); // Ensure `login` throws an error if authentication fails
-      // navigate('/');
+      await login({username: formData.username, password: formData.password});
       
     } catch (err) {
       console.error("Login Error:", err);
@@ -61,11 +85,11 @@ const LoginPage = () => {
   return (
     <div className="login-page-container">
       <div className="login-page-left-section">
-          <img
-            src="src/assets/image/logo.png" 
-            alt="Logo"
-            className="login-page-branding-logo"
-          />
+        <img
+          src="src/assets/image/logo.png" 
+          alt="Logo"
+          className="login-page-branding-logo"
+        />
       </div>
   
       <div className="login-page-right-section">
@@ -81,8 +105,6 @@ const LoginPage = () => {
               required
               className="input-field"
             />
-
-            {/* Password Input with Visibility Toggle */}
             <div className="password-container1">
               <input
                 type={showPassword ? "text" : "password"}
@@ -101,20 +123,17 @@ const LoginPage = () => {
                 {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
               </button>
             </div>
-
             <div className="remember-me-container">
               <input
                 type="checkbox"
                 id="rememberMe"
                 name="rememberMe"
                 checked={rememberMe}
-                onChange={handleRememberMeChange} // Update state on change
+                onChange={handleRememberMeChange}
               />
               <label htmlFor="rememberMe">Remember Me</label>
             </div>
-            
             {error && <p className="login-page-error-text">{error}</p>}
-            
             <button
               type="submit"
               disabled={loading}
@@ -122,7 +141,6 @@ const LoginPage = () => {
             >
               {loading ? 'Logging in...' : 'Login'}
             </button>
-
             <a href="/register" className="change-password">Don't have an account? Register here</a>
             {loading && (
               <div className="loading-spin">

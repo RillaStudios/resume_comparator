@@ -14,7 +14,7 @@ export const useAuth = () => useContext(AuthContext);
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
-  const [loading, setLoading] = useState(true); // Track loading state
+  const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -27,9 +27,9 @@ export const AuthProvider = ({ children }) => {
         .catch(() => {
           logout();
         })
-        .finally(() => setLoading(false)); // Set loading to false
+        .finally(() => setLoading(false));
     } else {
-      setLoading(false); // No token, stop loading
+      setLoading(false); 
     }
   }, []);
 
@@ -44,9 +44,9 @@ export const AuthProvider = ({ children }) => {
           localStorage.setItem('refresh_token', data.refresh);
 
           try {
-            const userProfile = await getProfileService();  //  Ensure this is called only when login is successful
+            const userProfile = await getProfileService(); 
             console.log("User profile fetched successfully", userProfile.data);
-            setUser(userProfile.data);  //  Save user profile in context
+            setUser(userProfile.data);
             navigate('/');
         } catch (profileError) {
             console.error('Failed to fetch profile:', profileError);
@@ -67,12 +67,10 @@ const register = async (userInfo) => {
     const data = await registerService(userInfo); 
 
     if (data) {
-      console.log("Registration successful", data); 
-      // alert('Registration successful!'); 
+      console.log("Registration successful", data);       
       toast.success('Registration successful!');
-      // window.location.href = '/login'; // Redirect to login page after successful registration 
       setTimeout(() => {
-        navigate('/login'); // Navigate only after toast is shown
+        navigate('/login');
       }, 2000); 
     }
   } catch (error) {    
@@ -84,8 +82,7 @@ const register = async (userInfo) => {
 const logout = () => {
     logoutService();
     setUser(null);
-    // window.location.href= '/login'; // Redirect to login page after logout
-    toast.success('Logged out successfully'); //  Toast notification for logout
+    toast.success('Logged out successfully');
     navigate('/login');
   };
 
@@ -98,9 +95,9 @@ const changePassword = async (username, oldPassword, newPassword) => {
             return;
         }
 
-        await changePasswordService(username, oldPassword, newPassword); // Call your service to change the password
+        await changePasswordService(username, oldPassword, newPassword);
         toast.success('Password changed successfully!');
-        logout(); // Redirect after password change
+        navigate('/login');
     } catch (error) {
         console.error('Error changing password:', error);
         toast.error('Error changing password. Please try again.');

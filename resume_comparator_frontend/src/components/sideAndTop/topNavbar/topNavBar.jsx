@@ -34,7 +34,7 @@ const Navbar = () => {
               <div className="profile-role">{user.role}</div>
             </>
           ) : (
-            <p>Loading...</p> // Show loading while fetching data
+            <p>Loading...</p>
           )}
         </div>
       </div>
