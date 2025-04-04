@@ -6,6 +6,12 @@ import ForgetPassword from '../forgetPassword/forgetPassword';
 import './Account.css'; 
 import spinner from "../../../assets/image/loadingSpinner.gif";
 
+
+/*
+ Author: Michael Tamatey
+ Date: 20250222
+ Description: This class is for user account settings and profile management
+*/
 const Account = () => {
     const [user, setUser] = useState(null);
     const [deletePassword, setDeletePassword] = useState('');

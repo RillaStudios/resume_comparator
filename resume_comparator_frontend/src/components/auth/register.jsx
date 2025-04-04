@@ -3,7 +3,14 @@ import { useAuth } from '../service/authContext';
 import './authRegister.css';
 import { toast } from "react-toastify";
 import spinner from "../../assets/image/loadingSpinner.gif";
-import { Eye, EyeOff } from "lucide-react"; // Import icons for password visibility toggle
+import { Eye, EyeOff } from "lucide-react";
+
+/*
+ Author: Michael Tamatey
+ Date: 20250222
+ Description: This class allows users to register for an account.
+*/
+
 
 const RegisterPage = () => {
   const [formData, setFormData] = useState({
@@ -19,7 +26,7 @@ const RegisterPage = () => {
   
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
-  const { register } = useAuth(); // Call register from your auth context
+  const { register } = useAuth(); 
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
@@ -31,7 +38,7 @@ const RegisterPage = () => {
     e.preventDefault();
     setError('');
     
-    // Check for password match
+    
     if (formData.password !== formData.confirm_password) {
       setError('Passwords do not match');
       toast.error('Passwords do not match');
@@ -41,10 +48,8 @@ const RegisterPage = () => {
     setLoading(true);
   
     try {
-      // Call register function from authContext
       await register(formData);
     } catch (err) {
-      // Handle errors by displaying specific error messages
       setError(err.message || 'Registration failed');
     } finally {
       setLoading(false);
@@ -123,7 +128,7 @@ const RegisterPage = () => {
             </select>
 
             {/* Password Field with Toggle */}
-            <div className="password-container">
+            <div className="password-container2">
               <input
                 type={showPassword ? "text" : "password"}
                 name="password"
@@ -143,7 +148,7 @@ const RegisterPage = () => {
             </div>
 
             {/* Confirm Password Field with Toggle */}
-            <div className="password-container">
+            <div className="password-container2">
               <input
                 type={showConfirmPassword ? "text" : "password"}
                 name="confirm_password"

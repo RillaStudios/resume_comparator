@@ -2,7 +2,7 @@ import React, { createContext, useState, useEffect, useContext } from 'react';
 import { login as loginService, logout as logoutService, getProfile as getProfileService, register as registerService, changePassword as changePasswordService } from './authService';
 import { toast } from 'react-toastify';
 /*
- Author: Michael Tamatey/ Navjot Kaur
+ Author: Michael Tamatey/Navjot Kaur/shobhit
  Date: 20250222
  Description: AUTHENTICATION CLASS
 */
@@ -13,7 +13,7 @@ export const useAuth = () => useContext(AuthContext);
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
-  const [loading, setLoading] = useState(true); // Track loading state
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const token = localStorage.getItem('access_token');
@@ -25,9 +25,9 @@ export const AuthProvider = ({ children }) => {
         .catch(() => {
           logout();
         })
-        .finally(() => setLoading(false)); // Set loading to false
+        .finally(() => setLoading(false)); 
     } else {
-      setLoading(false); // No token, stop loading
+      setLoading(false);
     }
   }, []);
 
@@ -35,8 +35,8 @@ export const AuthProvider = ({ children }) => {
     try {
         const data = await loginService(credentials);
         if (data) {
-          console.log("Registration successful", data); 
-          alert('Login successful!'); 
+          console.log("Login Successful", data); 
+          toast.success('Login successful!'); 
         }
         let userProfile;
         try {
@@ -46,11 +46,11 @@ export const AuthProvider = ({ children }) => {
             console.error("Profile fetch error:", profileError);  
         }
         setTimeout(() => {
-            window.location.href = '/'; // Delay redirect to allow state update
-        }, 200);
+            window.location.href = '/';
+        }, 350);
     } catch (error) {
         console.error("Login error:", error);
-        alert("Invalid credentials");
+        toast.error("Invalid credentials"); 
     }
 };
 
@@ -61,20 +61,19 @@ const register = async (userInfo) => {
 
     if (data) {
       console.log("Registration successful", data); 
-      alert('Registration successful!'); 
       toast.success('Registration successful!');
-      window.location.href = '/login'; // Redirect to login page after successful registration 
+      window.location.href = '/login'; 
     }
   } catch (error) {    
     console.error("Registration failed", error.message); 
-    alert(`Registration failed: ${error.message}`);
+    toast.error(`Registration failed: ${error.message}`);
   }
 };
 
 const logout = () => {
     logoutService();
     setUser(null);
-    window.location.href= '/login'; // Redirect to login page after logout
+    window.location.href= '/login';
 };
 
 // Change Password function
@@ -82,16 +81,18 @@ const changePassword = async (username, oldPassword, newPassword) => {
     try {
         const token = localStorage.getItem('access_token');
         if (!token) {
-            alert("You must be logged in to change your password.");
+            toast.error("You must be logged in to change your password.");
             return;
         }
 
-        await changePasswordService(username, oldPassword, newPassword); // Call your service to change the password
-        alert('Password changed successfully!');
-        logout(); // Redirect after password change
+        // Call your service to change the password
+        await changePasswordService(username, oldPassword, newPassword); 
+        toast.success('Password changed successfully!');
+        logout();
     } catch (error) {
         console.error('Error changing password:', error);
         alert('Error changing password. Please try again.');
+        toast.error('Error changing password. Please try again.');
     }
 };
 

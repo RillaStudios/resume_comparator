@@ -5,14 +5,23 @@ import { Eye, EyeOff } from "lucide-react"; // Import eye icons
 import './auth.css';
 import { toast } from "react-toastify";
 import spinner from "../../assets/image/loadingSpinner.gif";
+import { useNavigate } from 'react-router-dom'; 
+
+
+/*
+ Author: Michael Tamatey/shobhit
+ Date: 20250222
+ Description: This class allows users to login.
+*/
 
 const LoginPage = () => {
   const [formData, setFormData] = useState({ username: '', password: '' });
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
   const { login } = useAuth();
+  const navigate = useNavigate();
   const [rememberMe, setRememberMe] = useState(false);
-  const [showPassword, setShowPassword] = useState(false); // State for password visibility
+  const [showPassword, setShowPassword] = useState(false);
 
   // Load the saved state from localStorage when the component mounts
   useEffect(() => {
@@ -24,7 +33,7 @@ const LoginPage = () => {
   const handleRememberMeChange = (e) => {
     const isChecked = e.target.checked;
     setRememberMe(isChecked);
-    localStorage.setItem('rememberMe', isChecked); // Save to localStorage
+    localStorage.setItem('rememberMe', isChecked);
   };
 
   const handleChange = (e) => {
@@ -39,14 +48,12 @@ const LoginPage = () => {
     if (!formData.username || !formData.password) {
       setError('Login Failed');
       toast.error("Login Failed");
-      setLoading(false); // Stop loading if validation fails
+      setLoading(false);
       return;
     }
   
     try {
-      await login(formData); // Ensure `login` throws an error if authentication fails
-      toast.success("Logged in successfully");
-      window.location.href = '/';
+      await login({username: formData.username, password: formData.password});
     } catch (err) {
       console.error("Login Error:", err);
       setError('Invalid credentials');
@@ -106,7 +113,7 @@ const LoginPage = () => {
                 id="rememberMe"
                 name="rememberMe"
                 checked={rememberMe}
-                onChange={handleRememberMeChange} // Update state on change
+                onChange={handleRememberMeChange}
               />
               <label htmlFor="rememberMe">Remember Me</label>
             </div>

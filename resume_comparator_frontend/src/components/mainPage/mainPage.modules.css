@@ -188,5 +188,34 @@
     height: 30px;
   }
   
-  
+  /* Ensure containers don't overflow on large screens */
+.left-section,
+.upload-container,
+.dropdown-container {
+    max-width: 100%;
+}
+
+/* Prevent .display-box from overflowing on smaller screens */
+@media (max-width: 1024px) {
+    .display-box {
+        width: 100%;
+        max-width: 100%;
+    }
+}
+
+/* Make sure .main-container and .container-body have padding on mobile */
+@media (max-width: 600px) {
+    .main-container {
+        padding: 10px;
+    }
+
+    .container-body {
+        padding: 10px;
+    }
+
+    .convert-button {
+        font-size: 14px;
+        padding: 12px 20px;
+    }
+}
   

@@ -140,22 +140,26 @@
         padding: 10px;
     }
 }
-.password-container {
+.password-container2 {
     position: relative;
-    width: 50%;
+    max-width: 400px; /* prevents it from stretching too far on big screens */
+    width: 100%;
   }
   
   .input-field {
     width: 100%;
-    padding-right: 60px; 
+    padding: 10px 40px 10px 10px; /* leave space on the right for the icon */
+    font-size: 16px;
     box-sizing: border-box;
   }
   
   .toggle-password {
     position: absolute;
-    right: 10px;
     top: 50%;
+    right: 12px;
     transform: translateY(-50%);
     cursor: pointer;
-    color: #666; 
+    color: #666;
+    font-size: 18px;
+    z-index: 2;
   }

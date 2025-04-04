@@ -3,7 +3,7 @@
  Date: 20250222
  Description: This class contains sidebar data
 */
-const role = localStorage.getItem("role"); // Get user role
+const role = "DIRECTOR"; // Get user role
 
 // Define all sidebar items
 const allSideBarData = [
@@ -22,21 +22,14 @@ const allSideBarData = [
     path: "/account", 
     cName: "nav-text",
   },
-  // Uncomment if needed
-  // {
-  //   title: "Settings",
-  //   path: "/settings",
-  //   icon: <CiSettings />,
-  //   cName: "nav-text",
-  // },
 ];
 
 // Filter based on role
 const SideBarData = allSideBarData.filter((item) => {
   if (role === "DIRECTOR") {
-    return item.title !== "Reports"; // Hide Reports for DIRECTOR
+    return item.title !== "";
   }
-  return true; // RECRUITER sees everything
+  return true; 
 });
 
 export default SideBarData;
