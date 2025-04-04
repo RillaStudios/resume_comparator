@@ -78,7 +78,7 @@ export const MainPage = () => {
 
       toast.success("Comparing successful!");
 
-      navigate("/reports", { state: { jobTitle: selectedJob.title, score: data.score, date: data.created_at, jobId: data.job_id } });
+      navigate("/singlereports", { state: { jobTitle: selectedJob.title, score: data.score, date: data.created_at, jobId: data.job_id } });
 
     } catch (error) {
       console.error("Error comparing resume:", error);
