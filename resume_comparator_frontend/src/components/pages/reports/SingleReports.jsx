@@ -9,9 +9,13 @@ import { useLocation, useNavigate } from "react-router-dom";
 */
 
 const SingleReports = () => {
+    const navigate = useNavigate();
   const location = useLocation();
   const { jobTitle, score, date, jobId } = location.state || {};
 
+  const handleReportClick = id => {
+    navigate(`/summary/`); // Navigate to summary page with report ID
+  };
   return (
     <div className="reports-container">
       <h2>Single Report Results</h2>
@@ -39,6 +43,9 @@ const SingleReports = () => {
 
                     <div className="pass-fail-column">
                       <strong>{score >= 7 ? "✅ Passed" : "❌ Failed"}</strong>
+                    </div>
+                    <div className="view-column">
+                      <button onClick={() => handleReportClick()}>📝</button>
                     </div>
                   </div>                
               </div>
