@@ -74,7 +74,6 @@ const Account = () => {
                             className="account-input"
                             placeholder="Confirm Password" 
                             onChange={(e) => setDeletePassword(e.target.value)} 
-                            required
                         />
                         <button onClick={() => setShowDeleteModal(true)} className="account-button">
                             Delete Account

@@ -13,7 +13,6 @@ import { AuthProvider, useAuth } from "./components/service/authContext"; // Mak
 import Login from "./components/auth/login";
 import ChangePassword from "./components/settings/forgetPassword/forgetPassword"; 
 import RegisterPage from "./components/auth/register";
-import SingleReports from "./components/pages/reports/SingleReports";
 
 /*
  Author: Michael Tamatey/ Navjot Kaur
@@ -59,7 +58,6 @@ function App() {
             <Route path="reports" element={<Reports />} />
             <Route path="summary" element={<Summary />} />
             <Route path="account" element={<Account />} />
-            <Route path="singlereports" element={<SingleReports />} /> 
             <Route path="changepass" element={<ChangePassword />} />
           </Route>
 
