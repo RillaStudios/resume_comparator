@@ -88,6 +88,16 @@ input[type="checkbox"] {
   transform: scale(1.5);  
 }
 
+.select-all {
+  margin-bottom: 15px;
+}
+
+.select-all label {
+  font-weight: normal;
+  font-size: 16px;
+  color: #333;
+}
+
 .view-column button {
   font-size: 20px;
   padding: 8px 15px;
@@ -127,7 +137,10 @@ input[type="checkbox"] {
     padding: 15px;
   }
 }
-
+.filter-container{
+  text-align: right;
+  margin-bottom: 15px;
+}
 /* Action Buttons */
 .action-buttons {
   display: flex;
@@ -176,35 +189,6 @@ input[type="checkbox"] {
   cursor: pointer;
 }
 
-/* Filter, Sort and Select-All Container */
-.filter-sort-select-container {
-  display: flex;
-  justify-content: space-between;
-}
 
-.filter-sort-select-container > div {
-  display: flex;
-  gap: 15px;
-  align-items: center;
-}
 
-.filter-sort-select-container select,
-.filter-sort-select-container button {
-  padding: 1px;
-  font-size: 15px;
-  border-radius: 5px;
-  cursor: pointer;
-}
 
-.filter-sort-select-container select:focus {
-  border-color: #45a049;
-}
-
-.filter-sort-select-container button {
-  background-color: #4caf50;
-  color: white;
-}
-
-.filter-sort-select-container button:hover {
-  background-color: #45a049;
-}
