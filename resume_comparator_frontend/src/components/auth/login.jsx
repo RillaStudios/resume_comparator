@@ -1,4 +1,3 @@
-// src/pages/Login.jsx
 import React, { useEffect, useState } from 'react';
 import { useAuth } from '../service/authContext';
 import { Eye, EyeOff } from "lucide-react"; // Import eye icons

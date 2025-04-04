@@ -39,13 +39,15 @@ const Account = () => {
             toast.error('Please enter your password to confirm deletion');
             return;
         }
-
         setLoading(true);
         try {
             await deleteAccount(deletePassword);
-            alert('Account deleted successfully');
+            toast.success('Account deleted successfully');
             logout();
+
+            setTimeout(() => {
             window.location.href = '/login';
+        }, 400);
         } catch (err) {
             toast.error('Error deleting account invalid password');
         } finally {

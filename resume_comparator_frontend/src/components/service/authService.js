@@ -29,9 +29,10 @@ export const register = async (userData) => {
     }
   };
 // Login User
-export const login = async (credentials) => {
+export const login = async (credentials,) => {
     const response = await axios.post(`${API_URL}/login/`, credentials);
     if (response.data.access) {
+        const storage = rememberMe ? localStorage : sessionStorage;
         localStorage.setItem('access_token', response.data.access);
         localStorage.setItem('refresh_token', response.data.refresh);
     }

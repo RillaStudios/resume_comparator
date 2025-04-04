@@ -62,7 +62,9 @@ const register = async (userInfo) => {
     if (data) {
       console.log("Registration successful", data); 
       toast.success('Registration successful!');
-      window.location.href = '/login'; 
+      setTimeout(() => {
+        window.location.href = '/login';
+    }, 400); 
     }
   } catch (error) {    
     console.error("Registration failed", error.message); 
