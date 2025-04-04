@@ -13,7 +13,8 @@ const Reports = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const { jobTitle, score, created_at, job_id } = location.state || {}; // Retrieve job title & score
-
+  const [sortCriteria, setSortCriteria] = useState("score"); // Default sorting by date
+  const [sortOrder, setSortOrder] = useState("desc"); // "asc" or "desc"  
   const [selectAll, setSelectAll] = useState(false);
   const [filter, setFilter] = useState("all");
   const [allReports, setAllReports] = useState([]);
@@ -21,6 +22,7 @@ const Reports = () => {
   const [error, setError] = useState(null);
   const [dialogVisible, setDialogVisible] = useState(false);
   const [actionType, setActionType] = useState(""); 
+
 
   // Fetch reports from database
   useEffect(() => {
@@ -194,6 +196,21 @@ const Reports = () => {
   const handleReportClick = id => {
     navigate(`/summary/`); // Navigate to summary page with report ID
   };
+  const sortedReports = [...filteredReports].sort((a, b) => {
+    if (sortCriteria === "date") {
+      return sortOrder === "asc"
+        ? new Date(a.created_at) - new Date(b.created_at)
+        : new Date(b.created_at) - new Date(a.created_at);
+    } else if (sortCriteria === "score") {
+      return sortOrder === "asc" ? a.score - b.score : b.score - a.score;
+    } else if (sortCriteria === "job") {
+      return sortOrder === "asc"
+        ? String(a.job_id).localeCompare(String(b.job_id))
+        : String(b.job_id).localeCompare(String(a.job_id));
+    }
+    return 0;
+  });
+  
 
   return (
     <div className="reports-container">
@@ -205,6 +222,16 @@ const Reports = () => {
 
       {!loading && !error && (
         <>
+        <div className="filter-sort-select-container">
+
+           {/* Select All Checkbox */}
+           <div className="select-all">
+            <label>
+              <input type="checkbox" checked={selectAll} onChange={handleSelectAll} />
+              Select All
+            </label>
+          </div>
+          
           {/* Filter Dropdown */}
           <div className="filter-container">
             <label>Filter by Result: </label>
@@ -215,14 +242,20 @@ const Reports = () => {
             </select>
           </div>
 
-          {/* Select All Checkbox */}
-          <div className="select-all">
-            <label>
-              <input type="checkbox" checked={selectAll} onChange={handleSelectAll} />
-              Select All
-            </label>
-          </div>
+          {/* Sort Dropdown */}
+          <div className="sort-container">
+            <label>Sort by: </label>
+            <select value={sortCriteria} onChange={(e) => setSortCriteria(e.target.value)}>
+              <option value="date">Date</option>
+              <option value="score">Score</option>
+              <option value="job">Job Title</option>
+            </select>
 
+             <button onClick={() => setSortOrder(sortOrder === "asc" ? "desc" : "asc")}>
+               {sortOrder === "asc" ? "🔼 Asc" : "🔽 Desc"}
+             </button>
+          </div>        
+     </div>
           {/* No Data Message */}
           {filteredReports.length === 0 ? (
             <p className="no-data">No information to display</p>
@@ -230,7 +263,7 @@ const Reports = () => {
             <>
               {/* Reports List */}
               <div className="reports-list">
-                {filteredReports.map(report => (
+                {sortedReports.map(report => (
                   <div key={report.id} className="report-item">
                     <div className="select-column">
                       <input
