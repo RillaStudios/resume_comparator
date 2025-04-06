@@ -24,7 +24,7 @@ const SingleReports = () => {
       {/* Reports List */}
       <div className="reports-list">
                 
-                <div className="report-item">
+            <div className="report-item">
                     <div className="name-date-column">
                       <div>
                       <strong>Job Title:</strong> {jobTitle || "N/A"}
@@ -49,7 +49,11 @@ const SingleReports = () => {
                     </div>
                   </div>                
               </div>
+
+              <a href="/" className="compare-again">Click here to compare again</a>
+              <a href="/reports" className="compare-again">Click here to view all reports</a>
     </div>
+
   );
 };
 

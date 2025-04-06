@@ -16,13 +16,14 @@ export const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const token = localStorage.getItem('access_token');
+    const token = localStorage.getItem('access_token') || sessionStorage.getItem("access_token");
     if (token) {
       getProfileService()
         .then(response => {
           setUser(response.data);
         })
-        .catch(() => {
+        .catch((err) => {
+          console.error("Auto-login failed:", err);
           logout();
         })
         .finally(() => setLoading(false)); 
@@ -31,9 +32,9 @@ export const AuthProvider = ({ children }) => {
     }
   }, []);
 
-  const login = async (credentials) => {
+  const login = async (credentials, rememberMe) => {
     try {
-        const data = await loginService(credentials);
+        const data = await loginService(credentials, rememberMe);
         if (data) {
           console.log("Login Successful", data); 
           toast.success('Login successful!'); 

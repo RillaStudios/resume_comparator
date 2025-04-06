@@ -39,6 +39,8 @@ const LoginPage = () => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
+
+  // Handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError('');
@@ -52,7 +54,10 @@ const LoginPage = () => {
     }
   
     try {
-      await login({username: formData.username, password: formData.password});
+      await login(
+        { username: formData.username, password: formData.password },
+        rememberMe
+      );
     } catch (err) {
       console.error("Login Error:", err);
       setError('Invalid credentials');
