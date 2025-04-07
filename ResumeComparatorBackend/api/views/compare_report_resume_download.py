@@ -2,6 +2,7 @@ import datetime
 import os
 import tempfile
 import zipfile
+from io import BytesIO
 
 from django.core.files.storage import default_storage
 from django.http import FileResponse
@@ -33,24 +34,26 @@ class CompareReportResumeDownload(APIView):
             except CompareReport.DoesNotExist:
                 return Response({"error": "Report not found"}, status=status.HTTP_404_NOT_FOUND)
 
-        # Download multiple reports as a ZIP
+        # Create an in-memory ZIP file
+        zip_buffer = BytesIO()
+
+        # Create the ZIP file with the reports
+        with zipfile.ZipFile(zip_buffer, 'w') as zip_file:
+            for report_id in report_ids:
+                try:
+                    report = CompareReport.objects.get(pk=report_id)
+                    file_path = report.resume.path
+                    zip_file.write(file_path, os.path.basename(file_path))
+                except CompareReport.DoesNotExist:
+                    continue
+
+        # Reset buffer position to beginning
+        zip_buffer.seek(0)
+
+        # Create the response with the in-memory ZIP
         zip_filename = f"resumes_{datetime.date.today()}.zip"
-        with tempfile.NamedTemporaryFile(delete=False) as tmp_file:
-            with zipfile.ZipFile(tmp_file, 'w') as zip_file:
-                for report_id in report_ids:
-                    try:
-                        report = CompareReport.objects.get(pk=report_id)
-                        file_path = report.resume.path
-                        zip_file.write(file_path, os.path.basename(file_path))
-                    except CompareReport.DoesNotExist:
-                        continue
-
-            tmp_file_path = tmp_file.name
-
-        with open(tmp_file_path, 'rb') as file:
-            saved_path = default_storage.save(zip_filename, file)
-            response = FileResponse(default_storage.open(saved_path, 'rb'), as_attachment=True, filename=zip_filename)
-
-        os.remove(tmp_file_path)
-
-        return response
+        return FileResponse(
+            zip_buffer,
+            as_attachment=True,
+            filename=zip_filename
+        )

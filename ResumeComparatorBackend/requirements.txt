@@ -26,14 +26,17 @@ Django==5.1.7
 django-cors-headers==4.7.0
 django-extensions==3.2.3
 djangorestframework==3.15.2
+djangorestframework_simplejwt==5.5.0
 docx==0.2.4
 emoji==1.7.0
+en_core_web_sm @ https://github.com/explosion/spacy-models/releases/download/en_core_web_sm-3.8.0/en_core_web_sm-3.8.0-py3-none-any.whl#sha256=1932429db727d4bff3deed6b34cfc05df17794f4a52eeb26cf8928f7c1a0fb85
 et_xmlfile==2.0.0
 etelemetry==0.3.1
 filelock==3.18.0
 fonttools==4.56.0
 fsspec==2025.3.0
 ftfy==6.3.1
+gensim==4.3.3
 httplib2==0.22.0
 huggingface-hub==0.29.3
 idna==3.10
@@ -55,7 +58,7 @@ networkx==3.4.2
 nibabel==5.3.2
 nipype==1.9.2
 nltk==3.9.1
-numpy==2.2.4
+numpy==1.26.4
 opencv-python-headless==4.11.0.86
 openpyxl==3.1.5
 packaging==24.2
@@ -74,6 +77,7 @@ pydantic_core==2.27.2
 pydot==3.0.4
 pydyf==0.11.0
 Pygments==2.19.1
+PyJWT==2.9.0
 PyMuPDF==1.25.4
 pypandoc==1.15
 pypandoc_binary==1.15
@@ -91,18 +95,21 @@ rdflib==6.3.2
 regex==2024.11.6
 reportlab==4.3.1
 requests==2.32.3
+rest-framework-simplejwt==0.0.2
 rich==13.9.4
 safetensors==0.5.3
 scikit-learn==1.6.1
-scipy==1.15.2
+scipy==1.13.1
 sentence-transformers==3.4.1
 shellingham==1.5.4
 simplejson==3.20.1
 six==1.17.0
 smart-open==7.1.0
 spacy==3.8.4
+spacy-alignments==0.9.1
 spacy-legacy==3.0.12
 spacy-loggers==1.0.5
+spacy-transformers==1.3.8
 sqlparse==0.5.3
 srsly==2.5.1
 sympy==1.13.1
@@ -124,4 +131,3 @@ wcwidth==0.2.13
 weasel==0.4.1
 webencodings==0.5.1
 wrapt==1.17.2
-rest_framework_simplejwt==0.0.2

@@ -9,6 +9,7 @@
 # pip install spacy-transformers
 # python -m spacy download en_core_web_sm
 # pip install django djangorestframework djangorestframework-simplejwt
-#
+# pip install httpx
+# pip install python-dotenv
 # Make sure these are ran to successfully run the code.
 

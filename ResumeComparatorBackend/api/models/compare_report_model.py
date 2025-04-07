@@ -19,6 +19,10 @@ class CompareReport(models.Model):
     job_id = models.IntegerField()
     score = models.FloatField()
     created_at = models.DateTimeField(auto_now_add=True)
+    passing = models.JSONField(default=list)
+    failing = models.JSONField(default=list)
+    applicant_name = models.CharField(max_length=100, null=True)
+    applicant_email = models.EmailField(null=True)
 
     """
     A string representation of the report.

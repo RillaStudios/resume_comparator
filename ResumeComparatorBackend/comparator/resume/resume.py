@@ -1,7 +1,8 @@
 from pathlib import Path
 from django.conf import settings
-from comparator.resume.extraction_tools.extract import extract_text
-from comparator.resume.extraction_tools.section_classifier import classify_sections
+
+from comparator.compare_utils.ai_tools.pdf_parser import classify_text
+from comparator.compare_utils.text_tools.extract_text_from_pdf import extract_text_from_pdf
 
 """
 Resume class for extracting and classifying sections from resume documents.
@@ -18,5 +19,5 @@ class Resume:
 
     def __init__(self, resume_path):
         self.resume_path = Path(settings.BASE_DIR) / 'media' / resume_path
-        self.resume_text = extract_text(str(self.resume_path))
-        self.sections = classify_sections(self.resume_text)
+        self.resume_text = extract_text_from_pdf(str(self.resume_path))
+        self.sections = classify_text(self.resume_text)

@@ -1,10 +1,15 @@
 from api.job_posting.job_posting import JobPosting
 from api.models.compare_report_model import CompareReport
-from comparator.resume.extraction_tools.keyword_extractor import extract_keywords
+from comparator.compare_utils.detail_generator import generate_detail
+from comparator.compare_utils.stage_enum import Stage
+from comparator.compare_utils.ai_tools.skill_extractor import extract_skills
 from comparator.resume.resume import Resume
 import spacy
 from sklearn.metrics.pairwise import cosine_similarity
 import numpy as np
+
+from comparator.compare_utils.text_tools.pd_extractor import get_applicant_details
+from comparator.stages.stage_1 import ai_raw_compare
 
 """
 Compare class
@@ -33,8 +38,8 @@ class Compare:
         self.job_posting_id = job_posting_id
         self.resume = Resume(self.resume_path)
         self.job_posting = JobPosting().create_from_json(job_posting_id=1)
-        self.resume_keywords = extract_keywords(self.resume.resume_text, target_labels=["SKILLS"])
-        self.job_keywords = extract_keywords(self.job_posting.__str__(), target_labels=["SKILLS"])
+        self.resume_keywords = extract_skills(self.resume.resume_text)
+        self.job_keywords = extract_skills(self.job_posting.__str__())
 
     def compare_and_gen_report(self) -> CompareReport:
         """
@@ -47,8 +52,32 @@ class Compare:
             CompareReport: A CompareReport instance containing the comparison results.
         """
 
+        # Variables to store the score, applicant name, and applicant email
+        score = 0
+        applicant_name = get_applicant_details(self.resume.resume_text)['name']
+        applicant_email = get_applicant_details(self.resume.resume_text)['email']
+
+        # Get the score from the AI model (Stage 1)
+
+        stage_one_score = ai_raw_compare(self.resume.resume_path, self.job_posting)
+
+        if stage_one_score >= 55:
+
+            passing_list = [generate_detail(Stage.STAGE_1, "Resume passed initial AI screening.")]
+
+        else:
+
+            failing_list = [generate_detail(Stage.STAGE_1, "Resume did not pass initial AI screening.")]
+
+        # Get the keywords score (Stage 2)
+
+
+
+
         # Return a CompareReport instance with the score
-        return CompareReport(resume=self.resume_path, job_id=self.job_posting_id, score=self.cosine_similarity_score())
+        return CompareReport(resume=self.resume_path, job_id=self.job_posting_id,
+                             applicant_name=applicant_name, applicant_email=applicant_email,
+                             score=self.cosine_similarity_score())
 
 
     def cosine_similarity_score(self):
