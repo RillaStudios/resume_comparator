@@ -22,7 +22,7 @@ const EnterEmail = () => {
   return (
     <div className="email-reset-container">
       <h2 className="email-reset-header">Forgot Password - Resume Comparator</h2>
-      <p className="email-reset-description">Please enter your email address to receive a password reset link soon.</p>
+      <p className="email-reset-description">Please enter your email address to receive a password reset link.</p>
       <form onSubmit={handleSubmit}>
         <div className="email-reset-form-group">
           <input

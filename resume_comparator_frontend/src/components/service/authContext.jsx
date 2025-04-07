@@ -80,23 +80,23 @@ const logout = () => {
 };
 
 // Change Password function
-const changePassword = async (oldPassword, newPassword) => {
-    try {
-        const token = localStorage.getItem('access_token') || sessionStorage.getItem("access_token");
-        if (!token) {
-            toast.error("You must be logged in to change your password.");
-            return;
-        }
+const changePassword = async (username, oldPassword, newPassword) => {
+  try {
+      const token = localStorage.getItem('access_token') || sessionStorage.getItem("access_token");
+      if (!token) {
+          toast.error("You must be logged in to change your password.");
+          return;
+      }
 
-        // Call your service to change the password
-        await changePasswordService(oldPassword, newPassword); 
-        toast.success('Password changed successfully!');
-        logout();
-    } catch (error) {
-        console.error('Error changing password:', error);
-        alert('Error changing password. Please try again.');
-        toast.error('Error changing password. Please try again.');
-    }
+      // Call your service to change the password
+      await changePasswordService(username, oldPassword, newPassword); 
+      toast.success('Password changed successfully!');
+      logout();
+  } catch (error) {
+      console.error('Error changing password:', error);
+      alert('Error changing password. Please try again.');
+      toast.error('Error changing password. Please try again.');
+  }
 };
 
   return (

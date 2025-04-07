@@ -11,18 +11,23 @@ import spinner from "../../../assets/image/loadingSpinner.gif";
 */
 
 const ForgetPassword = ({ onClose }) => {
-    const {changePassword: changePasswordService } = useAuth();
+    const { user, changePassword: changePasswordService } = useAuth();
+    const [username, setUsername] = useState('');
     const [oldPassword, setOldPassword] = useState('');
     const [newPassword, setNewPassword] = useState('');
     const [loading, setLoading] = useState(false);
 
     const handleChangePassword = async () => {
         
-        if (!oldPassword || !newPassword) {
+        if (!username || !oldPassword || !newPassword) {
             toast.error('Please fill in all fields');
             return;
         }
-    
+
+        if (username !== user?.username) {
+            toast.error('Entered username does not match the logged-in user');
+            return;
+        }
         
         if (oldPassword === newPassword) {
             toast.error('New password cannot be the same as the old password');
@@ -31,7 +36,7 @@ const ForgetPassword = ({ onClose }) => {
     
         try {
             setLoading(true); 
-            await changePasswordService(oldPassword, newPassword);
+            await changePasswordService(username, oldPassword, newPassword);
             onClose(); 
         } catch (err) {
             toast.error('Error changing password. Please try again.');
@@ -44,6 +49,13 @@ const ForgetPassword = ({ onClose }) => {
         <div className="modal-overlay">
             <div className="modal-content">
                 <h3>Change Password</h3>
+                <input 
+                    type="text" 
+                    placeholder="Username" 
+                    value={username} 
+                    onChange={(e) => setUsername(e.target.value)} 
+                    className="password-input"
+                />
                 <input 
                     type="password" 
                     placeholder="Old Password" 
