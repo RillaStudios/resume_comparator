@@ -1,0 +1,80 @@
+.email-reset-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    width: 100%;
+    padding: 20px;
+    color: black;
+    background-color: white;
+  }
+  
+  /* Header styling */
+  .email-reset-header {
+    text-align: center;
+    font-size: 24px;
+    color: #333;
+  }
+  
+  /* Paragraph styling */
+  .email-reset-description {
+    text-align: center;
+    font-size: 16px;
+    color: #555;
+    margin-bottom: 20px;
+  }
+  
+  /* Input field container */
+  .email-reset-form-group {
+    margin-bottom: 15px;
+  }
+  
+  /* Label styling */
+  .email-reset-label {
+    font-size: 14px;
+    color: #555;
+    display: block;
+    margin-bottom: 5px;
+  }
+  
+  /* Input styling */
+  .email-reset-input[type="email"] {
+    width: 100%;
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
+  
+  /* Button styling */
+  .email-reset-submit-btn[type="submit"] {
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .email-reset-submit-btn[type="submit"]:hover {
+    background-color: #0056b3;
+  }
+  
+  /* Message styling */
+  .email-reset-message {
+    font-size: 14px;
+    text-align: center;
+  }
+  
+  .email-reset-message-success {
+    font-size: 16px;
+    color: #28a745;
+  }
+  
+  .email-reset-message-error {
+    color: #dc3545;
+  }

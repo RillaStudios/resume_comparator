@@ -139,3 +139,15 @@
   cursor: pointer;
   color: #555;
 }
+
+.forgot-password {
+  display: block;
+  margin-top: 15px;
+  text-align: left;
+  color: #007bff;
+  text-decoration: none;
+  font-size: 16px;
+}
+.forgot-password:hover {
+  text-decoration: underline;
+}

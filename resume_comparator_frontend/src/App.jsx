@@ -14,6 +14,7 @@ import Login from "./components/auth/login";
 import ChangePassword from "./components/settings/forgetPassword/forgetPassword"; 
 import RegisterPage from "./components/auth/register";
 import SingleReports from "./components/pages/reports/SingleReports";
+import EnterEmail from "./components/settings/forgetPassword/enterEmail";
 
 /*
  Author: Michael Tamatey/ Navjot Kaur
@@ -52,6 +53,7 @@ function App() {
           {/* Public Route: Login */}
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<RegisterPage />} />
+          <Route path="/enter-email" element={<EnterEmail />} />
 
           {/* Private Routes */}
           <Route path="/" element={<ProtectedRoute element={<DashboardLayout />} />}>

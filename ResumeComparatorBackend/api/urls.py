@@ -5,7 +5,7 @@ from django.urls import path
 from api.views.compare_report_resume_download import CompareReportResumeDownload
 from api.views.job_posting_view import JobPostingView
 from api.views.compare_report_view import CompareReportView
-from api.views.user_view import register, login, logout, view_profile, update_profile, delete_user, change_password, protected_view
+from api.views.user_view import register, login, logout, view_profile, update_profile, delete_user, change_password, protected_view, verify_email, confirm_password
 
 urlpatterns = [
     path('reports/', CompareReportView.as_view(), name='all-reports'),
@@ -22,4 +22,7 @@ urlpatterns = [
     path('profile/delete/', delete_user, name='delete_user'),
     path('profile/changepass/', change_password, name='change_password'),
     path('protected/', protected_view, name='protected_view'),
+
+   path('verify_email/', verify_email, name='verify_email'),
+    path('reset/<uidb64>/<token>/', confirm_password, name='confirm_password'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

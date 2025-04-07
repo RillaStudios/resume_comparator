@@ -22,6 +22,8 @@ const LoginPage = () => {
   const [rememberMe, setRememberMe] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
 
+
+
   // Load the saved state from localStorage when the component mounts
   useEffect(() => {
     const savedRememberMe = localStorage.getItem('rememberMe') === 'true';
@@ -121,6 +123,9 @@ const LoginPage = () => {
               />
               <label htmlFor="rememberMe">Remember Me</label>
             </div>
+
+            {/* Forgot Password Link */}
+            <a href="enter-email" className="forgot-password">Forgot your password?</a>
             
             {error && <p className="login-page-error-text">{error}</p>}
             

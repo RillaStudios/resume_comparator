@@ -80,7 +80,7 @@ const logout = () => {
 };
 
 // Change Password function
-const changePassword = async (username, oldPassword, newPassword) => {
+const changePassword = async (oldPassword, newPassword) => {
     try {
         const token = localStorage.getItem('access_token');
         if (!token) {
@@ -89,7 +89,7 @@ const changePassword = async (username, oldPassword, newPassword) => {
         }
 
         // Call your service to change the password
-        await changePasswordService(username, oldPassword, newPassword); 
+        await changePasswordService(oldPassword, newPassword); 
         toast.success('Password changed successfully!');
         logout();
     } catch (error) {
