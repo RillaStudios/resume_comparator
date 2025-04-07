@@ -82,7 +82,7 @@ const logout = () => {
 // Change Password function
 const changePassword = async (oldPassword, newPassword) => {
     try {
-        const token = localStorage.getItem('access_token');
+        const token = localStorage.getItem('access_token') || sessionStorage.getItem("access_token");
         if (!token) {
             toast.error("You must be logged in to change your password.");
             return;
@@ -98,7 +98,6 @@ const changePassword = async (oldPassword, newPassword) => {
         toast.error('Error changing password. Please try again.');
     }
 };
-
 
   return (
     <AuthContext.Provider value={{ user, loading, login, register, logout, changePassword }}>
