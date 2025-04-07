@@ -3,3 +3,4 @@ ai_models
 __pycache__/
 *.bin
 .idea
+ai_models/**
