@@ -14,14 +14,14 @@ django.setup()
 from django.conf import settings
 BASE_DIR = settings.BASE_DIR
 
-def compute_cosine_similarity(set1, set2):
+def compute_cosine_similarity(set1, set2) -> float:
     """
     Compute cosine similarity between two sets of skills.
     """
     vectorizer = TfidfVectorizer()
     corpus = [" ".join(set1), " ".join(set2)]  # Convert sets to strings
     tfidf_matrix = vectorizer.fit_transform(corpus)
-    return cosine_similarity(tfidf_matrix[0], tfidf_matrix[1])[0][0]
+    return float(cosine_similarity(tfidf_matrix[0], tfidf_matrix[1])[0][0])
 
 def keyword_similarity_score(job_posting_id: int, resume_text: str):
     """
