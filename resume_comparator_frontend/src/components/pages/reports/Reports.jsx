@@ -135,7 +135,7 @@ const Reports = () => {
   };
 
  // Handle Email Reports functionality
-const handleEmailReports = async () => {
+ const handleEmailReports = async () => {
   const selectedReports = filteredReports.filter(report => report.selected);
   if (selectedReports.length === 0) {
     toast.error("No reports selected! Please select at least one.");
@@ -145,18 +145,24 @@ const handleEmailReports = async () => {
   try {
     await Promise.all(
       selectedReports.map((report) => {
+        if (!report.applicant_name || !report.applicant_email || !report.job_id) {
+          throw new Error("Missing required report data");
+        }
         return fetch("http://127.0.0.1:8000/api/send-email/", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({ applicant_email: report.applicant_email }),
+          body: JSON.stringify({
+            applicant_name: report.applicant_name,
+            applicant_email: report.applicant_email,
+            job_id: report.job_id,
+          }),
         });
       })
     );
-    toast.success("Emails sent successfully!");
   } catch (error) {
-    toast.error("Failed to send emails.");
+    toast.error(`Failed to send emails: ${error.message}`);
     console.error("Email error:", error);
   }
 };
