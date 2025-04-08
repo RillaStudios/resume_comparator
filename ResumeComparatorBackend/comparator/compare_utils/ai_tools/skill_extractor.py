@@ -1,7 +1,4 @@
 import os
-from typing import Dict
-
-import torch
 from transformers import AutoTokenizer, AutoModelForTokenClassification, pipeline
 from django.conf import settings
 from comparator.compare_utils.ai_tools.device import get_device
