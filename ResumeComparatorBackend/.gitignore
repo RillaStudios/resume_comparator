@@ -2,7 +2,9 @@
 ai_models
 __pycache__/
 *.bin
+.env
 .idea
 .idea/**
 ai_models/**
 /ai_models/lm-ner-linkedin-skills-recognition/
+
