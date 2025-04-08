@@ -87,6 +87,17 @@ def keyword_similarity_score(job_posting_id: int, resume_text: str):
     skills_jp = extract_skills(job_text)
     skills_cv = extract_skills(resume_text)
 
+    # Initialize scoring variables
+    hard_skill_similarity = 0.0
+    soft_skill_similarity = 0.0
+    matched_hard_skills = set()
+    unmatched_hard_skills = set()
+    matched_soft_skills = set()
+    unmatched_soft_skills = set()
+    bonus_hard_skills = set()
+    bonus_soft_skills = set()
+    final_score = 0.0
+
     # Initialize sets for Hard and Soft Skills
     skills_jp_hard_list = get_raw_skills(skills_jp, False)
     skills_cv_hard_list = get_raw_skills(skills_cv, False)
@@ -94,9 +105,14 @@ def keyword_similarity_score(job_posting_id: int, resume_text: str):
     skills_jp_soft_list = get_raw_skills(skills_jp, True)
     skills_cv_soft_list = get_raw_skills(skills_cv, True)
 
+    if not skills_jp_soft_list:
+        with_soft = False
+    else:
+        with_soft = True
+
     # Compute Cosine Similarity
     hard_skill_similarity = compute_cosine_similarity(skills_jp_hard_list, skills_cv_hard_list)
-    soft_skill_similarity = compute_cosine_similarity(skills_jp_soft_list, skills_cv_soft_list)
+    soft_skill_similarity = compute_cosine_similarity(skills_jp_soft_list, skills_cv_soft_list) if with_soft else None
 
     # Identify Matches and Mismatches
     matched_hard_skills = set(skills_jp_hard_list) & set(skills_cv_hard_list)
@@ -107,7 +123,7 @@ def keyword_similarity_score(job_posting_id: int, resume_text: str):
     unmatched_soft_skills = set(skills_jp_soft_list) - set(skills_cv_soft_list)
     extra_soft_skills = set(skills_cv_soft_list) - set(skills_jp_soft_list)
 
-    # FACTOR 1: Similarity score (as before)
+    # FACTOR 1: Similarity score as base score
     base_score = (0.7 * hard_skill_similarity) + (0.3 * soft_skill_similarity)
 
     print("Base Score:", base_score)
@@ -150,6 +166,7 @@ def keyword_similarity_score(job_posting_id: int, resume_text: str):
     # FACTOR 5: Penalty for missing critical skills
     missing_critical_penalty = min(0.25, len(unmatched_hard_skills) * 0.05)
     print("Missing Critical Penalty:", missing_critical_penalty)
+
     # Final weighted score formula
     final_score = (base_score * 0.5) + (match_rate_score * 0.3) + (extra_skills_bonus * 0.1) - missing_critical_penalty
 
@@ -171,6 +188,7 @@ def keyword_similarity_score(job_posting_id: int, resume_text: str):
     print(result)
 
     return result
+
 
 resume_path = BASE_DIR / 'media' / 'resumes' / 'FordDow_Izaak_Resume_2025.pdf'
 resume = Resume(str(resume_path))
