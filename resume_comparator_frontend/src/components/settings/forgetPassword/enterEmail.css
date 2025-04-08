@@ -49,7 +49,7 @@
   
   /* Button styling */
   .email-reset-submit-btn[type="submit"] {
-    width: 100%;
+    width: 90%;
     padding: 12px;
     font-size: 16px;
     background-color: #007bff;
@@ -78,3 +78,18 @@
   .email-reset-message-error {
     color: #dc3545;
   }
+  .email-reset-submit-btn.sent {
+    background-color: #ed1026; 
+  }
+  
+  .email-reset-submit-btn.processing {
+    opacity: 0.7;
+    cursor: not-allowed;
+  }
+  .loading-spinner {
+    width: 18px;
+    height: 18px;
+    margin-right: 8px;
+    vertical-align: middle;
+  }
+  

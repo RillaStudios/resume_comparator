@@ -1,22 +1,36 @@
 import { useState } from 'react';
 import axios from 'axios';
 import './EnterEmail.css';
+import spinner from "../../../assets/image/loadingSpinner.gif";
+
+
 
 const EnterEmail = () => {
   const [email, setEmail] = useState('');
   const [message, setMessage] = useState('');
   const [error, setError] = useState('');
+  const [loading, setLoading] = useState(false);
+  const [emailSent, setEmailSent] = useState(false); 
+  
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
+    setEmailSent(false);
+    
     try {
       const response = await axios.post('http://localhost:8000/api/verify_email/', { email });
-      setMessage(response.data.message);
+      setMessage('Reset link sent! Please check your email.');
+      setEmailSent(true);
+      setEmail(''); 
       setError('');
     } catch (error) {
       setError('There was an error sending the reset link.');
       setMessage('');
-    }
+      setEmailSent(false);
+    }setTimeout(() => {
+      setLoading(false);
+    }, 1000);
   };
 
   return (
@@ -32,12 +46,29 @@ const EnterEmail = () => {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
+            placeholder='Enter your email'
           />
         </div>
-        <button className="email-reset-submit-btn" type="submit">Send Reset Link</button>
+      <button
+          type="submit"
+          disabled={loading}
+          className={`email-reset-submit-btn 
+              ${loading ? 'processing' : ''} 
+              ${emailSent ? 'sent' : ''}`}
+>
+  {loading ? 'Processing...' : emailSent ? 'Sent' : 'Send Reset Link'}
+</button>
+        {loading && (
+                  <div className="loading-spin">
+                    <div className="loading-spinner">
+                      <img src={spinner} alt="Loading..." />
+                    </div>
+                  </div>
+                   )}
       </form>
       {message && <p className="email-reset-message email-reset-message-success">{message}</p>}
       {error && <p className="email-reset-message email-reset-message-error">{error}</p>}
+    
     </div>
   );
 };
