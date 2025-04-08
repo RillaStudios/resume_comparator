@@ -1,5 +1,6 @@
 import json
 import os
+from DjangoApp import settings
 
 """
 A class to represent a job posting.
@@ -47,8 +48,8 @@ class JobPosting:
         Author: IFD
         Date: 2025-03-17
         """
-        base_dir = os.path.dirname(os.path.abspath(__file__))
-        file_path = os.path.join(base_dir, 'data', 'job_postings.json')
+        file_path = os.path.join(settings.BASE_DIR, 'api', 'job_posting', 'data', 'job_postings.json')
+
         if not os.path.exists(file_path):
             raise FileNotFoundError(f"No such file or directory: '{file_path}'")
 
@@ -83,8 +84,12 @@ class JobPosting:
                 for job_posting in job_postings
             ]
 
+        job_posting_id = int(job_posting_id)
+        found = False
+
         for job_posting in job_postings:
             if job_posting['id'] == job_posting_id:
+                found = True
                 self.job_posting_id = job_posting['id']
                 self.title = job_posting['title']
                 self.company_name = job_posting['company']['name']
@@ -107,6 +112,11 @@ class JobPosting:
                 self.job_closing_date = job_posting['application_deadline']
                 self.job_contact_email = job_posting['contact_email']
                 break
+
+        if not found:
+            # Debug info to help understand what's happening
+            available_ids = [jp['id'] for jp in job_postings]
+            raise ValueError(f"No job posting found with ID: {job_posting_id}. Available IDs: {available_ids}")
 
         return self
 
@@ -153,13 +163,23 @@ class JobPosting:
             "contact_email": self.job_contact_email
         }
 
-    def __str__(self):
-        """
-        A method to return a string representation of the JobPosting object.
-
-        :return: A string representation of the JobPosting object.
-
-        Author: IFD
-        Date: 2025-03-17
-        """
-        return json.dumps(self.to_json(), indent=4)
+    def get_text(self):
+        return (
+            f"Job Posting ID: {self.job_posting_id},\n"
+            f"Title: {self.title},\n"
+            f"Company Name: {self.company_name},\n"
+            f"Job Summary: {self.job_summary},\n"
+            f"Job Responsibilities: {self.job_responsibilities},\n"
+            f"Job Requirements (Must Have): {self.job_requirements_must_have},\n"
+            f"Job Requirements (Nice to Have): {self.job_requirements_nice_to_have},\n"
+            f"Location: {self.job_loc_city}, {self.job_loc_province}, {self.job_loc_country},\n"
+            f"Remote: {self.job_loc_remote},\n"
+            f"Salary Min: {self.job_salary_min} {self.job_salary_currency},\n"
+            f"Salary Max: {self.job_salary_max} {self.job_salary_currency},\n"
+            f"Salary Interval: {self.job_salary_interval},\n"
+            f"Employment Type: {self.job_employment_type},\n"
+            f"Benefits: {self.benefits},\n"
+            f"Posted Date: {self.job_posting_date},\n"
+            f"Application Deadline: {self.job_closing_date},\n"
+            f"Contact Email: {self.job_contact_email}\n"
+        )

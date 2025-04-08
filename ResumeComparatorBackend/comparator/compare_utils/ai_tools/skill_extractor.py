@@ -38,3 +38,32 @@ def extract_skills(text: str) -> dict[str, list[dict[str, str | float]]]:
         })
 
     return grouped_results
+
+def get_raw_skills(raw_list: dict, soft: bool) -> list[str]:
+    """
+    A helper function to extract raw skills from the raw_list. Will also
+    remove duplicates and convert them to lowercase.
+
+    Args:
+        raw_list (dict): The dictionary containing skills categorized as HARD or SOFT.
+        soft (bool): If True, extract soft skills; if False, extract hard skills.
+
+    Returns:
+        list[str]: A list of skills (words) that match the criteria.
+
+    @Author: IFD
+    @Date: 2025-04-07
+    """
+
+    raw_skills = []
+
+    for category, skills in raw_list.items():
+        for skill in skills:
+            skill_word = skill['word'].lower()
+            if skill['score'] > 0.98:
+                if (soft and category == 'SOFT') or (not soft and category != 'SOFT'):
+                    # Check if the skill is already in the list
+                    if skill_word not in raw_skills:
+                        raw_skills.append(skill_word)
+
+    return raw_skills

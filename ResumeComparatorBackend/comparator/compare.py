@@ -37,9 +37,7 @@ class Compare:
         self.resume_path = resume_path
         self.job_posting_id = job_posting_id
         self.resume = Resume(self.resume_path)
-        self.job_posting = JobPosting().create_from_json(job_posting_id=1)
         self.resume_keywords = extract_skills(self.resume.resume_text)
-        self.job_keywords = extract_skills(self.job_posting.__str__())
 
     def compare_and_gen_report(self) -> CompareReport:
         """
@@ -52,14 +50,18 @@ class Compare:
             CompareReport: A CompareReport instance containing the comparison results.
         """
 
+        passing_list = []
+        failing_list = []
+
         # Variables to store the score, applicant name, and applicant email
         score = 0
+
         applicant_name = get_applicant_details(self.resume.resume_text)['name']
         applicant_email = get_applicant_details(self.resume.resume_text)['email']
 
         # Get the score from the AI model (Stage 1)
 
-        stage_one_score = ai_raw_compare(self.resume.resume_path, self.job_posting)
+        stage_one_score = ai_raw_compare(self.resume_path, self.job_posting_id)
 
         if stage_one_score >= 55:
 
@@ -69,62 +71,12 @@ class Compare:
 
             failing_list = [generate_detail(Stage.STAGE_1, "Resume did not pass initial AI screening.")]
 
+        print("Stage 1 Score: ", stage_one_score)
+
         # Get the keywords score (Stage 2)
-
-
 
 
         # Return a CompareReport instance with the score
         return CompareReport(resume=self.resume_path, job_id=self.job_posting_id,
                              applicant_name=applicant_name, applicant_email=applicant_email,
-                             score=self.cosine_similarity_score())
-
-
-    def cosine_similarity_score(self):
-        """
-        Compute the cosine similarity score between the resume and the job posting.
-
-        Note that this is a first iteration. Much more enhanced methods will need
-        to be used for a production-ready system.
-
-        It currently only uses the SKILLS category for comparison.
-
-        Returns:
-            float: The cosine similarity score between the resume and the job posting.
-
-        @Author: IFD
-        @Date: 2025-03-17
-        """
-
-        nlp = spacy.load("en_core_web_sm")
-        # Initialize scores dictionary
-        scores = {}
-
-        for category in self.job_keywords:
-            # Only compare categories that are present in both job and resume
-            if category in self.resume_keywords:
-                resume_list = list(self.resume_keywords[category])
-                job_list = list(self.job_keywords[category])
-
-                # Convert keywords to vectors
-                resume_vectors = [nlp(word).vector for word in resume_list if nlp(word).has_vector]
-                job_vectors = [nlp(word).vector for word in job_list if nlp(word).has_vector]
-
-                # Skip category if no vectors are found
-                if not resume_vectors or not job_vectors:
-                    scores[category] = 0.0
-                    continue
-
-                # Compute pairwise cosine similarities
-                similarity_matrix = cosine_similarity(np.array(resume_vectors), np.array(job_vectors))
-
-                # Take the maximum similarity for each job keyword
-                max_similarities = similarity_matrix.max(axis=0)
-
-                # Compute overall category similarity score
-                scores[category] = round(max_similarities.mean(), 2) if len(max_similarities) > 0 else 0.0
-
-        # Final score is just the skills score
-        final_score = scores.get("SKILLS", 0)
-
-        return round(final_score, 2)
+                             score=0, passing=passing_list, failing=failing_list)
