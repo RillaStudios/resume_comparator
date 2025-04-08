@@ -32,6 +32,9 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+# Get the GROQ API key from the .env file
+GROQ_API_KEY = os.getenv("GROQ_API_KEY")
+
 # Application definition
 INSTALLED_APPS = [
     'django_extensions',
