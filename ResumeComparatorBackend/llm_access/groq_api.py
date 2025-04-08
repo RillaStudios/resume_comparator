@@ -1,4 +1,4 @@
-# RUN " python test_groq_report.py " IN THE CONSOLE WITH THE BELOW SECTION UNCOMMENTED TO TEST GROQ FUNCTIONALITY
+# RUN " python llm_access/test_groq_report.py " IN THE CONSOLE WITH THE BELOW SECTION UNCOMMENTED TO TEST GROQ FUNCTIONALITY
 # BE SURE TO COMMENT OUT " from DjangoApp import settings " BEFORE TESTING THE SCRIPT
 # import os
 # import sys
@@ -15,6 +15,8 @@
 # django.setup()
 #
 # from django.conf import settings
+
+##################################
 
 import httpx
 from DjangoApp import settings

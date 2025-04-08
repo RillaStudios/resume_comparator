@@ -13,3 +13,6 @@
 # pip install python-dotenv
 # Make sure these are ran to successfully run the code.
 
+# TO USE GROQ
+# Must create ".env" file in the root of the project and add in "GROQ_API_KEY=" + Groq key sent in teams
+
