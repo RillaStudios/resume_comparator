@@ -58,7 +58,7 @@ export const getProfile = async () => {
 };
 
 // Change Password
-export const changePassword = async (oldPassword, newPassword) => {
+export const changePassword = async (username, oldPassword, newPassword) => {
     const token = localStorage.getItem('access_token') || sessionStorage.getItem('access_token');
     
     if (!token) {
@@ -69,6 +69,7 @@ export const changePassword = async (oldPassword, newPassword) => {
         const response = await axios.post(
             `${API_URL}/profile/changepass/`, 
             { 
+                username: username,
                 old_password: oldPassword, 
                 new_password: newPassword 
             }, 

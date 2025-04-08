@@ -8,16 +8,15 @@ from api.models.user import User
 from api.serializers.user_serializer import UserSerializer
 from django.contrib.auth import authenticate, get_user_model
 from django.conf import settings
-from django.urls import reverse
 from django.core.mail import send_mail
 from django.template.loader import render_to_string
-from django.contrib.sites.shortcuts import get_current_site
 from django.contrib.auth.tokens import default_token_generator
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.utils.encoding import force_bytes
 from django.contrib.auth.forms import SetPasswordForm
 from rest_framework.permissions import AllowAny
 from django.contrib.auth import authenticate
+from django.shortcuts import render
 
 
 """
@@ -137,16 +136,20 @@ Date: 2025-03-05
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
 def change_password(request):
-    user = request.user  # ✅ This ensures the user is authenticated via token
 
+    user = request.user
+    username = request.data.get('username')
     old_password = request.data.get('old_password')
     new_password = request.data.get('new_password')
 
-    if not old_password or not new_password:
-        return Response(
-            {"error": "Both old password and new password are required."},
-            status=status.HTTP_400_BAD_REQUEST
-        )
+    if not username or not old_password or not new_password:
+        return Response({"error": "All fields (username, old password, new password) are required"}, status=status.HTTP_400_BAD_REQUEST)
+
+    # Ensure the user matches the username in the request
+    try:
+        user = User.objects.get(username=username)
+    except User.DoesNotExist:
+        return Response({"error": "User not found"}, status=status.HTTP_404_NOT_FOUND)
 
     if not user.check_password(old_password):
         return Response(
@@ -211,7 +214,7 @@ def delete_user(request):
     if not password:
         return Response({"error": "Password is required to delete account"}, status=status.HTTP_400_BAD_REQUEST)
 
-    if not user.check_password(password):  # Verify password
+    if not user.check_password(password):
         return Response({"error": "Incorrect password"}, status=status.HTTP_400_BAD_REQUEST)
 
     user.delete()
@@ -231,12 +234,12 @@ def verify_email(request):
     except User.DoesNotExist:
         return JsonResponse({"message": "If the email is registered, you will receive a reset link."}, status=200)
 
-    # Generate the password reset token and uid
+    
     uid = urlsafe_base64_encode(force_bytes(user.pk))
     token = default_token_generator.make_token(user)
 
-    # Prepare the email
-    reset_link = f"{request.scheme}://{request.get_host()}/reset/{uid}/{token}/"
+    
+    reset_link = f"{request.scheme}://{request.get_host()}/api/reset/{uid}/{token}/"
     message = render_to_string('register/password_reset_email.html', {'reset_link': reset_link, 'user': user})
     
     send_mail(
@@ -257,30 +260,21 @@ Date: 2025-04-07
 """
 @api_view(['GET', 'POST'])
 def confirm_password(request, uidb64, token):
-    user = None  # Initialize `user` outside of the try block
-
     try:
-        # Decode the user ID from the base64 encoded string
         uid = urlsafe_base64_decode(uidb64).decode()
-        user = get_user_model().objects.get(pk=uid)  # This is where `user` is defined
-    except (TypeError, ValueError, OverflowError):
-        return JsonResponse({'error': 'Invalid link'}, status=400)
-    except get_user_model().DoesNotExist:
-        return JsonResponse({'error': 'User does not exist'}, status=400)
+        user = get_user_model().objects.get(pk=uid)
+    except (TypeError, ValueError, OverflowError, get_user_model().DoesNotExist):
+        return render(request, 'register/reset_password.html', {'error': 'Invalid reset link.'})
 
-    # Check the token
     if not default_token_generator.check_token(user, token):
-        return JsonResponse({'error': 'Invalid token'}, status=400)
+        return render(request, 'register/reset_password.html', {'error': 'The reset link is invalid or has expired.'})
 
-    # At this point, the user is valid and the token is correct
-    # You can now render a password reset form or proceed to save the new password
-    
     if request.method == 'POST':
         form = SetPasswordForm(user, request.POST)
         if form.is_valid():
             form.save()
-            return JsonResponse({'message': 'Password reset successfully'}, status=200)
-        else:
-            return JsonResponse({'error': 'Invalid password'}, status=400)
+            return render(request, 'register/reset_password.html', {'message': 'Your password has been reset successfully. Go to login page.'})
+    else:
+        form = SetPasswordForm(user)
 
-    return JsonResponse({'message': 'Please submit your new password'})
+    return render(request, 'register/reset_password.html', {'form': form})
