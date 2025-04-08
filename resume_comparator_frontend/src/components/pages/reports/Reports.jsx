@@ -168,9 +168,17 @@ const Reports = () => {
 };
 
 
-  const handlePrint = () => {
-    window.print();
-  };
+//handle print button
+const handlePrint = () => {
+  const originalContent = document.body.innerHTML;
+  const printContent = document.querySelector('.reports-container').outerHTML;
+  document.body.innerHTML = printContent;
+  
+  window.print();
+
+  document.body.innerHTML = originalContent;
+};
+
 
   // Show Confirmation Dialog
   const showConfirmationDialog = (action) => {

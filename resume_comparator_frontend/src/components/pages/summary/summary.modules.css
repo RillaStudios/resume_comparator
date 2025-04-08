@@ -81,3 +81,71 @@
     transform: scale(1.05);
   }
   
+  @media print {
+    /* Hide unnecessary elements for printing */
+    .candidate-action-buttons, 
+    .candidate-btn, 
+    .navbar {
+      display: none !important;
+    }
+  
+    .candidate-summary-container {
+      max-width: 100%;
+      margin: 0;
+      padding: 10px;
+      font-family: Arial, sans-serif;
+      box-shadow: none;
+      background: #fff;
+      border-radius: 0;
+    }
+  
+    .candidate-summary-title {
+      text-align: center;
+      color: #333;
+      margin-bottom: 10px;
+      font-size: 18px;
+    }
+  
+    .candidate-summary-role {
+      font-size: 16px;
+      color: #666;
+      margin-bottom: 20px;
+    }
+  
+    .candidate-summary-section {
+      margin-bottom: 30px;
+      padding: 10px;
+      border-radius: 8px;
+      background: #f9f9f9;
+    }
+  
+    .summary-section-title {
+      font-size: 18px;
+      color: #444;
+      margin-bottom: 10px;
+    }
+  
+    .candidate-summary-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+      font-size: 12px;
+    }
+  
+    .candidate-summary-table th, 
+    .candidate-summary-table td {
+      border: 1px solid #ddd;
+      padding: 8px;
+      text-align: left;
+    }
+  
+    .candidate-summary-table th {
+      background-color: #150ab4;
+      color: white;
+    }
+  
+    .candidate-summary-table tr:nth-child(even) {
+      background-color: #f2f2f2;
+    }
+  }
+  

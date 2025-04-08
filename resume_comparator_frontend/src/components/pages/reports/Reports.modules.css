@@ -238,5 +238,43 @@ h4 {
   text-decoration: underline;
 }
 
+@media print {
+  .action-buttons,
+  .filter-sort-select-container,
+  .confirmation-dialog {
+    display: none;
+  }
+
+  .reports-list {
+    width: 100%;
+    margin-top: 20px;
+    font-family: Arial, sans-serif;
+    font-size: 12px;
+  }
+
+  .report-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px;
+  }
+
+  .report-item .name-date-column,
+  .report-item .score-column,
+  .report-item .pass-fail-column {
+    flex: 1;
+  }
+
+  .report-item .view-column {
+    display: none;
+  }
+
+  .report-item input[type="checkbox"] {
+    display: none;
+  }
+
+  h2 {
+    text-align: center;
+  }
+}
 
 

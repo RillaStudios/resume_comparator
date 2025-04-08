@@ -39,8 +39,15 @@ const Summary = () => {
     recommendation: "The candidate has a solid foundation in Java and cloud technologies but lacks hands-on experience with core job requirements such as Spring Boot, Microservices, React/Angular 8+, API development, and DevOps. Resume needs improvement in clarity, structure, and detail."
   };
 
+  //handle print button
   const handlePrint = () => {
+    const originalContent = document.body.innerHTML;
+    const printContent = document.querySelector('.candidate-summary-container').outerHTML;
+    document.body.innerHTML = printContent;
+    
     window.print();
+  
+    document.body.innerHTML = originalContent;
   };
 
 // Handle Email functionality
