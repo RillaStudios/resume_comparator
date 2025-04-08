@@ -55,7 +55,6 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<RegisterPage />} />
           <Route path="/enter-email" element={<EnterEmail />} />
-          <Route path="/api/reset/:uidb64/:token" element={<ResetPassword />} />
 
           {/* Private Routes */}
           <Route path="/" element={<ProtectedRoute element={<DashboardLayout />} />}>

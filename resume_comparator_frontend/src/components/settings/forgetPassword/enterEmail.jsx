@@ -3,7 +3,11 @@ import axios from 'axios';
 import './EnterEmail.css';
 import spinner from "../../../assets/image/loadingSpinner.gif";
 
-
+/*
+ Author: Michael Tamatey/Navjot Kaur
+ Date: 20250222
+ Description: This component is used to send a password reset link to the user's email address.
+*/
 
 const EnterEmail = () => {
   const [email, setEmail] = useState('');

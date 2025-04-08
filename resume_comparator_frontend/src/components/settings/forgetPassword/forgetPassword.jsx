@@ -5,7 +5,7 @@ import { toast } from 'react-toastify';
 import spinner from "../../../assets/image/loadingSpinner.gif";
 
 /*
- Author: Michael Tamatey
+ Author: Michael Tamatey/
  Date: 20250222
  Description: This class is for user password change with validation
 */
