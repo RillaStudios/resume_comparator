@@ -71,6 +71,8 @@ class Compare:
 
             failing_list = [generate_detail(Stage.STAGE_1, "Resume did not pass initial AI screening.")]
 
+        # Get the score from the keyword similarity (Stage 2)
+
         print("Stage 1 Score: ", stage_one_score)
 
         # Get the keywords score (Stage 2)
