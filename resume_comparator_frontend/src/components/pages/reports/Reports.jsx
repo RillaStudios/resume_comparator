@@ -134,38 +134,33 @@ const Reports = () => {
     }
   };
 
-  // Handle Email Reports functionality
-  const handleEmailReports = async () => {
-    const selectedReports = filteredReports.filter(report => report.selected);
-    if (selectedReports.length === 0) {
-      toast.error("No reports selected! Please select at least one.");
-      return;
-    }
+ // Handle Email Reports functionality
+const handleEmailReports = async () => {
+  const selectedReports = filteredReports.filter(report => report.selected);
+  if (selectedReports.length === 0) {
+    toast.error("No reports selected! Please select at least one.");
+    return;
+  }
 
-    try {
-      await Promise.all(
-        selectedReports.map((report) => {
-          const emailData = {
-            to: report.candidateEmail,
-            subject: "Selected Report",
-            body: `Here is the report for ${report.name}:`,
-            report: report,
-          };
+  try {
+    await Promise.all(
+      selectedReports.map((report) => {
+        return fetch("http://127.0.0.1:8000/api/send-email/", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ applicant_email: report.applicant_email }),
+        });
+      })
+    );
+    toast.success("Emails sent successfully!");
+  } catch (error) {
+    toast.error("Failed to send emails.");
+    console.error("Email error:", error);
+  }
+};
 
-          return fetch("http://127.0.0.1:8000/api/sendemail/", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(emailData),
-          });
-        })
-      );
-
-      toast.success("Emails sent successfully!");
-    } catch (error) {
-      toast.error("Failed to send emails.");
-      console.error("Email error:", error);
-    }
-  };
 
   const handlePrint = () => {
     window.print();
