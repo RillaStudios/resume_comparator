@@ -15,7 +15,6 @@ import ChangePassword from "./components/settings/forgetPassword/forgetPassword"
 import RegisterPage from "./components/auth/register";
 import SingleReports from "./components/pages/reports/SingleReports";
 import EnterEmail from "./components/settings/forgetPassword/enterEmail";
-import ResetPassword from "./components/settings/forgetPassword/resetPassword";
 
 /*
  Author: Michael Tamatey/ Navjot Kaur
