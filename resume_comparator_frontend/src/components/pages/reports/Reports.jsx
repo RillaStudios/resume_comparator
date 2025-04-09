@@ -148,7 +148,7 @@ const Reports = () => {
         if (!report.applicant_name || !report.applicant_email || !report.job_id) {
           throw new Error("Missing required report data");
         }
-        return fetch("http://127.0.0.1:8000/api/send-email/", {
+        return fetch("http://127.0.0.1:8000/api/sendemail/", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",

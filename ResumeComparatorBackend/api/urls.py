@@ -27,7 +27,7 @@ urlpatterns = [
     # For sending.
     path('verify_email/', verify_email, name='verify_email'),
     path('reset/<uidb64>/<token>/', confirm_password, name='confirm_password'),
-    path('send-email/', send_candidate_email.send_candidate_email, name='send_candidate_email'),
+    path('sendemail/', send_candidate_email.send_candidate_email, name='send_candidate_email'),
 
    
 
