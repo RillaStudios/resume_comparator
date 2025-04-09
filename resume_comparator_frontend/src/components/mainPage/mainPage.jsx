@@ -1,5 +1,5 @@
 import "./mainPage.modules.css";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef  } from "react";
 import { useNavigate } from "react-router-dom";
 import spinner from "../../assets/image/loadingSpinner.gif";
 import { toast } from "react-toastify";
@@ -16,6 +16,7 @@ export const MainPage = () => {
   const [uploadedFiles, setUploadedFiles] = useState([]);
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+  const fileInputRef = useRef(null); // Ref to the file input element
 
   // Fetch jobs from Django backend
   useEffect(() => {
@@ -34,6 +35,13 @@ export const MainPage = () => {
     const selectedTitle = event.target.value;
     const job = jobs.find((job) => job.title === selectedTitle);
     setSelectedJob(job);
+  };
+
+  const clearFiles = () => {
+    setUploadedFiles([]);
+    if (fileInputRef.current) {
+      fileInputRef.current.value = null;
+    }
   };
 
   // Handle file upload - now appending files without duplicates
@@ -164,11 +172,11 @@ export const MainPage = () => {
               {/* Clear All Files Button */}
                   <button
                   className="clear-button"
-                  onClick={() => setUploadedFiles([])}
+                  onClick={clearFiles}
+                  disabled={loading}
                    >
                 Clear All Files
                 </button>
-              
             </div>
           )}
         </div>
