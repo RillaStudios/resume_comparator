@@ -51,7 +51,7 @@ const SingleReports = () => {
             </div>
 
             <div className="pass-fail-column">
-              <strong>{(report.score / 10) >= 7.5 ? "✅ Passed" : "❌ Failed"}</strong>
+              <strong>{(report.score / 10) >= 7 ? "✅ Passed" : "❌ Failed"}</strong>
             </div>
 
             <div className="view-column">
