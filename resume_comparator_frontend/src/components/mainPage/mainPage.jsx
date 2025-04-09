@@ -13,7 +13,7 @@ import { toast } from "react-toastify";
 export const MainPage = () => {
   const [jobs, setJobs] = useState([]);  // Store jobs from backend
   const [selectedJob, setSelectedJob] = useState(null); // Store selected job
-  const [uploadedFile, setUploadedFile] = useState(null);
+  const [uploadedFiles, setUploadedFiles] = useState([]);
   const [fileName, setFileName] = useState("");
   const [loading, setLoading] = useState(false)
   const navigate = useNavigate();
@@ -42,24 +42,25 @@ export const MainPage = () => {
 
   // Handle file upload
   const handleFileUpload = (event) => {
-    const file = event.target.files[0];
-    if (file) {
-      setUploadedFile(file);
-      setFileName(file.name);
-    }
+    const files = Array.from(event.target.files);
+    setUploadedFiles(files);
   };
+  
 
   // Send resume to backend for processing
   const handleCompare = async () => {
-    if (!selectedJob || !uploadedFile) {
+    if (!selectedJob || uploadedFiles.length ==0){
       toast.warning("Please select a job title and upload your resume."); // message to user
       return;
     }
     setLoading(true);
 
     const formData = new FormData();
-    formData.append("resume", uploadedFile);
-    formData.append("jobId", selectedJob.id);  // Send job ID only
+    uploadedFiles.forEach((file) => {
+    formData.append("resumes[]", file); 
+      });
+    
+        formData.append("jobId", selectedJob.id);  // Send job ID only
 
     try {
       const response = await fetch("http://127.0.0.1:8000/api/compare/", {
@@ -145,17 +146,20 @@ export const MainPage = () => {
           )}
         </div>
 
-
-
         {/* Resume Upload */}
         <div className="upload-container">
           <label htmlFor="file-upload">Upload Resume:</label>
-          <input type="file" id="file-upload" onChange={handleFileUpload} />
-          {uploadedFile && (
-            <div className="uploaded-file">
-              <p>Uploaded File: {fileName}</p>
-            </div>
-          )}
+          <input type="file" id="file-upload"multiple onChange={handleFileUpload} />
+          {uploadedFiles.length > 0 && (
+          <div className="uploaded-file">
+            <p>Uploaded Files:</p>
+          <ol>
+            {uploadedFiles.map((file, index) => (
+            <li key={index}>{file.name}</li>
+            ))}
+          </ol>
+         </div>
+        )}
         </div>
       </div>
 
@@ -165,8 +169,8 @@ export const MainPage = () => {
       <button
         className={`convert-button ${loading ? "processing" : ""}`}
         onClick={handleCompare}
-        disabled={!uploadedFile || loading}
-        title={!uploadedFile ? "Please upload a file first!" : ""}
+        disabled={uploadedFiles.length === 0 || loading}
+        title={uploadedFiles.length === 0 ? "Please upload at least one file!" : ""}
       >
         {loading ? "Processing..." : "Compare"}
       </button>
@@ -178,10 +182,10 @@ export const MainPage = () => {
           </div>
         </div>
       )}
-
     </div>
 
   );
-};
+}
+
 
 export default MainPage;
