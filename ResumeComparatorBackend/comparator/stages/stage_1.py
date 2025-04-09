@@ -46,9 +46,6 @@ def ai_raw_compare(resume_path: str, job_posting_id: int) -> float:
 
         resume_text = extract_text_from_pdf(resume_path)
 
-        print(resume_text)
-        print("Job Posting Text: ", job_posting_text)
-
         v1 = model.infer_vector(resume_text.split())  # Vector for resume
         v2 = model.infer_vector(job_posting_text.split())  # Vector for job posting
 

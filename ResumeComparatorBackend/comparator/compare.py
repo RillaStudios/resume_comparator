@@ -1,15 +1,11 @@
-from api.job_posting.job_posting import JobPosting
 from api.models.compare_report_model import CompareReport
 from comparator.compare_utils.detail_generator import generate_detail
 from comparator.compare_utils.stage_enum import Stage
 from comparator.compare_utils.ai_tools.skill_extractor import extract_skills
 from comparator.resume.resume import Resume
-import spacy
-from sklearn.metrics.pairwise import cosine_similarity
-import numpy as np
-
 from comparator.compare_utils.text_tools.pd_extractor import get_applicant_details
 from comparator.stages.stage_1 import ai_raw_compare
+from comparator.stages.stage_2 import keyword_similarity_score
 
 """
 Compare class
@@ -53,9 +49,6 @@ class Compare:
         passing_list = []
         failing_list = []
 
-        # Variables to store the score, applicant name, and applicant email
-        score = 0
-
         applicant_name = get_applicant_details(self.resume.resume_text)['name']
         applicant_email = get_applicant_details(self.resume.resume_text)['email']
 
@@ -63,22 +56,60 @@ class Compare:
 
         stage_one_score = ai_raw_compare(self.resume_path, self.job_posting_id)
 
-        if stage_one_score >= 55:
+        if stage_one_score >= 50:
 
-            passing_list = [generate_detail(Stage.STAGE_1, "Resume passed initial AI screening.")]
+            passing_list.append(generate_detail(Stage.STAGE_1, "Resume passed initial AI screening."))
 
         else:
 
-            failing_list = [generate_detail(Stage.STAGE_1, "Resume did not pass initial AI screening.")]
-
-        # Get the score from the keyword similarity (Stage 2)
-
-        print("Stage 1 Score: ", stage_one_score)
+            failing_list.append(generate_detail(Stage.STAGE_1, "Resume did not pass initial AI screening."))
 
         # Get the keywords score (Stage 2)
 
+        stage_two_score = keyword_similarity_score(self.resume.resume_text, self.job_posting_id)
+
+        if stage_two_score['final_score'] >= 75:
+
+            passing_list.append(generate_detail(Stage.STAGE_2, "Resume passed keyword matching."))
+
+        else:
+
+            failing_list.append(generate_detail(Stage.STAGE_2, "Resume did not pass keyword matching."))
+
+        # Calculate the final score
+
+        # Define minimum thresholds for each stage
+        MIN_STAGE_ONE = 50
+        MIN_STAGE_TWO = 75
+
+        # Calculate base weighted score (equal weights by default)
+        base_score = (stage_one_score * 0.7) + (stage_two_score['final_score'] * 0.3)
+
+        print(stage_one_score)
+        print(stage_two_score)
+
+        print(base_score)
+
+        # Apply penalties for failing stages
+        penalties = 0
+        if stage_one_score < MIN_STAGE_ONE:
+            penalties += (MIN_STAGE_ONE - stage_one_score) * 0.3
+        if stage_two_score['final_score'] < MIN_STAGE_TWO:
+            penalties += (MIN_STAGE_TWO - stage_two_score['final_score']) * 0.3
+
+        # Apply bonus for exceptional performance in both stages
+        bonus = 0
+        if stage_one_score > 80 and stage_two_score['final_score'] > 80:
+            bonus = 5  # Reward candidates who excel in both areas
+        if stage_one_score > 80:
+            bonus += 2.5  # Additional bonus for exceptional AI score
+        if stage_two_score['final_score'] > 80:
+            bonus += 2.5
+
+        # Calculate final score (ensure it stays between 0-100)
+        score = max(0, min(100, base_score - penalties + bonus))
 
         # Return a CompareReport instance with the score
         return CompareReport(resume=self.resume_path, job_id=self.job_posting_id,
                              applicant_name=applicant_name, applicant_email=applicant_email,
-                             score=stage_one_score, passing=passing_list, failing=failing_list)
+                             score=score, passing=passing_list, failing=failing_list)

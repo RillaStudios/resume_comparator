@@ -1,5 +1,5 @@
 import "./mainPage.modules.css";
-import React, { useEffect, useState, useRef  } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import spinner from "../../assets/image/loadingSpinner.gif";
 import { toast } from "react-toastify";
@@ -67,7 +67,7 @@ export const MainPage = () => {
 
     const formData = new FormData();
     uploadedFiles.forEach((file) => {
-      formData.append("resumes[]", file);
+      formData.append("resume", file);
     });
     formData.append("jobId", selectedJob.id);
 
@@ -162,13 +162,13 @@ export const MainPage = () => {
         {/* Resume Upload */}
         <div className="upload-container">
           <label htmlFor="file-upload">Upload Resume:</label>
-          <input 
-          key={fileInputKey}
-          type="file" 
-          id="file-upload" 
-          multiple 
-          onChange={handleFileUpload}
-          ref={fileInputRef} 
+          <input
+            key={fileInputKey}
+            type="file"
+            id="file-upload"
+            multiple
+            onChange={handleFileUpload}
+            ref={fileInputRef}
           />
           {uploadedFiles.length > 0 && (
             <div className="uploaded-file">
@@ -179,13 +179,13 @@ export const MainPage = () => {
                 ))}
               </ol>
               {/* Clear All Files Button */}
-                  <button
-                  className="clear-button"
-                  onClick={clearFiles}
-                  disabled={loading}
-                   >
+              <button
+                className="clear-button"
+                onClick={clearFiles}
+                disabled={loading}
+              >
                 Clear All Files
-                </button>
+              </button>
             </div>
           )}
         </div>
