@@ -39,7 +39,6 @@ class GroqReport:
             f"✅ Matching Skills: {self.good_skills if self.good_skills else 'None'}\n"
             f"❌ Missing Skills: {self.bad_skills if self.bad_skills else 'None'}\n\n"
             f"Based on this information, write a detailed and professional report evaluating the candidate's strengths and areas for improvement. "
-            f"Provide constructive feedback in a friendly and supportive tone."
         )
 
         try:
