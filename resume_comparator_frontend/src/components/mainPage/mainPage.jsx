@@ -17,6 +17,7 @@ export const MainPage = () => {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const fileInputRef = useRef(null); // Ref to the file input element
+  const [fileInputKey, setFileInputKey] = useState(Date.now());
 
   // Fetch jobs from Django backend
   useEffect(() => {
@@ -42,6 +43,7 @@ export const MainPage = () => {
     if (fileInputRef.current) {
       fileInputRef.current.value = null;
     }
+    setFileInputKey(Date.now()); // Reset the key to force re-render of the input
   };
 
   // Handle file upload - now appending files without duplicates
@@ -160,7 +162,14 @@ export const MainPage = () => {
         {/* Resume Upload */}
         <div className="upload-container">
           <label htmlFor="file-upload">Upload Resume:</label>
-          <input type="file" id="file-upload" multiple onChange={handleFileUpload} />
+          <input 
+          key={fileInputKey}
+          type="file" 
+          id="file-upload" 
+          multiple 
+          onChange={handleFileUpload}
+          ref={fileInputRef} 
+          />
           {uploadedFiles.length > 0 && (
             <div className="uploaded-file">
               <p>Uploaded Files:</p>
