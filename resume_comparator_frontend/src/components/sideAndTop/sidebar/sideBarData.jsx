@@ -18,6 +18,11 @@ const allSideBarData = [
     cName: "nav-text",
   },
   {
+    title: "Add Job",
+    path: "/", 
+    cName: "nav-text",
+  },
+  {
     title: "Account",
     path: "/account", 
     cName: "nav-text",

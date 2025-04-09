@@ -1,6 +1,6 @@
 /* Navbar Container */
 .navbar {
-  background-color: #150ab4;
+  background-color: #2d2d38;
   padding: 15px 30px;
   border-bottom: 1px solid #ddd;
   display: flex;
@@ -25,7 +25,7 @@
 /* Profile Role */
 .profile-role {
   font-size: 1rem;
-  color: rgb(0, 0, 0);
+  color: rgb(248, 5, 5);
   margin-top: 2px;
 }
 

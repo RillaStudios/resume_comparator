@@ -60,6 +60,7 @@ function App() {
             <Route index element={<MainPage />} />
             <Route path="reports" element={<Reports />} />
             <Route path="summary" element={<Summary />} />
+            <Route path="summary/:id" element={<Summary />} />
             <Route path="account" element={<Account />} />
             <Route path="singlereports" element={<SingleReports />} /> 
             <Route path="changepass" element={<ChangePassword />} />
