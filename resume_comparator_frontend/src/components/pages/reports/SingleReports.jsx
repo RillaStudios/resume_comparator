@@ -44,11 +44,11 @@ const SingleReports = () => {
                     </div>
 
                     <div className="score-column">
-                      <strong>Score:</strong> {Math.min(10, ((score) / 10).toFixed(1))} / 10
+                      <strong>Score:</strong> {Math.min(10, ((score || report.score) / 10).toFixed(1))} / 10
                     </div>
 
                     <div className="pass-fail-column">
-                      <strong>{score >= 7 ? "✅ Passed" : "❌ Failed"}</strong>
+                    <strong>{((score) / 10) >= 7.5 ? "✅ Passed" : "❌ Failed"}</strong>
                     </div>
                     <div className="view-column">
                       <button onClick={() => handleReportClick()}>📝</button>
