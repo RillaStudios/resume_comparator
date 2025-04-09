@@ -289,6 +289,12 @@ const handlePrint = () => {
                       <div>
                         <strong>Job:</strong> {jobTitle ? jobTitle : report.job_id}
                       </div>
+                      <div>
+                        <strong>Applicant Name:</strong> {report.applicant_name || "N/A"}
+                      </div>
+                      <div>
+                        <strong>Applicant Email:</strong> {report.applicant_email || "N/A"}
+                      </div>
                       <div><strong>Date:</strong> {created_at || report.created_at ? new Date(report.created_at).toLocaleDateString() : "N/A"}</div>
                     </div>
 

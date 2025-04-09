@@ -11,7 +11,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 const SingleReports = () => {
     const navigate = useNavigate();
   const location = useLocation();
-  const { jobTitle, score, date, jobId } = location.state || {};
+  const { jobTitle, score, date, jobId, applicantName, applicantEmail } = location.state || {};
 
   const handleReportClick = id => {
     navigate(`/summary/`); // Navigate to summary page with report ID
@@ -27,10 +27,16 @@ const SingleReports = () => {
             <div className="report-item">
                     <div className="name-date-column">
                       <div>
-                      <strong>Job Title:</strong> {jobTitle || "N/A"}
+                            <strong>Job Title:</strong> {jobTitle || "N/A"}
                       </div>
                         <div>
                             <strong>Job ID:</strong> {jobId || "N/A"}
+                        </div>
+                        <div>
+                            <strong>Applicant Name</strong> {applicantName || "N/A"}
+                        </div>
+                        <div>
+                            <strong>Applicant Email:</strong> {applicantEmail || "N/A"}
                         </div>
                       <div>
                         <strong>Date:</strong> {date ? new Date(date).toLocaleDateString() : "N/A"}
