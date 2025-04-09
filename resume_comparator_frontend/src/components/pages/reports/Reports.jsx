@@ -61,8 +61,8 @@ const Reports = () => {
 
   // Filter reports based on user selection
   const filteredReports = allReports.filter(report => {
-    if (filter === "passed") return report.score >= 7;
-    if (filter === "failed") return report.score < 7;
+    if (filter === "passed") return report.score >= 70;
+    if (filter === "failed") return report.score < 70;
     return true;
   });
 
