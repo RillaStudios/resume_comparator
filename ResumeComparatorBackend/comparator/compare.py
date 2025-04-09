@@ -85,7 +85,10 @@ class Compare:
         MIN_STAGE_TWO = 75
 
         # Calculate base weighted score (equal weights by default)
-        base_score = (stage_one_score * 0.7) + (stage_two_score['final_score'] * 0.3)
+        if stage_one_score > stage_two_score['final_score']:
+            base_score = (stage_one_score * 0.7) + (stage_two_score['final_score'] * 0.3)
+        else:
+            base_score = (stage_two_score['final_score'] * 0.7) + (stage_one_score * 0.3)
 
         print(stage_one_score)
         print(stage_two_score)

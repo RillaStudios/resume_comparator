@@ -14,14 +14,14 @@ const Reports = () => {
   const location = useLocation();
   const { jobTitle, score, created_at, job_id } = location.state || {};
   const [sortCriteria, setSortCriteria] = useState("score");
-  const [sortOrder, setSortOrder] = useState("desc"); 
+  const [sortOrder, setSortOrder] = useState("desc");
   const [selectAll, setSelectAll] = useState(false);
   const [filter, setFilter] = useState("all");
   const [allReports, setAllReports] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [dialogVisible, setDialogVisible] = useState(false);
-  const [actionType, setActionType] = useState(""); 
+  const [actionType, setActionType] = useState("");
 
 
   // Fetch reports from database
@@ -31,7 +31,7 @@ const Reports = () => {
         const response = await fetch("http://127.0.0.1:8000/api/reports/");
         if (!response.ok) throw new Error("Failed to fetch reports");
         const data = await response.json();
-        setAllReports(data.map(report => ({ ...report, selected: false }))); 
+        setAllReports(data.map(report => ({ ...report, selected: false })));
       } catch (err) {
         setError(err.message);
       } finally {
@@ -74,12 +74,12 @@ const Reports = () => {
       toast.error("No reports selected! Please select at least one.");
       return;
     }
- 
+
     const selectedReportIds = selectedReports.map((report) => report.id);
     console.log(action, selectedReportIds);
- 
+
     const report_ids = selectedReportIds.join(",");
- 
+
     try {
       const res = await fetch(`http://127.0.0.1:8000/api/reports/download/?report_ids=${report_ids}`, {
         method: "GET",
@@ -87,20 +87,20 @@ const Reports = () => {
           "Content-Type": "application/json",
         },
       });
- 
+
       if (!res.ok) {
         throw new Error("Failed to download reports");
       }
- 
+
       const blob = await res.blob();
       const isSingleReport = selectedReports.length === 1;
       const fileName = isSingleReport ? "report.pdf" : "reports.zip";
- 
+
       const link = document.createElement("a");
       link.href = window.URL.createObjectURL(blob);
       link.download = fileName;
       link.click();
- 
+
       toast.success("Reports downloaded successfully!");
     } catch (error) {
       toast.error("Failed to download reports.");
@@ -108,7 +108,7 @@ const Reports = () => {
     }
   };
 
-  
+
   // Handle Delete Reports functionality
   const handleDeleteReports = async () => {
     const selectedReports = filteredReports.filter((report) => report.selected);
@@ -134,50 +134,50 @@ const Reports = () => {
     }
   };
 
- // Handle Email Reports functionality
- const handleEmailReports = async () => {
-  const selectedReports = filteredReports.filter(report => report.selected);
-  if (selectedReports.length === 0) {
-    toast.error("No reports selected! Please select at least one.");
-    return;
-  }
+  // Handle Email Reports functionality
+  const handleEmailReports = async () => {
+    const selectedReports = filteredReports.filter(report => report.selected);
+    if (selectedReports.length === 0) {
+      toast.error("No reports selected! Please select at least one.");
+      return;
+    }
 
-  try {
-    await Promise.all(
-      selectedReports.map((report) => {
-        if (!report.applicant_name || !report.applicant_email || !report.job_id) {
-          throw new Error("Missing required report data");
-        }
-        return fetch("http://127.0.0.1:8000/api/sendemail/", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            applicant_name: report.applicant_name,
-            applicant_email: report.applicant_email,
-            job_id: report.job_id,
-          }),
-        });
-      })
-    );
-  } catch (error) {
-    toast.error(`Failed to send emails: ${error.message}`);
-    console.error("Email error:", error);
-  }
-};
+    try {
+      await Promise.all(
+        selectedReports.map((report) => {
+          if (!report.applicant_name || !report.applicant_email || !report.job_id) {
+            throw new Error("Missing required report data");
+          }
+          return fetch("http://127.0.0.1:8000/api/sendemail/", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              applicant_name: report.applicant_name,
+              applicant_email: report.applicant_email,
+              job_id: report.job_id,
+            }),
+          });
+        })
+      );
+    } catch (error) {
+      toast.error(`Failed to send emails: ${error.message}`);
+      console.error("Email error:", error);
+    }
+  };
 
 
-//handle print button
-const handlePrint = () => {
-  const originalContent = document.body.innerHTML;
-  const printContent = document.querySelector('.reports-container').outerHTML;
-  document.body.innerHTML = printContent;
-  
-  window.print();
+  //handle print button
+  const handlePrint = () => {
+    const originalContent = document.body.innerHTML;
+    const printContent = document.querySelector('.reports-container').outerHTML;
+    document.body.innerHTML = printContent;
 
-  document.body.innerHTML = originalContent;
-};
+    window.print();
+
+    document.body.innerHTML = originalContent;
+  };
 
 
   // Show Confirmation Dialog
@@ -201,7 +201,7 @@ const handlePrint = () => {
     setDialogVisible(false);
   };
 
-  
+
   const handleReportClick = id => {
     navigate(`/summary/`); // Navigate to summary page with report ID
   };
@@ -219,7 +219,7 @@ const handlePrint = () => {
     }
     return 0;
   });
-  
+
 
   return (
     <div className="reports-container">
@@ -231,40 +231,40 @@ const handlePrint = () => {
 
       {!loading && !error && (
         <>
-        <div className="filter-sort-select-container">
+          <div className="filter-sort-select-container">
 
-           {/* Select All Checkbox */}
-           <div className="select-all">
-            <label>
-              <input type="checkbox" checked={selectAll} onChange={handleSelectAll} />
-              Select All
-            </label>
+            {/* Select All Checkbox */}
+            <div className="select-all">
+              <label>
+                <input type="checkbox" checked={selectAll} onChange={handleSelectAll} />
+                Select All
+              </label>
+            </div>
+
+            {/* Filter Dropdown */}
+            <div className="filter-container">
+              <label>Filter by Result: </label>
+              <select value={filter} onChange={e => setFilter(e.target.value)}>
+                <option value="all">All</option>
+                <option value="passed">Passed</option>
+                <option value="failed">Failed</option>
+              </select>
+            </div>
+
+            {/* Sort Dropdown */}
+            <div className="sort-container">
+              <label>Sort by: </label>
+              <select value={sortCriteria} onChange={(e) => setSortCriteria(e.target.value)}>
+                <option value="date">Date</option>
+                <option value="score">Score</option>
+                <option value="job">Job Title</option>
+              </select>
+
+              <button onClick={() => setSortOrder(sortOrder === "asc" ? "desc" : "asc")}>
+                {sortOrder === "asc" ? "🔼 Asc" : "🔽 Desc"}
+              </button>
+            </div>
           </div>
-          
-          {/* Filter Dropdown */}
-          <div className="filter-container">
-            <label>Filter by Result: </label>
-            <select value={filter} onChange={e => setFilter(e.target.value)}>
-              <option value="all">All</option>
-              <option value="passed">Passed</option>
-              <option value="failed">Failed</option>
-            </select>
-          </div>
-
-          {/* Sort Dropdown */}
-          <div className="sort-container">
-            <label>Sort by: </label>
-            <select value={sortCriteria} onChange={(e) => setSortCriteria(e.target.value)}>
-              <option value="date">Date</option>
-              <option value="score">Score</option>
-              <option value="job">Job Title</option>
-            </select>
-
-             <button onClick={() => setSortOrder(sortOrder === "asc" ? "desc" : "asc")}>
-               {sortOrder === "asc" ? "🔼 Asc" : "🔽 Desc"}
-             </button>
-          </div>        
-     </div>
           {/* No Data Message */}
           {filteredReports.length === 0 ? (
             <p className="no-data">No information to display</p>
@@ -303,7 +303,7 @@ const handlePrint = () => {
                     </div>
 
                     <div className="pass-fail-column">
-                    <strong>{((score || report.score) / 10) >= 7 ? "✅ Passed" : "❌ Failed"}</strong>
+                      <strong>{((score || report.score) / 10).toFixed(1) >= 7 ? "✅ Passed" : "❌ Failed"}</strong>
                     </div>
 
                     <div className="view-column">

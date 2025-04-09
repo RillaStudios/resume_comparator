@@ -3,7 +3,7 @@ import numpy as np
 from gensim.models import Doc2Vec
 from numpy.linalg import norm
 from DjangoApp import settings
-from api.job_posting.job_posting import JobPosting
+from api.models.job_posting_model import JobPosting
 from comparator.compare_utils.text_tools.extract_text_from_pdf import extract_text_from_pdf
 
 """
@@ -41,7 +41,7 @@ def ai_raw_compare(resume_path: str, job_posting_id: int) -> float:
         model = Doc2Vec.load(model_path)
 
         # Get the job posting - this is where the error occurs
-        job_posting = JobPosting().create_from_json(job_posting_id)
+        job_posting = JobPosting.objects.get(pk=job_posting_id)
         job_posting_text = job_posting.get_text()
 
         resume_text = extract_text_from_pdf(resume_path)
@@ -60,7 +60,7 @@ def ai_raw_compare(resume_path: str, job_posting_id: int) -> float:
         print(f"Error getting job posting: {e}")
         # Debug: List available job postings
         try:
-            all_postings = JobPosting().create_from_json(job_posting_id=None)
+            all_postings = JobPosting().objects.all()
             available_ids = [p['id'] for p in all_postings]
             print(f"Available job posting IDs: {available_ids}")
             # Also check the type of IDs

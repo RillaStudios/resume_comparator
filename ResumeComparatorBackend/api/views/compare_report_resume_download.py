@@ -1,15 +1,11 @@
 import datetime
 import os
-import tempfile
 import zipfile
 from io import BytesIO
-
-from django.core.files.storage import default_storage
 from django.http import FileResponse
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.views import APIView
-
 from api.models.compare_report_model import CompareReport
 
 class CompareReportResumeDownload(APIView):

@@ -1,4 +1,4 @@
-from api.job_posting.job_posting import JobPosting
+from api.models.job_posting_model import JobPosting
 from comparator.compare_utils.ai_tools.skill_extractor import extract_skills, get_raw_skills
 
 
@@ -8,7 +8,7 @@ def skill_matcher(resume_text: str, job_posting_id: int):
 
     Returns a dictionary with matched/unmatched/extra skills.
     """
-    job_posting = JobPosting().create_from_json(job_posting_id)
+    job_posting = JobPosting.objects.get(pk=job_posting_id)
     job_text = ""
 
     if job_posting.job_requirements_must_have:

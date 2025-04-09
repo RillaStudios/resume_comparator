@@ -1,7 +1,8 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
 
-from api.job_posting.job_posting import JobPosting
+from api.models.job_posting_model import JobPosting
+from api.serializers.job_posting_serializer import JobPostingSerializer
 
 """
 A view for all job postings
@@ -21,9 +22,11 @@ class JobPostingView(APIView):
             :param request:
             :return: Job postings
             """
-            job_posting = JobPosting().create_from_json(uid)
+            job_posting = JobPosting.objects.get(pk=uid)
 
-            return Response(job_posting.to_json())
+            serializer = JobPostingSerializer(job_posting)
+
+            return Response(serializer.data)
         else:
             """
             Get all job postings
@@ -32,6 +35,82 @@ class JobPostingView(APIView):
             :param request:
             :return: Job postings
             """
-            job_posting = JobPosting().create_from_json(None)
+            job_posting = JobPosting.objects.all()
 
-            return Response(job_posting)
+            serializer = JobPostingSerializer(job_posting)
+
+            return Response(serializer.data)
+
+    def post(self, request):
+        """
+        Create a new job posting
+
+        :param request:
+        :return: Job posting
+
+        @Author: IFD
+        @Date: 2025-04-09
+        """
+        serializer = JobPostingSerializer(data=request.data)
+
+        if serializer.is_valid():
+            serializer.save()
+
+            return Response(serializer.data, status=201)
+
+        return Response(serializer.errors, status=400)
+
+    def patch(self, request):
+        """
+        Update a job posting
+
+        :param request:
+        :return: Job posting
+
+        @Author: IFD
+        @Date: 2025-04-09
+        """
+        uid = request.data.get('id')
+
+        if not uid:
+            return Response({"error": "Job posting ID is required."}, status=400)
+
+        try:
+            job_posting = JobPosting.objects.get(pk=uid)
+
+        except JobPosting.DoesNotExist:
+            return Response({"error": "Job posting not found."}, status=404)
+
+        serializer = JobPostingSerializer(job_posting, data=request.data, partial=True)
+
+        if serializer.is_valid():
+
+            serializer.save()
+
+            return Response(serializer.data, status=200)
+
+        return Response(serializer.errors, status=400)
+
+    def delete(self, request):
+        """
+        Delete a job posting
+
+        :param request:
+        :return: Job posting
+
+        @Author: IFD
+        @Date: 2025-04-09
+        """
+        uid = request.data.get('id')
+
+        if not uid:
+            return Response({"error": "Job posting ID is required."}, status=400)
+
+        try:
+            job_posting = JobPosting.objects.get(pk=uid)
+            job_posting.delete()
+
+            return Response({"message": "Job posting deleted successfully."}, status=204)
+
+        except JobPosting.DoesNotExist:
+            return Response({"error": "Job posting not found."}, status=404)
