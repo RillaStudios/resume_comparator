@@ -86,11 +86,7 @@ export const MainPage = () => {
       navigate("/singlereports", {
         state: {
           jobTitle: selectedJob.title,
-          score: data.score,
-          date: data.created_at,
-          jobId: data.job_id,
-          applicantName: data.applicant_name,
-          applicantEmail: data.applicant_email,
+          reports: Array.isArray(data) ? data : [data],
         },
       });
     } catch (error) {

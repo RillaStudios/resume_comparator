@@ -61,8 +61,8 @@ const Reports = () => {
 
   // Filter reports based on user selection
   const filteredReports = allReports.filter(report => {
-    if (filter === "passed") return report.score >= 7.5;
-    if (filter === "failed") return report.score < 7.5;
+    if (filter === "passed") return report.score >= 7;
+    if (filter === "failed") return report.score < 7;
     return true;
   });
 
@@ -303,7 +303,7 @@ const handlePrint = () => {
                     </div>
 
                     <div className="pass-fail-column">
-                    <strong>{((score || report.score) / 10) >= 7.5 ? "✅ Passed" : "❌ Failed"}</strong>
+                    <strong>{((score || report.score) / 10) >= 7 ? "✅ Passed" : "❌ Failed"}</strong>
                     </div>
 
                     <div className="view-column">
