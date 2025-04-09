@@ -1,34 +1,31 @@
 import "./mainPage.modules.css";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef  } from "react";
 import { useNavigate } from "react-router-dom";
 import spinner from "../../assets/image/loadingSpinner.gif";
 import { toast } from "react-toastify";
 
 /*
- Author: Michael Tamatey/ Navjot Kaur
+ Author: Michael Tamatey / Navjot Kaur
  Date: 20250222
  Description: This class allows users to select job posting and upload resumes to compare 
 */
 
 export const MainPage = () => {
-  const [jobs, setJobs] = useState([]);  // Store jobs from backend
-  const [selectedJob, setSelectedJob] = useState(null); // Store selected job
+  const [jobs, setJobs] = useState([]);
+  const [selectedJob, setSelectedJob] = useState(null);
   const [uploadedFiles, setUploadedFiles] = useState([]);
-  const [fileName, setFileName] = useState("");
-  const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
-
+  const fileInputRef = useRef(null); // Ref to the file input element
 
   // Fetch jobs from Django backend
   useEffect(() => {
-    fetch("http://127.0.0.1:8000/api/job-postings/")  // Fetch job list from backend
+    fetch("http://127.0.0.1:8000/api/job-postings/")
       .then((res) => res.json())
       .then((data) => {
-
         console.log("Data:", data);
-
         setJobs(data);
-        setSelectedJob(data[0]);  // Default to first job
+        setSelectedJob(data[0]);
       })
       .catch((err) => console.error("Error fetching jobs:", err));
   }, []);
@@ -40,27 +37,37 @@ export const MainPage = () => {
     setSelectedJob(job);
   };
 
-  // Handle file upload
+  const clearFiles = () => {
+    setUploadedFiles([]);
+    if (fileInputRef.current) {
+      fileInputRef.current.value = null;
+    }
+  };
+
+  // Handle file upload - now appending files without duplicates
   const handleFileUpload = (event) => {
     const files = Array.from(event.target.files);
-    setUploadedFiles(files);
+    setUploadedFiles((prevFiles) => {
+      const newFiles = files.filter(
+        (file) => !prevFiles.some((prev) => prev.name === file.name)
+      );
+      return [...prevFiles, ...newFiles];
+    });
   };
-  
 
   // Send resume to backend for processing
   const handleCompare = async () => {
-    if (!selectedJob || uploadedFiles.length ==0){
-      toast.warning("Please select a job title and upload your resume."); // message to user
+    if (!selectedJob || uploadedFiles.length === 0) {
+      toast.warning("Please select a job title and upload your resume.");
       return;
     }
     setLoading(true);
 
     const formData = new FormData();
     uploadedFiles.forEach((file) => {
-    formData.append("resumes[]", file); 
-      });
-    
-        formData.append("jobId", selectedJob.id);  // Send job ID only
+      formData.append("resumes[]", file);
+    });
+    formData.append("jobId", selectedJob.id);
 
     try {
       const response = await fetch("http://127.0.0.1:8000/api/compare/", {
@@ -68,22 +75,25 @@ export const MainPage = () => {
         body: formData,
       });
 
-      console.log("Response status:", response.status);
-      console.log("Response headers:", response.headers);
-
       if (!response.ok) throw new Error("Failed to compare resume.");
 
       const data = await response.json();
 
-      console.log("Data:", data);
+      toast.success("Comparing successful!");
 
-      toast.success("Comparing successful!"); //Show success only after a successful response
-
-      navigate("/singlereports", { state: { jobTitle: selectedJob.title, score: data.score, date: data.created_at, jobId: data.job_id, applicantName: data.applicant_name, applicantEmail: data.applicant_email} });
-
+      navigate("/singlereports", {
+        state: {
+          jobTitle: selectedJob.title,
+          score: data.score,
+          date: data.created_at,
+          jobId: data.job_id,
+          applicantName: data.applicant_name,
+          applicantEmail: data.applicant_email,
+        },
+      });
     } catch (error) {
       console.error("Error comparing resume:", error);
-      toast.error("Comparison failed. Please try again."); //Show error if request fails
+      toast.error("Comparison failed. Please try again.");
     } finally {
       setTimeout(() => {
         setLoading(false);
@@ -93,7 +103,6 @@ export const MainPage = () => {
 
   return (
     <div className="main-container">
-
       <div className="container-body">
         <div className="left-section">
           {/* Job Selection Dropdown */}
@@ -101,7 +110,9 @@ export const MainPage = () => {
             <label htmlFor="job-select">Select a Job:</label>
             <select id="job-select" onChange={handleJobChange}>
               {jobs.map((job) => (
-                <option key={job.id} value={job.title}>{job.title}</option>
+                <option key={job.id} value={job.title}>
+                  {job.title}
+                </option>
               ))}
             </select>
           </div>
@@ -141,7 +152,7 @@ export const MainPage = () => {
               </ol>
               <p><strong>Posted Date:</strong> {selectedJob.posted_date}</p>
               <p><strong>Application Deadline:</strong> {selectedJob.application_deadline}</p>
-              <p><strong>Contact Email:</strong> <a href={'mailto:${selectedJob.contact_email}'}>{selectedJob.contact_email}</a></p>
+              <p><strong>Contact Email:</strong> <a href={`mailto:${selectedJob.contact_email}`}>{selectedJob.contact_email}</a></p>
             </div>
           )}
         </div>
@@ -149,23 +160,29 @@ export const MainPage = () => {
         {/* Resume Upload */}
         <div className="upload-container">
           <label htmlFor="file-upload">Upload Resume:</label>
-          <input type="file" id="file-upload"multiple onChange={handleFileUpload} />
+          <input type="file" id="file-upload" multiple onChange={handleFileUpload} />
           {uploadedFiles.length > 0 && (
-          <div className="uploaded-file">
-            <p>Uploaded Files:</p>
-          <ol>
-            {uploadedFiles.map((file, index) => (
-            <li key={index}>{file.name}</li>
-            ))}
-          </ol>
-         </div>
-        )}
+            <div className="uploaded-file">
+              <p>Uploaded Files:</p>
+              <ol>
+                {uploadedFiles.map((file, index) => (
+                  <li key={index}>{file.name}</li>
+                ))}
+              </ol>
+              {/* Clear All Files Button */}
+                  <button
+                  className="clear-button"
+                  onClick={clearFiles}
+                  disabled={loading}
+                   >
+                Clear All Files
+                </button>
+            </div>
+          )}
         </div>
       </div>
 
-
       {/* Compare Button */}
-      {/* Compare Button - Disabled until a resume is uploaded */}
       <button
         className={`convert-button ${loading ? "processing" : ""}`}
         onClick={handleCompare}
@@ -183,9 +200,7 @@ export const MainPage = () => {
         </div>
       )}
     </div>
-
   );
-}
-
+};
 
 export default MainPage;
