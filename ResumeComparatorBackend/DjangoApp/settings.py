@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'comparator',
     'api',
+    'llm_access'
 ]
 
 # Middleware configuration

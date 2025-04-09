@@ -23,6 +23,7 @@ class CompareReport(models.Model):
     failing = models.JSONField(default=list)
     applicant_name = models.CharField(max_length=100, null=True)
     applicant_email = models.EmailField(null=True)
+    report_text = models.TextField(null=True)
 
     """
     A string representation of the report.

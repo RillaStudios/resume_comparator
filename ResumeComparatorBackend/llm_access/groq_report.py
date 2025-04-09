@@ -1,5 +1,4 @@
-import asyncio
-from groq_api import generate_groq_response_async
+from llm_access.groq_api import generate_groq_response_async
 
 
 class GroqReport:
@@ -39,6 +38,9 @@ class GroqReport:
             f"✅ Matching Skills: {self.good_skills if self.good_skills else 'None'}\n"
             f"❌ Missing Skills: {self.bad_skills if self.bad_skills else 'None'}\n\n"
             f"Based on this information, write a detailed and professional report evaluating the candidate's strengths and areas for improvement. "
+            f"If the skills list is empty, mention that the candidate lacks the required skills for the job.\n\n"
+            f"If the matching or missing list has more than 3 entries, pick the three that you feel are most relevant to the job posting.\n\n"
+            f"The report should only be a paragraph long and should be written in a professional tone. Max 300 words.\n\n"
         )
 
         try:

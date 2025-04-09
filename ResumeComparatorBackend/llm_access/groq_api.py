@@ -15,19 +15,22 @@
 # django.setup()
 #
 # from django.conf import settings
-
-##################################
-
+import os
+from dotenv import load_dotenv
 import httpx
-from DjangoApp import settings
-
-
 GROQ_API_URL = "https://api.groq.com/openai/v1/chat/completions"
 
 async def generate_groq_response_async(prompt):
     async with httpx.AsyncClient() as client:
+
+        load_dotenv()
+
+        GROQ_API_KEY = os.environ.get('GROQ_API_KEY')
+        if not GROQ_API_KEY:
+            print("WARNING: GROQ_API_KEY not found in environment variables!")
+
         headers = {
-            "Authorization": f"Bearer {settings.GROQ_API_KEY}",
+            "Authorization": f"Bearer {GROQ_API_KEY}",
             "Content-Type": "application/json",
         }
 

@@ -6,6 +6,8 @@ from comparator.resume.resume import Resume
 from comparator.compare_utils.text_tools.pd_extractor import get_applicant_details
 from comparator.stages.stage_1 import ai_raw_compare
 from comparator.stages.stage_2 import keyword_similarity_score
+import asyncio
+from llm_access.groq_report import GroqReport
 
 """
 Compare class
@@ -109,7 +111,14 @@ class Compare:
         # Calculate final score (ensure it stays between 0-100)
         score = max(0, min(100, base_score - penalties + bonus))
 
+        # Create an instance of GroqReport
+        report_generator = GroqReport(score, stage_two_score['matched_skills'], stage_two_score['missing_skills'])
+
+        # Run the async function to generate the report
+        report_text = asyncio.run(report_generator.generate_llm_report())
+
         # Return a CompareReport instance with the score
         return CompareReport(resume=self.resume_path, job_id=self.job_posting_id,
+                             report_text=report_text,
                              applicant_name=applicant_name, applicant_email=applicant_email,
                              score=score, passing=passing_list, failing=failing_list)
