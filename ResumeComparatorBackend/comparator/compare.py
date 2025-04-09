@@ -81,4 +81,4 @@ class Compare:
         # Return a CompareReport instance with the score
         return CompareReport(resume=self.resume_path, job_id=self.job_posting_id,
                              applicant_name=applicant_name, applicant_email=applicant_email,
-                             score=0, passing=passing_list, failing=failing_list)
+                             score=stage_one_score, passing=passing_list, failing=failing_list)
