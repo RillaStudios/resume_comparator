@@ -3,6 +3,8 @@ import React, { useEffect, useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import spinner from "../../assets/image/loadingSpinner.gif";
 import { toast } from "react-toastify";
+import ReportGraph from "./reportGraph/reportGraph";
+import JobPostingGraph from "./jobPostingGraph/jobPostingGraph";
 
 /*
  Author: Michael Tamatey / Navjot Kaur
@@ -26,7 +28,7 @@ export const MainPage = () => {
       .then((data) => {
         console.log("Data:", data);
         setJobs(data);
-        setSelectedJob(data[0]);
+        setSelectedJob(data[0]); // Set the first job as the selected job by default
       })
       .catch((err) => console.error("Error fetching jobs:", err));
   }, []);
@@ -100,6 +102,22 @@ export const MainPage = () => {
   };
 
   return (
+
+    <> 
+    <div className="graphs-container">
+    {/* Report Graph on the left */}
+    <div className="left-graph">
+        <ReportGraph />
+    </div>
+
+    {/* Job Posting Graph on the right */}
+    <div className="right-graph">
+        <JobPostingGraph />
+    </div>
+</div>
+
+
+
     <div className="main-container">
       <div className="container-body">
         <div className="left-section">
@@ -118,33 +136,33 @@ export const MainPage = () => {
           {/* Job Description */}
           {selectedJob && (
             <div className="display-box">
-              <p><strong>Company:</strong> {selectedJob.company.name}</p>
-              <p><strong>Location:</strong> {selectedJob.location.city}, {selectedJob.location.province}, {selectedJob.location.country}</p>
-              <p><strong>Description:</strong> {selectedJob.company.description}</p>
-              <p><strong>Summary:</strong> {selectedJob.job_description.summary}</p>
+              <p><strong>Company:</strong> {selectedJob.company?.name}</p>
+              <p><strong>Location:</strong> {selectedJob.location?.city}, {selectedJob.location?.province}, {selectedJob.location?.country}</p>
+              <p><strong>Description:</strong> {selectedJob.company?.description}</p>
+              <p><strong>Summary:</strong> {selectedJob.job_description?.summary}</p>
               <p><strong>Responsibilities:</strong></p>
               <ol>
-                {selectedJob.job_description.responsibilities.map((resp, index) => (
+                {selectedJob.job_description?.responsibilities?.map((resp, index) => (
                   <li key={index}>{resp}</li>
                 ))}
               </ol>
               <p><strong>Must-Have Requirements:</strong></p>
               <ol>
-                {selectedJob.job_description.requirements.must_have.map((req, index) => (
+                {selectedJob.job_description?.requirements?.must_have?.map((req, index) => (
                   <li key={index}>{req}</li>
                 ))}
               </ol>
               <p><strong>Nice-to-Have Requirements:</strong></p>
               <ol>
-                {selectedJob.job_description.requirements.nice_to_have.map((req, index) => (
+                {selectedJob.job_description?.requirements?.nice_to_have?.map((req, index) => (
                   <li key={index}>{req}</li>
                 ))}
               </ol>
-              <p><strong>Salary:</strong> {selectedJob.salary.currency} {selectedJob.salary.min} - {selectedJob.salary.max} per {selectedJob.salary.period}</p>
+              <p><strong>Salary:</strong> {selectedJob.salary?.currency} {selectedJob.salary?.min} - {selectedJob.salary?.max} per {selectedJob.salary?.period}</p>
               <p><strong>Employment Type:</strong> {selectedJob.employment_type}</p>
               <p><strong>Benefits:</strong></p>
               <ol>
-                {selectedJob.benefits.map((benefit, index) => (
+                {selectedJob.benefits?.map((benefit, index) => (
                   <li key={index}>{benefit}</li>
                 ))}
               </ol>
@@ -205,6 +223,8 @@ export const MainPage = () => {
         </div>
       )}
     </div>
+
+    </>
   );
 };
 

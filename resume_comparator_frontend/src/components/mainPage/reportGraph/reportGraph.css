@@ -1,0 +1,29 @@
+/* Report Graph Container */
+.report-graph-container {
+    display: flex;
+    justify-content: flex-start;  /* Align the graph container to the left */
+    align-items: flex-start;    
+    padding: 20px;
+    width: 107%; /* Adjust width to balance the graphs */
+    
+}
+
+.report-container-body {
+    width: 100%; 
+    height: 400px; 
+    background-color: white; 
+}
+
+/* Style for the Report Graph title */
+.report-graph-container h2 {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px; 
+}
+
+/* Style for the Report Graph chart */
+.report-graph-container .chart {
+    max-width: 800px; 
+    width: 100%; 
+    height: auto;
+}

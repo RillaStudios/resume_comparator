@@ -1,0 +1,28 @@
+/* Job Posting Graph Container */
+.jobPosting-graph-container {
+    display: flex;
+    justify-content: flex-end; 
+    align-items: flex-start;    
+    padding: 20px;
+    width: 107%; 
+}
+
+.jobPosting-container-body {
+    width: 100%; 
+    height: 400px; 
+    background-color: white; 
+}
+
+/* Style for the Job Posting Graph title */
+.jobPosting-graph-container h2 {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px; 
+}
+
+/* Style for the Job Posting Graph chart */
+.jobPosting-graph-container .chart {
+    max-width: 800px; 
+    width: 100%; 
+    height: auto;
+}

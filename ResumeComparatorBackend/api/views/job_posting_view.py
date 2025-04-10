@@ -11,8 +11,13 @@ This view allows for the retrieval of all job postings.
 @Author: IFD
 @Date: 2025-03-05
 """
-class JobPostingView(APIView):
 
+
+
+
+
+class JobPostingView(APIView):
+    
     def get(self, request, uid=None):
         if uid is not None:
             """
@@ -22,10 +27,10 @@ class JobPostingView(APIView):
             :param request:
             :return: Job postings
             """
+
+            # Get a single job posting by primary key (uid)
             job_posting = JobPosting.objects.get(pk=uid)
-
             serializer = JobPostingSerializer(job_posting)
-
             return Response(serializer.data)
         else:
             """
@@ -35,11 +40,12 @@ class JobPostingView(APIView):
             :param request:
             :return: Job postings
             """
-            job_posting = JobPosting.objects.all()
 
-            serializer = JobPostingSerializer(job_posting)
-
+            # Get all job postings
+            job_postings = JobPosting.objects.all()
+            serializer = JobPostingSerializer(job_postings, many=True)
             return Response(serializer.data)
+
 
     def post(self, request):
         """

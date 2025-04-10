@@ -65,7 +65,7 @@
 
 /* Right Section - Upload Container */
 .upload-container {
-    width: 25%;
+    width: 35%;
     height: auto;
     display: flex;
     flex-direction: column;
@@ -234,3 +234,27 @@
     background-color: #cc0000;
   }
   
+/* Parent container for the graphs */
+.graphs-container {
+    display: flex;
+    justify-content: space-between;
+    width: 100%; 
+    padding: 20px;
+    
+    
+}
+
+/* Left container for the Report Graph */
+.left-graph {
+    width: 49%;
+}
+
+/* Right container for the Job Posting Graph */
+.right-graph {
+    width: 49%; 
+}
+
+/* Optional: Adding a small gap between the two graphs */
+.left-graph, .right-graph {
+    margin-right: 10px;
+}
