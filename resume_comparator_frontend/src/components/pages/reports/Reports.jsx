@@ -203,9 +203,30 @@ const Reports = () => {
   };
 
 
-  const handleReportClick = id => {
-    navigate(`/summary/`); // Navigate to summary page with report ID
-  };
+   // fetch report data and navigate to summary page
+const handleReportClick = async (reportId) => {
+  try {
+    const response = await fetch(`http://127.0.0.1:8000/api/reports/${reportId}/`, {
+      method: "GET",
+    });
+
+    if (!response.ok) throw new Error("Failed to fetch report");
+
+    const data = await response.json();
+
+    toast.success("Fetched report successfully!");
+
+    navigate(`/summary/${reportId}`); // navigate to summary page with report ID
+  } catch (error) {
+    console.error("Error:", error);
+    toast.error("Failed to load report. Please try again.");
+  } finally {
+    setTimeout(() => {
+      setLoading(false);
+    }, 1000);
+  }
+};
+
   const sortedReports = [...filteredReports].sort((a, b) => {
     if (sortCriteria === "date") {
       return sortOrder === "asc"
