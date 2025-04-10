@@ -8,6 +8,7 @@
     color: black;
     background-color: white;
     gap: 10px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
 }
 
 /* Header - Places user name at the top right */
@@ -32,6 +33,7 @@
     max-width: 1200px; 
     margin-top: 20px;
     gap: 20px;
+    
 }
 
 /* Left Section (Dropdown & Job Description) */
@@ -242,19 +244,15 @@
     padding: 20px;
     
     
+    
 }
 
 /* Left container for the Report Graph */
 .left-graph {
-    width: 49%;
+    width: 60%;
 }
 
 /* Right container for the Job Posting Graph */
 .right-graph {
-    width: 49%; 
-}
-
-/* Optional: Adding a small gap between the two graphs */
-.left-graph, .right-graph {
-    margin-right: 10px;
+    width: 60%; 
 }

@@ -52,7 +52,7 @@ const Summary = () => {
       <p><strong>Name:</strong> {reportData.applicant_name}</p>
       <p><strong>Email:</strong> {reportData.applicant_email}</p>
       <p><strong>Job ID:</strong> {reportData.job_id}</p>
-      <p><strong>Score:</strong> {Math.min(10, ((reportData.score) / 10).toFixed(1))}</p> 
+      <p><strong>Score Status:</strong> {((reportData.score) / 10).toFixed(1) >= 7 ? "✅ Passed" : "❌ Failed"}</p> 
 
       </div>
 

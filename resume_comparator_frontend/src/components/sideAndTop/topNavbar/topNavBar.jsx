@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react"; 
 import "./topNavBar.css"; 
 import { getProfile } from "../../service/authService";
+import ProfilePic from '../../../assets/image/profilePic.png';
+import { Link } from 'react-router-dom';
 
 /*
  Author: Michael Tamatey / Navjot Kaur
@@ -28,13 +30,18 @@ const Navbar = () => {
       {/* Profile Section */}
       <div className="profile-section">
         <div className="profile-info">
+          <div className="hero-image-navbar">
+          <Link to="/account">
+          <img src={ProfilePic} alt="Profile" />
+          </Link>
+          </div>
           {user ? (
             <>
               <strong>{`${user.first_name} ${user.last_name}`}</strong>
               <div className="profile-role">{user.role}</div>
             </>
           ) : (
-            <p>Loading...</p> // Show loading while fetching data
+            <p>Loading...</p>
           )}
         </div>
       </div>

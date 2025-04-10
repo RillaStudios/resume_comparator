@@ -18,8 +18,17 @@
 
 /* Profile Name */
 .profile-info {
-  text-align: right; /* Align text to the right */
+  display: flex;
+  align-items: center;
+  gap: 10px;         /* space between image and text */
+  text-align: right;
   color: white;
+}
+
+.profile-text {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 /* Profile Role */
@@ -39,4 +48,21 @@
       justify-content: flex-end; /* Keep aligned to the right */
       width: auto;
   }
+}
+.hero-image-navbar {
+  width: 25px;   /* Smaller size */
+  height: 25px;
+  border-radius: 50%;
+  overflow: hidden;
+  margin: 0 auto 10px;
+  border: 2px solid #ddd;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.hero-image-navbar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }

@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import { Line } from 'react-chartjs-2';
+import { Bar } from 'react-chartjs-2'; // Import Bar chart from react-chartjs-2
 import axios from 'axios';
 import './reportGraph.css';
 
 // Import Chart.js components
-import { Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend } from 'chart.js';
+import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend } from 'chart.js';
 
 // Register necessary Chart.js components
-ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend);
+ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 
 const ReportGraph = () => {
     const [reportData, setReportData] = useState([]);
@@ -23,27 +23,53 @@ const ReportGraph = () => {
             });
     }, []);
 
-    // Chart data structure
+    // Chart data structure for Bar Chart
     const chartData = {
         labels: reportData.map(data => `ID: ${data.id}`), 
         datasets: [
             {
                 label: 'Report Scores', 
                 data: reportData.map(data => data.score),  
-                borderColor: 'rgba(75,192,192,1)', 
-                tension: 0.1, 
+                backgroundColor: 'rgba(75, 192, 192, 0.5)', 
+                borderColor: 'rgba(75, 192, 192, 1)', 
+                borderWidth: 1,
             },
         ],
     };
 
-    // Chart options with axis configuration
+    // Chart options
     const chartOptions = {
+        responsive: true,
+        maintainAspectRatio: false,
         scales: {
             x: {
-                type: 'category', 
+                type: 'category',
+                ticks: {
+                    autoSkip: true,
+                    maxRotation: 45,
+                    minRotation: 0,
+                },
+                title: {
+                    display: true,
+                    text: 'Report ID',
+                },
             },
             y: {
                 type: 'linear',
+                beginAtZero: true,
+                title: {
+                    display: true,
+                    text: 'Scores',
+                },
+            },
+        },
+        plugins: {
+            legend: {
+                display: true,
+                position: 'top',
+            },
+            tooltip: {
+                enabled: true,
             },
         },
     };
@@ -51,11 +77,11 @@ const ReportGraph = () => {
     return (
         <div className="report-graph-container">
             <div className="report-container-body">  
-            <div className="chart">
-                <h2>Scores Report</h2>
-                <Line data={chartData} options={chartOptions} />
+                <div className="chart">
+                    <h2>Scores Report</h2>
+                    <Bar data={chartData} options={chartOptions} />
+                </div>
             </div>
-        </div>
         </div>
     );
 };
