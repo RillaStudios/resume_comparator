@@ -276,5 +276,9 @@ h4 {
     text-align: center;
   }
 }
+.circular-score {
+  display: block;
+  margin: auto;
+}
 
 

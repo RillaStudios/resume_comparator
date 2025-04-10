@@ -1,5 +1,7 @@
 import "./reports.modules.css";
 import { useLocation, useNavigate } from "react-router-dom";
+import CircularScore from "./CircularScore"; 
+
 
 /*
  Author: Michael Tamatey
@@ -10,6 +12,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 const SingleReports = () => {
   const navigate = useNavigate();
   const location = useLocation();
+  const {  score, created_at, job_id } = location.state || {};
   const { jobTitle, reports = [] } = location.state || {};
 
   const handleReportClick = (id) => {
@@ -46,13 +49,18 @@ const SingleReports = () => {
               </div>
             </div>
 
-            <div className="score-column">
+            {/* <div className="score-column">
               <strong>Score:</strong> {(report.score / 10).toFixed(1)} / 10
             </div>
 
             <div className="pass-fail-column">
               <strong>{(report.score / 10).toFixed(1) >= 7 ? "✅ Passed" : "❌ Failed"}</strong>
-            </div>
+            </div> */}
+             <div className="pass-fail-column">
+                      <div className="circular-score">
+                    <CircularScore score={score || report.score} />
+                    </div>
+                    </div>
 
             <div className="view-column">
               <button onClick={() => handleReportClick(report.id)}>📝</button>

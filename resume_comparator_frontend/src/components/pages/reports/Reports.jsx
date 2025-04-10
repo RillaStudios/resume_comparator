@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import "./reports.modules.css";
 import { toast } from "react-toastify";
 import { useLocation, useNavigate } from "react-router-dom";
+import CircularScore from "./CircularScore"; 
 
 /*
  Author: Michael Tamatey / Navjot Kaur
@@ -298,12 +299,17 @@ const Reports = () => {
                       <div><strong>Date:</strong> {created_at || report.created_at ? new Date(report.created_at).toLocaleDateString() : "N/A"}</div>
                     </div>
 
-                    <div className="score-column">
+                    {/* <div className="score-column">
                       <strong>Score:</strong> {Math.min(10, ((score || report.score) / 10).toFixed(1))} / 10
                     </div>
 
                     <div className="pass-fail-column">
                       <strong>{((score || report.score) / 10).toFixed(1) >= 7 ? "✅ Passed" : "❌ Failed"}</strong>
+                    </div> */}
+                    <div className="pass-fail-column">
+                      <div className="circular-score">
+                    <CircularScore score={score || report.score} />
+                    </div>
                     </div>
 
                     <div className="view-column">
