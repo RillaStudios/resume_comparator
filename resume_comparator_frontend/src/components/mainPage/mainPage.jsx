@@ -104,6 +104,12 @@ export const MainPage = () => {
   return (
 
     <> 
+   
+
+
+
+    <div className="main-container">
+
     <div className="graphs-container">
     {/* Report Graph on the left */}
     <div className="left-graph">
@@ -114,11 +120,7 @@ export const MainPage = () => {
     <div className="right-graph">
         <JobPostingGraph />
     </div>
-</div>
-
-
-
-    <div className="main-container">
+    </div>
       <div className="container-body">
         <div className="left-section">
           {/* Job Selection Dropdown */}
