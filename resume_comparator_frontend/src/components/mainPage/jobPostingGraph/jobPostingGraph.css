@@ -11,13 +11,13 @@
 /* Container body for the chart */
 .jobPosting-container-body {
     width: 100%;
-    height: 100%; /* Let it fill the available space */
-    max-height: 400px; /* Limit the height to 400px */
+    height: 100%; 
+    max-height: 400px; 
     background-color: white;
     padding: 20px;
     box-sizing: border-box;
-    border-radius: 8px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    border-radius: 13px;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.1);
 }
 
 /* Job Posting Graph Title */
@@ -30,7 +30,7 @@
 /* Chart style to fit its container */
 .jobPosting-graph-container .chart {
     width: 100%;
-    height: 100%; /* Allow chart to adjust to container height */
+    height: 100%;
     position: relative;
 }
 
@@ -42,6 +42,6 @@
     }
 
     .jobPosting-container-body {
-        height: 300px; /* Reduced height for smaller screens */
+        height: 300px; 
     }
 }
