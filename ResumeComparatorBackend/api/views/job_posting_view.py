@@ -12,10 +12,6 @@ This view allows for the retrieval of all job postings.
 @Date: 2025-03-05
 """
 
-
-
-
-
 class JobPostingView(APIView):
     
     def get(self, request, uid=None):

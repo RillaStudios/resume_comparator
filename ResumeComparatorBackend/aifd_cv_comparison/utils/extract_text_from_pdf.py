@@ -12,7 +12,7 @@ def extract_text_from_pdf(file_path):
 
     Args:
         file_path (str): The path to the PDF file.
-f
+
     Returns:
         str: The extracted raw text.
     """
