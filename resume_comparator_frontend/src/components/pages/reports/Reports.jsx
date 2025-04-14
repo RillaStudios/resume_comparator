@@ -3,7 +3,7 @@ import "./reports.modules.css";
 import { toast } from "react-toastify";
 import { useLocation, useNavigate } from "react-router-dom";
 import CircularScore from "./CircularScore";
-import JobSearch from '../../jobSearch/jobSearch.jsx'; 
+ 
 
 /*
  Author: Michael Tamatey / Navjot Kaur
@@ -24,6 +24,7 @@ const Reports = () => {
   const [error, setError] = useState(null);
   const [dialogVisible, setDialogVisible] = useState(false);
   const [actionType, setActionType] = useState("");
+  const [searchTerm, setSearchTerm] = useState("");
 
 
   // Fetch reports from database
@@ -63,9 +64,15 @@ const Reports = () => {
 
   // Filter reports based on user selection
   const filteredReports = allReports.filter(report => {
-    if (filter === "passed") return report.score >= 70;
-    if (filter === "failed") return report.score < 70;
-    return true;
+    const matchesFilter =
+      (filter === "passed" && report.score >= 70) ||
+      (filter === "failed" && report.score < 70) ||
+      filter === "all";
+  
+    const matchesSearch =
+      report.job_id.toLowerCase().includes(searchTerm.toLowerCase());
+  
+    return matchesFilter && matchesSearch;
   });
 
 
@@ -253,13 +260,19 @@ const handleReportClick = async (reportId) => {
 
   return (
     <div className="reports-container">
+      <h2>All Reports</h2>
 
-      <div className="reports-header">
-        <div className="search-wrapper">
-          <JobSearch />
-        </div>
-        <h2>All Reports</h2>
+      <div className="search-container">
+        <label>Search by Job Title: </label>
+          <input
+          type="text"
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+          placeholder="Enter job title..."
+        />
       </div>
+
+      <br />
 
 
       {/* Show Loading/Error */}
