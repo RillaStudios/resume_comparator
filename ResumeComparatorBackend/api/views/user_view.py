@@ -17,7 +17,7 @@ from django.contrib.auth.forms import SetPasswordForm
 from rest_framework.permissions import AllowAny
 from django.contrib.auth import authenticate
 from django.shortcuts import render
-
+from .utils import TenMinuteTokenGenerator
 
 """
 User Views
@@ -220,8 +220,13 @@ def delete_user(request):
     user.delete()
     return Response({"message": "User deleted successfully"}, status=status.HTTP_200_OK)
 
+
+
+
+# Instantiate the token generator
+# token_generator = TenMinuteTokenGenerator()
 """
-verify and send email method
+Verify and send email method
 
 Author: Michael Tamatey
 Date: 2025-04-07
@@ -234,14 +239,14 @@ def verify_email(request):
     except User.DoesNotExist:
         return JsonResponse({"message": "If the email is registered, you will receive a reset link."}, status=200)
 
-    
+    # Generate the unique reset link
     uid = urlsafe_base64_encode(force_bytes(user.pk))
     token = default_token_generator.make_token(user)
 
-    
     reset_link = f"{request.scheme}://{request.get_host()}/api/reset/{uid}/{token}/"
     message = render_to_string('register/password_reset_email.html', {'reset_link': reset_link, 'user': user})
     
+    # Send the reset link via email
     send_mail(
         'Password Reset Request',
         message,
@@ -250,7 +255,7 @@ def verify_email(request):
         fail_silently=False,
     )
 
-    return JsonResponse({"message": "If the email is registered, you will receive a reset link Soon."}, status=200)
+    return JsonResponse({"message": "If the email is registered, you will receive a reset link soon."}, status=200)
 
 """
 Reset password method
@@ -261,20 +266,24 @@ Date: 2025-04-07
 @api_view(['GET', 'POST'])
 def confirm_password(request, uidb64, token):
     try:
+        # Decode the uid and retrieve the user
         uid = urlsafe_base64_decode(uidb64).decode()
         user = get_user_model().objects.get(pk=uid)
     except (TypeError, ValueError, OverflowError, get_user_model().DoesNotExist):
         return render(request, 'register/reset_password.html', {'error': 'Invalid reset link.'})
 
+    # Check if the token is valid
     if not default_token_generator.check_token(user, token):
         return render(request, 'register/reset_password.html', {'error': 'The reset link is invalid or has expired.'})
 
     if request.method == 'POST':
+        # Handle form submission to reset password
         form = SetPasswordForm(user, request.POST)
         if form.is_valid():
             form.save()
-            return render(request, 'register/reset_password.html', {'message': 'Your password has been reset successfully. Go to login page.'})
+            return render(request, 'register/reset_password.html', {'message': 'Your password has been reset successfully. Go to the login page.'})
     else:
+        # Display the form if it's a GET request
         form = SetPasswordForm(user)
 
     return render(request, 'register/reset_password.html', {'form': form})
