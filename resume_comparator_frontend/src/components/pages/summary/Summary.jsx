@@ -22,6 +22,45 @@ const Summary = () => {
     fetchReportData();
   }, [id]);
 
+
+
+  // Handle Email Reports functionality
+  const handleEmailReports = async () => {
+    // Check if necessary data is available
+    const { applicant_name, applicant_email, job_id } = reportData;
+  
+    if (!applicant_name || !applicant_email || !job_id) {
+      toast.error("Missing required candidate information.");
+      return;
+    }
+  
+    try {
+      // Send the email using the candidate's data
+      const response = await fetch("http://127.0.0.1:8000/api/sendemail/", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          applicant_name,
+          applicant_email,
+          job_id,
+        }),
+      });
+  
+      // Check if the email was sent successfully
+      if (response.ok) {
+        toast.success("Email sent successfully!");
+      } else {
+        throw new Error("Failed to send email");
+      }
+    } catch (error) {
+      toast.error(`Error sending email: ${error.message}`);
+      console.error("Email error:", error);
+    }
+  };
+
+  // Function to print 
   const handlePrint = () => {
     const printContent = document.querySelector('.candidate-summary-container').outerHTML;
     const printWindow = window.open('', '_blank');
@@ -102,7 +141,7 @@ const Summary = () => {
 
       <div className="candidate-action-buttons">
         <button className="candidate-btn print-btn" onClick={handlePrint}>🖨️ Print</button>
-        <button className="candidate-btn email-btn" onClick={() => showConfirmationDialog("email")}>📧 Email</button>
+        <button className="candidate-btn email-btn" onClick={handleEmailReports}>📧 Email Candidate</button>
       </div>
     </div>
   );

@@ -6,7 +6,7 @@ from api.views.compare_report_resume_download import CompareReportResumeDownload
 from api.views.job_posting_view import JobPostingView
 from api.views.compare_report_view import CompareReportView
 from api.views.user_view import register, login, logout, view_profile, update_profile, delete_user, change_password, protected_view, verify_email, confirm_password
-import api.views.email_view as send_candidate_email
+from api.views.email_view import send_candidate_email 
 
 urlpatterns = [
     path('reports/', CompareReportView.as_view(), name='all-reports'),
@@ -27,7 +27,7 @@ urlpatterns = [
     # For sending.
     path('verify_email/', verify_email, name='verify_email'),
     path('reset/<uidb64>/<token>/', confirm_password, name='confirm_password'),
-    path('sendemail/', send_candidate_email.send_candidate_email, name='send_candidate_email'),
+    path('sendemail/', send_candidate_email, name='send_candidate_email'),
 
    
 

@@ -23,6 +23,17 @@ const ReportGraph = () => {
             });
     }, []);
 
+    // If data is empty, show a fallback
+    if (reportData.length === 0) {
+        return (
+            <div className="jobPosting-graph-container">
+                <div className="jobPosting-container-body">
+                    <h2>No Score Data Available</h2>
+                </div>
+            </div>
+        );
+    }
+
     // Chart data structure for Bar Chart
     const chartData = {
         labels: reportData.map(data => `ID: ${data.id}`), 
