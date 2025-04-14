@@ -1,5 +1,12 @@
 from django.core.mail import send_mail
 
+
+"""
+Email utility function
+
+@Author: Michael Tamatey
+@Date: 2025-03-05
+"""
 def send_success_email(applicant_email, applicant_name, job_id):
     subject = f"Application Status for Job ID {job_id}"
     message = (
