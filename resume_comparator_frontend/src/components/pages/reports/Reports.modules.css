@@ -281,4 +281,27 @@ h4 {
   margin: auto;
 }
 
+.reports-header {
+  display: flex;
+  align-items: baseline; /* Aligns items to their text baselines */
+  justify-content: center;
+  position: relative;
+  margin-bottom: 2%;
+}
+
+.search-form {
+  display: flex;
+  align-items: center;
+  margin-top: 2%;
+}
+
+/* Position the search box to the left */
+.search-wrapper {
+  position: absolute;
+  left: 0;
+}
+
+
+
+
 

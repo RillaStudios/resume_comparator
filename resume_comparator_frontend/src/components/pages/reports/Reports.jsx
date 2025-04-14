@@ -2,7 +2,8 @@ import React, { useState, useEffect } from "react";
 import "./reports.modules.css";
 import { toast } from "react-toastify";
 import { useLocation, useNavigate } from "react-router-dom";
-import CircularScore from "./CircularScore"; 
+import CircularScore from "./CircularScore";
+import JobSearch from '../../jobSearch/jobSearch.jsx'; 
 
 /*
  Author: Michael Tamatey / Navjot Kaur
@@ -252,7 +253,14 @@ const handleReportClick = async (reportId) => {
 
   return (
     <div className="reports-container">
-      <h2>All Reports</h2>
+
+      <div className="reports-header">
+        <div className="search-wrapper">
+          <JobSearch />
+        </div>
+        <h2>All Reports</h2>
+      </div>
+
 
       {/* Show Loading/Error */}
       {loading && <p>Loading reports...</p>}
