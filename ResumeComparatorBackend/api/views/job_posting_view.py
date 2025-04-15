@@ -62,7 +62,7 @@ class JobPostingView(APIView):
 
         return Response(serializer.errors, status=400)
 
-    def patch(self, request):
+    def patch(self, request, *args, **kwargs):
         """
         Update a job posting
 
@@ -72,7 +72,8 @@ class JobPostingView(APIView):
         @Author: IFD
         @Date: 2025-04-09
         """
-        uid = request.data.get('id')
+        # Access the 'uid' from URL parameters (kwargs)
+        uid = kwargs.get('uid')
 
         if not uid:
             return Response({"error": "Job posting ID is required."}, status=400)
@@ -86,9 +87,7 @@ class JobPostingView(APIView):
         serializer = JobPostingSerializer(job_posting, data=request.data, partial=True)
 
         if serializer.is_valid():
-
             serializer.save()
-
             return Response(serializer.data, status=200)
 
         return Response(serializer.errors, status=400)

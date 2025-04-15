@@ -20,7 +20,6 @@ import RegisterPage from "./components/auth/register";
 import SingleReports from "./components/pages/reports/SingleReports";
 import EnterEmail from "./components/settings/forgetPassword/enterEmail";
 import ReportGraph from "./components/mainPage/reportGraph/reportGraph";
-import JobPostingGraph from "./components/mainPage/jobPostingGraph/jobPostingGraph";
 
 /*
  Author: Michael Tamatey/ Navjot Kaur
@@ -71,7 +70,7 @@ function App() {
             <Route path="singlereports" element={<SingleReports />} /> 
             <Route path="changepass" element={<ChangePassword />} />
             <Route path="reportGraph" element={<ReportGraph />} />
-            <Route path="reportGraph" element={<JobPostingGraph />} />
+            
             
             {/* Job Posting Pages */}
             <Route path="job-postings" element={<JobListingPage />} /> 

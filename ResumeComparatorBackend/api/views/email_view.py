@@ -44,8 +44,7 @@ def send_candidate_email(request):
         send_success_email(applicant_email, applicant_name, job_id)
 
         return JsonResponse({
-            'message': _('Email sent successfully.'),
-            'title': job.title  
+            'message': _('Email sent successfully.'),  
         })
 
     except Exception as e:

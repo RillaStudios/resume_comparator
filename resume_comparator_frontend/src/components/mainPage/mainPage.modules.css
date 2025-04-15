@@ -241,18 +241,5 @@
     display: flex;
     justify-content: space-between;
     width: 100%; 
-    padding: 20px;
-    
-    
-    
-}
-
-/* Left container for the Report Graph */
-.left-graph {
-    width: 60%;
-}
-
-/* Right container for the Job Posting Graph */
-.right-graph {
-    width: 60%; 
+    padding: 20px;  
 }

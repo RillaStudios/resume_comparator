@@ -69,8 +69,8 @@ const Reports = () => {
       (filter === "failed" && report.score < 70) ||
       filter === "all";
   
-    const matchesSearch =
-      report.job_id.toLowerCase().includes(searchTerm.toLowerCase());
+    const jobTitle = String(report.job_id?.title || "").toLowerCase();
+    const matchesSearch = jobTitle.includes(searchTerm.toLowerCase());
   
     return matchesFilter && matchesSearch;
   });
@@ -153,7 +153,7 @@ const Reports = () => {
     }
   
     
-    const recipientEmail = "recruitment@ifdglobal.com";
+    const recipientEmail = "tamateymichael99@gmail.com";
   
     // Extract only the report IDs to send
     const reportIds = selectedReports.map(report => report.id);
@@ -336,6 +336,9 @@ const handleReportClick = async (reportId) => {
                     </div>
 
                     <div className="name-date-column">
+                    <div>
+                        <strong>Job Title:</strong> {jobTitle ? jobTitle : report.title}
+                      </div>
                       <div>
                         <strong>Job:</strong> {jobTitle ? jobTitle : report.job_id}
                       </div>

@@ -43,6 +43,11 @@ const CreateJobPage = () => {
       ],
       India: [
         "Andhra Pradesh", "Delhi", "Gujarat", "Karnataka", "Maharashtra", "Punjab", "Rajasthan", "Tamil Nadu"
+      ],
+      Ghana: [
+        "Ashanti", "Brong Ahafo", "Central", "Eastern", "Greater Accra", 
+        "Northern", "Upper East", "Upper West", "Volta", "Western", 
+        "Western North", "Bono", "Bono East", "North East", "Oti", "Savannah", "Ahafo"
       ]
     };
     
@@ -217,6 +222,7 @@ const CreateJobPage = () => {
        <option value="Canada">Canada</option>
        <option value="USA">USA</option>
        <option value="India">India</option>
+        <option value="Ghana">Ghana</option>
      </select>
     </div>
         <div>

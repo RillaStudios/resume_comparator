@@ -4,7 +4,6 @@ import { useNavigate } from "react-router-dom";
 import spinner from "../../assets/image/loadingSpinner.gif";
 import { toast } from "react-toastify";
 import ReportGraph from "./reportGraph/reportGraph";
-import JobPostingGraph from "./jobPostingGraph/jobPostingGraph";
 
 /*
  Author: Michael Tamatey / Navjot Kaur
@@ -101,26 +100,34 @@ export const MainPage = () => {
     }
   };
 
+  // Function to parse text into a list based on new line or comma
+  const parseTextToList = (text) => {
+    if (!text) return [];
+    return text.includes('\n') ? text.split('\n') : text.split(',');
+  };
+
+  const handleAddJob = () => {
+    navigate("/create-job");
+  };
+
   return (
 
     <> 
-   
-
-
-
     <div className="main-container">
 
+      {/* Add Job Card */}
+    <div className="add-job-card" onClick={handleAddJob}>
+          +
+      </div>
+
+
+
     <div className="graphs-container">
-    {/* Report Graph on the left */}
-    <div className="left-graph">
+    <div>
         <ReportGraph />
     </div>
+    </div>
 
-    {/* Job Posting Graph on the right */}
-    <div className="right-graph">
-        <JobPostingGraph />
-    </div>
-    </div>
       <div className="container-body">
         <div className="left-section">
           {/* Job Selection Dropdown */}
@@ -137,42 +144,48 @@ export const MainPage = () => {
 
           {/* Job Description */}
           {selectedJob && (
-            <div className="display-box">
-              <p><strong>Company:</strong> {selectedJob.company?.name}</p>
-              <p><strong>Location:</strong> {selectedJob.location?.city}, {selectedJob.location?.province}, {selectedJob.location?.country}</p>
-              <p><strong>Description:</strong> {selectedJob.company?.description}</p>
-              <p><strong>Summary:</strong> {selectedJob.job_description?.summary}</p>
-              <p><strong>Responsibilities:</strong></p>
-              <ol>
-                {selectedJob.job_description?.responsibilities?.map((resp, index) => (
-                  <li key={index}>{resp}</li>
-                ))}
-              </ol>
-              <p><strong>Must-Have Requirements:</strong></p>
-              <ol>
-                {selectedJob.job_description?.requirements?.must_have?.map((req, index) => (
-                  <li key={index}>{req}</li>
-                ))}
-              </ol>
-              <p><strong>Nice-to-Have Requirements:</strong></p>
-              <ol>
-                {selectedJob.job_description?.requirements?.nice_to_have?.map((req, index) => (
-                  <li key={index}>{req}</li>
-                ))}
-              </ol>
-              <p><strong>Salary:</strong> {selectedJob.salary?.currency} {selectedJob.salary?.min} - {selectedJob.salary?.max} per {selectedJob.salary?.period}</p>
-              <p><strong>Employment Type:</strong> {selectedJob.employment_type}</p>
-              <p><strong>Benefits:</strong></p>
-              <ol>
-                {selectedJob.benefits?.map((benefit, index) => (
-                  <li key={index}>{benefit}</li>
-                ))}
-              </ol>
-              <p><strong>Posted Date:</strong> {selectedJob.posted_date}</p>
-              <p><strong>Application Deadline:</strong> {selectedJob.application_deadline}</p>
-              <p><strong>Contact Email:</strong> <a href={`mailto:${selectedJob.contact_email}`}>{selectedJob.contact_email}</a></p>
-            </div>
-          )}
+  <div className="display-box">
+    <p><strong>Company:</strong> {selectedJob.company_name}</p>
+    <p><strong>Location:</strong> {selectedJob.city}, {selectedJob.prov_state}, {selectedJob.country}</p>
+    <p><strong>Description:</strong> {selectedJob.company_desc}</p>
+    <p><strong>Summary:</strong> {selectedJob.summary}</p>
+
+    <p><strong>Responsibilities:</strong></p>
+    <ol>
+      {parseTextToList(selectedJob.responsibilities).map((item, index) => (
+        <li key={index}>{item.trim()}</li>
+      ))}
+    </ol>
+
+    <p><strong>Must-Have Requirements:</strong></p>
+    <ol>
+      {parseTextToList(selectedJob.skills_qual_required).map((item, index) => (
+        <li key={index}>{item.trim()}</li>
+      ))}
+    </ol>
+
+    <p><strong>Nice-to-Have Requirements:</strong></p>
+    <ol>
+      {parseTextToList(selectedJob.skills_qual_nice_to_have).map((item, index) => (
+        <li key={index}>{item.trim()}</li>
+      ))}
+    </ol>
+
+    <p><strong>Salary:</strong> {selectedJob.salary_currency_type} {selectedJob.salary_min} - {selectedJob.salary_max} per {selectedJob.salary_interval}</p>
+    <p><strong>Employment Type:</strong> {selectedJob.employment_type}</p>
+
+    <p><strong>Benefits:</strong></p>
+    <ul>
+      {parseTextToList(selectedJob.benefits).map((item, index) => (
+        <li key={index}>{item.trim()}</li>
+      ))}
+    </ul>
+
+    <p><strong>Posted Date:</strong> {selectedJob.posting_date}</p>
+    <p><strong>Application Deadline:</strong> {selectedJob.closing_date}</p>
+    <p><strong>Contact Email:</strong> <a href={`mailto:${selectedJob.contact_email}`}>{selectedJob.contact_email}</a></p>
+  </div>
+)}
         </div>
 
         {/* Resume Upload */}

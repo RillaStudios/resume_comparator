@@ -17,7 +17,6 @@ from django.contrib.auth.forms import SetPasswordForm
 from rest_framework.permissions import AllowAny
 from django.contrib.auth import authenticate
 from django.shortcuts import render
-from .utils import TenMinuteTokenGenerator
 
 """
 User Views
@@ -223,8 +222,7 @@ def delete_user(request):
 
 
 
-# Instantiate the token generator
-# token_generator = TenMinuteTokenGenerator()
+
 """
 Verify and send email method
 

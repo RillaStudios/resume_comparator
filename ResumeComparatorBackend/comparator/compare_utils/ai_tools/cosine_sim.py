@@ -18,7 +18,7 @@ def skill_similarity(resume_text: str, job_posting_id: int = None) -> float:
     skills = cleaner.transform([sections['skills']])[0]
 
     # Extract job requirements
-    return __model_sim_score(job_posting.job_requirements_must_have, skills)
+    return __model_sim_score(job_posting.skills_qual_required, skills)
 
 
 def __model_sim_score(req_list: str, skills: str):

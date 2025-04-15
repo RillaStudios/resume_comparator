@@ -11,8 +11,8 @@ def skill_matcher(resume_text: str, job_posting_id: int):
     job_posting = JobPosting.objects.get(pk=job_posting_id)
     job_text = ""
 
-    if job_posting.job_requirements_must_have:
-        job_text += ", ".join(str(item) for item in job_posting.job_requirements_must_have)
+    if job_posting.skills_qual_required:
+        job_text += ", ".join(str(item) for item in job_posting.skills_qual_required)
 
     # Extract skills
     skills_jp = extract_skills(job_text)
