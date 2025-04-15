@@ -5,6 +5,10 @@ import MainPage from "./components/mainPage/mainPage";
 import Reports from "./components/pages/reports/Reports";
 import Summary from "./components/pages/summary/summary";
 import Account from "./components/settings/account/account";
+import CreateJobPage from "./components/pages/createJob/createJobPage";
+import UpdateJobPage from "./components/pages/updateJob/updateJobPage";
+import JobListingPage from "./components/pages/jobPage/jobListingPage";
+
 import DashboardLayout from "./DashboardLayout";
 import NotFound from "./components/auth/notFound";
 import { ToastContainer } from "react-toastify";
@@ -69,7 +73,11 @@ function App() {
             <Route path="reportGraph" element={<ReportGraph />} />
             <Route path="reportGraph" element={<JobPostingGraph />} />
             
-          </Route>
+            {/* Job Posting Pages */}
+            <Route path="job-postings" element={<JobListingPage />} /> 
+            <Route path="create-job" element={<CreateJobPage />} /> 
+            <Route path="update-job/:id" element={<UpdateJobPage />} />
+            </Route>
 
           {/* 404 Page */}
           <Route path="*" element={<NotFound />} />

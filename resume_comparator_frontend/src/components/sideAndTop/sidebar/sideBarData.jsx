@@ -19,7 +19,7 @@ const allSideBarData = [
   },
   {
     title: "Add Job",
-    path: "/", 
+    path: "/job-postings", 
     cName: "nav-text",
   },
   {
