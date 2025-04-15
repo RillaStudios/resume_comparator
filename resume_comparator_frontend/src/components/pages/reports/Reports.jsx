@@ -153,7 +153,7 @@ const Reports = () => {
     }
   
     
-    const recipientEmail = "tamateymichael99@gmail.com";
+    const recipientEmail = "cisojt94@gmail.com";
   
     // Extract only the report IDs to send
     const reportIds = selectedReports.map(report => report.id);

@@ -117,7 +117,7 @@ export const MainPage = () => {
 
       {/* Add Job Card */}
     <div className="add-job-card" onClick={handleAddJob}>
-          +
+          add Job
       </div>
 
 
