@@ -2,23 +2,26 @@ import spacy
 import re
 from typing import Dict
 
-def get_applicant_details(resume_text: str) -> Dict[str, str]:
+def get_applicant_details(contact_info: str) -> Dict[str, str]:
     """
     Extract applicant's name and email from resume text.
     """
-    applicant_info = {
-        "name": "N/A",
-        "email": "N/A"
+    result = {
+        'name': '',
+        'email': '',
+        'phone': '',
+        'address': '',
+        'socials': [],
     }
 
     # Extract email
     email_pattern = r'[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}'
-    email_matches = re.findall(email_pattern, resume_text)
+    email_matches = re.findall(email_pattern, contact_info)
     if email_matches:
-        applicant_info["email"] = email_matches[0]
+        result["email"] = email_matches[0]
 
     # Get non-empty lines from the beginning
-    lines = [line.strip() for line in resume_text.split('\n') if line.strip()]
+    lines = [line.strip() for line in contact_info.split('\n') if line.strip()]
 
     # First line handling with improved name extraction
     if lines:
@@ -40,8 +43,8 @@ def get_applicant_details(resume_text: str) -> Dict[str, str]:
                 all(word[0].isupper() for word in words) and
                 all(all(c.isalpha() or c == '-' for c in word) for word in words)):
             formatted_name = format_name(words)
-            applicant_info["name"] = formatted_name
-            return applicant_info
+            result["name"] = formatted_name
+            return result
 
     # Fallback to spaCy NER with hyphen handling
     nlp = spacy.load("en_core_web_sm")
@@ -65,10 +68,10 @@ def get_applicant_details(resume_text: str) -> Dict[str, str]:
             name = ent.text.strip()
             words = [word.strip() for word in name.split() if word.strip()]
             formatted_name = format_name(words)
-            applicant_info["name"] = formatted_name
+            result["name"] = formatted_name
             break
 
-    return applicant_info
+    return result
 
 def format_name(words: list[str]) -> str:
     # Format name to title case (first letter of each word capitalized)

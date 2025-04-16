@@ -1,7 +1,5 @@
 from aifd_cv_comparison.models import load_models
 from aifd_cv_comparison.models.model_loader import get_model
-from tests.text_utils import extract_text_from_pdf
-
 
 def chunk_text(text, max_chunk_size=512, tokenizer=None):
     """Split text into chunks of approximately max_chunk_size tokens, with natural separation."""

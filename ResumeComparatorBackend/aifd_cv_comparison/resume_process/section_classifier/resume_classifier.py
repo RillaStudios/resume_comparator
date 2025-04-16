@@ -3,14 +3,10 @@ from aifd_cv_comparison.models.model_loader import get_model
 from aifd_cv_comparison.resume_process.section_classifier import regex_classifier
 from aifd_cv_comparison.resume_process.section_classifier.utils.ai_classifier import ai_classifier
 from aifd_cv_comparison.utils.chunk_text import chunk_text
-from aifd_cv_comparison.utils.resume import Resume
+from aifd_cv_comparison.utils.resume import Resume, ResumeContact
 from nltk.corpus import stopwords
 from nltk.stem import WordNetLemmatizer
 import string
-
-# Load NLTK resources
-lemmatizer = WordNetLemmatizer()
-stop_words = set(stopwords.words('english'))
 
 def classify_resume(resume: Resume) -> dict[str | list[str], str]:
     """
@@ -53,45 +49,44 @@ def classify_resume(resume: Resume) -> dict[str | list[str], str]:
             # Determine best section label based on votes
             if votes:
                 winning_label = max(votes, key=votes.get)
-                print(f"AI reclassified section as '{winning_label}'")
 
                 # Get the mapped label first
-                revised_label = AI_RESUME_LABEL_MAP.get(winning_label, winning_label)
+                revised_label = AI_RESUME_LABEL_MAP.get(winning_label)
 
                 # Add to sections dict, appending if label already exists
                 if revised_label in revised_sections:
-                    revised_sections[revised_label] += "\n\n" + normalize_text(section_content)
+                    revised_sections[revised_label] += "\n\n" + section_content
                 else:
-                    revised_sections[revised_label] = normalize_text(section_content)
+                    revised_sections[revised_label] = section_content
 
         else:
             # For non-"other" sections, keep the original label
-            revised_sections[section_key] = normalize_text(section_content)
+            revised_sections[section_key] = section_content
 
     confidence_score = _check_class_confidence(revised_sections)
+
+    resume.contact = ResumeContact(resume.raw_text)
 
     if confidence_score < 0.65:
         resume.bad_format = True
         fail_message = 'Resume was either badly formatted or unparsable. Will not continue with comparison.'
         resume.failing_list.append(fail_message)
     else:
-        resume.skills = revised_sections.get('skills')
-        resume.education = revised_sections.get('education')
-        resume.experience = revised_sections.get('experience')
-        resume.awards = revised_sections.get('awards')
-        resume.certifications = revised_sections.get('certifications')
-        resume.hobbies = revised_sections.get('hobbies')
-        resume.projects = revised_sections.get('projects')
-        resume.summary = revised_sections.get('summary')
-        resume.contact = revised_sections.get('contact')
-        resume.unknown = revised_sections.get('unknown')
+        section_names = ['skills', 'education', 'experience', 'awards', 'certifications',
+                         'hobbies', 'projects', 'summary', 'unknown']
 
+        # Load NLTK resources
+        lemmatizer = WordNetLemmatizer()
+        stop_words = set(stopwords.words('english'))
 
-    print("Classification Confidence: ", confidence_score)
+        for section_name in section_names:
+            section_text = revised_sections.get(section_name)
+            if section_text:
+                section_text = normalize_text(section_text, lemmatizer, stop_words)
+            setattr(resume, section_name, section_text)
 
     # Return the classified sections
     return revised_sections
-
 
 def _check_class_confidence(sections: dict[str | list[str], str]) -> float:
     """
@@ -112,12 +107,12 @@ def _check_class_confidence(sections: dict[str | list[str], str]) -> float:
 
     # Get all possible section labels from the map
     expected_sections = set(AI_RESUME_LABEL_MAP.values())
-    print(f"Expected sections: {expected_sections} (total: {len(expected_sections)})")
+    # print(f"Expected sections: {expected_sections} (total: {len(expected_sections)})")
 
     # Remove "unknown" as it's not a real section type
     if "unknown" in expected_sections:
         expected_sections.remove("unknown")
-        print(f"Removed 'unknown', remaining: {len(expected_sections)}")
+        # print(f"Removed 'unknown', remaining: {len(expected_sections)}")
 
     # Count existing sections with content
     sections_with_content = 0
@@ -130,34 +125,33 @@ def _check_class_confidence(sections: dict[str | list[str], str]) -> float:
                 sections_with_content += 1
                 found_sections.append(section_key)
                 has_content = True
-            print(f"Section '{section_key}': {'has content' if has_content else 'empty'}")
+            # print(f"Section '{section_key}': {'has content' if has_content else 'empty'}")
 
     # Show which sections are missing
-    missing_sections = expected_sections - set(found_sections)
-    print(f"Missing sections: {missing_sections}")
+    # missing_sections = expected_sections - set(found_sections)
+    # print(f"Missing sections: {missing_sections}")
 
     # Calculate coverage ratio (how many expected sections exist with content)
     coverage_ratio = sections_with_content / len(expected_sections) if expected_sections else 0.0
-    print(f"Coverage ratio: {sections_with_content}/{len(expected_sections)} = {coverage_ratio:.2f}")
+    # print(f"Coverage ratio: {sections_with_content}/{len(expected_sections)} = {coverage_ratio:.2f}")
 
     # Add weight to important sections
     important_sections = {"education", "experience", "skills", "summary"}
     found_important = [s for s in important_sections if s in sections and sections[s]]
-    print(f"Important sections found: {found_important}")
+    # print(f"Important sections found: {found_important}")
 
     important_sections_coverage = len(found_important) / len(important_sections)
-    print(
-        f"Important sections coverage: {len(found_important)}/{len(important_sections)} = {important_sections_coverage:.2f}")
+    # print(
+    #     f"Important sections coverage: {len(found_important)}/{len(important_sections)} = {important_sections_coverage:.2f}")
 
     # Final confidence is weighted average of overall coverage and important section coverage
     confidence = (0.3 * coverage_ratio) + (0.7 * important_sections_coverage)
-    print(
-        f"Final confidence: (0.3 * {coverage_ratio:.2f}) + (0.7 * {important_sections_coverage:.2f}) = {confidence:.2f}")
+    # print(
+    #     f"Final confidence: (0.3 * {coverage_ratio:.2f}) + (0.7 * {important_sections_coverage:.2f}) = {confidence:.2f}")
 
     return min(1.0, max(0.0, confidence))
 
-
-def normalize_text(text):
+def normalize_text(text, lemmatizer, stop_words):
     # Lowercase the text
     text = text.lower()
     # Remove punctuation
