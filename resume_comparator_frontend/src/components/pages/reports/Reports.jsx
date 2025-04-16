@@ -14,7 +14,7 @@ import CircularScore from "./CircularScore";
 const Reports = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  const { jobTitle, score, created_at, job_id } = location.state || {};
+  const { jobTitle, score, created_at} = location.state || {};
   const [sortCriteria, setSortCriteria] = useState("score");
   const [sortOrder, setSortOrder] = useState("desc");
   const [selectAll, setSelectAll] = useState(false);
@@ -25,8 +25,10 @@ const Reports = () => {
   const [dialogVisible, setDialogVisible] = useState(false);
   const [actionType, setActionType] = useState("");
   const [searchTerm, setSearchTerm] = useState("");
+  const [jobTitles, setJobTitles] = useState({});
 
 
+ 
   // Fetch reports from database
   useEffect(() => {
     const fetchReports = async () => {
@@ -43,7 +45,42 @@ const Reports = () => {
     };
 
     fetchReports();
+
+
   }, []);
+
+  useEffect(() => {
+    if (allReports.length === 0) return;
+  
+    const fetchJobTitles = async () => {
+      try {
+        const jobIdSet = new Set(allReports.map(report => report.job_id));
+        const jobTitleMap = {};
+  
+        await Promise.all(
+          Array.from(jobIdSet).map(async (jobId) => {
+            try {
+              const res = await fetch(`http://127.0.0.1:8000/api/job-postings/${jobId}/`);
+              if (res.ok) {
+                const data = await res.json();
+                jobTitleMap[jobId] = data.title;
+              } else {
+                jobTitleMap[jobId] = "Unknown Title";
+              }
+            } catch {
+              jobTitleMap[jobId] = "Error Loading";
+            }
+          })
+        );
+  
+        setJobTitles(jobTitleMap);
+      } catch (err) {
+        console.error("Failed to fetch job titles:", err);
+      }
+    };
+  
+    fetchJobTitles();
+  }, [allReports]);
 
   // Handle Select All functionality
   const handleSelectAll = () => {
@@ -69,7 +106,7 @@ const Reports = () => {
       (filter === "failed" && report.score < 70) ||
       filter === "all";
   
-    const jobTitle = String(report.job_id?.title || "").toLowerCase();
+    const jobTitle = (jobTitles[report.job_id] || "").toLowerCase();
     const matchesSearch = jobTitle.includes(searchTerm.toLowerCase());
   
     return matchesFilter && matchesSearch;
@@ -337,7 +374,7 @@ const handleReportClick = async (reportId) => {
 
                     <div className="name-date-column">
                     <div>
-                        <strong>Job Title:</strong> {jobTitle ? jobTitle : report.title}
+                    <strong>Job Title:</strong> {jobTitles[report.job_id] || "Loading..."}
                       </div>
                       <div>
                         <strong>Job:</strong> {jobTitle ? jobTitle : report.job_id}
