@@ -7,6 +7,7 @@ const JobListingPage = () => {
   const [jobPostings, setJobPostings] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [searchTerm, setSearchTerm] = useState("");
   const navigate = useNavigate();
 
   // Fetch job postings
@@ -32,6 +33,15 @@ const JobListingPage = () => {
       });
   };
 
+    // Filter reports based on user selection
+    const filteredJobs = jobPostings.filter(job => {
+    
+      const jobTitle = String(job.title || "").toLowerCase();
+      const matchesSearch = jobTitle.includes(searchTerm.toLowerCase());
+    
+      return matchesSearch;
+    });
+
   const handleEditJob = (jobId) => {
     navigate(`/update-job/${jobId}`);
   };
@@ -46,8 +56,18 @@ const JobListingPage = () => {
   return (
     <div>
       <h1>Job Postings</h1>
+
+      <div className="search-container">
+        <label>Search by Job Title: </label>
+          <input
+          type="text"
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+          placeholder="Enter job title..."
+        />
+      </div>
       <div className="job-container">
-        {jobPostings.map((job) => (
+        {filteredJobs.map((job) => (
           <div key={job.id} className="job-card">
             <div className="job-info">
               <h3 className="title">{job.title}</h3>
