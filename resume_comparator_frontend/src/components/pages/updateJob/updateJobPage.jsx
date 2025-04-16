@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useParams, useNavigate } from "react-router-dom";
 import "./updateJobPage.css"
+import BackButton from "../../common/backButton";
 const UpdateJobPage = () => {
   const { id } = useParams();
   const navigate = useNavigate();
@@ -147,6 +148,7 @@ const UpdateJobPage = () => {
 
   return (
     <div>
+      <BackButton />
       <h1>Edit Job Posting</h1>
       {success && <div className="success-message">{success}</div>}
       {error && <div className="error-message">{error}</div>}

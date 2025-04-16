@@ -3,6 +3,7 @@ import "./summary.modules.css";
 import { toast } from "react-toastify";
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
+import BackButton from '../../common/backButton'; 
 
 const Summary = () => {
   const { id } = useParams(); 
@@ -86,6 +87,7 @@ const Summary = () => {
 
   return (
     <div className="candidate-summary-container">
+      <BackButton />
       <h1 className="candidate-summary-title">Candidate Summary</h1>
       <div className="candidate-summary-title">
       <p><strong>Name:</strong> {reportData.applicant_name}</p>

@@ -5,6 +5,7 @@ import ProfilePic from '../../../assets/image/profilePic.png';
 import ForgetPassword from '../forgetPassword/forgetPassword'; 
 import './Account.css'; 
 import spinner from "../../../assets/image/loadingSpinner.gif";
+import BackButton from '../../common/backButton'; 
 
 
 /*
@@ -57,6 +58,8 @@ const Account = () => {
     };
 
     return (
+       <> 
+       <BackButton />
         <div className="account-container">
             <div className="hero-image">
                 <img src={ProfilePic} alt="Profile" />
@@ -120,6 +123,7 @@ const Account = () => {
                 </div>
              )}
         </div>
+        </>
     );
 };
 
