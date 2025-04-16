@@ -94,47 +94,34 @@ def optimized_resume_comparison(resume: Resume, job_posting: JobPosting) -> floa
 
         print("Summary score:", summary_score)
 
-        """
-        FINALLY DO A DOC2VEC COMPARISON BETWEEN THE RESUME AND JOB POSTING
-        """
-        r5 = model.infer_vector(resume.raw_text.split() if resume.raw_text else [""])
-        j5 = model.infer_vector(job_posting.get_text().split())
+        # Get all scores in a list
+        all_scores = [req_skill_score, experience_score, education_score, nice_skill_score, summary_score]
 
-        # Calculate similarity between resume and job posting
-        doc_score = get_score(r5, j5)
+        # Sort scores in descending order
+        sorted_scores = sorted(all_scores, reverse=True)
 
-        # Calculate weighted final score (0-100 scale)
-        # Note:
-        # If doc score is greater than 50, we give more weight to the doc2vec score
-        # if doc score is less, we give equal weight to all scores. This is to try
-        # to avoid the doc2vec score being too dominant when it is low.
-        if doc_score > 50:
-            base_score = (
-                0.2 * req_skill_score * 100 +  # Required skills (20%)
-                0.1 * experience_score * 100 +  # Experience (20%)
-                0.1 * education_score * 100 +  # Education (20%)
-                0.05 * nice_skill_score * 100 +  # Nice-to-have skills (20%)
-                0.05 * summary_score * 100 +  # Summary alignment (20%)
-                0.5 * doc_score * 100  # Doc2Vec score (50%)
-            )
+        # Calculate weighted score: 30% for each top score, 5% for each bottom score
+        base_score = (
+                0.35 * sorted_scores[0] * 100 +  # Top score (35%)
+                0.25 * sorted_scores[1] * 100 +  # Second score (25%)
+                0.2 * sorted_scores[2] * 100 +  # Third score (20%)
+                0.15 * sorted_scores[3] * 100 +  # Fourth score (15%)
+                0.05 * sorted_scores[4] * 100  # Fifth score (5%)
+        )
 
-        else:
-            # Get all scores in a list
-            all_scores = [req_skill_score, experience_score, education_score, nice_skill_score, summary_score]
+        # Threshold for bonus eligibility (60%)
+        threshold = 0.6
 
-            # Sort scores in descending order
-            sorted_scores = sorted(all_scores, reverse=True)
+        bonus_score = (
+                (0.5 * ((req_skill_score - threshold) / (
+                            1 - threshold)) * 100 if req_skill_score >= threshold else 0) +  # Bonus for required skills (scales with score)
+            (0.03 * nice_skill_score * 100 if nice_skill_score >= threshold else 0) +  # Bonus for nice-to-have skills
+            (0.02 * experience_score * 100 if experience_score >= threshold else 0) +  # Bonus for experience
+            (0.01 * education_score * 100 if education_score >= threshold else 0)  # Bonus for education
+        )
 
-            print(doc_score)
-
-            # Calculate weighted score: 30% for each top score, 5% for each bottom score
-            base_score = (
-                    0.25 * sorted_scores[0] * 100 +  # Top score (30%)
-                    0.25 * sorted_scores[1] * 100 +  # Second score (30%)
-                    0.25 * sorted_scores[2] * 100 +  # Third score (30%)
-                    0.125 * sorted_scores[3] * 100 +  # Fourth score (5%)
-                    0.125 * sorted_scores[4] * 100  # Fifth score (5%)
-            )
+        # Add bonus score to base score
+        base_score += bonus_score
 
         # Cap at 100 if needed
         final_score = min(100, base_score)

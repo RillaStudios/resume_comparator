@@ -70,6 +70,6 @@ def compare_resumes(resumes: list[str | Path], job_posting_id: int, settings: Co
         else:
             raise ValueError("Invalid comparison setting. Choose from BASIC, OPTIMIZED, or ADVANCED.")
 
-resume_path = os.path.join(BASE_DIR, "media", "resumes", "Michael Tettey_Tamatey_Resume_0gbcDXF..pdf")
+resume_path = os.path.join(BASE_DIR, "media", "resumes", "Java-Developer-Resume-4.pdf")
 
 compare_resumes([resume_path], 1, CompareSettings(CompareSettingsType.OPTIMIZED, False))
