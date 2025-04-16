@@ -46,7 +46,7 @@
 }
 
 /* Button Styles */
-.login-page-button {
+.login-page-button1 {
   background-color: #4caf50;
   color: white;
   padding: 12px 20px;
@@ -58,11 +58,11 @@
   transition: background 0.3s ease-in-out;
 }
 
-.login-page-button:hover {
+.login-page-button1:hover {
   background-color: #45a049; /* Darker green */
 }
 
-.login-page-button.processing {
+.login-page-button1.processing {
   background-color: #ccc;
   cursor: not-allowed;
 }
@@ -83,7 +83,7 @@
 }
 
 /* Input Field Styles */
-.input-field {
+.input1-field {
   width: 100%;
   padding: 12px;
   margin: 10px 0;
@@ -95,7 +95,7 @@
 }
 
 /* Input Focus Effect */
-.input-field:focus {
+.input1-field:focus {
   border-color: #007bff;
   background-color: #ffffff;
   outline: none;
@@ -103,7 +103,7 @@
 }
 
 /* Input Placeholder Styling */
-.input-field::placeholder {
+.input1-field::placeholder {
   color: #999;
   font-style: italic;
 }
@@ -126,7 +126,7 @@
   align-items: center;
 }
 
-.input-field {
+.input1-field {
   flex: 1;
   padding-right: 40px; /* Space for the eye icon */
 }

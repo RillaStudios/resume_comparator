@@ -104,13 +104,13 @@ const LoginPage = () => {
                 required
                 className="input-field"
               />
-              <button
+              <button1
                 type="button"
                 onClick={() => setShowPassword(!showPassword)}
                 className="toggle-password"
               >
                 {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
-              </button>
+              </button1>
             </div>
 
             <div className="remember-me-container">
