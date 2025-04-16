@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useParams, useNavigate } from "react-router-dom";
 import "./updateJobPage.css"
+
 const UpdateJobPage = () => {
   const { id } = useParams();
   const navigate = useNavigate();
@@ -236,6 +237,7 @@ const UpdateJobPage = () => {
         <div>
         <label htmlFor="jobProvince">Province/State</label>
           <select
+           className="job-select-spacing"
            id="jobProvince"
            value={province}
            onChange={(e) => setProvince(e.target.value)}
@@ -253,6 +255,7 @@ const UpdateJobPage = () => {
         <div>
       <label htmlFor="jobCountry">Country</label>
        <select
+        className="job-select-spacing"
          id="jobCountry"
         value={country}
         onChange={(e) => setCountry(e.target.value)}
@@ -268,6 +271,7 @@ const UpdateJobPage = () => {
         <div>
           <label htmlFor="jobCountry">Zip Code</label>
           <input
+            className="job-select-spacing"
             type="text"
             id="jobCountry"
             value={zipCode}
@@ -304,6 +308,7 @@ const UpdateJobPage = () => {
         <div>
           <label htmlFor="jobSalaryCurrency">Salary Currency</label>
             <select
+             className="job-select-spacing"
              id="jobSalaryCurrency"
              value={salaryCurrency}
               onChange={(e) => setSalaryCurrency(e.target.value)}
@@ -320,6 +325,7 @@ const UpdateJobPage = () => {
         <div>
         <label htmlFor="jobSalaryInterval">Salary Interval</label>
           <select
+             className="job-select-spacing"
              id="jobSalaryInterval"
              value={salaryInterval}
              onChange={(e) => setSalaryInterval(e.target.value)}
@@ -337,6 +343,7 @@ const UpdateJobPage = () => {
         <div>
       <label htmlFor="jobEmploymentType">Employment Type</label>
         <select
+         className="job-select-spacing"
          id="jobEmploymentType"
          value={employmentType}
          onChange={(e) => setEmploymentType(e.target.value)}

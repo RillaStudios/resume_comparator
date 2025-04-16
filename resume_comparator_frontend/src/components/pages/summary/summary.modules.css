@@ -71,13 +71,13 @@
     font-size: 14px;
   }
   
-  .email-btn { background: #2d2d38; }
-  .download-btn { background: #28a745; }
-  .delete-btn { background: #28a745; }
-  .print-btn { background: #2d2d38; }
+  .email-btn { background:  #8f8f97;
+     }
+  .print-btn { background:  #8f8f97;
+     }
   
   .candidate-btn:hover {
-    background-color: #45a049;
+    background-color: #8f8f97;
     transform: scale(1.05);
   }
   

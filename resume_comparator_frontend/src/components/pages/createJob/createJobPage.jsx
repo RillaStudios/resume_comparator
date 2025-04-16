@@ -1,6 +1,7 @@
 import React, { useEffect,useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import "./createJobPage.css";
 
 const CreateJobPage = () => {
   const navigate = useNavigate();
@@ -196,6 +197,7 @@ const CreateJobPage = () => {
         <div>
         <label htmlFor="jobProvince">Province/State</label>
           <select
+          className="job-select-spacing"
            id="jobProvince"
            value={province}
            onChange={(e) => setProvince(e.target.value)}
@@ -213,7 +215,8 @@ const CreateJobPage = () => {
         <div>
       <label htmlFor="jobCountry">Country</label>
        <select
-         id="jobCountry"
+        className="job-select-spacing"
+        id="jobCountry"
         value={country}
         onChange={(e) => setCountry(e.target.value)}
         required
@@ -255,6 +258,7 @@ const CreateJobPage = () => {
         <div>
           <label htmlFor="jobSalaryCurrency">Salary Currency</label>
             <select
+             className="job-select-spacing"
              id="jobSalaryCurrency"
              value={salaryCurrency}
               onChange={(e) => setSalaryCurrency(e.target.value)}
@@ -271,6 +275,7 @@ const CreateJobPage = () => {
         <div>
         <label htmlFor="jobSalaryInterval">Salary Interval</label>
           <select
+             className="job-select-spacing"
              id="jobSalaryInterval"
              value={salaryInterval}
              onChange={(e) => setSalaryInterval(e.target.value)}
@@ -288,6 +293,7 @@ const CreateJobPage = () => {
         <div>
       <label htmlFor="jobEmploymentType">Employment Type</label>
         <select
+         className="job-select-spacing"
          id="jobEmploymentType"
          value={employmentType}
          onChange={(e) => setEmploymentType(e.target.value)}

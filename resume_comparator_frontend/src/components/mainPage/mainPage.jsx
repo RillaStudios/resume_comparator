@@ -116,8 +116,8 @@ export const MainPage = () => {
     <div className="main-container">
 
       {/* Add Job Card */}
-    <div className="add-job-card" onClick={handleAddJob}>
-          add Job
+    <div className="add-job-card-main" onClick={handleAddJob}>
+          Add Job
       </div>
 
 
