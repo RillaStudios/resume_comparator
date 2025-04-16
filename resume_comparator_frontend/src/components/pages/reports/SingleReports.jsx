@@ -1,6 +1,7 @@
 import "./reports.modules.css";
 import { useLocation, useNavigate } from "react-router-dom";
 import CircularScore from "./CircularScore"; 
+import BackButton from "../../common/backButton";
 
 
 /*
@@ -20,7 +21,9 @@ const SingleReports = () => {
   };
 
   return (
+    
     <div className="reports-container">
+      <BackButton />
       <h2>Single Report Results</h2>
       <h4>Click on Reports Page for summary</h4>
 
