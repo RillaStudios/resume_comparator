@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import spinner from "../../assets/image/loadingSpinner.gif";
 import { toast } from "react-toastify";
 import ReportGraph from "./reportGraph/reportGraph";
-
+import BackButton from '../common/backButton'; 
 /*
  Author: Michael Tamatey / Navjot Kaur
  Date: 20250222
@@ -113,6 +113,7 @@ export const MainPage = () => {
   return (
 
     <> 
+    <BackButton />
     <div className="main-container">
 
       {/* Add Job Card */}

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import "./JobListingPage.css";
+ import BackButton from "../../common/backButton";
 
 const JobListingPage = () => {
   const [jobPostings, setJobPostings] = useState([]);
@@ -55,6 +56,7 @@ const JobListingPage = () => {
 
   return (
     <div>
+      <BackButton />
       <h1>Job Postings</h1>
 
       <div className="search-container">

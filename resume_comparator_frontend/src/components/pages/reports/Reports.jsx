@@ -3,6 +3,7 @@ import "./reports.modules.css";
 import { toast } from "react-toastify";
 import { useLocation, useNavigate } from "react-router-dom";
 import CircularScore from "./CircularScore";
+import BackButton from '../../common/backButton'; 
  
 
 /*
@@ -296,6 +297,8 @@ const handleReportClick = async (reportId) => {
 
 
   return (
+    <>
+          <BackButton />
     <div className="reports-container">
       <h2>All Reports</h2>
 
@@ -431,6 +434,7 @@ const handleReportClick = async (reportId) => {
         </div>
       )}
     </div>
+    </>
   );
 };
 

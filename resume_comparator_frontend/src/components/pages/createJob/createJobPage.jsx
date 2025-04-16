@@ -1,6 +1,7 @@
 import React, { useEffect,useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import BackButton from '../../common/backButton';
 import "./createJobPage.css";
 
 const CreateJobPage = () => {
@@ -32,7 +33,7 @@ const CreateJobPage = () => {
   const [contactEmail, setContactEmail] = useState("");
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(null);
-
+  
     const countryStateMap = {
       Canada: [
         "Alberta", "British Columbia", "Manitoba", "New Brunswick",
@@ -107,7 +108,9 @@ const CreateJobPage = () => {
   };
 
   return (
+    
     <div>
+      <BackButton />
       <h1>Create Job Posting</h1>
       {success && <div className="success-message">{success}</div>}
       {error && <div className="error-message">{error}</div>}
