@@ -70,18 +70,14 @@ const LoginPage = () => {
   };
 
   return (
+    <div className="login-page-background">
     <div className="login-page-container">
-      <div className="login-page-left-section">
-          <img
-            src="src/assets/image/logo.png" 
-            alt="Logo"
-            className="login-page-branding-logo"
-          />
-      </div>
-  
+         
       <div className="login-page-right-section">
         <div>
           <h2>Welcome Back</h2>
+          <br/>
+          
           <form onSubmit={handleSubmit}>
             <input
               type="text"
@@ -148,6 +144,7 @@ const LoginPage = () => {
           </form>
         </div>
       </div>
+    </div>
     </div>
   );
 };

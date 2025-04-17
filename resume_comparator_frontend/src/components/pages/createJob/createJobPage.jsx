@@ -224,6 +224,22 @@ const CreateJobPage = () => {
           />
         </div>
         <div>
+      <label htmlFor="jobCountry">Country</label>
+       <select
+        className="job-select-spacing"
+        id="jobCountry"
+        value={country}
+        onChange={(e) => setCountry(e.target.value)}
+        required
+       >
+       <option value="">Select Country</option>
+       <option value="Canada">Canada</option>
+       <option value="USA">USA</option>
+       <option value="India">India</option>
+        <option value="Ghana">Ghana</option>
+     </select>
+    </div>
+        <div>
         <label htmlFor="jobProvince">Province/State</label>
           <select
           className="job-select-spacing"
@@ -241,34 +257,7 @@ const CreateJobPage = () => {
           ))}
          </select>
         </div>
-        <div>
-      <label htmlFor="jobCountry">Country</label>
-       <select
-        className="job-select-spacing"
-        id="jobCountry"
-        value={country}
-        onChange={(e) => setCountry(e.target.value)}
-        required
-       >
-       <option value="">Select Country</option>
-       <option value="Canada">Canada</option>
-       <option value="USA">USA</option>
-       <option value="India">India</option>
-        <option value="Ghana">Ghana</option>
-     </select>
-    </div>
-    
-        <div>
-          <label htmlFor="jobCity">Address</label>
-          <input
-            type="text"
-            id="jobCity"
-            value={address}
-            onChange={(e) => setAddress(e.target.value)}
-            required
-          />
-        </div>
-      
+        
         <div>
           <label htmlFor="jobRemote">Remote</label>
           <input

@@ -1,31 +1,21 @@
 /* General Register Page Container */
 .register-page-container {
     display: flex; /* Enables flexbox */
-    width: 100vw; /* Full viewport width */
-    height: 100vh; /* Full viewport height */
 }
-  
-/* Left Section - Full left side */
-.register-page-left-section {
-    flex: 1; 
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: #f4f4f4;
-    min-height: 100vh;
-}
-  
+
 /* Right Section - Full right side */
 .register-page-right-section {
     flex: 1; 
-    padding: 40px;
-    background-color: white;
-    min-height: 100vh;
+    padding: 5px;
+    min-height: 5vh;
     display: flex;
     justify-content: center;
     align-items: center;
 }
   
+.register-page-right-section h2{
+    color: white;
+}
 /* Register Box */
 .register-page-box {
     width: 100%;
@@ -163,4 +153,26 @@
     color: #666;
     font-size: 18px;
     z-index: 2;
+  }
+  /* Blurred image */
+  .login-page-background::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    background-image: url('../../assets/image/resume2.webp'); 
+    background-size: cover;
+    background-position: center;
+    filter: blur(8px);
+    z-index: -1;
+    transform: scale(1.1); 
+  }
+  .register-page-container {
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    width: 100%;
+    max-width: 450px;
+    z-index: 1;
   }

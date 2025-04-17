@@ -152,37 +152,37 @@ export const MainPage = () => {
     <p><strong>Summary:</strong> {selectedJob.summary}</p>
 
     <p><strong>Responsibilities:</strong></p>
-    <ol>
+    <ul>
       {parseTextToList(selectedJob.responsibilities).map((item, index) => (
         <li key={index}>{item.trim()}</li>
       ))}
-    </ol>
+    </ul>
 
     <p><strong>Must-Have Requirements:</strong></p>
-    <ol>
+    <ul>
       {parseTextToList(selectedJob.skills_qual_required).map((item, index) => (
         <li key={index}>{item.trim()}</li>
       ))}
-    </ol>
+    </ul>
 
     <p><strong>Nice-to-Have Requirements:</strong></p>
-    <ol>
+    <ul>
       {parseTextToList(selectedJob.skills_qual_nice_to_have).map((item, index) => (
         <li key={index}>{item.trim()}</li>
       ))}
-    </ol>
+    </ul>
     <p><strong>Education Required:</strong></p>
-    <ol>
+    <ul>
       {parseTextToList(selectedJob.education_required).map((item, index) => (
         <li key={index}>{item.trim()}</li>
       ))}
-    </ol>
+    </ul>
     <p><strong>Experience Required:</strong></p>
-    <ol>
+    <ul>
       {parseTextToList(selectedJob.experience_required).map((item, index) => (
         <li key={index}>{item.trim()}</li>
       ))}
-    </ol>
+    </ul>
 
     <p><strong>Salary:</strong> {selectedJob.salary_currency_type} {selectedJob.salary_min} - {selectedJob.salary_max} per {selectedJob.salary_interval}</p>
     <p><strong>Employment Type:</strong> {selectedJob.employment_type}</p>
