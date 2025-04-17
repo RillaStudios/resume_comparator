@@ -4,6 +4,7 @@ from numpy.linalg import norm
 import numpy as np
 from aifd_cv_comparison.utils.resume import Resume
 from api.models import JobPosting
+from phi.test_script import compare_resume_to_job
 
 # Load models once at module level
 _d2v_model = None

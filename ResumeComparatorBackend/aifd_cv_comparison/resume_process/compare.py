@@ -1,3 +1,4 @@
+import asyncio
 import os
 import django
 from DjangoApp.settings import BASE_DIR
@@ -8,20 +9,25 @@ django.setup()
 
 from pathlib import Path
 from aifd_cv_comparison.models import load_models
+
 from aifd_cv_comparison.resume_process.section_classifier.resume_classifier import classify_resume
 from aifd_cv_comparison.config.compare_settings import CompareSettings, CompareSettingsType
 from aifd_cv_comparison.utils.extract_text_from_pdf import extract_text_from_pdf
-from aifd_cv_comparison.resume_process.comparisons.optimized import optimized_resume_comparison
 from aifd_cv_comparison.utils.resume import Resume
 from api.models import JobPosting
 
 def compare_resumes(resumes: list[str | Path], job_posting_id: int, settings: CompareSettings) -> None:
 
+    load_models()
+
+    from phi.test_script import compare_resume_to_job
+    from aifd_cv_comparison.resume_process.comparisons.optimized import optimized_resume_comparison
+
     # Verify resumes is a list of strings or Path objects
     if not isinstance(resumes, list) or not all(isinstance(r, (str, Path)) for r in resumes):
         raise TypeError("Resumes must be a list of strings or Path objects")
 
-    load_models()
+    # Models are already loaded, so we don't need to call load_models() here again
 
     # Load the job posting
     try:
@@ -69,6 +75,8 @@ def compare_resumes(resumes: list[str | Path], job_posting_id: int, settings: Co
             print('Advanced comparison logic executed.')
         else:
             raise ValueError("Invalid comparison setting. Choose from BASIC, OPTIMIZED, or ADVANCED.")
+
+        print(compare_resume_to_job(resume.raw_text, job_posting.get_text()))
 
 resume_path = os.path.join(BASE_DIR, "media", "resumes", "Java-Developer-Resume-4.pdf")
 

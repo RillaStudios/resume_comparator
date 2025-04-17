@@ -1,7 +1,8 @@
 import os
-
 import spacy
-from transformers import AutoModelForSequenceClassification, AutoTokenizer
+import torch
+from llama_cpp import Llama
+from transformers import AutoModelForSequenceClassification, AutoTokenizer, AutoModelForCausalLM, pipeline
 
 # Get absolute path to the models directory
 base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -34,4 +35,9 @@ MODEL_REGISTRY = {
         "model": os.path.join(model_path, "cv_job_maching.model"),
         "tokenizer": None,
     },
+    "phi": {
+        "name": "Phi Model",
+        "model": Llama(model_path=os.path.join(model_path, "Phi-4-mini-instruct-Q3_K_L.gguf"), n_threads=4),
+        "tokenizer": None,
+    }
 }
