@@ -171,6 +171,18 @@ export const MainPage = () => {
         <li key={index}>{item.trim()}</li>
       ))}
     </ol>
+    <p><strong>Education Required:</strong></p>
+    <ol>
+      {parseTextToList(selectedJob.education_required).map((item, index) => (
+        <li key={index}>{item.trim()}</li>
+      ))}
+    </ol>
+    <p><strong>Experience Required:</strong></p>
+    <ol>
+      {parseTextToList(selectedJob.experience_required).map((item, index) => (
+        <li key={index}>{item.trim()}</li>
+      ))}
+    </ol>
 
     <p><strong>Salary:</strong> {selectedJob.salary_currency_type} {selectedJob.salary_min} - {selectedJob.salary_max} per {selectedJob.salary_interval}</p>
     <p><strong>Employment Type:</strong> {selectedJob.employment_type}</p>
