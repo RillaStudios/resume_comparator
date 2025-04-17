@@ -37,7 +37,7 @@ const Navbar = () => {
           </div>
           {user ? (
             <>
-              <strong>{`${user.first_name} ${user.last_name}`}</strong>
+              <strong>{`${user.first_name} ${user.last_name}`} | </strong>
               <div className="profile-role">{user.role}</div>
             </>
           ) : (
