@@ -27,6 +27,7 @@ const Reports = () => {
   const [actionType, setActionType] = useState("");
   const [searchTerm, setSearchTerm] = useState("");
   const [jobTitles, setJobTitles] = useState({});
+  
 
 
  
@@ -390,14 +391,6 @@ const handleReportClick = async (reportId) => {
                       </div>
                       <div><strong>Date:</strong> {created_at || report.created_at ? new Date(report.created_at).toLocaleDateString() : "N/A"}</div>
                     </div>
-
-                    {/* <div className="score-column">
-                      <strong>Score:</strong> {Math.min(10, ((score || report.score) / 10).toFixed(1))} / 10
-                    </div>
-
-                    <div className="pass-fail-column">
-                      <strong>{((score || report.score) / 10).toFixed(1) >= 7 ? "✅ Passed" : "❌ Failed"}</strong>
-                    </div> */}
                     <div className="pass-fail-column">
                       <div className="circular-score">
                     <CircularScore score={score || report.score} />

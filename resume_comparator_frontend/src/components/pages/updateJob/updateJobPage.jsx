@@ -3,6 +3,7 @@ import axios from "axios";
 import { useParams, useNavigate } from "react-router-dom";
 import "./updateJobPage.css"
 import BackButton from "../../common/backButton";
+import { toast } from "react-toastify";
 
 const UpdateJobPage = () => {
   const { id } = useParams();
@@ -36,6 +37,7 @@ const UpdateJobPage = () => {
   const [contactEmail, setContactEmail] = useState("");
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const countryStateMap = {
     Canada: [
@@ -110,6 +112,7 @@ const UpdateJobPage = () => {
   
   const handleSubmit = (e) => {
     e.preventDefault();
+    setIsSubmitting(true);
   
     const jobData = {
       title: title,
@@ -142,13 +145,15 @@ const UpdateJobPage = () => {
     axios
       .patch(`http://localhost:8000/api/job-postings/${id}/`, jobData)
       .then((response) => {
-        setSuccess("Job updated successfully!");
+        toast.success("Job updated successfully!");
         setTimeout(() => {
+          setIsSubmitting(false);
           navigate("/job-postings");
-        }, 2000);
+        }, 900);
       })
       .catch((err) => {
-        setError("Failed to update job posting. Please try again.");
+        toast.error("Failed to update job posting. Please try again.");
+        setIsSubmitting(false);
       });
   };
   
@@ -444,7 +449,9 @@ const UpdateJobPage = () => {
             required
           />
         </div>
-        <button type="submit">Update Job</button>
+        <button type="submit" disabled={isSubmitting}>
+         {isSubmitting ? "Updating..." : "Update Job"}
+         </button>
       </form>
     </div>
   );

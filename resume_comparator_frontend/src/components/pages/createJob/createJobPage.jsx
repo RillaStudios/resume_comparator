@@ -3,6 +3,8 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import BackButton from '../../common/backButton';
 import "./createJobPage.css";
+import { toast } from "react-toastify";
+
 
 const CreateJobPage = () => {
   const navigate = useNavigate();
@@ -35,6 +37,7 @@ const CreateJobPage = () => {
   const [contactEmail, setContactEmail] = useState("");
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   
     const countryStateMap = {
       Canada: [
@@ -67,47 +70,52 @@ const CreateJobPage = () => {
     }, [country]);
       
     
+
+  // Handle form submission
   const handleSubmit = (e) => {
     e.preventDefault();
-
- 
+    setIsSubmitting(true);
+  
     const jobData = {
-      title: title,
+      title,
       company_name: companyName,
       company_desc: companyDesc,
-      summary: summary,
-      responsibilities: responsibilities,
+      summary,
+      responsibilities,
       skills_qual_required: skillsRequired,
       skills_qual_nice_to_have: skillsNiceToHave,
       education_required: educationRequired,
       experience_required: experienceRequired,
-      address: address,
-      city: city,
+      address,
+      city,
       prov_state: province,
-      country: country,
+      country,
       zip_postal_code: zipCode,
-      remote: remote,
+      remote,
       salary_min: salaryMin,
       salary_max: salaryMax,
       salary_currency_type: salaryCurrency,
       salary_interval: salaryInterval,
       employment_type: employmentType,
-      benefits: benefits,
+      benefits,
       posting_date: postingDate,
       closing_date: closingDate,
       contact_name: contactName,
       contact_email: contactEmail,
     };
+  
     axios
       .post("http://localhost:8000/api/job-postings/", jobData)
       .then((response) => {
-        setSuccess("Job posted successfully!");
+        toast.success("Job posted successfully!");
         setTimeout(() => {
+          setIsSubmitting(false);
           navigate("/job-postings");
-        }, 1000);
+        }, 500);
       })
       .catch((err) => {
-        setError("Failed to post the job. Please try again.");
+        toast.error("Failed to post the job. Please try again.");
+        setIsSubmitting(false);
       });
   };
 
@@ -389,7 +397,9 @@ const CreateJobPage = () => {
             required
           />
         </div>
-        <button type="submit">Create Job</button>
+        <button type="submit" disabled={isSubmitting}>
+         {isSubmitting ? "Creating..." : "Create Job"}
+         </button>
       </form>
     </div>
   );
