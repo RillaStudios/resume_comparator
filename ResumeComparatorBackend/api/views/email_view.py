@@ -22,10 +22,10 @@ def send_candidate_email(request):
 
         applicant_name = data.get('applicant_name')
         applicant_email = data.get('applicant_email')
-        job_id = data.get('job_id')
-
+       
+        
         # Check for missing fields
-        if not (applicant_name and applicant_email and job_id):
+        if not (applicant_name and applicant_email):
             return JsonResponse({'error': _('Missing required fields.')}, status=400)
 
         # Validate email format
@@ -33,18 +33,13 @@ def send_candidate_email(request):
             validate_email(applicant_email)
         except ValidationError:
             return JsonResponse({'error': _('Invalid email format.')}, status=400)
-
-        # Check if job exists
-        try:
-            job = CompareReport.objects.get(id=job_id)
-        except CompareReport.DoesNotExist:
-            return JsonResponse({'error': _('Invalid job ID.')}, status=404)
-
+        
+        
         # Send success email
-        send_success_email(applicant_email, applicant_name, job_id)
+        send_success_email(applicant_email, applicant_name)
 
         return JsonResponse({
-            'message': _('Email sent successfully.'),  
+            'message': _('Email sent successfully.')
         })
 
     except Exception as e:
@@ -80,13 +75,13 @@ def send_selected_reports(request):
 
     report_details = ""
     for report in reports:
-        report_details += f"📄 Report for {report.applicant_name} - Job ID: {report.job_id}\n"
-        report_details += f"✅ Score: {report.score}\n"
-        report_details += f"📅 Created At: {report.created_at.strftime('%Y-%m-%d %H:%M:%S')}\n"
-        report_details += f"✔️ Passing: {report.passing}\n"
-        report_details += f"❌ Failing: {report.failing}\n"
-        report_details += f"📝 Description: {report.report_text}\n"
-        report_details += f"📎 Resume: {report.resume.url if report.resume else 'No file available'}\n\n"
+        report_details += f"Report for {report.applicant_name} - Job ID: {report.job_id}\n"
+        report_details += f"Score: {report.score}\n"
+        report_details += f"Created At: {report.created_at.strftime('%Y-%m-%d %H:%M:%S')}\n"
+        report_details += f"Passing: {report.passing}\n"
+        report_details += f"Failing: {report.failing}\n"
+        report_details += f"Description: {report.report_text}\n"
+        report_details += f"Resume: {report.resume.url if report.resume else 'No file available'}\n\n"
 
     email = EmailMessage(
         subject="Selected Candidate Reports",
