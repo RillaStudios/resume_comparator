@@ -113,27 +113,23 @@ const Summary = () => {
             </tr>
           </thead>
           <tbody>
-            {Array.from({ length: maxLength }).map((_, index) => (
-              <tr key={index}>
-                <td>
-                  {reportData.passing?.[index] &&
-                    Object.entries(reportData.passing[index]).map(([stage, info]) => (
-                      <div key={stage}>
-                        <strong>{stage}</strong>: {info.description}
-                      </div>
-                    ))}
-                </td>
-                <td>
-                  {reportData.failing?.[index] &&
-                    Object.entries(reportData.failing[index]).map(([stage, info]) => (
-                      <div key={stage}>
-                        <strong>{stage}</strong>: {info.description}
-                      </div>
-                    ))}
-                </td>
-              </tr>
-            ))}
-          </tbody>
+        {Array.from({ length: maxLength }).map((_, index) => (
+           <tr key={index}>
+           <td>
+           {reportData.passing?.[index] &&
+          Object.values(reportData.passing[index]).map((info, i) => (
+            <div key={i}>{info.description}</div>
+          ))}
+        </td>
+        <td>
+        {reportData.failing?.[index] &&
+          Object.values(reportData.failing[index]).map((info, i) => (
+            <div key={i}>{info.description}</div>
+          ))}
+        </td>
+      </tr>
+  ))}
+</tbody>
         </table>
       </section>
 
