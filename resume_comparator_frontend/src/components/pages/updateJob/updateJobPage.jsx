@@ -3,6 +3,8 @@ import axios from "axios";
 import { useParams, useNavigate } from "react-router-dom";
 import "./updateJobPage.css"
 import BackButton from "../../common/backButton";
+import { toast } from "react-toastify";
+
 const UpdateJobPage = () => {
   const { id } = useParams();
   const navigate = useNavigate();
@@ -15,6 +17,8 @@ const UpdateJobPage = () => {
   const [responsibilities, setResponsibilities] = useState("");
   const [skillsRequired, setSkillsRequired] = useState("");
   const [skillsNiceToHave, setSkillsNiceToHave] = useState("");
+  const [educationRequired, setEducationRequired] = useState("");
+  const [experienceRequired, setExperienceRequired] = useState("");
   const [address, setAddress] = useState("");
   const [city, setCity] = useState("");
   const [province, setProvince] = useState("");
@@ -33,6 +37,7 @@ const UpdateJobPage = () => {
   const [contactEmail, setContactEmail] = useState("");
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const countryStateMap = {
     Canada: [
@@ -76,6 +81,8 @@ const UpdateJobPage = () => {
         setResponsibilities(jobData.responsibilities);
         setSkillsRequired(jobData.skills_qual_required);
         setSkillsNiceToHave(jobData.skills_qual_nice_to_have);
+        setEducationRequired(jobData.education_required);
+        setExperienceRequired(jobData.experience_required);
         setAddress(jobData.address);
         setCity(jobData.city);
         setProvince(jobData.prov_state);
@@ -105,6 +112,7 @@ const UpdateJobPage = () => {
   
   const handleSubmit = (e) => {
     e.preventDefault();
+    setIsSubmitting(true);
   
     const jobData = {
       title: title,
@@ -114,6 +122,8 @@ const UpdateJobPage = () => {
       responsibilities: responsibilities,
       skills_qual_required: skillsRequired,
       skills_qual_nice_to_have: skillsNiceToHave,
+      education_required: educationRequired,
+      experience_required: experienceRequired,
       address: address,
       city: city,
       prov_state: province,
@@ -135,13 +145,15 @@ const UpdateJobPage = () => {
     axios
       .patch(`http://localhost:8000/api/job-postings/${id}/`, jobData)
       .then((response) => {
-        setSuccess("Job updated successfully!");
+        toast.success("Job updated successfully!");
         setTimeout(() => {
+          setIsSubmitting(false);
           navigate("/job-postings");
-        }, 2000);
+        }, 900);
       })
       .catch((err) => {
-        setError("Failed to update job posting. Please try again.");
+        toast.error("Failed to update job posting. Please try again.");
+        setIsSubmitting(false);
       });
   };
   
@@ -180,6 +192,7 @@ const UpdateJobPage = () => {
             id="companyDesc"
             value={companyDesc}
             onChange={(e) => setCompanyDesc(e.target.value)}
+            required
           ></textarea>
         </div>
         <div>
@@ -197,6 +210,7 @@ const UpdateJobPage = () => {
             id="jobResponsibilities"
             value={responsibilities}
             onChange={(e) => setResponsibilities(e.target.value)}
+            required
           ></textarea>
         </div>
         <div>
@@ -205,6 +219,7 @@ const UpdateJobPage = () => {
             id="jobRequirementsMustHave"
             value={skillsRequired}
             onChange={(e) => setSkillsRequired(e.target.value)}
+            required
           ></textarea>
         </div>
         <div>
@@ -213,7 +228,26 @@ const UpdateJobPage = () => {
             id="jobRequirementsNiceToHave"
             value={skillsNiceToHave}
             onChange={(e) => setSkillsNiceToHave(e.target.value)}
+            required
           ></textarea>
+        </div>
+        <div>
+          <label htmlFor="educationRequired">Education Required:</label>
+          <textarea
+            id="educationRequired"
+            value={educationRequired}
+            onChange={(e) => setEducationRequired(e.target.value)}
+            required
+          ></textarea>
+        </div>
+        <div>
+          <label htmlFor="experienceRequired">Experience Required:</label>
+          <textarea
+            id="experienceRequired"
+            value={experienceRequired}
+            onChange={(e) => setExperienceRequired(e.target.value)}
+            required
+            ></textarea>
         </div>
         <div>
           <label htmlFor="jobCity">Address</label>
@@ -235,9 +269,29 @@ const UpdateJobPage = () => {
             required
           />
         </div>
+
+       
         <div>
+      <label htmlFor="jobCountry">Country</label>
+       <select
+        className="job-select-spacing"
+         id="jobCountry"
+        value={country}
+        onChange={(e) => setCountry(e.target.value)}
+        required
+       >
+       <option value="">Select Country</option>
+       <option value="Canada">Canada</option>
+       <option value="USA">USA</option>
+       <option value="India">India</option>
+        <option value="Ghana">Ghana</option>
+     </select>
+    </div>
+    
+    <div>
         <label htmlFor="jobProvince">Province/State</label>
           <select
+           className="job-select-spacing"
            id="jobProvince"
            value={province}
            onChange={(e) => setProvince(e.target.value)}
@@ -252,30 +306,18 @@ const UpdateJobPage = () => {
           ))}
          </select>
         </div>
-        <div>
-      <label htmlFor="jobCountry">Country</label>
-       <select
-         id="jobCountry"
-        value={country}
-        onChange={(e) => setCountry(e.target.value)}
-        required
-       >
-       <option value="">Select Country</option>
-       <option value="Canada">Canada</option>
-       <option value="USA">USA</option>
-       <option value="India">India</option>
-        <option value="Ghana">Ghana</option>
-     </select>
-    </div>
-        <div>
+
+        {/* <div>
           <label htmlFor="jobCountry">Zip Code</label>
           <input
+            className="job-select-spacing"
             type="text"
             id="jobCountry"
             value={zipCode}
             onChange={(e) => setZipCode(e.target.value)}
           />
         </div>
+        */}
         <div>
           <label htmlFor="jobRemote">Remote</label>
           <input
@@ -292,6 +334,7 @@ const UpdateJobPage = () => {
             id="jobSalaryMin"
             value={salaryMin}
             onChange={(e) => setSalaryMin(e.target.value)}
+            required
           />
         </div>
         <div>
@@ -301,11 +344,13 @@ const UpdateJobPage = () => {
             id="jobSalaryMax"
             value={salaryMax}
             onChange={(e) => setSalaryMax(e.target.value)}
+            required
           />
         </div>
         <div>
           <label htmlFor="jobSalaryCurrency">Salary Currency</label>
             <select
+             className="job-select-spacing"
              id="jobSalaryCurrency"
              value={salaryCurrency}
               onChange={(e) => setSalaryCurrency(e.target.value)}
@@ -322,6 +367,7 @@ const UpdateJobPage = () => {
         <div>
         <label htmlFor="jobSalaryInterval">Salary Interval</label>
           <select
+             className="job-select-spacing"
              id="jobSalaryInterval"
              value={salaryInterval}
              onChange={(e) => setSalaryInterval(e.target.value)}
@@ -339,6 +385,7 @@ const UpdateJobPage = () => {
         <div>
       <label htmlFor="jobEmploymentType">Employment Type</label>
         <select
+         className="job-select-spacing"
          id="jobEmploymentType"
          value={employmentType}
          onChange={(e) => setEmploymentType(e.target.value)}
@@ -359,6 +406,7 @@ const UpdateJobPage = () => {
             id="jobBenefits"
             value={benefits}
             onChange={(e) => setBenefits(e.target.value)}
+            required
           ></textarea>
         </div>
         <div>
@@ -368,6 +416,7 @@ const UpdateJobPage = () => {
             id="jobPostingDate"
             value={postingDate}
             onChange={(e) => setPostingDate(e.target.value)}
+            required
           />
         </div>
         <div>
@@ -377,6 +426,7 @@ const UpdateJobPage = () => {
             id="jobClosingDate"
             value={closingDate}
             onChange={(e) => setClosingDate(e.target.value)}
+            required
           />
         </div>
         <div>
@@ -386,6 +436,7 @@ const UpdateJobPage = () => {
             id="text"
             value={contactName}
             onChange={(e) => setContactName(e.target.value)}
+            required
           />
         </div>
         <div>
@@ -395,9 +446,12 @@ const UpdateJobPage = () => {
             id="jobContactEmail"
             value={contactEmail}
             onChange={(e) => setContactEmail(e.target.value)}
+            required
           />
         </div>
-        <button type="submit">Update Job</button>
+        <button type="submit" disabled={isSubmitting}>
+         {isSubmitting ? "Updating..." : "Update Job"}
+         </button>
       </form>
     </div>
   );

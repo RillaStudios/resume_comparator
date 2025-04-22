@@ -42,6 +42,8 @@ class JobPosting(models.Model):
     responsibilities = models.TextField(null=True, blank=True)
     skills_qual_required = models.TextField(null=True, blank=True)
     skills_qual_nice_to_have = models.TextField()
+    education_required = models.TextField(null=True, blank=True)
+    experience_required = models.TextField(null=True, blank=True)
     address = models.CharField(max_length=255, null=True, blank=True)
     city = models.CharField(max_length=255, null=True, blank=True)
     prov_state = models.CharField(max_length=255, null=True, blank=True)
@@ -76,6 +78,8 @@ class JobPosting(models.Model):
             f"Job Responsibilities: {self.responsibilities}\n"
             f"Job Requirements (Must Have): {self.skills_qual_required}\n"
             f"Job Requirements (Nice to Have): {self.skills_qual_nice_to_have}\n"
+            f"Education Required: {self.education_required}\n"
+            f"Experience Required: {self.experience_required}\n"
             f"Location: {self.address}, {self.city}, {self.prov_state}, {self.country}, {self.zip_postal_code}\n"
             f"Remote: {self.remote}\n"
             f"Salary Min: {self.salary_min}\n"

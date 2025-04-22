@@ -18,60 +18,6 @@ h1 {
   margin-bottom: 20px;
 }
 
-.job-listing {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
-  justify-content: space-between;
-}
-
-.job-card {
-  background-color: white;
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  width: calc(33.33% - 20px);
-  box-sizing: border-box;
-  transition: transform 0.2s;
-}
-
-.job-card:hover {
-  transform: scale(1.05);
-}
-
-.job-card h2 {
-  color: #333;
-  font-size: 18px;
-  margin-bottom: 10px;
-}
-
-.job-card p {
-  color: #777;
-  margin-bottom: 10px;
-}
-
-.job-card button {
-  background-color: #ff4d4d;
-  color: white;
-  padding: 10px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s;
-}
-
-.job-card button:hover {
-  background-color: #cc3333;
-}
-
-.job-card a {
-  text-decoration: none;
-  color: #007bff;
-  font-weight: bold;
-  margin-top: 10px;
-  display: inline-block;
-}
-
 form {
   background-color: white;
   padding: 30px;
@@ -139,17 +85,8 @@ button {
   cursor: pointer;
 }
 
-@media (max-width: 768px) {
-  .job-card {
-    width: calc(50% - 20px);
-  }
-}
-
 @media (max-width: 480px) {
-  .job-card {
-    width: 100%;
-  }
-
+ 
   form {
     padding: 20px;
   }
@@ -159,3 +96,14 @@ button {
   font-size: 0.85em;
 }
 
+.job-select-spacing {
+  margin-bottom: 55px;
+  font-size: medium;
+  display: block;
+  width: 100%;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+  margin-top: 5px;
+}

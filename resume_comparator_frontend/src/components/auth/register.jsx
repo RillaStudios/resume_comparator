@@ -57,18 +57,12 @@ const RegisterPage = () => {
   };
 
   return (
+    <div className="login-page-background">
     <div className="register-page-container">
-      <div className="register-page-left-section">
-        <img
-          src="src/assets/image/logo.png"
-          alt="Logo"
-          className="register-page-branding-logo"
-        />
-      </div>
-
       <div className="register-page-right-section">
         <div>
           <h2>Create an Account</h2>
+          <br/>
           <form onSubmit={handleSubmit}>
             <input
               type="text"
@@ -138,13 +132,13 @@ const RegisterPage = () => {
                 required
                 className="input-field"
               />
-             <button
+             <button1
               type="button"
               onClick={() => setShowPassword(!showPassword)}
                className="toggle-password"
               >
               {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
-              </button>
+              </button1>
             </div>
 
             {/* Confirm Password Field with Toggle */}
@@ -158,13 +152,13 @@ const RegisterPage = () => {
                 required
                 className="input-field"
               />
-              <button
+              <button1
               type="button"
               onClick={() => setShowConfirmPassword(!showConfirmPassword)}
               className="toggle-password"
               >
                 {showConfirmPassword? <EyeOff size={20} /> : <Eye size={20} />}
-              </button>
+              </button1>
               
             </div>           
 
@@ -178,7 +172,6 @@ const RegisterPage = () => {
             </button>
 
             <a href="/login" className="change-password">Already have an account? Login here</a>
-            <br />
             
             {loading && (
               <div className="loading-spin">
@@ -190,6 +183,7 @@ const RegisterPage = () => {
           </form>
         </div>
       </div>
+    </div>
     </div>
   );
 };

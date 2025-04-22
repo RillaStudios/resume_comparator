@@ -11,6 +11,7 @@
 # pip install django djangorestframework djangorestframework-simplejwt
 # pip install httpx
 # pip install python-dotenv
+# pip install llama-cpp-python
 # Make sure these are ran to successfully run the code.
 
 # TO USE GROQ

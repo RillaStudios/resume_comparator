@@ -1,7 +1,7 @@
 RESUME_HEADER_KEYWORDS = {
-    r"(contact|contact information|contact info|email|phone|"
-    r"telephone|mobile|website|linkedin|github|social media|"
-    r"online presence|personal info|personal information|reach me)": "contact",
+    r"(contact|contact information|contact info|"
+    r"personal info|personal information|reach me|contact details|"
+    r"my contact|my details|get in touch|contact me)": "contact",
 
     r"(summary|professional summary|career summary|profile|"
     r"personal statement|executive summary|about|about me|"

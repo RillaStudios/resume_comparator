@@ -8,3 +8,4 @@ __pycache__/
 ai_models/**
 /ai_models/lm-ner-linkedin-skills-recognition/
 
+/.venv3-10/

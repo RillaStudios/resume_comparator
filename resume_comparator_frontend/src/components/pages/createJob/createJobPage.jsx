@@ -2,6 +2,9 @@ import React, { useEffect,useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import BackButton from '../../common/backButton';
+import "./createJobPage.css";
+import { toast } from "react-toastify";
+
 
 const CreateJobPage = () => {
   const navigate = useNavigate();
@@ -14,6 +17,8 @@ const CreateJobPage = () => {
   const [responsibilities, setResponsibilities] = useState("");
   const [skillsRequired, setSkillsRequired] = useState("");
   const [skillsNiceToHave, setSkillsNiceToHave] = useState("");
+  const [educationRequired, setEducationRequired] = useState("");
+  const [experienceRequired, setExperienceRequired] = useState("");
   const [address, setAddress] = useState("");
   const [city, setCity] = useState("");
   const [province, setProvince] = useState("");
@@ -32,8 +37,8 @@ const CreateJobPage = () => {
   const [contactEmail, setContactEmail] = useState("");
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   
-
     const countryStateMap = {
       Canada: [
         "Alberta", "British Columbia", "Manitoba", "New Brunswick",
@@ -65,10 +70,12 @@ const CreateJobPage = () => {
     }, [country]);
       
     
+
+  // Handle form submission
   const handleSubmit = (e) => {
     e.preventDefault();
-
- 
+    setIsSubmitting(true);
+  
     const jobData = {
       title: title,
       company_name: companyName,
@@ -77,6 +84,8 @@ const CreateJobPage = () => {
       responsibilities: responsibilities,
       skills_qual_required: skillsRequired,
       skills_qual_nice_to_have: skillsNiceToHave,
+      education_required: educationRequired,
+      experience_required: experienceRequired,
       address: address,
       city: city,
       prov_state: province,
@@ -94,16 +103,19 @@ const CreateJobPage = () => {
       contact_name: contactName,
       contact_email: contactEmail,
     };
+  
     axios
       .post("http://localhost:8000/api/job-postings/", jobData)
       .then((response) => {
-        setSuccess("Job posted successfully!");
+        toast.success("Job posted successfully!");
         setTimeout(() => {
+          setIsSubmitting(false);
           navigate("/job-postings");
-        }, 1000);
+        }, 500);
       })
       .catch((err) => {
-        setError("Failed to post the job. Please try again.");
+        toast.error("Failed to post the job. Please try again.");
+        setIsSubmitting(false);
       });
   };
 
@@ -142,6 +154,7 @@ const CreateJobPage = () => {
             id="companyDesc"
             value={companyDesc}
             onChange={(e) => setCompanyDesc(e.target.value)}
+            required
           ></textarea>
         </div>
         <div>
@@ -159,6 +172,7 @@ const CreateJobPage = () => {
             id="jobResponsibilities"
             value={responsibilities}
             onChange={(e) => setResponsibilities(e.target.value)}
+            required
           ></textarea>
         </div>
         <div>
@@ -167,6 +181,7 @@ const CreateJobPage = () => {
             id="jobRequirementsMustHave"
             value={skillsRequired}
             onChange={(e) => setSkillsRequired(e.target.value)}
+            required
           ></textarea>
         </div>
         <div>
@@ -175,7 +190,26 @@ const CreateJobPage = () => {
             id="jobRequirementsNiceToHave"
             value={skillsNiceToHave}
             onChange={(e) => setSkillsNiceToHave(e.target.value)}
+            required
           ></textarea>
+        </div>
+        <div>
+          <label htmlFor="educationRequired">Education Required:</label>
+          <textarea
+            id="educationRequired"
+            value={educationRequired}
+            onChange={(e) => setEducationRequired(e.target.value)}
+            required
+          ></textarea>
+        </div>
+        <div>
+          <label htmlFor="experienceRequired">Experience Required:</label>
+          <textarea
+            id="experienceRequired"
+            value={experienceRequired}
+            onChange={(e) => setExperienceRequired(e.target.value)}
+            required
+            ></textarea>
         </div>
        <div>
           <label htmlFor="jobCity">Address</label>
@@ -198,8 +232,25 @@ const CreateJobPage = () => {
           />
         </div>
         <div>
+      <label htmlFor="jobCountry">Country</label>
+       <select
+        className="job-select-spacing"
+        id="jobCountry"
+        value={country}
+        onChange={(e) => setCountry(e.target.value)}
+        required
+       >
+       <option value="">Select Country</option>
+       <option value="Canada">Canada</option>
+       <option value="USA">USA</option>
+       <option value="India">India</option>
+        <option value="Ghana">Ghana</option>
+     </select>
+    </div>
+        <div>
         <label htmlFor="jobProvince">Province/State</label>
           <select
+          className="job-select-spacing"
            id="jobProvince"
            value={province}
            onChange={(e) => setProvince(e.target.value)}
@@ -214,21 +265,7 @@ const CreateJobPage = () => {
           ))}
          </select>
         </div>
-        <div>
-      <label htmlFor="jobCountry">Country</label>
-       <select
-         id="jobCountry"
-        value={country}
-        onChange={(e) => setCountry(e.target.value)}
-        required
-       >
-       <option value="">Select Country</option>
-       <option value="Canada">Canada</option>
-       <option value="USA">USA</option>
-       <option value="India">India</option>
-        <option value="Ghana">Ghana</option>
-     </select>
-    </div>
+        
         <div>
           <label htmlFor="jobRemote">Remote</label>
           <input
@@ -245,6 +282,7 @@ const CreateJobPage = () => {
             id="jobSalaryMin"
             value={salaryMin}
             onChange={(e) => setSalaryMin(e.target.value)}
+            required
           />
         </div>
         <div>
@@ -254,11 +292,13 @@ const CreateJobPage = () => {
             id="jobSalaryMax"
             value={salaryMax}
             onChange={(e) => setSalaryMax(e.target.value)}
+            required
           />
         </div>
         <div>
           <label htmlFor="jobSalaryCurrency">Salary Currency</label>
             <select
+             className="job-select-spacing"
              id="jobSalaryCurrency"
              value={salaryCurrency}
               onChange={(e) => setSalaryCurrency(e.target.value)}
@@ -275,6 +315,7 @@ const CreateJobPage = () => {
         <div>
         <label htmlFor="jobSalaryInterval">Salary Interval</label>
           <select
+             className="job-select-spacing"
              id="jobSalaryInterval"
              value={salaryInterval}
              onChange={(e) => setSalaryInterval(e.target.value)}
@@ -292,6 +333,7 @@ const CreateJobPage = () => {
         <div>
       <label htmlFor="jobEmploymentType">Employment Type</label>
         <select
+         className="job-select-spacing"
          id="jobEmploymentType"
          value={employmentType}
          onChange={(e) => setEmploymentType(e.target.value)}
@@ -312,6 +354,7 @@ const CreateJobPage = () => {
             id="jobBenefits"
             value={benefits}
             onChange={(e) => setBenefits(e.target.value)}
+            required
           ></textarea>
         </div>
         <div>
@@ -321,6 +364,7 @@ const CreateJobPage = () => {
           id="jobPostingDate"
           value={postingDate}
           onChange={(e) => setPostingDate(e.target.value)}
+          required
         />
         </div>
         <div>
@@ -330,6 +374,7 @@ const CreateJobPage = () => {
             id="jobClosingDate"
             value={closingDate}
             onChange={(e) => setClosingDate(e.target.value)}
+            required
           />
         </div>
         <div>
@@ -339,6 +384,7 @@ const CreateJobPage = () => {
             id="text"
             value={contactName}
             onChange={(e) => setContactName(e.target.value)}
+            required
           />
         </div>
         <div>
@@ -348,9 +394,12 @@ const CreateJobPage = () => {
             id="jobContactEmail"
             value={contactEmail}
             onChange={(e) => setContactEmail(e.target.value)}
+            required
           />
         </div>
-        <button type="submit">Create Job</button>
+        <button type="submit" disabled={isSubmitting}>
+         {isSubmitting ? "Creating..." : "Create Job"}
+         </button>
       </form>
     </div>
   );

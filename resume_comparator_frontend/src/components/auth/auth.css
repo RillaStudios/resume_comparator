@@ -2,7 +2,7 @@
 .login-page-container {
   display: flex; /* Enables flexbox */
   width: 100vw; /* Full viewport width */
-  height: 100vh; /* Full viewport height */
+  height: 70vh; /* Full viewport height */
 }
 
 /* Left Section - Full left side */
@@ -18,9 +18,8 @@
 /* Right Section - Full right side */
 .login-page-right-section {
   flex: 1; 
-  padding: 40px;
-  background-color: white;
-  min-height: 100vh;
+  padding: 10px;
+  min-height: 10vh;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -46,7 +45,7 @@
 }
 
 /* Button Styles */
-.login-page-button {
+.login-page-button1 {
   background-color: #4caf50;
   color: white;
   padding: 12px 20px;
@@ -58,11 +57,11 @@
   transition: background 0.3s ease-in-out;
 }
 
-.login-page-button:hover {
+.login-page-button1:hover {
   background-color: #45a049; /* Darker green */
 }
 
-.login-page-button.processing {
+.login-page-button1.processing {
   background-color: #ccc;
   cursor: not-allowed;
 }
@@ -83,7 +82,7 @@
 }
 
 /* Input Field Styles */
-.input-field {
+.input1-field {
   width: 100%;
   padding: 12px;
   margin: 10px 0;
@@ -95,7 +94,7 @@
 }
 
 /* Input Focus Effect */
-.input-field:focus {
+.input1-field:focus {
   border-color: #007bff;
   background-color: #ffffff;
   outline: none;
@@ -103,7 +102,7 @@
 }
 
 /* Input Placeholder Styling */
-.input-field::placeholder {
+.input1-field::placeholder {
   color: #999;
   font-style: italic;
 }
@@ -126,7 +125,7 @@
   align-items: center;
 }
 
-.input-field {
+.input1-field {
   flex: 1;
   padding-right: 40px; /* Space for the eye icon */
 }
@@ -150,4 +149,39 @@
 }
 .forgot-password:hover {
   text-decoration: underline;
+}
+/* Background container with blur */
+.login-page-background {
+  position: relative;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.login-page-right-section h2{
+  color: #f4f4f4;
+}
+/* Blurred image */
+.login-page-background::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  background-image: url('../../assets/image/resume2.webp'); 
+  background-size: cover;
+  background-position: center;
+  filter: blur(8px);
+  z-index: -1;
+  transform: scale(1.1); 
+}
+.login-page-container {
+  padding: 40px;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+  width: 100%;
+  max-width: 400px;
+  z-index: 1;
 }

@@ -106,9 +106,9 @@ DATABASES = {
 # 2 minutes for password reset token expiration
 PASSWORD_RESET_TIMEOUT = 120  
 
-# keeps user logged in for 30minutes
+# keeps user logged in for 55minutes
 SIMPLE_JWT = {
-    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=30),
+    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=55),
     'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
     'ROTATE_REFRESH_TOKENS': False,
     'BLACKLIST_AFTER_ROTATION': True,

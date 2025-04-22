@@ -2,6 +2,7 @@ import "./reports.modules.css";
 import { useLocation, useNavigate } from "react-router-dom";
 import CircularScore from "./CircularScore"; 
 import BackButton from "../../common/backButton";
+import { toast } from "react-toastify";
 
 
 /*
@@ -16,8 +17,28 @@ const SingleReports = () => {
   const {  score, created_at, job_id } = location.state || {};
   const { jobTitle, reports = [] } = location.state || {};
 
-  const handleReportClick = (id) => {
-    navigate(`/summary/`);
+    // fetch report data and navigate to summary page
+  const handleReportClick = async (reportId) => {
+    try {
+      const response = await fetch(`http://127.0.0.1:8000/api/reports/${reportId}/`, {
+        method: "GET",
+      });
+  
+      if (!response.ok) throw new Error("Failed to fetch report");
+  
+      const data = await response.json();
+  
+      toast.success("Fetched report successfully!");
+  
+      navigate(`/summary/${reportId}`); // navigate to summary page with report ID
+    } catch (error) {
+      console.error("Error:", error);
+      toast.error("Failed to load report. Please try again.");
+    } finally {
+      setTimeout(() => {
+        setLoading(false);
+      }, 1000);
+    }
   };
 
   return (
@@ -52,13 +73,6 @@ const SingleReports = () => {
               </div>
             </div>
 
-            {/* <div className="score-column">
-              <strong>Score:</strong> {(report.score / 10).toFixed(1)} / 10
-            </div>
-
-            <div className="pass-fail-column">
-              <strong>{(report.score / 10).toFixed(1) >= 7 ? "✅ Passed" : "❌ Failed"}</strong>
-            </div> */}
              <div className="pass-fail-column">
                       <div className="circular-score">
                     <CircularScore score={score || report.score} />
