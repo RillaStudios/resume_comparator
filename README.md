@@ -2,7 +2,7 @@
 This repository contains a full-stack web application that allows users to compare a resume to a job posting. It intelligently analyzes the match between a candidate's resume and job requirements, making it easier to tailor resumes for better chances of success.
 
 # Authors
-Shobhit Rajain
+- Shobhit Rajain
 Navjot Kaur
 Benjamin Ramos-Armstrong
 Michael Tettey Tamatey
