@@ -3,10 +3,10 @@ This repository contains a full-stack web application that allows users to compa
 
 # Authors
 - Shobhit Rajain
-Navjot Kaur
-Benjamin Ramos-Armstrong
-Michael Tettey Tamatey
-Izaak Ford Dow
+- Navjot Kaur
+- Benjamin Ramos-Armstrong
+- Michael Tettey Tamatey
+- Izaak Ford Dow
 
 # The project is split into two parts:
 
