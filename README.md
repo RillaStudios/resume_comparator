@@ -14,7 +14,7 @@ This repository contains a full-stack web application that allows users to compa
 - Backend – ResumeComparatorBackend (built with Django & NLP tools)
 
 # 🚀 Getting Started
-1. Clone the Repository
+1. Clone this Repository
 
 # ⚙️ Prerequisites
 - Visual Studio Code
@@ -30,7 +30,7 @@ This repository contains a full-stack web application that allows users to compa
 
 # 🖥️ Frontend Setup (React)
 - Open the Resume_comparator_frontend folder in VS Code.
-- Open a terminal and run:
+- Open terminal and run:
 - npm install
 - npm run dev
 - Your frontend should now be running locally.
@@ -41,6 +41,7 @@ This repository contains a full-stack web application that allows users to compa
 - Open a terminal and run the following:
 
 # 💻 Create and Activate Virtual Environment
+- Open terminal and run:
 - On macOS/Linux:
 - python3.11 -m venv .venv
 - source .venv/bin/activate
