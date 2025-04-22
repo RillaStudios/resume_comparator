@@ -38,10 +38,9 @@ This repository contains a full-stack web application that allows users to compa
 # 🔧 Backend Setup (Django + NLP)
 - You can use either VS Code or PyCharm for the backend.
 - Open the ResumeComparatorBackend folder.
-- Open a terminal and run the following:
+- Open terminal and run the following:
 
 # 💻 Create and Activate Virtual Environment
-- Open terminal and run:
 - On macOS/Linux:
 - python3.11 -m venv .venv
 - source .venv/bin/activate
