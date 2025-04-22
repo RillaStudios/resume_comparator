@@ -17,7 +17,7 @@ This repository contains a full-stack web application that allows users to compa
 1. Clone this Repository
 
 # ⚙️ Prerequisites
-- Visual Studio Code
+- Visual Studio Code latest version
 - PyCharm (optional for backend)
 - Node.js and npm
 - Python 3.11
@@ -62,6 +62,8 @@ This repository contains a full-stack web application that allows users to compa
 - Create a .env file in the root of the ResumeComparatorBackend folder and add your API key as follows:
 - API_KEY=your_api_key_here
 - ⚠️ The API key will be provided separately.
+- Add ai_models folder in the root of the ResumeComparatorBackend Folder.
+- ⚠️ The ai_models folder will be provided seperately
 
 # ▶️ Run the Backend
 - python manage.py runserver
