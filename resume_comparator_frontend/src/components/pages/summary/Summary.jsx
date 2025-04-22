@@ -63,19 +63,13 @@ const Summary = () => {
 
   // Function to print 
   const handlePrint = () => {
+    const originalContent = document.body.innerHTML;
     const printContent = document.querySelector('.candidate-summary-container').outerHTML;
-    const printWindow = window.open('', '_blank');
-    printWindow.document.write(`
-      <html>
-        <head>
-          <title>Candidate Summary</title>
-          <link rel="stylesheet" href="summary.modules.css" />
-        </head>
-        <body>${printContent}</body>
-      </html>
-    `);
-    printWindow.document.close();
-    printWindow.print();
+    document.body.innerHTML = printContent;
+
+    window.print();
+
+    document.body.innerHTML = originalContent;
   };
 
   if (!reportData) return <div>Loading report...</div>;
@@ -86,8 +80,9 @@ const Summary = () => {
   );
 
   return (
+    <>
+    <BackButton />
     <div className="candidate-summary-container">
-      <BackButton />
       <h1 className="candidate-summary-title">Candidate Summary</h1>
       <div className="candidate-summary-title">
       <p><strong>Name:</strong> {reportData.applicant_name}</p>
@@ -142,6 +137,7 @@ const Summary = () => {
         <button className="candidate-btn email-btn" onClick={handleEmailReports}>📧 Email Candidate</button>
       </div>
     </div>
+    </>
   );
 };
 

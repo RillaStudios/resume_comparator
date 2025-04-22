@@ -253,7 +253,12 @@ h4 {
   .confirmation-dialog {
     display: none;
   }
-
+  @media print {
+    .search-container {
+      display: none !important;
+    }
+  }
+  
   .reports-list {
     width: 100%;
     margin-top: 20px;
