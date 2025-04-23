@@ -8,6 +8,7 @@ import BackButton from '../../common/backButton';
 const Summary = () => {
   const { id } = useParams(); 
   const [reportData, setReportData] = useState(null);
+  const [emailSending, setEmailSending] = useState(false);
 
   useEffect(() => {
     const fetchReportData = async () => {
@@ -34,6 +35,7 @@ const Summary = () => {
       toast.error("Missing required candidate information.");
       return;
     }
+    setEmailSending(true);
   
     try {
       // Send the email using the candidate's data
@@ -58,6 +60,8 @@ const Summary = () => {
     } catch (error) {
       toast.error(`Error sending email: ${error.message}`);
       console.error("Email error:", error);
+    }finally {
+      setEmailSending(false);
     }
   };
 
@@ -128,13 +132,15 @@ const Summary = () => {
         </table>
       </section>
 
-      <section className="candidate-summary-section">
-        
-      </section>
-
       <div className="candidate-action-buttons">
         <button className="candidate-btn print-btn" onClick={handlePrint}>🖨️ Print</button>
-        <button className="candidate-btn email-btn" onClick={handleEmailReports}>📧 Email Candidate</button>
+        <button
+            className="candidate-btn email-btn"
+            onClick={handleEmailReports}
+            disabled={emailSending}
+          >
+            {emailSending ? "📧 Sending..." : "📧 Email Candidate"}
+          </button>
       </div>
     </div>
     </>
