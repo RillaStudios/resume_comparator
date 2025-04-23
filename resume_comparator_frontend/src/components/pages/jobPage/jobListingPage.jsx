@@ -9,6 +9,10 @@ const JobListingPage = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [searchTerm, setSearchTerm] = useState("");
+  const [dialogVisible, setDialogVisible] = useState(false);
+  const [jobToDelete, setJobToDelete] = useState(null);
+
+
   const navigate = useNavigate();
 
   // Fetch job postings
@@ -24,6 +28,21 @@ const JobListingPage = () => {
       });
   }, []);
 
+  const confirmAction = () => {
+    handleDeleteJob(jobToDelete);
+    setDialogVisible(false);
+  };
+  
+  const cancelAction = () => {
+    setDialogVisible(false);
+    setJobToDelete(null);
+  };
+  
+  const handleDeleteClick = (jobId) => {
+    setJobToDelete(jobId);
+    setDialogVisible(true);
+  };
+  
   const handleDeleteJob = (jobId) => {
     axios.delete("http://localhost:8000/api/job-postings/", { data: { id: jobId } })
       .then(() => {
@@ -84,8 +103,8 @@ const JobListingPage = () => {
             </div>
             <div className="job-actions">
               <button className="edit-btn" onClick={() => handleEditJob(job.id)}>Edit</button>
-              <button className="delete-btn" onClick={() => handleDeleteJob(job.id)}>Delete</button>
-            </div>
+              <button className="delete-btn" onClick={() => handleDeleteClick(job.id)}>Delete</button>
+              </div>
           </div>
         ))}
 
@@ -94,6 +113,16 @@ const JobListingPage = () => {
           +
         </div>
       </div>
+      {/* Confirmation Dialog */}
+      {dialogVisible && (
+  <div className="confirmation-dialog">
+    <div className="dialog-content">
+      <h3>Are you sure you want to delete this job posting?</h3>
+      <button onClick={confirmAction}>Yes</button>
+      <button onClick={cancelAction}>No</button>
+    </div>
+  </div>
+    )}
     </div>
   );
 };
