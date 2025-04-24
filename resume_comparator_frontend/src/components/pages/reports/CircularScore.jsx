@@ -1,5 +1,12 @@
 import React, { useEffect, useState } from "react";
 
+
+/*
+ Author: Navjot Kaur
+ Date: 20250222
+ Description: This component renders a circular progress bar that displays a score as a percentage.
+ It animates the progress from 0 to the given score over a duration of 1 second.
+*/
 const CircularScore = ({ score }) => {
   const radius = 36;
   const stroke = 6;

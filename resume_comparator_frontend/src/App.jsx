@@ -8,7 +8,6 @@ import Account from "./components/settings/account/account";
 import CreateJobPage from "./components/pages/createJob/createJobPage";
 import UpdateJobPage from "./components/pages/updateJob/updateJobPage";
 import JobListingPage from "./components/pages/jobPage/jobListingPage";
-
 import DashboardLayout from "./DashboardLayout";
 import NotFound from "./components/auth/notFound";
 import { ToastContainer } from "react-toastify";

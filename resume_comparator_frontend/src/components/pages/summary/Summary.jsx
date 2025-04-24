@@ -5,6 +5,13 @@ import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import BackButton from '../../common/backButton'; 
 
+
+/*
+ Author: Michael Tamatey
+ Date: 20250222
+ Description: This component fetches and displays the summary of a candidate's report.
+ It includes the candidate's name, email, job ID, score status, overall recommendation, and passed/failed criteria.
+*/
 const Summary = () => {
   const { id } = useParams(); 
   const [reportData, setReportData] = useState(null);

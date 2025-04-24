@@ -2,7 +2,11 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ArrowLeft } from 'lucide-react';
 import './BackButton.css'; // Import the CSS file
-
+/*
+ Author: Shobhit
+ Date: 20250222
+ Description: This component is used to navigate back to the previous page.
+*/
 const BackButton = () => {
   const navigate = useNavigate();
 

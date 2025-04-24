@@ -5,6 +5,13 @@ import "./updateJobPage.css"
 import BackButton from "../../common/backButton";
 import { toast } from "react-toastify";
 
+
+/*
+ Author: Navjot Kaur/Michael Tamatey
+ Date: 20250222
+ Description: This component is used to update a job posting. It fetches the job details from the API and allows the user to edit and submit the updated details.
+ It uses React Router for navigation and Axios for API calls. The component also handles form submission and displays success or error messages using react-toastify.
+*/
 const UpdateJobPage = () => {
   const { id } = useParams();
   const navigate = useNavigate();

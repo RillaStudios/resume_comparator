@@ -5,7 +5,14 @@ import BackButton from '../../common/backButton';
 import "./createJobPage.css";
 import { toast } from "react-toastify";
 
-
+/*
+ Author: Navjot/Michael Tamatey
+ Date: 20250222
+ Description: This component is used to create a job posting. It contains all the fields required to create a job posting.
+ It also contains a form to submit the job posting. The form is validated before submission. 
+ The component uses axios to send a POST request to the server to create the job posting. 
+ The component also uses react-router-dom to navigate to the job postings page after successful submission.
+*/
 const CreateJobPage = () => {
   const navigate = useNavigate();
 

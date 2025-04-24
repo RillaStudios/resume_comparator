@@ -4,6 +4,14 @@ import { useNavigate } from "react-router-dom";
 import "./JobListingPage.css";
  import BackButton from "../../common/backButton";
 
+
+ /*
+ Author: Navjot Kaur
+ Date: 20250222
+ Description: This component displays a list of job postings. It allows users to search for job postings by title, edit existing postings, and delete postings. 
+ The component fetches data from an API and handles loading and error states.
+ It also includes a confirmation dialog for deletion actions.
+*/
 const JobListingPage = () => {
   const [jobPostings, setJobPostings] = useState([]);
   const [loading, setLoading] = useState(true);

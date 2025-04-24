@@ -3,6 +3,15 @@ import { Bar } from 'react-chartjs-2'; // Import Bar chart from react-chartjs-2
 import axios from 'axios';
 import './reportGraph.css';
 
+
+/*
+ Author: Michael Tamatey
+ Date: 20250222
+ Description: This component fetches report data from the Django backend and displays it in a bar chart using Chart.js.
+              The chart shows the scores of different reports, with the report ID on the x-axis and the score on the y-axis.
+*/
+
+
 // Import Chart.js components
 import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend } from 'chart.js';
 
