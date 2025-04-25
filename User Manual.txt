@@ -1,0 +1,96 @@
+#Resume Comparator – End User Manual
+
+##📘 Purpose
+
+Compare candidate resumes against job descriptions to assess skill fit, detect gaps, and generate a summary report.
+
+##🚀 How to Use the App
+
+1. Log In
+
+-Go to /login
+
+-Enter username and password
+
+-Or register if you're a new user
+
+2. Create a Job Posting
+
+-Navigate to the Job Page
+
+-Click “+ Create New Job”
+
+-Fill in job details and submit
+
+3. Upload Resume(s)
+
+-Open the Main Page
+
+-Click “Upload Resume”
+
+-Select a .pdf file to upload
+
+4. Compare Resume to Job
+
+-Pick a resume and a job posting
+
+-Click “Compare”
+
+-View match score and skill analysis
+
+5. View Reports
+
+-Go to the Reports tab
+
+-Open a report to see
+
+6. View Summary Page
+
+-Go to the Reports tab
+
+-Click the summary icon next to any comparison result (icon that looks like a document with an arrow)
+
+-This opens the Summary Page showing detailed results for that comparison
+
+7. Download or Print Report
+
+-In any report, click Download to save a .pdf file
+
+-Click Print to open the browser's print dialog
+
+8. Email Report (if enabled)
+
+-After comparison, the system can email the report automatically to the Director and Recruiter (configured internally)
+
+9. Account Page
+
+-Click your name/icon in the top-right or Account tab
+
+-View your email, user type, delete option, and logout options
+
+
+##❓ FAQs
+
+What file types are allowed?
+
+-Only PDFs
+
+Can I run multiple comparisons?
+
+-Yes, just reselect resume and job
+
+Where do I find old reports?
+
+-In the Reports section
+
+What does the Summary page show?
+
+-A visual summary of comparisons, scores, and trends
+
+Can I print or email the report?
+
+-Yes, use the Print or Email options on the report page
+
+How do I log out or manage my account?
+
+-Click the profile icon or account tabs and choose Logout or Account Info
