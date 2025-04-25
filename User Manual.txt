@@ -10,7 +10,7 @@ Compare candidate resumes against job descriptions to assess skill fit, detect g
 
 -Go to /login
 
--Enter email and password
+-Enter username and password
 
 -Or register if you're a new user
 
