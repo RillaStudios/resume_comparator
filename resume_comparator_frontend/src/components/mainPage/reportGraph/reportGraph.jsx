@@ -8,7 +8,7 @@ import './reportGraph.css';
  Author: Michael Tamatey
  Date: 20250222
  Description: This component fetches report data from the Django backend and displays it in a bar chart using Chart.js.
-              The chart shows the scores of different reports, with the report ID on the x-axis and the score on the y-axis.
+ The chart shows the scores of different reports, with the report ID on the x-axis and the score on the y-axis.
 */
 
 
